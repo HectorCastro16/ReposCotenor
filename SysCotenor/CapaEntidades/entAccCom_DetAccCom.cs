@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace CapaEntidades
+{
+    public class entAccCom_DetAccCom
+    {
+        public String Ad_ID { get; set; }
+        public entAccionComercial AccionComercial { get; set; }
+        public entDetalleAccionComercial DetalleAccionComercial { get; set; }
+        public DateTime Ad_FechaRegistro { get; set; }
+        public String Ad_IdUsuarioRegistro { get; set; }
+        public DateTime Ad_FechaModificacion { get; set; }
+        public String Ad_IdUsuarioModificacion { get; set; }
+
+    }
+}
