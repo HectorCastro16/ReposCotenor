@@ -518,6 +518,7 @@
     <Content Include="assets\img\avatar9.jpg" />
     <Content Include="assets\img\img16.jpg" />
     <Content Include="assets\img\LICENSE.txt" />
+    <Content Include="assets\img\log.png" />
     <Content Include="assets\js\core\demo\Demo.js" />
     <Content Include="assets\js\core\demo\DemoCalendar.js" />
     <Content Include="assets\js\core\demo\DemoCharts.js" />
@@ -1883,6 +1884,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Inicio\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Login.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

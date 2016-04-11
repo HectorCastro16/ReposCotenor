@@ -18,6 +18,12 @@ namespace CapaPresentacion.Controllers
             return View();
         }
 
+        public ActionResult Login(String mensaje)
+        {
+            ViewBag.mensaje = mensaje;
+            return View();
+        }
+
         public ActionResult VerificarAcceso(FormCollection form)
         {
             try
@@ -25,19 +31,23 @@ namespace CapaPresentacion.Controllers
                 String Usuario = form["txtUsuario"];
                 String Password = form["txtPassword"];
                 entUsuario u = negUsuario.Instancia.VerificarAccesoIntranet(Usuario, Password);
-                Session["usuario"] = u; //agregando el objeto c en el atributo cliente de la sesion
+                Session["usuario"] = u;
 
-                if (u.TipoUsuario.NombreTipo.Equals("JefeLogistica"))
+                if (u.TipoUsuario.TipUsu_Nombre.Equals("Administrador"))
                 {
-                    return RedirectToAction("MenuPrincipalLogistica", "IntranetJefeLogistica", u);
+                    return RedirectToAction("PrincipalAdministrador", "IntranetAdministrador", u);
                 }
-                else if (u.TipoUsuario.NombreTipo.Equals("JefeAlmacen"))
+                else if (u.TipoUsuario.TipUsu_Nombre.Equals("Gerente"))
                 {
-                    return RedirectToAction("MenuPrincipalAlmacen", "IntranetJefeAlmacen", u);
+                    return RedirectToAction("PrincipalGerente", "IntranetAdministrador", u);
+                }
+                else if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor"))
+                {
+                    return RedirectToAction("PrincipalSupervisor", "IntranetSupervisor", u);
                 }
                 else
                 {
-                    return RedirectToAction("MenuPrincipalDespachador", "IntranetDespachador", u);
+                    return RedirectToAction("PrincipalAsesorVentas", "IntranetAsesorVentas", u);
                 }
 
 
