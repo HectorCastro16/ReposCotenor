@@ -13,7 +13,7 @@ namespace CapaEntidades
         public String Per_Apellidos { get; set; }
         public String Per_DNI { get; set; }
         public String Per_Telefono { get; set; }
-        public String per_Direccion { get; set; }
+        public String Per_Direccion { get; set; }
         public String Per_Foto { get; set; }
         public DateTime Per_FechaNacimiento { get; set; }
         public String Per_LugarNacimiento { get; set; }

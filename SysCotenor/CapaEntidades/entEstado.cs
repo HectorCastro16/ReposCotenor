@@ -12,9 +12,9 @@ namespace CapaEntidades
         public String Est_Nombre { get; set; }
         public String Est_Descripcion { get; set; }
         public DateTime Est_FechaRegistro { get; set; }
-        public String Est_IdUsuarioRegistro { get; set; }
+        public String Est_UsuarioRegistro { get; set; }
         public DateTime Est_FechaModificacion { get; set; }
-        public String Est_IdUsuarioModificacion { get; set; }
+        public String Est_UsuarioModificacion { get; set; }
 
     }
 }

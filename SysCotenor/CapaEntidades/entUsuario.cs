@@ -17,9 +17,9 @@ namespace CapaEntidades
         public String Usu_Estado { get; set; }
         public DateTime Usu_FechaHasta { get; set; }
         public DateTime Usu_FechaRegistro { get; set; }
-        public String Usu_IdUsuarioRegistro { get; set; }
+        public String Usu_UsuarioRegistro { get; set; }
         public DateTime Usu_FechaModificacion { get; set; }
-        public String Usu_IdUsuarioModificacion { get; set; }
+        public String Usu_UsuarioModificacion { get; set; }
 
     }
 }

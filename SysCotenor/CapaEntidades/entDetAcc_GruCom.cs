@@ -12,9 +12,9 @@ namespace CapaEntidades
         public entDetalleAccionComercial DetalleAccionComercial { get; set; }
         public entGrupoComercial GrupoComercial { get; set; }
         public DateTime Ag_FechaRegistro { get; set; }
-        public String Ag_IdUsuarioRegistro { get; set; }
+        public String Ag_UsuarioRegistro { get; set; }
         public DateTime Ag_FechaModificacion { get; set; }
-        public String Ag_IdUsuarioModificacion { get; set; }
+        public String Ag_UsuarioModificacion { get; set; }
 
     }
 }

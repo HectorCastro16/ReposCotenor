@@ -16,9 +16,9 @@ namespace CapaEntidades
         public String Ped_Dir_Inst { get; set; }
         public Double Ped_Total { get; set; }
         public DateTime Ped_FechaRegistro { get; set; }
-        public String Ped_IdUsuarioRegistro { get; set; }
+        public String Ped_UsuarioRegistro { get; set; }
         public DateTime Ped_FechaModificacion { get; set; }
-        public String Ped_IdUsuarioModificacion { get; set; }
+        public String Ped_UsuarioModificacion { get; set; }
 
     }
 }

@@ -13,9 +13,9 @@ namespace CapaEntidades
         public entCliente Cliente { get; set; }
         public Boolean Asi_Estado { get; set; }
         public DateTime Asi_FechaRegistro { get; set; }
-        public String Asi_IdUsuarioRegistro { get; set; }
+        public String Asi_UsuarioRegistro { get; set; }
         public DateTime Asi_FechaModificacion { get; set; }
-        public String Asi_IdUsuarioModificacion { get; set; }
+        public String Asi_UsuarioModificacion { get; set; }
 
     }
 }

@@ -15,9 +15,9 @@ namespace CapaEntidades
         public String Suc_Ciudad { get; set; }
         public Boolean Suc_Estado { get; set; }
         public DateTime Suc_FechaRegistro { get; set; }
-        public String Suc_IdUsuarioRegistro { get; set; }
+        public String Suc_UsuarioRegistro { get; set; }
         public DateTime Suc_FechaModificacion { get; set; }
-        public String Suc_IdUsuarioModificacion { get; set; }
+        public String Suc_UsuarioModificacion { get; set; }
 
     }
 }

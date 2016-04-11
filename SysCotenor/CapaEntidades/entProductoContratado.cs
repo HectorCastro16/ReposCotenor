@@ -16,9 +16,9 @@ namespace CapaEntidades
         public DateTime ProCon_InicioVigencia { get; set; }
         public DateTime ProCon_FinVigencia { get; set; }
         public DateTime ProCon_FechaRegistro { get; set; }
-        public String ProCon_IdUsuarioRegistro { get; set; }
+        public String ProCon_UsuarioRegistro { get; set; }
         public DateTime ProCon_FechaModificacion { get; set; }
-        public String ProCon_IdUsuarioModificacion { get; set; }
+        public String ProCon_UsuarioModificacion { get; set; }
 
     }
 }

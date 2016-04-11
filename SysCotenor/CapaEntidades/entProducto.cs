@@ -15,9 +15,9 @@ namespace CapaEntidades
         public String Pro_Descripcion { get; set; }
         public String Pro_Imagen { get; set; }
         public DateTime Pro_FechaRegistro { get; set; }
-        public String Pro_IdUsuarioRegistro { get; set; }
+        public String Pro_UsuarioRegistro { get; set; }
         public DateTime Pro_FechaModificacion { get; set; }
-        public String Pro_IdUsuarioModificacion { get; set; }
+        public String Pro_UsuarioModificacion { get; set; }
 
     }
 }
