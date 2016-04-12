@@ -38,19 +38,19 @@ namespace CapaPresentacion.Controllers
 
                 if (u.TipoUsuario.TipUsu_Nombre.Equals("Administrador"))
                 {
-                    return RedirectToAction("PrincipalAdministrador", "IntranetAdministrador", u);
+                    return RedirectToAction("PrincipalAdministrador", "Administrador", u);
                 }
                 else if (u.TipoUsuario.TipUsu_Nombre.Equals("Gerente"))
                 {
-                    return RedirectToAction("PrincipalGerente", "IntranetAdministrador", u);
+                    return RedirectToAction("PrincipalGerente", "Administrador", u);
                 }
                 else if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor"))
                 {
-                    return RedirectToAction("PrincipalSupervisor", "IntranetSupervisor", u);
+                    return RedirectToAction("PrincipalSupervisor", "Supervisor", u);
                 }
                 else
                 {
-                    return RedirectToAction("PrincipalAsesorVentas", "IntranetAsesorVentas", u);
+                    return RedirectToAction("PrincipalAsesorVentas", "AsesorVentas", u);
                 }
             }
             catch (ApplicationException x)

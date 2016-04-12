@@ -108,8 +108,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Intranet\AdministradorController.cs" />
     <Compile Include="Controllers\Intranet\InicioController.cs" />
-    <Compile Include="Controllers\Intranet\IntranetAdministradorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1890,10 +1890,10 @@
     <Content Include="Views\Inicio\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\IntranetAdministrador\PrincipalAdministrador.cshtml" />
+    <Content Include="Views\MasterPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\MasterPage.cshtml" />
+    <Content Include="Views\Administrador\PrincipalAdministrador.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

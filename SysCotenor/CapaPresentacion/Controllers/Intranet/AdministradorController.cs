@@ -8,10 +8,10 @@ using CapaNegocio;
 
 namespace CapaPresentacion.Controllers.Intranet
 {
-    public class IntranetAdministradorController : Controller
+    public class AdministradorController : Controller
     {
         //
-        // GET: /IntranetAdministrador/
+        // GET: /Administrador/
 
         public ActionResult Index()
         {
