@@ -43,7 +43,7 @@ namespace CapaAccesoDatos
                 if (dr.Read())
                 {
                     u = new entUsuario();
-                    u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
+                    u.Usu_Id = dr["Usu_Id"].ToString();
 
                     entPersona p = new entPersona();
                     p.Per_Nombres = dr["Per_Nombres"].ToString();

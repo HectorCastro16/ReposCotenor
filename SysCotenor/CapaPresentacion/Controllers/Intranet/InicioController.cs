@@ -55,12 +55,12 @@ namespace CapaPresentacion.Controllers
             catch (ApplicationException x)
             {
                 ViewBag.mensaje = x.Message;
-                return RedirectToAction("Index", "Inicio", new { mensaje = x.Message });
+                return RedirectToAction("Login", "Inicio", new { mensaje = x.Message });
             }
             catch (Exception e)
             {
 
-                return RedirectToAction("Index", "Inicio", new { mensaje = e.Message });
+                return RedirectToAction("Login", "Inicio", new { mensaje = e.Message });
             }
         }
 
