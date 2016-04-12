@@ -27,20 +27,38 @@ namespace CapaNegocio
         {
             try
             {
-                if (prmstrLogin == null)
+                //if (prmstrLogin == null || prmstrLogin == "")
+                //{
+                //    throw new ApplicationException("Debe Ingresar Usuario");
+                //}
+                //if (prmstrPassw == null || prmstrPassw == "")
+                //{
+                //    throw new ApplicationException("Debe Ingresar Contraseña");
+                //}
+                if (prmstrLogin == "" && prmstrPassw == "")
                 {
-                    throw new ApplicationException("Debe Ingresar el Usuario");
+                    throw new ApplicationException("Debe Ingresar Usuario y Contraseña");
                 }
-                if (prmstrPassw == null)
+                else if (prmstrLogin == "" && prmstrPassw != "")
                 {
-                    throw new ApplicationException("Debe Ingresar el Password");
+                    throw new ApplicationException("Debe Ingresar Usuario");
                 }
+                else
+                {
+                    if (prmstrLogin != "" && prmstrPassw == "")
+                    {
+                        throw new ApplicationException("Debe Ingresar Contraseña");
+                    }
+
+                }
+
                 entUsuario u = datUsuario.Instancia.VerificarAccesoIntranet(prmstrLogin, prmstrPassw);
+
                 if (u == null)
                 {
-                    throw new ApplicationException("Usuario o password no valido");
+                    throw new ApplicationException("Usuario y/o Contaseña No Validos");
                 }
-                if (u.Usu_Estado=="Bloqueado")
+                if (u.Usu_Estado == "Bloqueado")
                 {
                     throw new ApplicationException("Usuario Bloqueado - Comunicarse con el Departamento de Sistemas");
                 }
