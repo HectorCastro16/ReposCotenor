@@ -24,8 +24,11 @@ namespace CapaPresentacion.Controllers
             return View();
         }
 
+
         public ActionResult VerificarAcceso(FormCollection form)
         {
+            
+           
             try
             {
                 String Usuario = form["txtUsuario"];
@@ -49,11 +52,10 @@ namespace CapaPresentacion.Controllers
                 {
                     return RedirectToAction("PrincipalAsesorVentas", "IntranetAsesorVentas", u);
                 }
-
-
             }
             catch (ApplicationException x)
             {
+                
                 ViewBag.mensaje = x.Message;
                 return RedirectToAction("Login", "Inicio", new { mensaje = x.Message });
             }

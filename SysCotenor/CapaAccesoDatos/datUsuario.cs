@@ -81,6 +81,36 @@ namespace CapaAccesoDatos
             return u;
         }
 
+
+        public entUsuario VerificarUsuarioExiste(String prmstrLogin)
+        {
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            entUsuario u = null;
+            
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spVerificaUsuarioExiste", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@prmstrLogin", prmstrLogin);
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    u = new entUsuario();
+                    u.Usu_Login = dr["Usu_Login"].ToString();
+                }
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+            finally { cmd.Connection.Close(); }
+            return u;
+        }
+
         #endregion metodos
     }
 }
