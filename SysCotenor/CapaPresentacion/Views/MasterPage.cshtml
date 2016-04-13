@@ -1,10 +1,9 @@
 ﻿@using CapaEntidades
 
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>Material Admin - Blank page</title>
+    <title>@ViewBag.Title</title>
 
     <!-- BEGIN META -->
     <meta charset="utf-8">
@@ -120,13 +119,21 @@
                         </ul><!--end .dropdown-menu -->
                     </li><!--end .dropdown -->
                 </ul><!--end .header-nav-options -->
+
+            @{
+                entUsuario u = (entUsuario)Session["usuario"];
+                String NombreUser = u.Persona.Per_Nombres;
+                String TipoUser = u.TipoUsuario.TipUsu_Nombre;
+                String foto = u.Persona.Per_Foto;
+            }
+
                 <ul class="header-nav header-nav-profile">
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
-                            <img src="../../assets/img/avatar1.jpg?1403934956" alt="" />
+                            <img src="../../assets/img/@foto?1403934956" alt="" />
                             <span class="profile-info">
-                                Daniel Johnson
-                                <small>Administrator</small>
+                                @NombreUser
+                                <small>@TipoUser</small>
                             </span>
                         </a>
                         <ul class="dropdown-menu animation-dock">
