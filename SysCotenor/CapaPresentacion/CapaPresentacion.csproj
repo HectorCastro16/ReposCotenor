@@ -109,7 +109,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Intranet\AdministradorController.cs" />
+    <Compile Include="Controllers\Intranet\AsesorVentasController.cs" />
+    <Compile Include="Controllers\Intranet\GerenteController.cs" />
     <Compile Include="Controllers\Intranet\InicioController.cs" />
+    <Compile Include="Controllers\Intranet\SupervisorController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1894,6 +1897,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Administrador\PrincipalAdministrador.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Gerente\PrincipalGerente.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Supervisor\PrincipalSupervisor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AsesorVentas\PrincipalAsesorVentas.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

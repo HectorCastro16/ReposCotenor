@@ -42,7 +42,7 @@ namespace CapaPresentacion.Controllers
                 }
                 else if (u.TipoUsuario.TipUsu_Nombre.Equals("Gerente"))
                 {
-                    return RedirectToAction("PrincipalGerente", "Administrador", u);
+                    return RedirectToAction("PrincipalGerente", "Gerente", u);
                 }
                 else if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor"))
                 {
