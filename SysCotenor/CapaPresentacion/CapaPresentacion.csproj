@@ -1915,6 +1915,15 @@
   <ItemGroup>
     <Content Include="Views\SupervisorCall\PrincipalSupervisorCall.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Historia.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Mision.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Vision.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
