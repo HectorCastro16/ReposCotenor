@@ -100,5 +100,16 @@ namespace CapaPresentacion.Controllers
             return RedirectToAction("Index", "Inicio");
         }
 
+        public ActionResult Historia() {
+            return View();
+        }
+        public ActionResult Mision()
+        {
+            return View();
+        }
+        public ActionResult Vision()
+        {
+            return View();
+        }
     }
 }
