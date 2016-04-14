@@ -60,11 +60,24 @@
                     </li>
                 </ul><!--end .header-nav-options -->
                 @{
-                    //if (Session["usuario"] != null) { } else { RedirectResult Url; }
-                    entUsuario u = (entUsuario)Session["usuario"];
-                    String NombreUser = u.Persona.Per_Nombres;
-                    String TipoUser = u.TipoUsuario.TipUsu_Nombre;
-                    String foto = u.Persona.Per_Foto;
+                    entUsuario u = null;
+                    String NombreUser = "";
+                    String TipoUser = null;
+                    String foto = "";
+                    
+                    if (Session["usuario"] != null)
+                    {
+
+                         u = (entUsuario)Session["usuario"];
+                         NombreUser = u.Persona.Per_Nombres;
+                         TipoUser = u.TipoUsuario.TipUsu_Nombre;
+                         foto = u.Persona.Per_Foto;
+                    
+                    } else { 
+                        
+                        Response.Redirect(Url.Action("Login", "Inicio")); 
+                    }
+                   
                 }
 
                 <ul class="header-nav header-nav-profile">
