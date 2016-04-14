@@ -27,49 +27,25 @@ namespace CapaNegocio
         {
             try
             {
-
                 entUsuario u = null;
-                if (prmstrLogin == "" && prmstrPassw == "")
+                u = datUsuario.Instancia.VerificarAccesoIntranet(prmstrLogin, prmstrPassw);
+
+                if (u == null)
                 {
-                    throw new ApplicationException("Debe Ingresar Usuario y Contraseña");
+                    throw new ApplicationException("Usuario y/o Contaseña No Validos");
                 }
-
-                else
+                if (u.Usu_Estado == "Bloqueado")
                 {
-                    if (prmstrLogin == "" && prmstrPassw != "")
-                    {
-                        throw new ApplicationException("Debe Ingresar Usuario");
-                    }
-                    if (prmstrLogin != "" && prmstrPassw == "")
-                    {
-                        throw new ApplicationException("Debe Ingresar Contraseña");
-                    }
-
-
-
-                    if (prmstrLogin != "" && prmstrPassw != "")
-                    {
-                        u = datUsuario.Instancia.VerificarAccesoIntranet(prmstrLogin, prmstrPassw);
-
-                        if (u == null)
-                        {
-                            throw new ApplicationException("Usuario y/o Contaseña No Validos");
-
-                        }
-                        if (u.Usu_Estado == "Bloqueado")
-                        {
-                            throw new ApplicationException("Usuario Bloqueado - Comunicarse con el Departamento de Sistemas");
-                        }
-                        if (u.Usu_Estado == "Eliminado")
-                        {
-                            throw new ApplicationException("Usuario Eliminado del Sistema");
-                        }
-                        DateTime fechaHoy = DateTime.Now;
-                        if (DateTime.Compare(fechaHoy, u.Usu_FechaHasta) > 0)
-                        {
-                            throw new ApplicationException("Ha Expirado su Tiempo de Actividad en el Sistema");
-                        }
-                    }
+                    throw new ApplicationException("Usuario Bloqueado - Comunicarse con el Departamento de Sistemas");
+                }
+                if (u.Usu_Estado == "Eliminado")
+                {
+                    throw new ApplicationException("Usuario Eliminado del Sistema");
+                }
+                DateTime fechaHoy = DateTime.Now;
+                if (DateTime.Compare(fechaHoy, u.Usu_FechaHasta) > 0)
+                {
+                    throw new ApplicationException("Ha Expirado su Tiempo de Actividad en el Sistema");
                 }
 
                 return u;
