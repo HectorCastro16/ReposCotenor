@@ -44,9 +44,21 @@ namespace CapaPresentacion.Controllers
                 {
                     return RedirectToAction("PrincipalGerente", "Gerente", u);
                 }
-                else if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor"))
+                else if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Call"))
                 {
-                    return RedirectToAction("PrincipalSupervisor", "Supervisor", u);
+                    return RedirectToAction("PrincipalSupervisorCall", "SupervisorCall", u);
+                }
+                else if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Instalaciones"))
+                {
+                    return RedirectToAction("PrincipalSupervisorInstalaciones", "SupervisorInstalaciones", u);
+                }
+                else if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Ventas"))
+                {
+                    return RedirectToAction("PrincipalSupervisorVentas", "SupervisorVentas", u);
+                }
+                else if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Cable"))
+                {
+                    return RedirectToAction("PrincipalSupervisorCable", "SupervisorCable", u);
                 }
                 else
                 {
@@ -64,6 +76,28 @@ namespace CapaPresentacion.Controllers
 
                 return RedirectToAction("Login", "Inicio", new { mensaje = e.Message });
             }
+        }
+
+        public ActionResult CerrarSession()
+        {
+
+            try
+            {
+                Session["usuario"] = null;
+                Session.Remove("usuario");
+                Session.RemoveAll();
+            }
+            catch (ApplicationException x)
+            {
+                ViewBag.mensaje = x.Message;
+                return RedirectToAction("Error", "Error");
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Error", "Error");
+            }
+
+            return RedirectToAction("Index", "Inicio");
         }
 
     }

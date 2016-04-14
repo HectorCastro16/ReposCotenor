@@ -23,5 +23,12 @@ namespace CapaPresentacion.Controllers.Intranet
             return View(u);
         }
 
+        //public ActionResult ListaUsuarios(String mensaje)
+        //{
+
+        //    ViewBag.mensaje = mensaje;
+        //    List<entUsuario> Lista = negUsuario.Instancia.ListaUsuarios();
+        //    return View(Lista);
+        //}
     }
 }

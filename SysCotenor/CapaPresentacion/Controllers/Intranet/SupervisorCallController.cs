@@ -8,17 +8,16 @@ using CapaNegocio;
 
 namespace CapaPresentacion.Controllers.Intranet
 {
-    public class SupervisorController : Controller
+    public class SupervisorCallController : Controller
     {
         //
-        // GET: /Supervisor/
+        // GET: /SupervisorCall/
 
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult PrincipalSupervisor(entUsuario u)
+        public ActionResult PrincipalSupervisorCall(entUsuario u)
         {
             return View(u);
         }
