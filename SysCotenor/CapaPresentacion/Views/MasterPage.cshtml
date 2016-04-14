@@ -60,6 +60,7 @@
                     </li>
                 </ul><!--end .header-nav-options -->
                 @{
+                    //if (Session["usuario"] != null) { } else { RedirectResult Url; }
                     entUsuario u = (entUsuario)Session["usuario"];
                     String NombreUser = u.Persona.Per_Nombres;
                     String TipoUser = u.TipoUsuario.TipUsu_Nombre;
@@ -82,7 +83,7 @@
                             <li><a href="../../html/pages/calendar.html">My appointments</a></li>
                             <li class="divider"></li>
                             <li><a href="../../html/pages/locked.html"><i class="fa fa-fw fa-lock"></i> Lock</a></li>
-                            <li><a href="../../html/pages/login.html"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
+                            <li><a href="@Url.Action("CerrarSession", "Inicio")"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
                         </ul><!--end .dropdown-menu -->
                     </li><!--end .dropdown -->
                 </ul><!--end .header-nav-profile -->

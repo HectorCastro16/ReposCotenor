@@ -81,6 +81,18 @@ namespace CapaNegocio
 
         }
 
+        //public List<entUsuario> ListaUsuarios()
+        //{
+        //    try
+        //    {
+        //        return datUsuario.Instancia.ListaUsuarios();
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw e;
+        //    }
+        //}
+
         #endregion metodos
     }
 }

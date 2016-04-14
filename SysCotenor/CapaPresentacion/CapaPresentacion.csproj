@@ -108,11 +108,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Controllers\Error\ErrorController.cs" />
     <Compile Include="Controllers\Intranet\AdministradorController.cs" />
     <Compile Include="Controllers\Intranet\AsesorVentasController.cs" />
     <Compile Include="Controllers\Intranet\GerenteController.cs" />
     <Compile Include="Controllers\Intranet\InicioController.cs" />
-    <Compile Include="Controllers\Intranet\SupervisorController.cs" />
+    <Compile Include="Controllers\Intranet\SupervisorCallController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -506,6 +507,7 @@
     <Content Include="assets\css\theme-default\materialadmin.css" />
     <Content Include="assets\css\theme-default\materialadmin_demo.css" />
     <Content Include="assets\css\theme-default\materialadmin_print.css" />
+    <Content Include="assets\img\Asesor.jpg" />
     <Content Include="assets\img\avatar1.jpg" />
     <Content Include="assets\img\avatar10.jpg" />
     <Content Include="assets\img\avatar11.jpg" />
@@ -524,6 +526,8 @@
     <Content Include="assets\img\img16.jpg" />
     <Content Include="assets\img\LICENSE.txt" />
     <Content Include="assets\img\log.png" />
+    <Content Include="assets\img\super.jpg" />
+    <Content Include="assets\img\welcome.jpg" />
     <Content Include="assets\js\core\demo\Demo.js" />
     <Content Include="assets\js\core\demo\DemoCalendar.js" />
     <Content Include="assets\js\core\demo\DemoCharts.js" />
@@ -1903,10 +1907,13 @@
     <Content Include="Views\Gerente\PrincipalGerente.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Supervisor\PrincipalSupervisor.cshtml" />
+    <Content Include="Views\AsesorVentas\PrincipalAsesorVentas.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AsesorVentas\PrincipalAsesorVentas.cshtml" />
+    <Content Include="Views\Error\Error.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SupervisorCall\PrincipalSupervisorCall.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

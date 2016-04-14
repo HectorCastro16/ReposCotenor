@@ -111,6 +111,56 @@ namespace CapaAccesoDatos
             return u;
         }
 
+        public List<entUsuario> ListaUsuarios()
+        {
+
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entUsuario> Lista = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListaUsuarios", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entUsuario>();
+
+                while (dr.Read())
+                {
+                    entUsuario u = new entUsuario();
+                    //u.idUsuario = Convert.ToInt16(dr["idUsuario"]);
+                    //u.Nombres = dr["Nombres"].ToString();
+                    //u.Apellidos = dr["Apellidos"].ToString();
+                    //u.Dni = dr["Dni"].ToString();
+                    //u.Email = dr["Email"].ToString();
+
+                    //entTipoUsuario t = new entTipoUsuario();
+                    //t.idTipoUsuario = Convert.ToInt16(dr["idTipoUsuario"]);
+                    //t.NombreTipo = dr["DesTipoUsuario"].ToString();
+                    //u.TipoUsuario = t;
+
+                    //u.FechaHasta = Convert.ToDateTime(dr["FechaHasta"]);
+                    //u.Foto = dr["Foto"].ToString();
+                    //u.Activo = Convert.ToBoolean(dr["Activo"]);
+                    //u.FechaRegistro = Convert.ToDateTime(dr["FechaRegistro"]);
+                    //u.UsuarioRegistro = dr["UsuarioRegistro"].ToString();
+
+                    Lista.Add(u);
+                }
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+            return Lista;
+        }
+
         #endregion metodos
     }
 }

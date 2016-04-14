@@ -24,7 +24,6 @@ namespace CapaEntidades
         public String Usu_Estado { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        
         public DateTime Usu_FechaHasta { get; set; }
         public DateTime Usu_FechaRegistro { get; set; }
         public String Usu_UsuarioRegistro { get; set; }
