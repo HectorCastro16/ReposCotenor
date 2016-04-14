@@ -60,11 +60,26 @@
                     </li>
                 </ul><!--end .header-nav-options -->
                 @{
-                    //if (Session["usuario"] != null) { } else { RedirectResult Url; }
-                    entUsuario u = (entUsuario)Session["usuario"];
-                    String NombreUser = u.Persona.Per_Nombres;
-                    String TipoUser = u.TipoUsuario.TipUsu_Nombre;
-                    String foto = u.Persona.Per_Foto;
+                    entUsuario u = null;
+                    String NombreUser = "";
+                    String TipoUser = null;
+                    String foto = "";
+                    
+                    if (Session["usuario"] != null)
+                    {
+
+                         u = (entUsuario)Session["usuario"];
+                         NombreUser = u.Persona.Per_Nombres;
+                         TipoUser = u.TipoUsuario.TipUsu_Nombre;
+                         foto = u.Persona.Per_Foto;
+
+                    }
+                    else
+                    {
+
+                        Response.Redirect(Url.Action("Index", "Inicio")); 
+                    }
+                   
                 }
 
                 <ul class="header-nav header-nav-profile">
@@ -259,6 +274,23 @@
     <script src="../../assets/js/core/source/AppVendor.js"></script>
     <script src="../../assets/js/core/demo/Demo.js"></script>
     <!-- END JAVASCRIPT -->
+
+    <script>
+        function valida(e) {
+            tecla = (document.all) ? e.keyCode : e.which;
+
+            //Tecla de retroceso para borrar, siempre la permite
+            if (tecla == 8) {
+                return true;
+            }
+
+            // Patron de entrada, en este caso solo acepta numeros
+            patron = /[0-9]/;
+            tecla_final = String.fromCharCode(tecla);
+            return patron.test(tecla_final);
+        }
+    </script>
+
 
 </body>
 </html>

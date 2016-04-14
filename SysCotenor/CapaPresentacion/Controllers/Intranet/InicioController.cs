@@ -31,8 +31,8 @@ namespace CapaPresentacion.Controllers
            
             try
             {
-                String Usuario = form["txtUsuario"];
-                String Password = form["txtPassword"];
+                String Usuario = form["txtUsuario"].Replace(";", "").Replace("'", "").Replace("--","");
+                String Password = form["txtPassword"].Replace(";", "").Replace("'", "").Replace("--", "");
                 entUsuario u = negUsuario.Instancia.VerificarAccesoIntranet(Usuario, Password);
                 Session["usuario"] = u;
 
@@ -83,9 +83,10 @@ namespace CapaPresentacion.Controllers
 
             try
             {
+                //Session.Abandon();
                 Session["usuario"] = null;
                 Session.Remove("usuario");
-                Session.RemoveAll();
+                //Session.RemoveAll();
             }
             catch (ApplicationException x)
             {
