@@ -110,10 +110,15 @@
   <ItemGroup>
     <Compile Include="Controllers\Error\ErrorController.cs" />
     <Compile Include="Controllers\Intranet\AdministradorController.cs" />
-    <Compile Include="Controllers\Intranet\AsesorVentasController.cs" />
+    <Compile Include="Controllers\Intranet\AsesorVentasCallController.cs" />
+    <Compile Include="Controllers\Intranet\AsesorVentasCampoController.cs" />
     <Compile Include="Controllers\Intranet\GerenteController.cs" />
     <Compile Include="Controllers\Intranet\InicioController.cs" />
+    <Compile Include="Controllers\Intranet\SupervisorAdslController.cs" />
     <Compile Include="Controllers\Intranet\SupervisorCallController.cs" />
+    <Compile Include="Controllers\Intranet\SupervisorCampoController.cs" />
+    <Compile Include="Controllers\Intranet\SupervisorInstalacionesController.cs" />
+    <Compile Include="Controllers\Intranet\SupervisorVentasController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -1608,6 +1613,64 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CapaEntidades\CapaEntidades.csproj">
+      <Project>{53a0672a-78b0-462f-80f9-65729d8447e1}</Project>
+      <Name>CapaEntidades</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\CapaNegocio\CapaNegocio.csproj">
+      <Project>{c9a810df-1a8a-46ee-a8f2-4b51a35f755b}</Project>
+      <Name>CapaNegocio</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Index.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Login.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\MasterPage.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Administrador\PrincipalAdministrador.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Gerente\PrincipalGerente.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Error\Error.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SupervisorCall\PrincipalSupervisorCall.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Historia.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Mision.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\Vision.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SupervisorVentas\PrincipalSupervisorVentas.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SupervisorInstalaciones\PrincipalSupervisorInstalaciones.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SupervisorCampo\PrincipalSupervisorCampo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SupervisorAdsl\PrincipalSupervisorAdsl.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AsesorVentasCall\PrincipalAsesorVentasCall.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AsesorVentasCampo\PrincipalAsesorVentasCampo.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
     <Content Include="assets\css\fonts\fontawesome-webfont.eot" />
     <Content Include="assets\css\fonts\fontawesome-webfont.ttf" />
     <Content Include="assets\css\fonts\fontawesome-webfont.woff" />
@@ -1645,6 +1708,7 @@
     <Content Include="assets\css\theme-default\font-awesome-LICENSE" />
     <Content Include="assets\css\theme-default\libs\bootstrap-colorpicker\img\Thumbs.db" />
     <Content Include="assets\css\theme-default\material-design-LICENSE.md" />
+    <Content Include="assets\img\Thumbs.db" />
     <Content Include="assets\js\libs\bootstrap-colorpicker\LICENSE" />
     <Content Include="assets\js\libs\bootstrap-datepicker\LICENSE" />
     <Content Include="assets\js\libs\bootstrap-multiselect\LICENSE" />
@@ -1880,49 +1944,6 @@
     <Content Include="assets\less\shared\themes\theme-5.less" />
     <Content Include="assets\less\shared\themes\theme-default.less" />
     <Content Include="assets\less\shared\variables.less" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\CapaEntidades\CapaEntidades.csproj">
-      <Project>{53a0672a-78b0-462f-80f9-65729d8447e1}</Project>
-      <Name>CapaEntidades</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\CapaNegocio\CapaNegocio.csproj">
-      <Project>{c9a810df-1a8a-46ee-a8f2-4b51a35f755b}</Project>
-      <Name>CapaNegocio</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Inicio\Index.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Inicio\Login.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\MasterPage.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Administrador\PrincipalAdministrador.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Gerente\PrincipalGerente.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\AsesorVentas\PrincipalAsesorVentas.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Error\Error.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\SupervisorCall\PrincipalSupervisorCall.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Inicio\Historia.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Inicio\Mision.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Views\Inicio\Vision.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

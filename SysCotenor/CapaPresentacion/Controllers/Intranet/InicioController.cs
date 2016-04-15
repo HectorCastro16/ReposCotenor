@@ -27,47 +27,57 @@ namespace CapaPresentacion.Controllers
 
         public ActionResult VerificarAcceso(FormCollection form)
         {
-            
-           
+
+
             try
             {
-                String Usuario = form["txtUsuario"].Replace(";", "").Replace("'", "").Replace("--","");
+                String Usuario = form["txtUsuario"].Replace(";", "").Replace("'", "").Replace("--", "");
                 String Password = form["txtPassword"].Replace(";", "").Replace("'", "").Replace("--", "");
                 entUsuario u = negUsuario.Instancia.VerificarAccesoIntranet(Usuario, Password);
                 Session["usuario"] = u;
 
                 if (u.TipoUsuario.TipUsu_Nombre.Equals("Administrador"))
                 {
-                    return RedirectToAction("PrincipalAdministrador", "Administrador", u);
+                    return RedirectToAction("PrincipalAdministrador", "Administrador");
                 }
-                else if (u.TipoUsuario.TipUsu_Nombre.Equals("Gerente"))
+                if (u.TipoUsuario.TipUsu_Nombre.Equals("Gerente"))
                 {
-                    return RedirectToAction("PrincipalGerente", "Gerente", u);
+                    return RedirectToAction("PrincipalGerente", "Gerente");
                 }
-                else if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Call"))
+                if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Call"))
                 {
-                    return RedirectToAction("PrincipalSupervisorCall", "SupervisorCall", u);
+                    return RedirectToAction("PrincipalSupervisorCall", "SupervisorCall");
                 }
-                else if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Instalaciones"))
+                if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Ventas"))
                 {
-                    return RedirectToAction("PrincipalSupervisorInstalaciones", "SupervisorInstalaciones", u);
+                    return RedirectToAction("PrincipalSupervisorVentas", "SupervisorVentas");
                 }
-                else if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Ventas"))
+                if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Instalaciones"))
                 {
-                    return RedirectToAction("PrincipalSupervisorVentas", "SupervisorVentas", u);
+                    return RedirectToAction("PrincipalSupervisorInstalaciones", "SupervisorInstalaciones");
                 }
-                else if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Cable"))
+                if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Campo"))
                 {
-                    return RedirectToAction("PrincipalSupervisorCable", "SupervisorCable", u);
+                    return RedirectToAction("PrincipalSupervisorCampo", "SupervisorCampo");
                 }
-                else
+                if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Adsl"))
                 {
-                    return RedirectToAction("PrincipalAsesorVentas", "AsesorVentas", u);
+                    return RedirectToAction("PrincipalSupervisorAdsl", "SupervisorAdsl");
                 }
+                if (u.TipoUsuario.TipUsu_Nombre.Equals("Asesor Ventas Call"))
+                {
+                    return RedirectToAction("PrincipalAsesorVentasCall", "AsesorVentasCall");
+                }
+                if (u.TipoUsuario.TipUsu_Nombre.Equals("Asesor Ventas Campo"))
+                {
+                    return RedirectToAction("PrincipalAsesorVentasCampo", "AsesorVentasCampo");
+                }
+
+                return RedirectToAction("Login", "Inicio", new { mensaje = "Error = Tipo Usuario" });
             }
             catch (ApplicationException x)
             {
-                
+
                 ViewBag.mensaje = x.Message;
                 return RedirectToAction("Login", "Inicio", new { mensaje = x.Message });
             }
@@ -87,6 +97,7 @@ namespace CapaPresentacion.Controllers
                 Session["usuario"] = null;
                 Session.Remove("usuario");
                 //Session.RemoveAll();
+                return RedirectToAction("Index", "Inicio");
             }
             catch (ApplicationException x)
             {
@@ -98,10 +109,11 @@ namespace CapaPresentacion.Controllers
                 return RedirectToAction("Error", "Error");
             }
 
-            return RedirectToAction("Index", "Inicio");
+
         }
 
-        public ActionResult Historia() {
+        public ActionResult Historia()
+        {
             return View();
         }
         public ActionResult Mision()

@@ -18,9 +18,9 @@ namespace CapaPresentacion.Controllers.Intranet
             return View();
         }
 
-        public ActionResult PrincipalGerente(entUsuario u)
+        public ActionResult PrincipalGerente()
         {
-            return View(u);
+            return View();
         }
 
         //public ActionResult ListaUsuarios(String mensaje)
