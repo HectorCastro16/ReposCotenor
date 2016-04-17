@@ -18,9 +18,10 @@ namespace CapaPresentacion.Controllers
             return View();
         }
 
-        public ActionResult Login(String mensaje)
+        public ActionResult Login(String mensaje,Int16? identificador)
         {
             ViewBag.mensaje = mensaje;
+            ViewBag.identificador = identificador;
             return View();
         }
 
@@ -79,12 +80,12 @@ namespace CapaPresentacion.Controllers
             {
 
                 ViewBag.mensaje = x.Message;
-                return RedirectToAction("Login", "Inicio", new { mensaje = x.Message });
+                return RedirectToAction("Login", "Inicio", new { mensaje = x.Message, identificador=1 });
             }
             catch (Exception e)
             {
 
-                return RedirectToAction("Login", "Inicio", new { mensaje = e.Message });
+                return RedirectToAction("Login", "Inicio", new { mensaje = e.Message, identificador = 2 });
             }
         }
 
