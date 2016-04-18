@@ -64,22 +64,22 @@
                     String NombreUser = "";
                     String TipoUser = null;
                     String foto = "";
-                    
+
                     if (Session["usuario"] != null)
                     {
 
-                         u = (entUsuario)Session["usuario"];
-                         NombreUser = u.Persona.Per_Nombres;
-                         TipoUser = u.TipoUsuario.TipUsu_Nombre;
-                         foto = u.Persona.Per_Foto;
+                        u = (entUsuario)Session["usuario"];
+                        NombreUser = u.Persona.Per_Nombres;
+                        TipoUser = u.TipoUsuario.TipUsu_Nombre;
+                        foto = u.Persona.Per_Foto;
 
                     }
                     else
                     {
 
-                        Response.Redirect(Url.Action("Index", "Inicio")); 
+                        Response.Redirect(Url.Action("Index", "Inicio"));
                     }
-                   
+
                 }
 
                 <ul class="header-nav header-nav-profile">
@@ -185,7 +185,7 @@
                     <!-- END CHARTS -->
                         //
                     }
-                    else if (TipoUser == "Supervisor")
+                    else if (TipoUser == "Supervisor Call")
                     {
 
                         <!-- BEGIN FORMS -->
@@ -214,12 +214,35 @@
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
                     <!-- END CHARTS -->
-                        
+
                     }
-                    else
+                    else if (TipoUser == "Supervisor Ventas")
                     {
 
-                     <!-- BEGIN FORMS -->
+
+
+                    }
+                    else if (TipoUser == "Supervisor Instalaciones")
+                    {
+
+
+
+                    }
+                    else if (TipoUser == "Supervisor Campo")
+                    {
+
+
+
+                    }
+                    else if (TipoUser == "Supervisor Adsl")
+                    {
+
+
+
+                    }
+                    else if (TipoUser == "Asesor Ventas Call")
+                    {
+                        <!-- BEGIN FORMS -->
                         <li class="gui-folder">
                             <a>
                                 <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
@@ -228,13 +251,19 @@
                             <!--start submenu -->
                             <ul>
                                 <li><a href="../../html/forms/basic.html"><span class="title">Registro Ventas</span></a></li>
-                                
+
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
                     <!-- END FORMS -->
 
                     }
+                    else if (TipoUser == "Asesor Ventas Campo")
+                    {
 
+
+
+                    }
+                    
                     }
 
                 </ul><!--end .main-menu -->
