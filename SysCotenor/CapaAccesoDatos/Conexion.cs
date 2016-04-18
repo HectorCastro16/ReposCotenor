@@ -24,7 +24,8 @@ namespace CapaAccesoDatos
         public SqlConnection Conectar()
         {
             SqlConnection cn = new SqlConnection();
-            cn.ConnectionString = "Data Source=.; Initial Catalog=BD_Cotenor;User ID=sa; Password=123456";
+            //  cn.ConnectionString = "Data Source=.; Initial Catalog=BD_Cotenor;User ID=sa; Password=123456";
+            cn.ConnectionString = "Data Source=BDCotenor.mssql.somee.com; Initial Catalog=BDCotenor;User ID=Cotenor_SQLLogin_1; Password=shodwaudo5";
             return cn;
         }
         #endregion metodos
