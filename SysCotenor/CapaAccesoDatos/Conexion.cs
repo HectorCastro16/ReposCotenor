@@ -27,6 +27,8 @@ namespace CapaAccesoDatos
            /*  cn.ConnectionString = "Data Source=.; Initial Catalog=BD_Cotenor;User ID=sa; Password=123456";*/
             cn.ConnectionString = "Data Source=BDCotenor.mssql.somee.com; Initial Catalog=BDCotenor;User ID=Cotenor_SQLLogin_1; Password=shodwaudo5";
             return cn;
+
+            /* Prueba */
         }
         #endregion metodos
 
