@@ -20,16 +20,31 @@ namespace CapaPresentacion.Controllers
 
         public ActionResult Login(String mensaje,Int16? identificador)
         {
+            int limite = 0;
             ViewBag.mensaje = mensaje;
             ViewBag.identificador = identificador;
+            try { 
+                  if (identificador == 1){
+                    if (Session["intentos"] != null) {
+                        limite = (int)Session["intentos"] + 1;
+                        Session["intentos"] = limite;
+                    }else  Session["intentos"] = 1;
+                    limite = (int)Session["intentos"];
+                    if (limite == 3) {
+                        ViewBag.mensaje = "Se ha bloqueado por cantidad de intentos + o = 3";
+                        ViewBag.lim = limite;
+                    }
+                }
+            }
+            catch (Exception) {
+                throw;
+            }
             return View();
         }
 
 
         public ActionResult VerificarAcceso(FormCollection form)
         {
-
-
             try
             {
                 String Usuario = form["txtUsuario"].Replace(";", "").Replace("'", "").Replace("--", "");

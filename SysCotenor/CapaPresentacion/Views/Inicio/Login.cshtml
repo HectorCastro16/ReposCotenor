@@ -28,15 +28,29 @@
                     <div class="col-sm-12">
                         <br />
                         <span>Ingrese su codigo y contraseña correspondientes:</span>
-                        <form class="form floating-label col-lg-8" action="VerificarAcceso" accept-charset="utf-8" method="post">
+                       <form class="form floating-label col-lg-8" action="VerificarAcceso" accept-charset="utf-8" method="post">
+                            @if (ViewBag.lim == 3)
+                            {
+                                <div class="form-group">
+                                    <input type="text" disabled="disabled" class="form-control" id="username" name="txtUsuario" onkeypress="return valida(event)" maxlength="8">
+                                    <label for="username">Código</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" disabled="disabled" class="form-control" id="password" name="txtPassword">
+                                    <label for="password">Contraseña</label>
+                                </div>
+
+                            }
+                            else {
                             <div class="form-group">
-                                <input type="text" class="form-control" id="username" name="txtUsuario" onkeypress="return valida(event)" maxlength="8">
+                           <input type="text"  class="form-control" id="username" name="txtUsuario" onkeypress="return valida(event)" maxlength="8">
                                 <label for="username">Código</label>
                             </div>
                             <div class="form-group">
-                                <input type="password" class="form-control" id="password" name="txtPassword">
+                                <input type="password"  class="form-control" id="password" name="txtPassword">
                                 <label for="password">Contraseña</label>
                             </div>
+                            }
                             <br />
                             <div class="row">
                                 <div class="col-xs-6 text-right">
@@ -48,7 +62,7 @@
                             {
                                 if (@ViewBag.identificador == 1) { 
                                     <div class="alert alert-callout alert-warning" role="alert">
-					                    <strong>Atención!</strong> @ViewBag.mensaje
+					                    <strong>Atención!</strong> @ViewBag.mensaje                                        
 				                    </div>
                                 }
                                 else if (@ViewBag.identificador == 2)
