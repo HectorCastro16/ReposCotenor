@@ -87,7 +87,7 @@ namespace CapaAccesoDatos
             SqlCommand cmd = null;
             SqlDataReader dr = null;
             entUsuario u = null;
-            
+
             try
             {
                 SqlConnection cn = Conexion.Instancia.Conectar();
@@ -152,11 +152,15 @@ namespace CapaAccesoDatos
 
                     entSucursal s = new entSucursal();
                     s.Suc_Nombre = dr["Suc_Nombre"].ToString();
+                    s.Suc_Direccion = dr["Suc_Direccion"].ToString();
+                    s.Suc_Ciudad = dr["Suc_Ciudad"].ToString();
+                    s.Suc_Telefono = dr["Suc_Telefono"].ToString();
                     u.Sucursal = s;
 
                     u.Usu_UsuarioRegistro = dr["Usu_UsuarioRegistro"].ToString();
                     u.Usu_FechaRegistro = Convert.ToDateTime(dr["Usu_FechaRegistro"]);
-
+                    u.Usu_FechaModificacion = Convert.ToDateTime(dr["Usu_FechaModificacion"]);
+                    u.Usu_UsuarioModificacion = dr["Usu_UsuarioModificacion"].ToString();
                     Lista.Add(u);
                 }
 
