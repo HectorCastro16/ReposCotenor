@@ -22,5 +22,12 @@ namespace CapaPresentacion.Controllers.Intranet
             return View(u);
         }
 
+        public ActionResult ListaUsuarioAsesorCall() {
+
+            List<entUsuario> lista = negUsuario.Instancia.ListaUsuarios("T007");
+            return View(lista);
+        }
+
+
     }
 }

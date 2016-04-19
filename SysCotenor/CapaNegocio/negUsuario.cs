@@ -81,17 +81,17 @@ namespace CapaNegocio
 
         }
 
-        //public List<entUsuario> ListaUsuarios()
-        //{
-        //    try
-        //    {
-        //        return datUsuario.Instancia.ListaUsuarios();
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw e;
-        //    }
-        //}
+        public List<entUsuario> ListaUsuarios(String TipoUsuario)
+        {
+            try
+            {
+                return datUsuario.Instancia.ListaUsuarios(TipoUsuario);
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
 
         #endregion metodos
     }
