@@ -24,12 +24,10 @@
                                                 <th>Nº</th>
                                                 <th class="sort-alpha">Nombres y Apellidos</th>
                                                 <th class="sort-numeric">DNI</th>
-                                                <th>Foto</th>
+                                                <th class="sort-alpha">Sucursal</th>
                                                 <th class="sort-numeric">Telefono</th>
-                                                <th class="sort-alpha">Direccion</th>
                                                 <th class="sort-alpha">Estado</th>
                                                 <th>Fecha Hasta</th>
-                                                <th class="sort-alpha">Sucursal</th>
                                                 <th></th>
                                             </tr>
                                         </thead>
@@ -50,22 +48,16 @@
                                                         @Html.DisplayFor(modelItem => item.Persona.Per_DNI)
                                                     </td>
                                                     <td>
-                                                        @Html.DisplayFor(modelItem => item.Persona.Per_Foto)
+                                                        @Html.DisplayFor(modelItem => item.Sucursal.Suc_Nombre)
                                                     </td>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.Persona.Per_Telefono)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Persona.Per_Direccion)
                                                     </td>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.Usu_Estado)
                                                     </td>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.Usu_FechaHasta)
-                                                    </td>
-                                                    <td>
-                                                        @Html.DisplayFor(modelItem => item.Sucursal.Suc_Nombre)
                                                     </td>
                                                     <td>
                                                         @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
