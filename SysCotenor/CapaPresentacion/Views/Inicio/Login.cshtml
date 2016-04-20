@@ -16,7 +16,7 @@
     <link type="text/css" rel="stylesheet" href="../../assets/css/theme-1/bootstrap.css?1422792965" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/theme-1/materialadmin.css?1425466319" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/theme-1/font-awesome.min.css?1422529194" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-1/material-design-iconic-font.min.css?1421434286" />    
+    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-1/material-design-iconic-font.min.css?1421434286" />
 </head>
 <body class="menubar-hoverable header-fixed ">
     <section class="section-account">
@@ -25,15 +25,16 @@
         <div class="card contain-sm style-transparent">
             <div class="card-body">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-6">
                         <br />
-                        <span>Ingrese su codigo y contraseña correspondientes:</span>
-                       <form class="form floating-label col-lg-8" action="VerificarAcceso" accept-charset="utf-8" method="post">
+                        <span class="text-lg text-bold text-primary">COTENOR E.I.R.L.</span>
+                        <br /><br />
+                        <form class="form floating-label" action="VerificarAcceso" accept-charset="utf-8" method="post">
                             @if (ViewBag.lim == 3)
                             {
                                 <div class="form-group">
                                     <input type="text" disabled="disabled" class="form-control" id="username" name="txtUsuario" onkeypress="return valida(event)" maxlength="8">
-                                    <label for="username">Código</label>
+                                    <label for="username">Usuario</label>
                                 </div>
                                 <div class="form-group">
                                     <input type="password" disabled="disabled" class="form-control" id="password" name="txtPassword">
@@ -41,43 +42,58 @@
                                 </div>
 
                             }
-                            else {
-                            <div class="form-group">
-                           <input type="text"  class="form-control" id="username" name="txtUsuario" onkeypress="return valida(event)" maxlength="8">
-                                <label for="username">Código</label>
-                            </div>
-                            <div class="form-group">
-                                <input type="password"  class="form-control" id="password" name="txtPassword">
-                                <label for="password">Contraseña</label>
-                            </div>
+                            else
+                            {
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="username" name="txtUsuario" onkeypress="return valida(event)" maxlength="8">
+                                    <label for="username">Usuario</label>
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" id="password" name="txtPassword">
+                                    <label for="password">Contraseña</label>
+                                </div>
                             }
                             <br />
                             <div class="row">
-                                <div class="col-xs-6 text-right">
-                                    <button class="btn ink-reaction btn-raised btn-primary" type="submit">Login</button>
-                                </div> 
+                                <div>
+                                    <center>
+                                        <button class="btn ink-reaction btn-raised btn-primary" type="submit">INICIAR SESIÓN</button>
+                                    </center>
+                                </div>
                             </div>
                             <br />
-                            @if (@ViewBag.mensaje!=null)
+                            @if (@ViewBag.mensaje != null)
                             {
-                                if (@ViewBag.identificador == 1) { 
+                                if (@ViewBag.identificador == 1)
+                                {
                                     <div class="alert alert-callout alert-warning" role="alert">
-					                    <strong>Atención!</strong> @ViewBag.mensaje                                        
-				                    </div>
+                                        <strong>Atención!</strong> @ViewBag.mensaje
+                                    </div>
                                 }
                                 else if (@ViewBag.identificador == 2)
                                 {
-                                <div class="alert alert-callout alert-danger" role="alert">
-					                <strong>Ooops!</strong> @ViewBag.mensaje
-                            </div>
+                                    <div class="alert alert-callout alert-danger" role="alert">
+                                        <strong>Ooops!</strong> @ViewBag.mensaje
+                                    </div>
                                 }
                             }
                         </form>
-                    </div>
-                </div>
+                    </div><!--end .col -->
+                    <div class="col-sm-5 col-sm-offset-1 text-center">
+                        <br><br>
+                        <div>
+                            <center>
+                                <img src="~/assets/img/log.png" class="img-responsive" />
+                            </center>
                         </div>
-                    </div>
+                    </div><!--end .col -->
+                </div><!--end .row -->
+            </div><!--end .card-body -->
+        </div><!--end .card -->
     </section>
+    <!-- END LOGIN SECTION -->
+
+
     <script src="../../assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
     <script src="../../assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
     <script src="../../assets/js/libs/bootstrap/bootstrap.min.js"></script>
@@ -107,4 +123,3 @@
     </script>
 </body>
 </html>
-
