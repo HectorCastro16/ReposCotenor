@@ -15,15 +15,16 @@ namespace CapaEntidades
         public entPersona Persona { get; set; }
         public entTipoUsuario TipoUsuario { get; set; }
         public entSucursal Sucursal { get; set; }
-        
+
         [Required(ErrorMessage = "Usuario Requerido")]
         public String Usu_Login { get; set; }
-        
+
         [Required(ErrorMessage = "Contraseña Requerida")]
         public String Usu_Password { get; set; }
         public String Usu_Estado { get; set; }
         [Required]
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Usu_FechaHasta { get; set; }
         public DateTime Usu_FechaRegistro { get; set; }
         public String Usu_UsuarioRegistro { get; set; }

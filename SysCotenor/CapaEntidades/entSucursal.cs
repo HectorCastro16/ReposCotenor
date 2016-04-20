@@ -8,7 +8,7 @@ namespace CapaEntidades
 {
     public class entSucursal
     {
-        public String Id { get; set; }
+        public String Suc_Id { get; set; }
         public String Suc_Nombre { get; set; }
         public String Suc_Telefono { get; set; }
         public String Suc_Direccion { get; set; }

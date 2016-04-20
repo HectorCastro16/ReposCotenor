@@ -25,6 +25,7 @@ namespace CapaEntidades
         public String Per_Direccion { get; set; }
         public String Per_Foto { get; set; }
         [Required]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Per_FechaNacimiento { get; set; }
         [Required]
         public String Per_LugarNacimiento { get; set; }

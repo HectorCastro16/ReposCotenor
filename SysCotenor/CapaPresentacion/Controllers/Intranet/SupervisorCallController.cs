@@ -22,12 +22,20 @@ namespace CapaPresentacion.Controllers.Intranet
             return View(u);
         }
 
-        public ActionResult ListaUsuarioAsesorCall() {
+        public ActionResult ListaUsuarioAsesorCall()
+        {
 
-            List<entUsuario> lista = negUsuario.Instancia.ListaUsuarios("T007");
+            entUsuario u = (entUsuario)Session["usuario"];
+            String sucursal = u.Sucursal.Suc_Id;
+            List<entUsuario> lista = negUsuario.Instancia.ListaUsuarios("T007", sucursal);
             return View(lista);
         }
 
-
+        public ActionResult DetalleUsuario(String UsuarioId)
+        {
+            String UsuaID = UsuarioId.Replace(";", "").Replace("'", "").Replace("--", "").Replace("OR", "");
+            entUsuario u = negUsuario.Instancia.DetalleUsuario(UsuaID, "T007");
+            return View(u);
+        }
     }
 }

@@ -57,10 +57,12 @@ namespace CapaAccesoDatos
                     u.Persona = p;
 
                     entTipoUsuario t = new entTipoUsuario();
+                    t.TipUsu_Id = dr["TipUsu_Id"].ToString();
                     t.TipUsu_Nombre = dr["TipUsu_Nombre"].ToString();
                     u.TipoUsuario = t;
 
                     entSucursal s = new entSucursal();
+                    s.Suc_Id = dr["Suc_Id"].ToString();
                     s.Suc_Nombre = dr["Suc_Nombre"].ToString();
                     u.Sucursal = s;
 
@@ -111,7 +113,8 @@ namespace CapaAccesoDatos
             return u;
         }
 
-        public List<entUsuario> ListaUsuarios(String TipoUsuario)
+        
+        public List<entUsuario> ListaUsuarios(String TipoUsuario, String Sucursal)
         {
 
             SqlCommand cmd = null;
@@ -122,6 +125,7 @@ namespace CapaAccesoDatos
                 SqlConnection cn = Conexion.Instancia.Conectar();
                 cmd = new SqlCommand("spListaUsuariosXTipo", cn);
                 cmd.Parameters.AddWithValue("@prmtStrTipUsuId", TipoUsuario);
+                cmd.Parameters.AddWithValue("@prmtStrSucId", Sucursal);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cn.Open();
                 dr = cmd.ExecuteReader();
@@ -136,31 +140,11 @@ namespace CapaAccesoDatos
                     p.Per_Nombres = dr["Per_Nombres"].ToString();
                     p.Per_Apellidos = dr["Per_Apellidos"].ToString();
                     p.Per_DNI = dr["Per_DNI"].ToString();
-                    p.Per_Foto = dr["Per_Foto"].ToString();
                     p.Per_Telefono = dr["Per_Telefono"].ToString();
-                    p.Per_Direccion = dr["Per_Direccion"].ToString();
-                    p.Per_FechaNacimiento = Convert.ToDateTime(dr["Per_FechaNacimiento"]);
-                    p.Per_LugarNacimiento = dr["Per_LugarNacimiento"].ToString();
                     u.Persona = p;
 
                     u.Usu_Estado = dr["Usu_Estado"].ToString();
                     u.Usu_FechaHasta = Convert.ToDateTime(dr["Usu_FechaHasta"]);
-
-                    entTipoUsuario t = new entTipoUsuario();
-                    t.TipUsu_Nombre = dr["TipUsu_Nombre"].ToString();
-                    u.TipoUsuario = t;
-
-                    entSucursal s = new entSucursal();
-                    s.Suc_Nombre = dr["Suc_Nombre"].ToString();
-                    s.Suc_Direccion = dr["Suc_Direccion"].ToString();
-                    s.Suc_Ciudad = dr["Suc_Ciudad"].ToString();
-                    s.Suc_Telefono = dr["Suc_Telefono"].ToString();
-                    u.Sucursal = s;
-
-                    u.Usu_UsuarioRegistro = dr["Usu_UsuarioRegistro"].ToString();
-                    u.Usu_FechaRegistro = Convert.ToDateTime(dr["Usu_FechaRegistro"]);
-                    u.Usu_FechaModificacion = Convert.ToDateTime(dr["Usu_FechaModificacion"]);
-                    u.Usu_UsuarioModificacion = dr["Usu_UsuarioModificacion"].ToString();
                     Lista.Add(u);
                 }
 
@@ -176,6 +160,73 @@ namespace CapaAccesoDatos
             return Lista;
         }
 
+        public entUsuario DetalleUsuario(String UsuarioId,String TipUsuId)
+        {
+
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            entUsuario u = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("DetalleUsuario", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@prmtStrIdUsu", UsuarioId);
+                cmd.Parameters.AddWithValue("@prmtStrTipUsuId", TipUsuId);
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                if (dr.Read()) {
+
+                    u = new entUsuario();
+                    u.Usu_Id = dr["Usu_Id"].ToString();
+
+                    entPersona p = new entPersona();
+                    p.Per_Id = dr["Per_Id"].ToString();
+                    p.Per_Nombres = dr["Per_Nombres"].ToString();
+                    p.Per_Apellidos = dr["Per_Apellidos"].ToString();
+                    p.Per_DNI = dr["Per_DNI"].ToString();
+                    p.Per_Foto = dr["Per_Foto"].ToString();
+                    p.Per_Telefono = dr["Per_Telefono"].ToString();
+                    p.Per_Direccion = dr["Per_Direccion"].ToString();
+                    p.Per_FechaNacimiento = Convert.ToDateTime(dr["Per_FechaNacimiento"]);
+                    p.Per_LugarNacimiento = dr["Per_LugarNacimiento"].ToString();
+                    u.Persona = p;
+
+                    u.Usu_Estado = dr["Usu_Estado"].ToString();
+                    u.Usu_FechaHasta = Convert.ToDateTime(dr["Usu_FechaHasta"]);
+
+                    entTipoUsuario t = new entTipoUsuario();
+                    t.TipUsu_Id = dr["TipUsu_Id"].ToString();
+                    t.TipUsu_Nombre = dr["TipUsu_Nombre"].ToString();
+                    u.TipoUsuario = t;
+
+                    entSucursal s = new entSucursal();
+                    s.Suc_Id = dr["Suc_Id"].ToString();
+                    s.Suc_Nombre = dr["Suc_Nombre"].ToString();
+                    s.Suc_Direccion = dr["Suc_Direccion"].ToString();
+                    s.Suc_Ciudad = dr["Suc_Ciudad"].ToString();
+                    s.Suc_Telefono = dr["Suc_Telefono"].ToString();
+                    u.Sucursal = s;
+
+                    u.Usu_UsuarioRegistro = dr["Usu_UsuarioRegistro"].ToString();
+                    u.Usu_FechaRegistro = Convert.ToDateTime(dr["Usu_FechaRegistro"]);
+                    u.Usu_FechaModificacion = Convert.ToDateTime(dr["Usu_FechaModificacion"]);
+                    u.Usu_UsuarioModificacion = dr["Usu_UsuarioModificacion"].ToString();
+
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+            return u;
+        }
+
+        
         #endregion metodos
     }
 }

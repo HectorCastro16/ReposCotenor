@@ -1,0 +1,154 @@
+﻿@model CapaEntidades.entUsuario
+
+@{
+    ViewBag.Title = "DetalleUsuario";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+
+<section>
+    <div class="section-body">
+        <div class="card">
+            <div class="card-body">
+
+
+                <div class="row">
+                    <h2>INFORMACION DE USUARIO</h2>
+                </div>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <center>
+                            @*<img src="~/assets/img/avatar1.jpg" class="img-responsive" />*@
+                            <img src="~/assets/img/@Html.DisplayFor(model => model.Persona.Per_Foto)" class="img-responsive" />
+                            <br />
+                            <div class="display-label">
+                                ESTADO
+                            </div>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.Usu_Estado)
+                            </div>
+                        </center>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="display-label">
+                            CODIGO
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Usu_Id)
+                        </div>
+
+                        <div class="display-label">
+                            NOMBRES
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Persona.Per_Nombres)
+                        </div>
+
+                        <div class="display-label">
+                            APELLIDOS
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Persona.Per_Apellidos)
+                        </div>
+                        <div class="display-label">
+                            DNI
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Persona.Per_DNI)
+                        </div>
+
+                        <div class="display-label">
+                            TELEFONO
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Persona.Per_Telefono)
+                        </div>
+
+                        <div class="display-label">
+                            DIRECCION
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Persona.Per_Direccion)
+                        </div>
+
+                        <div class="display-label">
+                            FECHA NACIMIENTO
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Persona.Per_FechaNacimiento)
+                        </div>
+
+                        <div class="display-label">
+                            LUGAR NACIMIENTO
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Persona.Per_LugarNacimiento)
+                        </div>
+                    </div>
+                    <div class="col-sm-4">
+                        <div class="display-label">
+                            FECHA HASTA
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Usu_FechaHasta)
+                        </div>
+
+                        <div class="display-label">
+                            TIPO USUARIO
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.TipoUsuario.TipUsu_Id) -
+                            @Html.DisplayFor(model => model.TipoUsuario.TipUsu_Nombre)
+                        </div>
+
+                        <div class="display-label">
+                            SUCRUSAL
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Sucursal.Suc_Id) -
+                            @Html.DisplayFor(model => model.Sucursal.Suc_Nombre)
+                        </div>
+
+                        <div class="display-label">
+                            SUCRUSAL DIRECCION
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Sucursal.Suc_Direccion) -
+                            @Html.DisplayFor(model => model.Sucursal.Suc_Ciudad)
+                        </div>
+
+                        <div class="display-label">
+                            SUCRUSAL TELEFONO
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Sucursal.Suc_Telefono)
+                        </div>
+
+                        <div class="display-label">
+                            USUARIO REGISTRO
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Usu_UsuarioRegistro) -
+                            @Html.DisplayFor(model => model.Usu_FechaRegistro)
+                        </div>
+
+                        <div class="display-label">
+                            USUARIO ULTIMA MODIFICACION
+                        </div>
+                        <div class="display-field">
+                            @Html.DisplayFor(model => model.Usu_UsuarioModificacion) -
+                            @Html.DisplayFor(model => model.Usu_FechaModificacion)
+                        </div>
+
+                        <p>
+                            @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+                            @Html.ActionLink("Back to List", "Index")
+                        </p>
+                    </div>
+
+                </div>
+
+            </div><!--end .card-body -->
+        </div>
+    </div><!--end .section-body -->
+</section>
