@@ -13,10 +13,13 @@
 
 
                 <div class="row">
-                    <h2>INFORMACION DE USUARIO</h2>
+                    <center>
+                        <h2>INFORMACION DE USUARIO</h2>
+                    </center>
                 </div>
+                <br />
                 <div class="row">
-                    <div class="col-sm-4">
+                    <div class="col-sm-3">
                         <center>
                             @*<img src="~/assets/img/avatar1.jpg" class="img-responsive" />*@
                             <img src="~/assets/img/@Html.DisplayFor(model => model.Persona.Per_Foto)" class="img-responsive" />
@@ -29,124 +32,86 @@
                             </div>
                         </center>
                     </div>
-                    <div class="col-sm-4">
-                        <div class="display-label">
-                            CODIGO
-                        </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.Usu_Id)
-                        </div>
+                    <form class="form" role="form">
 
-                        <div class="display-label">
-                            NOMBRES
-                        </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.Persona.Per_Nombres)
-                        </div>
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.NombreCompleto)" readonly>
+                                <label for="readonly5">NOMBRES Y APELLIDOS</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_DNI)" readonly>
+                                <label for="readonly5">DNI</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_Telefono)" readonly>
+                                <label for="readonly5">TELEFONO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_Direccion)" readonly>
+                                <label for="readonly5">DIRECCION</label>
+                            </div>
 
-                        <div class="display-label">
-                            APELLIDOS
-                        </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.Persona.Per_Apellidos)
-                        </div>
-                        <div class="display-label">
-                            DNI
-                        </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.Persona.Per_DNI)
-                        </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_FechaNacimiento)" readonly>
+                                <label for="readonly5">FECHA NACIMIENTO</label>
+                            </div>
 
-                        <div class="display-label">
-                            TELEFONO
                         </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.Persona.Per_Telefono)
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_LugarNacimiento)" readonly>
+                                <label for="readonly5">LUGAR NACIMIENTO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Usu_FechaHasta)" readonly>
+                                <label for="readonly5">FECHA HASTA</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.TipoUsuario.IdNomTip)" readonly>
+                                <label for="readonly5">TIPO USUARIO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Sucursal.IdNomSuc)" readonly>
+                                <label for="readonly5">SUCURSAL</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Sucursal.DirCiuSuc)" readonly>
+                                <label for="readonly5">FECHA HASTA</label>
+                            </div>
                         </div>
-
-                        <div class="display-label">
-                            DIRECCION
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Sucursal.Suc_Telefono)" readonly>
+                                <label for="readonly5">SUCRUSAL TELEFONO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Usu_UsuarioRegistro)" readonly>
+                                <label for="readonly5">USUARIO REGISTRO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Usu_FechaRegistro)" readonly>
+                                <label for="readonly5">FECHA REGISTRO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Usu_UsuarioModificacion)" readonly>
+                                <label for="readonly5">USUARIO ULTIMA MODIFICACION</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Usu_FechaModificacion)" readonly>
+                                <label for="readonly5">FECHA ULTIMA MODIFICACION</label>
+                            </div>
                         </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.Persona.Per_Direccion)
-                        </div>
-
-                        <div class="display-label">
-                            FECHA NACIMIENTO
-                        </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.Persona.Per_FechaNacimiento)
-                        </div>
-
-                        <div class="display-label">
-                            LUGAR NACIMIENTO
-                        </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.Persona.Per_LugarNacimiento)
-                        </div>
-                    </div>
-                    <div class="col-sm-4">
-                        <div class="display-label">
-                            FECHA HASTA
-                        </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.Usu_FechaHasta)
-                        </div>
-
-                        <div class="display-label">
-                            TIPO USUARIO
-                        </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.TipoUsuario.TipUsu_Id) -
-                            @Html.DisplayFor(model => model.TipoUsuario.TipUsu_Nombre)
-                        </div>
-
-                        <div class="display-label">
-                            SUCRUSAL
-                        </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.Sucursal.Suc_Id) -
-                            @Html.DisplayFor(model => model.Sucursal.Suc_Nombre)
-                        </div>
-
-                        <div class="display-label">
-                            SUCRUSAL DIRECCION
-                        </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.Sucursal.Suc_Direccion) -
-                            @Html.DisplayFor(model => model.Sucursal.Suc_Ciudad)
-                        </div>
-
-                        <div class="display-label">
-                            SUCRUSAL TELEFONO
-                        </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.Sucursal.Suc_Telefono)
-                        </div>
-
-                        <div class="display-label">
-                            USUARIO REGISTRO
-                        </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.Usu_UsuarioRegistro) -
-                            @Html.DisplayFor(model => model.Usu_FechaRegistro)
-                        </div>
-
-                        <div class="display-label">
-                            USUARIO ULTIMA MODIFICACION
-                        </div>
-                        <div class="display-field">
-                            @Html.DisplayFor(model => model.Usu_UsuarioModificacion) -
-                            @Html.DisplayFor(model => model.Usu_FechaModificacion)
-                        </div>
-
-                        <p>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
-                            @Html.ActionLink("Back to List", "Index")
-                        </p>
-                    </div>
-
+                    </form>
                 </div>
+                <div class="row" style="text-align:right">
+                    <p>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=Model.PrimaryKey */ }) |
+                        @Html.ActionLink("Back to List", "Index")
+                    </p>
+                </div>
+
+
 
             </div><!--end .card-body -->
         </div>

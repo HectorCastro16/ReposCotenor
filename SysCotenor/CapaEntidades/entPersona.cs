@@ -30,5 +30,10 @@ namespace CapaEntidades
         [Required]
         public String Per_LugarNacimiento { get; set; }
 
+        // Atributos de concatenados
+        public String NombreCompleto {
+            get { return Per_Nombres + " " + Per_Apellidos; }
+        }
+
     }
 }

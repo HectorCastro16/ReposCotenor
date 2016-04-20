@@ -19,5 +19,13 @@ namespace CapaEntidades
         public DateTime Suc_FechaModificacion { get; set; }
         public String Suc_UsuarioModificacion { get; set; }
 
+        //Atributos Concatenados
+        public String IdNomSuc {
+            get { return Suc_Id + " - " + Suc_Nombre; }
+        }
+
+        public String DirCiuSuc {
+            get { return Suc_Direccion + " - " + Suc_Ciudad; }
+        }
     }
 }

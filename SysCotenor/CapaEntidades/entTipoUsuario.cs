@@ -18,5 +18,10 @@ namespace CapaEntidades
         public DateTime TipUsu_FechaModificacion { get; set; }
         public String TipUsu_UsuarioModificacion { get; set; }
 
+
+        //Atributos COncatendos
+        public String IdNomTip {
+            get { return TipUsu_Id + " - " + TipUsu_Nombre; }
+        }
     }
 }
