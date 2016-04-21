@@ -48,7 +48,7 @@
 
                                               if (actual < finbloqueo)
                                               {
-                                                  Session.Remove("intentos");
+                                                  
                                 <div class="form-group">
                                     <input type="text" disabled="disabled" class="form-control" id="username" name="txtUsuario" onkeypress="return valida(event)" maxlength="8">
                                     <label for="username">Usuario</label>
@@ -69,6 +69,11 @@
                                       }
                                       else
                                       {
+                                          if (lim >= 5) {
+                                              if (Session["intentos"] != null) {
+                                                  Session.Remove("intentos");
+                                              }
+                                          }
                                         <div class="form-group">
                                             <input type="text" class="form-control" id="username" name="txtUsuario" onkeypress="return valida(event)" maxlength="8">
                                             <label for="username">Usuario</label>
