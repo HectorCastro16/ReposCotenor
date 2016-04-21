@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     ViewBag.Title = "Login";
 }
 
@@ -30,8 +31,24 @@
                         <span class="text-lg text-bold text-primary">COTENOR E.I.R.L.</span>
                         <br /><br />
                         <form class="form floating-label" action="VerificarAcceso" accept-charset="utf-8" method="post">
-                            @if (ViewBag.lim == 3)
-                            {
+                              @{
+                                          int lim = 0;
+                                          DateTime actual=DateTime.Now;
+                                          DateTime finbloqueo=DateTime.Now;
+                                          if (Session["intentos"] != null){
+                                              lim = (int)Session["intentos"];
+                                          }
+
+                                          if (lim >= 5) {
+                                              if (Session["finbloqueo"] != null)
+                                              {
+                                                  actual = DateTime.Now;
+                                                  finbloqueo = (DateTime)Session["finbloqueo"];
+                                              }
+
+                                              if (actual < finbloqueo)
+                                              {
+                                                  Session.Remove("intentos");
                                 <div class="form-group">
                                     <input type="text" disabled="disabled" class="form-control" id="username" name="txtUsuario" onkeypress="return valida(event)" maxlength="8">
                                     <label for="username">Usuario</label>
@@ -40,10 +57,41 @@
                                     <input type="password" disabled="disabled" class="form-control" id="password" name="txtPassword">
                                     <label for="password">Contraseña</label>
                                 </div>
+                                <br />
+                                <div class="row">
+                                    <div>
+                                        <center>
+                                            <button class="btn ink-reaction btn-raised btn-primary" disabled="disabled" type="submit">INICIAR SESIÓN</button>
+                                        </center>
+                                    </div>
+                                </div>
+                                <br />
+                                      }
+                                      else
+                                      {
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="username" name="txtUsuario" onkeypress="return valida(event)" maxlength="8">
+                                            <label for="username">Usuario</label>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="password" class="form-control" id="password" name="txtPassword">
+                                            <label for="password">Contraseña</label>
+                                        </div>
+                                        <br />
+                                        <div class="row">
+                                            <div>
+                                                <center>
+                                                    <button class="btn ink-reaction btn-raised btn-primary" type="submit">INICIAR SESIÓN</button>
+                                                </center>
+                                            </div>
+                                        </div>
+                                        <br />
 
-                            }
-                            else
-                            {
+                                      }
+                                  }
+
+                                  else
+                                  {
                                 <div class="form-group">
                                     <input type="text" class="form-control" id="username" name="txtUsuario" onkeypress="return valida(event)" maxlength="8">
                                     <label for="username">Usuario</label>
@@ -52,16 +100,18 @@
                                     <input type="password" class="form-control" id="password" name="txtPassword">
                                     <label for="password">Contraseña</label>
                                 </div>
-                            }
-                            <br />
-                            <div class="row">
-                                <div>
-                                    <center>
-                                        <button class="btn ink-reaction btn-raised btn-primary" type="submit">INICIAR SESIÓN</button>
-                                    </center>
+                                <br />
+                                <div class="row">
+                                    <div>
+                                        <center>
+                                            <button class="btn ink-reaction btn-raised btn-primary" type="submit">INICIAR SESIÓN</button>
+                                        </center>
+                                    </div>
                                 </div>
-                            </div>
-                            <br />
+                                <br />
+                              
+                                }
+                                  }
                             @if (@ViewBag.mensaje != null)
                             {
                                 if (@ViewBag.identificador == 1)
