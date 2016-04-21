@@ -66,6 +66,7 @@ namespace CapaAccesoDatos
                     s.Suc_Nombre = dr["Suc_Nombre"].ToString();
                     u.Sucursal = s;
 
+                    u.Usu_Login = dr["Usu_Login"].ToString();
                     u.Usu_Estado = dr["Usu_Estado"].ToString();
                     u.Usu_FechaHasta = Convert.ToDateTime(dr["Usu_FechaHasta"]);
                     u.Usu_FechaRegistro = Convert.ToDateTime(dr["Usu_FechaRegistro"]);

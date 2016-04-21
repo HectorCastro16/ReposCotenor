@@ -24,11 +24,17 @@ namespace CapaPresentacion.Controllers.Intranet
 
         public ActionResult ListaUsuarioAsesorCall()
         {
-
-            entUsuario u = (entUsuario)Session["usuario"];
-            String sucursal = u.Sucursal.Suc_Id;
-            List<entUsuario> lista = negUsuario.Instancia.ListaUsuarios("T007", sucursal);
-            return View(lista);
+             entUsuario u = (entUsuario)Session["usuario"];
+            if(u!=null){
+                String sucursal = u.Sucursal.Suc_Id;
+                List<entUsuario> lista = negUsuario.Instancia.ListaUsuarios("T007", sucursal);
+                return View(lista);
+            }else{
+                return RedirectToAction("Index", "Inicio");
+            }
+            
+           
+           
         }
 
         public ActionResult DetalleUsuario(String UsuarioId)

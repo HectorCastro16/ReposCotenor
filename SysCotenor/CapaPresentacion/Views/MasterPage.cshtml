@@ -68,19 +68,16 @@
                     String TipoUser = null;
                     String foto = "";
 
-                    if (Session["usuario"] != null)
+                    if (Session["usuario"] == null)
                     {
-
+                        Response.Redirect(Url.Action("Index", "Inicio"));
+                    }
+                    else
+                    {
                         u = (entUsuario)Session["usuario"];
                         NombreUser = u.Persona.Per_Nombres;
                         TipoUser = u.TipoUsuario.TipUsu_Nombre;
                         foto = u.Persona.Per_Foto;
-
-                    }
-                    else
-                    {
-
-                        Response.Redirect(Url.Action("Index", "Inicio"));
                     }
 
                 }

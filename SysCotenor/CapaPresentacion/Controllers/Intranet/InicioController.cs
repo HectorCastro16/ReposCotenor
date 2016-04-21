@@ -15,31 +15,59 @@ namespace CapaPresentacion.Controllers
 
         public ActionResult Index()
         {
-            return View();
+            if (Session["usuario"] != null)
+            {
+                entUsuario u = (entUsuario)Session["usuario"];
+                String TipoUsuario = u.TipoUsuario.TipUsu_Nombre.Replace(" ", "").ToString();
+                return RedirectToAction("Principal" + TipoUsuario, TipoUsuario);
+            }
+            else
+            {
+                return View();
+            }
+
         }
 
-        public ActionResult Login(String mensaje,Int16? identificador)
+        public ActionResult Login(String mensaje, Int16? identificador)
         {
             int limite = 0;
             ViewBag.mensaje = mensaje;
             ViewBag.identificador = identificador;
-            try { 
-                  if (identificador == 1){
-                    if (Session["intentos"] != null) {
+            try
+            {
+                if (identificador == 1)
+                {
+                    if (Session["intentos"] != null)
+                    {
                         limite = (int)Session["intentos"] + 1;
                         Session["intentos"] = limite;
-                    }else  Session["intentos"] = 1;
+                    }
+                    else Session["intentos"] = 1;
                     limite = (int)Session["intentos"];
-                    if (limite == 3) {
+                    if (limite == 3)
+                    {
                         ViewBag.mensaje = "Se ha bloqueado por cantidad de intentos + o = 3";
                         ViewBag.lim = limite;
                     }
                 }
             }
-            catch (Exception) {
+            catch (Exception)
+            {
                 throw;
             }
-            return View();
+
+
+            if (Session["usuario"] != null)
+            {
+                entUsuario u = (entUsuario)Session["usuario"];
+                String TipoUsuario = u.TipoUsuario.TipUsu_Nombre.Replace(" ", "").ToString();
+                return RedirectToAction("Principal" + TipoUsuario, TipoUsuario);
+            }
+            else
+            {
+                return View();
+            }
+
         }
 
 
@@ -49,53 +77,44 @@ namespace CapaPresentacion.Controllers
             {
                 String Usuario = form["txtUsuario"].Replace(";", "").Replace("'", "").Replace("--", "");
                 String Password = form["txtPassword"].Replace(";", "").Replace("'", "").Replace("--", "");
-                entUsuario u = negUsuario.Instancia.VerificarAccesoIntranet(Usuario, Password);
-                Session["usuario"] = u;
+                if (Session["usuario"] != null)
+                {
+                    entUsuario us = (entUsuario)Session["usuario"];
+                    String login = us.Usu_Login;
+                    if (Usuario == login)
+                    {
+                        String TipoUsuario = us.TipoUsuario.TipUsu_Nombre.Replace(" ", "").ToString();
+                        return RedirectToAction("Principal" + TipoUsuario, TipoUsuario);
+                    }
+                    else
+                    {
+                        return RedirectToAction("ConfirmLogin", "Inicio");
+                    }
+                }
+                else
+                {
 
-                if (u.TipoUsuario.TipUsu_Nombre.Equals("Administrador"))
-                {
-                    return RedirectToAction("PrincipalAdministrador", "Administrador");
-                }
-                if (u.TipoUsuario.TipUsu_Nombre.Equals("Gerente"))
-                {
-                    return RedirectToAction("PrincipalGerente", "Gerente");
-                }
-                if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Call"))
-                {
-                    return RedirectToAction("PrincipalSupervisorCall", "SupervisorCall");
-                }
-                if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Ventas"))
-                {
-                    return RedirectToAction("PrincipalSupervisorVentas", "SupervisorVentas");
-                }
-                if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Instalaciones"))
-                {
-                    return RedirectToAction("PrincipalSupervisorInstalaciones", "SupervisorInstalaciones");
-                }
-                if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Campo"))
-                {
-                    return RedirectToAction("PrincipalSupervisorCampo", "SupervisorCampo");
-                }
-                if (u.TipoUsuario.TipUsu_Nombre.Equals("Supervisor Adsl"))
-                {
-                    return RedirectToAction("PrincipalSupervisorAdsl", "SupervisorAdsl");
-                }
-                if (u.TipoUsuario.TipUsu_Nombre.Equals("Asesor Ventas Call"))
-                {
-                    return RedirectToAction("PrincipalAsesorVentasCall", "AsesorVentasCall");
-                }
-                if (u.TipoUsuario.TipUsu_Nombre.Equals("Asesor Ventas Campo"))
-                {
-                    return RedirectToAction("PrincipalAsesorVentasCampo", "AsesorVentasCampo");
+                    entUsuario u = negUsuario.Instancia.VerificarAccesoIntranet(Usuario, Password);
+                    Session["usuario"] = u;
+
+                    if (u.TipoUsuario.TipUsu_Nombre != "" && u.TipoUsuario.TipUsu_Nombre != null)
+                    {
+                        String TipoUsuario = u.TipoUsuario.TipUsu_Nombre.Replace(" ", "").ToString();
+                        return RedirectToAction("Principal" + TipoUsuario, TipoUsuario);
+                    }
+                    else
+                    {
+                        return RedirectToAction("Login", "Inicio", new { mensaje = "Error = Tipo Usuario" });
+                    }
+
                 }
 
-                return RedirectToAction("Login", "Inicio", new { mensaje = "Error = Tipo Usuario" });
             }
             catch (ApplicationException x)
             {
 
                 ViewBag.mensaje = x.Message;
-                return RedirectToAction("Login", "Inicio", new { mensaje = x.Message, identificador=1 });
+                return RedirectToAction("Login", "Inicio", new { mensaje = x.Message, identificador = 1 });
             }
             catch (Exception e)
             {
@@ -138,6 +157,12 @@ namespace CapaPresentacion.Controllers
         }
         public ActionResult Vision()
         {
+            return View();
+        }
+
+        public ActionResult ConfirmLogin()
+        {
+
             return View();
         }
     }
