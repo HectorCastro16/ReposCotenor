@@ -49,6 +49,8 @@ namespace CapaAccesoDatos
                     p.Per_Nombres = dr["Per_Nombres"].ToString();
                     p.Per_Apellidos = dr["Per_Apellidos"].ToString();
                     p.Per_DNI = dr["Per_DNI"].ToString();
+                    p.Per_Celular = dr["Per_Celular"].ToString();
+                    p.Per_Correo = dr["Per_Correo"].ToString();
                     p.Per_Telefono = dr["Per_Telefono"].ToString();
                     p.Per_Direccion = dr["Per_Direccion"].ToString();
                     p.Per_Foto = dr["Per_Foto"].ToString();
@@ -115,7 +117,7 @@ namespace CapaAccesoDatos
         }
 
         
-        public List<entUsuario> ListaUsuarios(String TipoUsuario, String Sucursal)
+        public List<entUsuario> ListaUsuarios(String UsuarioId,String TipoUsuario, String Sucursal)
         {
 
             SqlCommand cmd = null;
@@ -125,6 +127,7 @@ namespace CapaAccesoDatos
             {
                 SqlConnection cn = Conexion.Instancia.Conectar();
                 cmd = new SqlCommand("spListaUsuariosXTipo", cn);
+                cmd.Parameters.AddWithValue("@prmtStrIdUsu", UsuarioId);
                 cmd.Parameters.AddWithValue("@prmtStrTipUsuId", TipoUsuario);
                 cmd.Parameters.AddWithValue("@prmtStrSucId", Sucursal);
                 cmd.CommandType = CommandType.StoredProcedure;
@@ -141,6 +144,7 @@ namespace CapaAccesoDatos
                     p.Per_Nombres = dr["Per_Nombres"].ToString();
                     p.Per_Apellidos = dr["Per_Apellidos"].ToString();
                     p.Per_DNI = dr["Per_DNI"].ToString();
+                    p.Per_Celular = dr["Per_Celular"].ToString();
                     p.Per_Telefono = dr["Per_Telefono"].ToString();
                     u.Persona = p;
 
@@ -187,6 +191,8 @@ namespace CapaAccesoDatos
                     p.Per_Apellidos = dr["Per_Apellidos"].ToString();
                     p.Per_DNI = dr["Per_DNI"].ToString();
                     p.Per_Foto = dr["Per_Foto"].ToString();
+                    p.Per_Celular = dr["Per_Celular"].ToString();
+                    p.Per_Correo = dr["Per_Correo"].ToString();
                     p.Per_Telefono = dr["Per_Telefono"].ToString();
                     p.Per_Direccion = dr["Per_Direccion"].ToString();
                     p.Per_FechaNacimiento = Convert.ToDateTime(dr["Per_FechaNacimiento"]);

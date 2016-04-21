@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CapaEntidades
 {
-    public class entAsignacion
+    public class entAsigncionLlamadas
     {
         public String Asi_Id { get; set; }
         public entUsuario Usuario { get; set; }
@@ -16,6 +16,5 @@ namespace CapaEntidades
         public String Asi_UsuarioRegistro { get; set; }
         public DateTime Asi_FechaModificacion { get; set; }
         public String Asi_UsuarioModificacion { get; set; }
-
     }
 }

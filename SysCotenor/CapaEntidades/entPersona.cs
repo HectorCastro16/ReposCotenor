@@ -19,6 +19,8 @@ namespace CapaEntidades
         [Required]
         [StringLength(8)]
         public String Per_DNI { get; set; }
+        public String Per_Celular { get; set; }
+        public String Per_Correo { get; set; }
         [Required]
         public String Per_Telefono { get; set; }
         [Required]

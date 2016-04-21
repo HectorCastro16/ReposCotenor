@@ -24,6 +24,7 @@
                                                 <th>Nº</th>
                                                 <th class="sort-alpha">Nombres y Apellidos</th>
                                                 <th class="sort-numeric">DNI</th>
+                                                <th class="sort-numeric">Celular</th>
                                                 <th class="sort-numeric">Telefono</th>
                                                 <th class="sort-alpha">Estado</th>
                                                 <th>Fecha Hasta</th>
@@ -44,6 +45,9 @@
                                                     </td>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.Persona.Per_DNI)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.Persona.Per_Celular)
                                                     </td>
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.Persona.Per_Telefono)

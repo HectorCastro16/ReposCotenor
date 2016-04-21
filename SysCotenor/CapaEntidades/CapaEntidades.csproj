@@ -42,7 +42,8 @@
   <ItemGroup>
     <Compile Include="entAccCom_DetAccCom.cs" />
     <Compile Include="entAccionComercial.cs" />
-    <Compile Include="entAsignacion.cs" />
+    <Compile Include="entAsigncionLlamadas.cs" />
+    <Compile Include="entAsigncionUsuarios.cs" />
     <Compile Include="entCategoria.cs" />
     <Compile Include="entCliente.cs" />
     <Compile Include="entDetAcc_GruCom.cs" />

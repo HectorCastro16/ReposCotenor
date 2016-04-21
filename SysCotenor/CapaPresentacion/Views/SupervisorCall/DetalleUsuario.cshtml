@@ -4,8 +4,6 @@
     ViewBag.Title = "DetalleUsuario";
     Layout = "~/Views/MasterPage.cshtml";
 }
-
-
 <section>
     <div class="section-body">
         <div class="card">
@@ -36,6 +34,10 @@
 
                         <div class="col-sm-3">
                             <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Usu_Id)" readonly>
+                                <label for="readonly5">CODIGO</label>
+                            </div>
+                            <div class="form-group">
                                 <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.NombreCompleto)" readonly>
                                 <label for="readonly5">NOMBRES Y APELLIDOS</label>
                             </div>
@@ -51,7 +53,6 @@
                                 <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_Direccion)" readonly>
                                 <label for="readonly5">DIRECCION</label>
                             </div>
-
                             <div class="form-group">
                                 <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_FechaNacimiento)" readonly>
                                 <label for="readonly5">FECHA NACIMIENTO</label>
@@ -59,9 +60,14 @@
 
                         </div>
                         <div class="col-sm-3">
+
                             <div class="form-group">
                                 <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_LugarNacimiento)" readonly>
                                 <label for="readonly5">LUGAR NACIMIENTO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_Celular)" readonly>
+                                <label for="readonly5">CELULAR</label>
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Usu_FechaHasta)" readonly>
@@ -77,12 +83,18 @@
                             </div>
                             <div class="form-group">
                                 <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Sucursal.DirCiuSuc)" readonly>
-                                <label for="readonly5">FECHA HASTA</label>
+                                <label for="readonly5">DIRECCION SUCURSAL</label>
                             </div>
+
                         </div>
                         <div class="col-sm-3">
+
                             <div class="form-group">
                                 <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Sucursal.Suc_Telefono)" readonly>
+                                <label for="readonly5">SUCRUSAL TELEFONO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_Correo)" readonly>
                                 <label for="readonly5">SUCRUSAL TELEFONO</label>
                             </div>
                             <div class="form-group">
@@ -101,6 +113,7 @@
                                 <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Usu_FechaModificacion)" readonly>
                                 <label for="readonly5">FECHA ULTIMA MODIFICACION</label>
                             </div>
+
                         </div>
                     </form>
                 </div>
@@ -110,9 +123,6 @@
                         @Html.ActionLink("Back to List", "Index")
                     </p>
                 </div>
-
-
-
             </div><!--end .card-body -->
         </div>
     </div><!--end .section-body -->

@@ -81,11 +81,11 @@ namespace CapaNegocio
 
         }
 
-        public List<entUsuario> ListaUsuarios(String TipoUsuario, String Sucursal)
+        public List<entUsuario> ListaUsuarios(String UsuarioId,String TipoUsuario, String Sucursal)
         {
             try
             {
-                return datUsuario.Instancia.ListaUsuarios(TipoUsuario, Sucursal);
+                return datUsuario.Instancia.ListaUsuarios(UsuarioId,TipoUsuario, Sucursal);
             }
             catch (Exception e)
             {
