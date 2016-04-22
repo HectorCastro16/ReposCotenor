@@ -60,8 +60,6 @@ namespace CapaAccesoDatos
             return Lista;
             }
 
-
-
         public entUsuario VerificarAccesoIntranet(String prmstrLogin, String prmstrPassw)
         {
             SqlCommand cmd = null;
@@ -122,7 +120,6 @@ namespace CapaAccesoDatos
             return u;
         }
 
-
         public entUsuario VerificarUsuarioExiste(String prmstrLogin)
         {
             SqlCommand cmd = null;
@@ -152,7 +149,6 @@ namespace CapaAccesoDatos
             return u;
         }
 
-        
         public List<entUsuario> ListaUsuarios(String UsuarioId,String TipoUsuario, String Sucursal)
         {
 
@@ -210,7 +206,7 @@ namespace CapaAccesoDatos
             try
             {
                 SqlConnection cn = Conexion.Instancia.Conectar();
-                cmd = new SqlCommand("DetalleUsuario", cn);
+                cmd = new SqlCommand("spDetalleUsuario", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@prmtStrIdUsu", UsuarioId);
                 cmd.Parameters.AddWithValue("@prmtStrTipUsuId", TipUsuId);
