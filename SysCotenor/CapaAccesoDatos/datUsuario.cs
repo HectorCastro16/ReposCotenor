@@ -26,6 +26,42 @@ namespace CapaAccesoDatos
 
         #region metodos
 
+        public List<entUsuario> ListaUsuariosEstado(String codigoSupervisor) {
+            SqlCommand cmd= null;
+            SqlDataReader dr = null;
+            List<entUsuario> Lista = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListaUserStatus", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@AsiUsu_Usu_Super_Id", codigoSupervisor);
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entUsuario>();
+                while (dr.Read())
+                {
+                    entUsuario u = new entUsuario();
+                    u.Usu_Id = dr["Usu_Id"].ToString();
+                    u.Usu_Estado = dr["Usu_Estado"].ToString();
+                    entPersona p = new entPersona();
+                    p.Per_Nombres = dr["Per_Nombres"].ToString();
+                    p.Per_Apellidos = dr["Per_Apellidos"].ToString();
+                    p.Per_Correo = dr["Per_Correo"].ToString();
+                    u.Persona = p;
+
+                    Lista.Add(u);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            } finally { cmd.Connection.Close();}
+            return Lista;
+            }
+
+
+
         public entUsuario VerificarAccesoIntranet(String prmstrLogin, String prmstrPassw)
         {
             SqlCommand cmd = null;

@@ -23,6 +23,21 @@ namespace CapaNegocio
 
         #region metodos
 
+        public List<entUsuario> ListUsuariosEstado(String codsupervisor) {
+           try
+            {
+                List<entUsuario> Lista = null;
+                Lista = datUsuario.Instancia.ListaUsuariosEstado(codsupervisor);
+                if (Lista.Count == 0) {
+                    throw new ApplicationException("No se encontraron registros");
+                }
+                return Lista;
+            }
+            catch (Exception) {
+                throw;
+            }
+        }
+        
         public entUsuario VerificarAccesoIntranet(String prmstrLogin, String prmstrPassw)
         {
             try

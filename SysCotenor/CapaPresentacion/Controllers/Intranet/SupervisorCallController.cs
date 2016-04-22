@@ -22,6 +22,32 @@ namespace CapaPresentacion.Controllers.Intranet
             return View(u);
         }
 
+        public ActionResult ListaUsuarioEstados()
+        {
+            try
+            {
+                String codsupervisor = "";
+                List<entUsuario> lista = null;
+                if (Session["usuario"] != null)
+                {
+                    entUsuario u = (entUsuario)Session["usuario"];
+                    codsupervisor = u.Usu_Id;
+                }
+                lista = negUsuario.Instancia.ListUsuariosEstado(codsupervisor);
+                return View(lista);
+            }
+            catch (ApplicationException ae) {
+                ViewBag.mensaje = ae.Message;
+                List<entUsuario> lista = new List<entUsuario>();
+                return View(lista);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+
+        }
+
         public ActionResult ListaUsuarioAsesorCall()
         {
             entUsuario u = (entUsuario)Session["usuario"];

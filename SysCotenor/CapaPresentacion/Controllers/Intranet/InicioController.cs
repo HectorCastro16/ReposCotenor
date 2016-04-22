@@ -25,58 +25,38 @@ namespace CapaPresentacion.Controllers
             {
                 return View();
             }
-            // hola mundo 
+           
         }
 
         public ActionResult Login(String mensaje, Int16? identificador)
         {
-            int limite = 0;
+           
             ViewBag.mensaje = mensaje;
             ViewBag.identificador = identificador;
             try
             {
-                if (identificador == 1){
-                        if (Session["intentos"] != null)
-                        {
-                            limite = (int)Session["intentos"] + 1;
-                            Session["intentos"] = limite;
-                        }
-                        else Session["intentos"] = 1;
-                        limite = (int)Session["intentos"];
-                        if (limite >= 5)
-                        {
-                            ViewBag.mensaje = "Se ha bloqueado por cantidad de intentos + o = 3";
-                        DateTime actual = DateTime.Now;
-                        DateTime finbloqueo = actual.AddMinutes(1);
-                        Session["finbloqueo"] = finbloqueo;
-                    }
-                    
+                if (Session["usuario"] != null)
+                {
+                    entUsuario u = (entUsuario)Session["usuario"];
+                    String TipoUsuario = u.TipoUsuario.TipUsu_Nombre.Replace(" ", "").ToString();
+                    return RedirectToAction("Principal" + TipoUsuario, TipoUsuario);
                 }
+                else
+                {
+                    return View();
+                }
+
+
             }
             catch (Exception)
             {
                 throw;
             }
-
-
-            if (Session["usuario"] != null)
-            {
-                entUsuario u = (entUsuario)Session["usuario"];
-                String TipoUsuario = u.TipoUsuario.TipUsu_Nombre.Replace(" ", "").ToString();
-                return RedirectToAction("Principal" + TipoUsuario, TipoUsuario);
-            }
-            else
-            {
-                return View();
-            }
-
+           
         }
-
-
-        public ActionResult VerificarAcceso(FormCollection form)
+       public ActionResult VerificarAcceso(FormCollection form)
         {
-            try
-            {
+            try  {
                 String Usuario = form["txtUsuario"].Replace(";", "").Replace("'", "").Replace("--", "");
                 String Password = form["txtPassword"].Replace(";", "").Replace("'", "").Replace("--", "");
                 if (Session["usuario"] != null)
@@ -102,9 +82,6 @@ namespace CapaPresentacion.Controllers
                     if (u.TipoUsuario.TipUsu_Nombre != "" && u.TipoUsuario.TipUsu_Nombre != null)
                     {
                         String TipoUsuario = u.TipoUsuario.TipUsu_Nombre.Replace(" ", "").ToString();
-                        if (Session["intentos"] != null){
-                            Session.Remove("intentos");
-                        }
                         return RedirectToAction("Principal" + TipoUsuario, TipoUsuario);  
                     }
                     else
@@ -136,9 +113,7 @@ namespace CapaPresentacion.Controllers
                 //Session.Abandon();
                 Session["usuario"] = null;
                 Session.Remove("usuario");
-                if (Session["intentos"] != null){
-                    Session.Remove("intentos");
-                }
+                
                 //Session.RemoveAll();
                 return RedirectToAction("Index", "Inicio");
             }
@@ -151,9 +126,9 @@ namespace CapaPresentacion.Controllers
             {
                 return RedirectToAction("Error", "Error");
             }
-
-
         }
+
+       
 
         public ActionResult Historia()
         {
