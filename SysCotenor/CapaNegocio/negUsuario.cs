@@ -122,6 +122,31 @@ namespace CapaNegocio
         }
 
 
+        public int  RegUsuarioSecurity(entUsuarioSecurity u, Int16 TipoEdicion) {
+            try
+            {
+                String cadXml = "";
+                cadXml += "<UsuarioSecurity ";
+                cadXml += "UsuarioID='" + u.UsuarioID + "' ";
+                cadXml += "Username='" + u.Username + "' ";
+                cadXml += "IPAcceso='" + u.IPAcceso + "' ";
+                cadXml += "TipoEdicion='" + TipoEdicion + "'/>";
+
+                cadXml = "<root>" + cadXml + "</root>";
+
+                int i = datUsuario.Instancia.RegUsuarioSecurity(cadXml);
+                if (i == -2) { throw new ApplicationException("Problema 1"); }
+                if (i == -3) { throw new ApplicationException("Problema 2"); }
+                return i;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        
+        }
+
         #endregion metodos
     }
 }

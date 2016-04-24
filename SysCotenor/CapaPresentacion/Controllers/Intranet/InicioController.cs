@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Net;
+using System.Net.NetworkInformation;
 using CapaEntidades;
 using CapaNegocio;
 
@@ -82,6 +84,24 @@ namespace CapaPresentacion.Controllers
                     if (u.TipoUsuario.TipUsu_Nombre != "" && u.TipoUsuario.TipUsu_Nombre != null)
                     {
                         String TipoUsuario = u.TipoUsuario.TipUsu_Nombre.Replace(" ", "").ToString();
+                        /*    Aca va el registro del Usuario en la Tabla UsuarioSecurity*/
+                        entUsuarioSecurity us = new entUsuarioSecurity();
+                        us.UsuarioID= u.Usu_Id;
+                        us.Username = u.Usu_Login;
+                        //Capturo IPV4 de Conexion de Area Local
+                        IPHostEntry host;
+                        string localIP = "";
+                        host = Dns.GetHostEntry(Dns.GetHostName());
+                        foreach (IPAddress ip in host.AddressList)
+                        {
+                            if (ip.AddressFamily.ToString() == "InterNetwork")
+                            {
+                                localIP = ip.ToString();
+                            }
+                        }
+                        us.IPAcceso = localIP;
+                        negUsuario.Instancia.RegUsuarioSecurity(us,1);
+
                         return RedirectToAction("Principal" + TipoUsuario, TipoUsuario);  
                     }
                     else
@@ -124,6 +144,7 @@ namespace CapaPresentacion.Controllers
             }
             catch (Exception e)
             {
+                ViewBag.mensaje = e.Message;
                 return RedirectToAction("Error", "Error");
             }
         }

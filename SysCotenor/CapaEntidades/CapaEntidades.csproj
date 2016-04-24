@@ -62,6 +62,7 @@
     <Compile Include="entSucursal.cs" />
     <Compile Include="entTipoUsuario.cs" />
     <Compile Include="entUsuario.cs" />
+    <Compile Include="entUsuarioSecurity.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
