@@ -8,11 +8,12 @@ namespace CapaEntidades
 {
     public class entDetallePedido
     {
-       public String DetPed_Id { get; set; }
-       public entPedido Pedido{ get; set; }
-       public entProducto Producto { get; set; }
-       public Double DetPed_Pre_Pro { get; set; }
-       public int DetPed_Cantidad { get; set; }
+        public int DetPed_Id { get; set; }
+        public String DetPed_Codigo { get; set; }
+        public entPedido Pedido { get; set; }
+        public entProducto Producto { get; set; }
+        public Double DetPed_Pre_Pro { get; set; }
+        public int DetPed_Cantidad { get; set; }
 
     }
 }

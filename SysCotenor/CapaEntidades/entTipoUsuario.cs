@@ -9,7 +9,8 @@ namespace CapaEntidades
 {
     public class entTipoUsuario
     {
-        public String TipUsu_Id { get; set; }
+        public int TipUsu_Id { get; set; }
+        public String TipUsu_Codigo { get; set; }
         [Required]
         public String TipUsu_Nombre { get; set; }
         public String TipUsu_Descripcion { get; set; }
@@ -20,8 +21,8 @@ namespace CapaEntidades
 
 
         //Atributos COncatendos
-        public String IdNomTip {
-            get { return TipUsu_Id + " - " + TipUsu_Nombre; }
+        public String CodNomTipUsu {
+            get { return TipUsu_Codigo + " - " + TipUsu_Nombre; }
         }
     }
 }

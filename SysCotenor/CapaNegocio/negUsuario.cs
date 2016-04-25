@@ -23,20 +23,20 @@ namespace CapaNegocio
 
         #region metodos
 
-        public List<entUsuario> ListUsuariosEstado(String codsupervisor) {
-           try
-            {
-                List<entUsuario> Lista = null;
-                Lista = datUsuario.Instancia.ListaUsuariosEstado(codsupervisor);
-                if (Lista.Count == 0) {
-                    throw new ApplicationException("No se encontraron registros");
-                }
-                return Lista;
-            }
-            catch (Exception) {
-                throw;
-            }
-        }
+        //public List<entUsuario> ListUsuariosEstado(String codsupervisor) {
+        //   try
+        //    {
+        //        List<entUsuario> Lista = null;
+        //        Lista = datUsuario.Instancia.ListaUsuariosEstado(codsupervisor);
+        //        if (Lista.Count == 0) {
+        //            throw new ApplicationException("No se encontraron registros");
+        //        }
+        //        return Lista;
+        //    }
+        //    catch (Exception) {
+        //        throw;
+        //    }
+        //}
         
         public entUsuario VerificarAccesoIntranet(String prmstrLogin, String prmstrPassw)
         {
@@ -76,31 +76,31 @@ namespace CapaNegocio
             }
         }
 
-        public entUsuario VerificarUsuarioExiste(String prmstrLogin)
+        //public entUsuario VerificarUsuarioExiste(String prmstrLogin)
+        //{
+        //    try
+        //    {
+        //        entUsuario u = null;
+        //        u = datUsuario.Instancia.VerificarUsuarioExiste(prmstrLogin);
+        //        return u;
+        //    }
+        //    catch (ApplicationException ae)
+        //    {
+        //        throw ae;
+        //    }
+        //    catch (Exception)
+        //    {
+
+        //        throw;
+        //    }
+
+        //}
+
+        public List<entUsuario> ListaUsuarios(Int32 UsuarioId, Int32 TipoUsuarioId, Int32 SucursalId)
         {
             try
             {
-                entUsuario u = null;
-                u = datUsuario.Instancia.VerificarUsuarioExiste(prmstrLogin);
-                return u;
-            }
-            catch (ApplicationException ae)
-            {
-                throw ae;
-            }
-            catch (Exception)
-            {
-
-                throw;
-            }
-
-        }
-
-        public List<entUsuario> ListaUsuarios(String UsuarioId,String TipoUsuario, String Sucursal)
-        {
-            try
-            {
-                return datUsuario.Instancia.ListaUsuarios(UsuarioId,TipoUsuario, Sucursal);
+                return datUsuario.Instancia.ListaUsuarios(UsuarioId, TipoUsuarioId, SucursalId);
             }
             catch (Exception e)
             {
@@ -108,7 +108,8 @@ namespace CapaNegocio
             }
         }
 
-        public entUsuario DetalleUsuario(String UsuarioId,String TipUsuId) {
+        public entUsuario DetalleUsuario(Int32 UsuarioId, Int32 TipUsuId)
+        {
 
             try
             {
@@ -122,14 +123,14 @@ namespace CapaNegocio
         }
 
 
-        public int  RegUsuarioSecurity(entUsuarioSecurity u, Int16 TipoEdicion) {
+        public int  RegUsuarioSecurity(entUsuario u, Int16 TipoEdicion,String IpAcceso) {
             try
             {
                 String cadXml = "";
                 cadXml += "<UsuarioSecurity ";
-                cadXml += "UsuarioID='" + u.UsuarioID + "' ";
-                cadXml += "Username='" + u.Username + "' ";
-                cadXml += "IPAcceso='" + u.IPAcceso + "' ";
+                cadXml += "UsuarioID='" + u.Usu_Id.ToString() + "' ";
+                cadXml += "Username='" + u.Usu_Login + "' ";
+                cadXml += "IPAcceso='" + IpAcceso + "' ";
                 cadXml += "TipoEdicion='" + TipoEdicion + "'/>";
 
                 cadXml = "<root>" + cadXml + "</root>";

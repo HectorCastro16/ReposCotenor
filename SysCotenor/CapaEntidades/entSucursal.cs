@@ -8,7 +8,8 @@ namespace CapaEntidades
 {
     public class entSucursal
     {
-        public String Suc_Id { get; set; }
+        public int Suc_Id { get; set; }
+        public String Suc_Codigo { get; set; }
         public String Suc_Nombre { get; set; }
         public String Suc_Telefono { get; set; }
         public String Suc_Direccion { get; set; }
@@ -20,8 +21,8 @@ namespace CapaEntidades
         public String Suc_UsuarioModificacion { get; set; }
 
         //Atributos Concatenados
-        public String IdNomSuc {
-            get { return Suc_Id + " - " + Suc_Nombre; }
+        public String CodNomSuc {
+            get { return Suc_Codigo + " - " + Suc_Nombre; }
         }
 
         public String DirCiuSuc {

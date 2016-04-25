@@ -8,7 +8,8 @@ namespace CapaEntidades
 {
     public class entPedido
     {
-        public String Ped_Id { get; set; }
+        public int Ped_Id { get; set; }
+        public String Ped_Codigo { get; set; }
         public entCliente Cliente { get; set; }
         public entUsuario Usuario { get; set; }
         public entEstado Estado { get; set; }

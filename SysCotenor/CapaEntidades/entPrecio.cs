@@ -8,7 +8,8 @@ namespace CapaEntidades
 {
     public class entPrecio
     {
-        public String Pre_ID { get; set; }
+        public int Pre_ID { get; set; }
+        public String Pre_Codigo { get; set; }
         public Double Pre_producto { get; set; }
         public DateTime Pre_FechaRegistro { get; set; }
         public String Pre_UsuarioRegistro { get; set; }

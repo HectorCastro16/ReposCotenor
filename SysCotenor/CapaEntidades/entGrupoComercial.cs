@@ -8,7 +8,8 @@ namespace CapaEntidades
 {
     public class entGrupoComercial
     {
-        public String Gru_ID { get; set; }
+        public int Gru_ID { get; set; }
+        public String Gru_Codigo { get; set; }
         public String Gru_Nombre { get; set; }
         public String Gru_Descripcion { get; set; }
         public DateTime Gru_FechaRegistro { get; set; }

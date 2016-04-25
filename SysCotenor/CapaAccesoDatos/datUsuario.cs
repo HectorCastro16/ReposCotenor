@@ -26,39 +26,39 @@ namespace CapaAccesoDatos
 
         #region metodos
 
-        public List<entUsuario> ListaUsuariosEstado(String codigoSupervisor) {
-            SqlCommand cmd= null;
-            SqlDataReader dr = null;
-            List<entUsuario> Lista = null;
-            try
-            {
-                SqlConnection cn = Conexion.Instancia.Conectar();
-                cmd = new SqlCommand("spListaUserStatus", cn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@AsiUsu_Usu_Super_Id", codigoSupervisor);
-                cn.Open();
-                dr = cmd.ExecuteReader();
-                Lista = new List<entUsuario>();
-                while (dr.Read())
-                {
-                    entUsuario u = new entUsuario();
-                    u.Usu_Id = dr["Usu_Id"].ToString();
-                    u.Usu_Estado = dr["Usu_Estado"].ToString();
-                    entPersona p = new entPersona();
-                    p.Per_Nombres = dr["Per_Nombres"].ToString();
-                    p.Per_Apellidos = dr["Per_Apellidos"].ToString();
-                    p.Per_Correo = dr["Per_Correo"].ToString();
-                    u.Persona = p;
+        //public List<entUsuario> ListaUsuariosEstado(String codigoSupervisor) {
+        //    SqlCommand cmd= null;
+        //    SqlDataReader dr = null;
+        //    List<entUsuario> Lista = null;
+        //    try
+        //    {
+        //        SqlConnection cn = Conexion.Instancia.Conectar();
+        //        cmd = new SqlCommand("spListaUserStatus", cn);
+        //        cmd.CommandType = CommandType.StoredProcedure;
+        //        cmd.Parameters.AddWithValue("@AsiUsu_Usu_Super_Id", codigoSupervisor);
+        //        cn.Open();
+        //        dr = cmd.ExecuteReader();
+        //        Lista = new List<entUsuario>();
+        //        while (dr.Read())
+        //        {
+        //            entUsuario u = new entUsuario();
+        //            u.Usu_Id = dr["Usu_Id"].ToString();
+        //            u.Usu_Estado = dr["Usu_Estado"].ToString();
+        //            entPersona p = new entPersona();
+        //            p.Per_Nombres = dr["Per_Nombres"].ToString();
+        //            p.Per_Apellidos = dr["Per_Apellidos"].ToString();
+        //            p.Per_Correo = dr["Per_Correo"].ToString();
+        //            u.Persona = p;
 
-                    Lista.Add(u);
-                }
-            }
-            catch (Exception)
-            {
-                throw;
-            } finally { cmd.Connection.Close();}
-            return Lista;
-            }
+        //            Lista.Add(u);
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        throw;
+        //    } finally { cmd.Connection.Close();}
+        //    return Lista;
+        //    }
 
         public entUsuario VerificarAccesoIntranet(String prmstrLogin, String prmstrPassw)
         {
@@ -77,7 +77,8 @@ namespace CapaAccesoDatos
                 if (dr.Read())
                 {
                     u = new entUsuario();
-                    u.Usu_Id = dr["Usu_Id"].ToString();
+                    u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
+                    u.Usu_Codigo = dr["Usu_Codigo"].ToString();
 
                     entPersona p = new entPersona();
                     p.Per_Nombres = dr["Per_Nombres"].ToString();
@@ -93,12 +94,14 @@ namespace CapaAccesoDatos
                     u.Persona = p;
 
                     entTipoUsuario t = new entTipoUsuario();
-                    t.TipUsu_Id = dr["TipUsu_Id"].ToString();
+                    t.TipUsu_Id = Convert.ToInt32(dr["TipUsu_Id"]);
+                    t.TipUsu_Codigo = dr["TipUsu_Codigo"].ToString();
                     t.TipUsu_Nombre = dr["TipUsu_Nombre"].ToString();
                     u.TipoUsuario = t;
 
                     entSucursal s = new entSucursal();
-                    s.Suc_Id = dr["Suc_Id"].ToString();
+                    s.Suc_Id = Convert.ToInt32(dr["Suc_Id"]);
+                    s.Suc_Codigo = dr["Suc_Codigo"].ToString();
                     s.Suc_Nombre = dr["Suc_Nombre"].ToString();
                     u.Sucursal = s;
 
@@ -120,36 +123,36 @@ namespace CapaAccesoDatos
             return u;
         }
 
-        public entUsuario VerificarUsuarioExiste(String prmstrLogin)
-        {
-            SqlCommand cmd = null;
-            SqlDataReader dr = null;
-            entUsuario u = null;
+        //public entUsuario VerificarUsuarioExiste(String prmstrLogin)
+        //{
+        //    SqlCommand cmd = null;
+        //    SqlDataReader dr = null;
+        //    entUsuario u = null;
 
-            try
-            {
-                SqlConnection cn = Conexion.Instancia.Conectar();
-                cmd = new SqlCommand("spVerificaUsuarioExiste", cn);
-                cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@prmstrLogin", prmstrLogin);
-                cn.Open();
-                dr = cmd.ExecuteReader();
-                if (dr.Read())
-                {
-                    u = new entUsuario();
-                    u.Usu_Login = dr["Usu_Login"].ToString();
-                }
-            }
-            catch (Exception e)
-            {
+        //    try
+        //    {
+        //        SqlConnection cn = Conexion.Instancia.Conectar();
+        //        cmd = new SqlCommand("spVerificaUsuarioExiste", cn);
+        //        cmd.CommandType = CommandType.StoredProcedure;
+        //        cmd.Parameters.AddWithValue("@prmstrLogin", prmstrLogin);
+        //        cn.Open();
+        //        dr = cmd.ExecuteReader();
+        //        if (dr.Read())
+        //        {
+        //            u = new entUsuario();
+        //            u.Usu_Login = dr["Usu_Login"].ToString();
+        //        }
+        //    }
+        //    catch (Exception e)
+        //    {
 
-                throw e;
-            }
-            finally { cmd.Connection.Close(); }
-            return u;
-        }
+        //        throw e;
+        //    }
+        //    finally { cmd.Connection.Close(); }
+        //    return u;
+        //}
 
-        public List<entUsuario> ListaUsuarios(String UsuarioId,String TipoUsuario, String Sucursal)
+        public List<entUsuario> ListaUsuarios(Int32 UsuarioId, Int32 TipoUsuarioId, Int32 SucursalId)
         {
 
             SqlCommand cmd = null;
@@ -159,9 +162,9 @@ namespace CapaAccesoDatos
             {
                 SqlConnection cn = Conexion.Instancia.Conectar();
                 cmd = new SqlCommand("spListaUsuariosXTipo", cn);
-                cmd.Parameters.AddWithValue("@prmtStrIdUsu", UsuarioId);
-                cmd.Parameters.AddWithValue("@prmtStrTipUsuId", TipoUsuario);
-                cmd.Parameters.AddWithValue("@prmtStrSucId", Sucursal);
+                cmd.Parameters.AddWithValue("@prmtIntIdUsu", UsuarioId);
+                cmd.Parameters.AddWithValue("@prmtIntTipUsuId", TipoUsuarioId);
+                cmd.Parameters.AddWithValue("@prmtIntSucId", SucursalId);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cn.Open();
                 dr = cmd.ExecuteReader();
@@ -170,7 +173,8 @@ namespace CapaAccesoDatos
                 while (dr.Read())
                 {
                     entUsuario u = new entUsuario();
-                    u.Usu_Id = dr["Usu_Id"].ToString();
+                    u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
+                    u.Usu_Codigo = dr["Usu_Codigo"].ToString();
 
                     entPersona p = new entPersona();
                     p.Per_Nombres = dr["Per_Nombres"].ToString();
@@ -197,7 +201,7 @@ namespace CapaAccesoDatos
             return Lista;
         }
 
-        public entUsuario DetalleUsuario(String UsuarioId,String TipUsuId)
+        public entUsuario DetalleUsuario(Int32 UsuarioId, Int32 TipUsuId)
         {
 
             SqlCommand cmd = null;
@@ -208,17 +212,19 @@ namespace CapaAccesoDatos
                 SqlConnection cn = Conexion.Instancia.Conectar();
                 cmd = new SqlCommand("spDetalleUsuario", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
-                cmd.Parameters.AddWithValue("@prmtStrIdUsu", UsuarioId);
-                cmd.Parameters.AddWithValue("@prmtStrTipUsuId", TipUsuId);
+                cmd.Parameters.AddWithValue("@prmtIntIdUsu", UsuarioId);
+                cmd.Parameters.AddWithValue("@prmtIntTipUsuId", TipUsuId);
                 cn.Open();
                 dr = cmd.ExecuteReader();
                 if (dr.Read()) {
 
                     u = new entUsuario();
-                    u.Usu_Id = dr["Usu_Id"].ToString();
+                    u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
+                    u.Usu_Codigo = dr["Usu_Codigo"].ToString();
 
                     entPersona p = new entPersona();
-                    p.Per_Id = dr["Per_Id"].ToString();
+                    p.Per_Id = Convert.ToInt32(dr["Per_Id"]);
+                    p.Per_Codigo = dr["Per_Codigo"].ToString();
                     p.Per_Nombres = dr["Per_Nombres"].ToString();
                     p.Per_Apellidos = dr["Per_Apellidos"].ToString();
                     p.Per_DNI = dr["Per_DNI"].ToString();
@@ -235,12 +241,14 @@ namespace CapaAccesoDatos
                     u.Usu_FechaHasta = Convert.ToDateTime(dr["Usu_FechaHasta"]);
 
                     entTipoUsuario t = new entTipoUsuario();
-                    t.TipUsu_Id = dr["TipUsu_Id"].ToString();
+                    t.TipUsu_Id = Convert.ToInt32(dr["TipUsu_Id"]);
+                    t.TipUsu_Codigo = dr["TipUsu_Codigo"].ToString();
                     t.TipUsu_Nombre = dr["TipUsu_Nombre"].ToString();
                     u.TipoUsuario = t;
 
                     entSucursal s = new entSucursal();
-                    s.Suc_Id = dr["Suc_Id"].ToString();
+                    s.Suc_Id = Convert.ToInt32(dr["Suc_Id"]);
+                    s.Suc_Codigo = dr["Suc_Codigo"].ToString();
                     s.Suc_Nombre = dr["Suc_Nombre"].ToString();
                     s.Suc_Direccion = dr["Suc_Direccion"].ToString();
                     s.Suc_Ciudad = dr["Suc_Ciudad"].ToString();
@@ -296,6 +304,40 @@ namespace CapaAccesoDatos
             {
                 cmd.Connection.Close();
             }
+        }
+
+        public int InsUpdDelBloAct(String cadXML) {
+
+            SqlCommand cmd = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spIsnUpdDelBloActUsuario", cn);
+                cmd.Parameters.AddWithValue("@prmstrCadXML", cadXML);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                //creamos el parametro de retorno
+                SqlParameter m = new SqlParameter("@retorno", DbType.Int32);
+                m.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(m);
+                //fin parametro
+                cn.Open();
+                cmd.ExecuteNonQuery();
+
+                int i = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
+
+                return i;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
         }
         #endregion metodos
     }

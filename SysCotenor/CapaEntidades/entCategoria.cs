@@ -8,7 +8,8 @@ namespace CapaEntidades
 {
     public class entCategoria
     {
-        public String  Cat_Id { get; set; }
+        public int Cat_Id { get; set; }
+        public String  Cat_Codigo { get; set; }
         public String Cat_Nombre { get; set; }
         public String Cat_Descripcion { get; set; }
         public DateTime Cat_FechaRegistro { get; set; }

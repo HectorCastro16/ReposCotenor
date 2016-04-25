@@ -85,9 +85,6 @@ namespace CapaPresentacion.Controllers
                     {
                         String TipoUsuario = u.TipoUsuario.TipUsu_Nombre.Replace(" ", "").ToString();
                         /*    Aca va el registro del Usuario en la Tabla UsuarioSecurity*/
-                        entUsuarioSecurity us = new entUsuarioSecurity();
-                        us.UsuarioID= u.Usu_Id;
-                        us.Username = u.Usu_Login;
                         //Capturo IPV4 de Conexion de Area Local
                         IPHostEntry host;
                         string localIP = "";
@@ -99,8 +96,7 @@ namespace CapaPresentacion.Controllers
                                 localIP = ip.ToString();
                             }
                         }
-                        us.IPAcceso = localIP;
-                        negUsuario.Instancia.RegUsuarioSecurity(us,1);
+                        negUsuario.Instancia.RegUsuarioSecurity(u, 1, localIP);
 
                         return RedirectToAction("Principal" + TipoUsuario, TipoUsuario);  
                     }

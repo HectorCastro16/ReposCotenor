@@ -8,7 +8,8 @@ namespace CapaEntidades
 {
     public class entSegmento
     {
-        public String Seg_Id { get; set; }
+        public int Seg_Id { get; set; }
+        public String Seg_Codigo { get; set; }
         public String Seg_Nombre { get; set; }
         public String Seg_Descripcion { get; set; }
         public DateTime Seg_FechaRegistro { get; set; }

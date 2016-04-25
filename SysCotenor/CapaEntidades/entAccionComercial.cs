@@ -8,7 +8,8 @@ namespace CapaEntidades
 {
     public class entAccionComercial
     {
-        public String Acc_Id { get; set; }
+        public int Acc_Id { get; set; }        
+        public String Acc_Codigo { get; set; }
         public String Acc_Nombre { get; set; }
         public String Acc_Descripcion { get; set; }
         public DateTime Acc_FechaRegistro { get; set; }

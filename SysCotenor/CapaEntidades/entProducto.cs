@@ -8,7 +8,8 @@ namespace CapaEntidades
 {
     public class entProducto
     {
-        public String Pro_ID { get; set; }
+        public int Pro_ID { get; set; }
+        public String Pro_Codigo { get; set; }
         public entCategoria Categoria { get; set; }
         public entPrecio Precio { get; set; }
         public String Pro_Nombre { get; set; }

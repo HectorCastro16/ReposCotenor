@@ -10,7 +10,8 @@ namespace CapaEntidades
 {
     public class entUsuario
     {
-        public String Usu_Id { get; set; }
+        public int Usu_Id { get; set; }
+        public String Usu_Codigo { get; set; }
         [Required]
         public entPersona Persona { get; set; }
         public entTipoUsuario TipoUsuario { get; set; }

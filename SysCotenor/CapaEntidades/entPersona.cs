@@ -10,7 +10,8 @@ namespace CapaEntidades
 {
     public class entPersona
     {
-        public String Per_Id { get; set; }
+        public int Per_Id { get; set; }
+        public String Per_Codigo { get; set; }
         [Required]
         //[Display(Name ="txtNombres")]
         public String Per_Nombres { get; set; }

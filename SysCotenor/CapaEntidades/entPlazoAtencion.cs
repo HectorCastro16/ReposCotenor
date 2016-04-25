@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace CapaEntidades
 {
-    public class entPlazoncion
+    public class entPlazoAtencion
     {
-        public String Pla_Id { get; set; }
+        public int Pla_Id { get; set; }        
+        public String Pla_Codigo { get; set; }
         public entAccionComercial AccionComercial { get; set; }
         public entProducto Producto { get; set; }
         public DateTime Pla_Tiempo { get; set; }

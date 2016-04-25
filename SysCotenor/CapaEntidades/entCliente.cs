@@ -8,7 +8,8 @@ namespace CapaEntidades
 {
     public class entCliente
     {
-        public String Cli_Id { get; set; }
+        public int Cli_Id { get; set; }
+        public String Cli_Codigo { get; set; }
         public entPersona Persona { get; set; }
         public entSegmento Segmento { get; set; }
         public String Cli_Ruc { get; set; }

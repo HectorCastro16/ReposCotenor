@@ -8,7 +8,8 @@ namespace CapaEntidades
 {
     public class entAsigncionLlamadas
     {
-        public String Asi_Id { get; set; }
+        public int Asi_Id { get; set; }
+        public String Asi_Codigo { get; set; }
         public entUsuario Usuario { get; set; }
         public entCliente Cliente { get; set; }
         public Boolean Asi_Estado { get; set; }
