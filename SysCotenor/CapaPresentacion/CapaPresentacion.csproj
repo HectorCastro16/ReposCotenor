@@ -1947,9 +1947,6 @@
     <Content Include="assets\less\shared\variables.less" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\SupervisorCall\ListaUsuarioAsesorCall.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\SupervisorCall\DetalleUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1957,6 +1954,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\SupervisorCall\ListaUsuarioEstados.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\SupervisorCall\ListaUsuarios.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
