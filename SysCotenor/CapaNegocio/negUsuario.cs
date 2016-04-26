@@ -22,22 +22,7 @@ namespace CapaNegocio
         #endregion Singleton
 
         #region metodos
-
-        //public List<entUsuario> ListUsuariosEstado(String codsupervisor) {
-        //   try
-        //    {
-        //        List<entUsuario> Lista = null;
-        //        Lista = datUsuario.Instancia.ListaUsuariosEstado(codsupervisor);
-        //        if (Lista.Count == 0) {
-        //            throw new ApplicationException("No se encontraron registros");
-        //        }
-        //        return Lista;
-        //    }
-        //    catch (Exception) {
-        //        throw;
-        //    }
-        //}
-        
+      
         public entUsuario VerificarAccesoIntranet(String prmstrLogin, String prmstrPassw)
         {
             try
@@ -76,31 +61,11 @@ namespace CapaNegocio
             }
         }
 
-        //public entUsuario VerificarUsuarioExiste(String prmstrLogin)
-        //{
-        //    try
-        //    {
-        //        entUsuario u = null;
-        //        u = datUsuario.Instancia.VerificarUsuarioExiste(prmstrLogin);
-        //        return u;
-        //    }
-        //    catch (ApplicationException ae)
-        //    {
-        //        throw ae;
-        //    }
-        //    catch (Exception)
-        //    {
-
-        //        throw;
-        //    }
-
-        //}
-
-        public List<entUsuario> ListaUsuarios(Int32 UsuarioId, Int32 TipoUsuarioId, Int32 SucursalId)
+        public List<entUsuario> ListaUsuarios(Int32 UsuarioId,  Int32 SucursalId)
         {
             try
             {
-                return datUsuario.Instancia.ListaUsuarios(UsuarioId, TipoUsuarioId, SucursalId);
+                return datUsuario.Instancia.ListaUsuarios(UsuarioId, SucursalId);
             }
             catch (Exception e)
             {
@@ -108,12 +73,12 @@ namespace CapaNegocio
             }
         }
 
-        public entUsuario DetalleUsuario(Int32 UsuarioId, Int32 TipUsuId)
+        public entUsuario DetalleUsuario(Int32 UsuarioId, Int32 UsuarioIdSuper)
         {
 
             try
             {
-                return datUsuario.Instancia.DetalleUsuario(UsuarioId, TipUsuId);
+                return datUsuario.Instancia.DetalleUsuario(UsuarioId, UsuarioIdSuper);
             }
             catch (Exception e)
             {
@@ -140,13 +105,55 @@ namespace CapaNegocio
                 if (i == -3) { throw new ApplicationException("Problema 2"); }
                 return i;
             }
-            catch (Exception)
+            catch (Exception e)
             {
                 
-                throw;
+                throw e;
             }
         
         }
+
+
+
+
+
+
+        //public int InsUpdUsuario(entPersona p, Int16 TipoEdicion) {
+
+        //    try
+        //    {
+        //        String cadXml = "";
+        //        cadXml += "<Pedido ";
+        //        cadXml += "idCliente='" + p.Cliente.idCliente + "' ";
+        //        cadXml += "idTarjetaCredito='" + p.idTarjetaCredito + "' ";
+        //        cadXml += "UsuarioTarjeta='" + p.UsuarioTarjeta + "' ";
+        //        cadXml += "NumeroTarjeta='" + p.NumeroTarjeta + "' ";
+        //        cadXml += "Total='" + p.Total + "'>";
+        //        foreach (entUsuario d in p.DPedido)
+        //        {
+        //            cadXml += "<DPedido ";
+        //            cadXml += "idProducto='" + d.idProducto + "' ";
+        //            cadXml += "Cantidad='" + d.Cantidad + "' ";
+        //            cadXml += "Precio='" + d.Precio + "'/>";
+        //        }
+        //        cadXml += "</Pedido>";
+        //        cadXml = "<root>" + cadXml + "</root>";
+        //        // variable i llega el resultado
+        //        int i = datUsuario.Instancia.InsUpdDelBloAct(cadXml);
+        //        if (i <= 0)
+        //        {
+        //            throw new ApplicationException("No se Pudo insertar a el trabajador");
+        //        }
+        //        return i;
+
+        //    }
+        //    catch (Exception e)
+        //    {
+
+        //        throw e;
+        //    }
+
+        //}
 
         #endregion metodos
     }

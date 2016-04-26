@@ -26,40 +26,6 @@ namespace CapaAccesoDatos
 
         #region metodos
 
-        //public List<entUsuario> ListaUsuariosEstado(String codigoSupervisor) {
-        //    SqlCommand cmd= null;
-        //    SqlDataReader dr = null;
-        //    List<entUsuario> Lista = null;
-        //    try
-        //    {
-        //        SqlConnection cn = Conexion.Instancia.Conectar();
-        //        cmd = new SqlCommand("spListaUserStatus", cn);
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        cmd.Parameters.AddWithValue("@AsiUsu_Usu_Super_Id", codigoSupervisor);
-        //        cn.Open();
-        //        dr = cmd.ExecuteReader();
-        //        Lista = new List<entUsuario>();
-        //        while (dr.Read())
-        //        {
-        //            entUsuario u = new entUsuario();
-        //            u.Usu_Id = dr["Usu_Id"].ToString();
-        //            u.Usu_Estado = dr["Usu_Estado"].ToString();
-        //            entPersona p = new entPersona();
-        //            p.Per_Nombres = dr["Per_Nombres"].ToString();
-        //            p.Per_Apellidos = dr["Per_Apellidos"].ToString();
-        //            p.Per_Correo = dr["Per_Correo"].ToString();
-        //            u.Persona = p;
-
-        //            Lista.Add(u);
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
-        //        throw;
-        //    } finally { cmd.Connection.Close();}
-        //    return Lista;
-        //    }
-
         public entUsuario VerificarAccesoIntranet(String prmstrLogin, String prmstrPassw)
         {
             SqlCommand cmd = null;
@@ -123,36 +89,8 @@ namespace CapaAccesoDatos
             return u;
         }
 
-        //public entUsuario VerificarUsuarioExiste(String prmstrLogin)
-        //{
-        //    SqlCommand cmd = null;
-        //    SqlDataReader dr = null;
-        //    entUsuario u = null;
 
-        //    try
-        //    {
-        //        SqlConnection cn = Conexion.Instancia.Conectar();
-        //        cmd = new SqlCommand("spVerificaUsuarioExiste", cn);
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        cmd.Parameters.AddWithValue("@prmstrLogin", prmstrLogin);
-        //        cn.Open();
-        //        dr = cmd.ExecuteReader();
-        //        if (dr.Read())
-        //        {
-        //            u = new entUsuario();
-        //            u.Usu_Login = dr["Usu_Login"].ToString();
-        //        }
-        //    }
-        //    catch (Exception e)
-        //    {
-
-        //        throw e;
-        //    }
-        //    finally { cmd.Connection.Close(); }
-        //    return u;
-        //}
-
-        public List<entUsuario> ListaUsuarios(Int32 UsuarioId, Int32 TipoUsuarioId, Int32 SucursalId)
+        public List<entUsuario> ListaUsuarios(Int32 UsuarioId,  Int32 SucursalId)
         {
 
             SqlCommand cmd = null;
@@ -163,7 +101,6 @@ namespace CapaAccesoDatos
                 SqlConnection cn = Conexion.Instancia.Conectar();
                 cmd = new SqlCommand("spListaUsuariosXTipo", cn);
                 cmd.Parameters.AddWithValue("@prmtIntIdUsu", UsuarioId);
-                cmd.Parameters.AddWithValue("@prmtIntTipUsuId", TipoUsuarioId);
                 cmd.Parameters.AddWithValue("@prmtIntSucId", SucursalId);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cn.Open();
@@ -201,7 +138,7 @@ namespace CapaAccesoDatos
             return Lista;
         }
 
-        public entUsuario DetalleUsuario(Int32 UsuarioId, Int32 TipUsuId)
+        public entUsuario DetalleUsuario(Int32 UsuarioId, Int32 UsuarioIdSuper)
         {
 
             SqlCommand cmd = null;
@@ -213,7 +150,7 @@ namespace CapaAccesoDatos
                 cmd = new SqlCommand("spDetalleUsuario", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
                 cmd.Parameters.AddWithValue("@prmtIntIdUsu", UsuarioId);
-                cmd.Parameters.AddWithValue("@prmtIntTipUsuId", TipUsuId);
+                cmd.Parameters.AddWithValue("@prmtIntIdUsuSuper", UsuarioIdSuper);
                 cn.Open();
                 dr = cmd.ExecuteReader();
                 if (dr.Read()) {
@@ -306,39 +243,42 @@ namespace CapaAccesoDatos
             }
         }
 
-        public int InsUpdDelBloAct(String cadXML) {
+        
 
-            SqlCommand cmd = null;
-            try
-            {
-                SqlConnection cn = Conexion.Instancia.Conectar();
-                cmd = new SqlCommand("spIsnUpdDelBloActUsuario", cn);
-                cmd.Parameters.AddWithValue("@prmstrCadXML", cadXML);
-                cmd.CommandType = CommandType.StoredProcedure;
+        //public int InsUpdDelBloAct(String cadXML) {
 
-                //creamos el parametro de retorno
-                SqlParameter m = new SqlParameter("@retorno", DbType.Int32);
-                m.Direction = ParameterDirection.ReturnValue;
-                cmd.Parameters.Add(m);
-                //fin parametro
-                cn.Open();
-                cmd.ExecuteNonQuery();
+        //    SqlCommand cmd = null;
+        //    try
+        //    {
+        //        SqlConnection cn = Conexion.Instancia.Conectar();
+        //        cmd = new SqlCommand("spIsnUpdDelBloActUsuario", cn);
+        //        cmd.Parameters.AddWithValue("@prmstrCadXML", cadXML);
+        //        cmd.CommandType = CommandType.StoredProcedure;
 
-                int i = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
+        //        //creamos el parametro de retorno
+        //        SqlParameter m = new SqlParameter("@retorno", DbType.Int32);
+        //        m.Direction = ParameterDirection.ReturnValue;
+        //        cmd.Parameters.Add(m);
+        //        //fin parametro
+        //        cn.Open();
+        //        cmd.ExecuteNonQuery();
 
-                return i;
+        //        int i = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
 
-            }
-            catch (Exception e)
-            {
-                throw e;
-            }
-            finally
-            {
-                cmd.Connection.Close();
-            }
+        //        return i;
 
-        }
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        throw e;
+        //    }
+        //    finally
+        //    {
+        //        cmd.Connection.Close();
+        //    }
+
+        //}
+
         #endregion metodos
     }
 }
