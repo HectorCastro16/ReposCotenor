@@ -40,7 +40,6 @@ namespace CapaPresentacion.Controllers.Intranet
             entUsuario u = (entUsuario)Session["usuario"];
             if (u != null)
             {
-                //Int32 UsuaID = UsuarioId;
                 Int32 UsuaIDSuper = u.Usu_Id;
                 entUsuario us = negUsuario.Instancia.DetalleUsuario(UsuarioId, UsuaIDSuper);
                 return View(us);
