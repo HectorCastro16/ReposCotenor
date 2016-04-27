@@ -184,7 +184,7 @@
                             </a>
                             <!--start submenu -->
                             <ul>
-                                <li><a href="@Url.Action("ListaUsuarios", "SupervisorCall")"><span class="title">Mantenedor Asesores</span></a></li>
+                                <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
                                <li><a href="#"><span class="title">Estado Usuarios</span></a></li>
                                 <li><a href="#"><span class="title">Mantenedor Clientes</span></a></li>
                             </ul><!--end /submenu -->
@@ -204,33 +204,42 @@
                         </li><!--end /menu-li -->
                     <!-- END CHARTS -->
 
-                    }
-                    else if (TipoUser == "Supervisor Ventas")
-                    {
+                        }
+                        else if (TipoUser == "Supervisor Ventas")
+                        {
 
 
 
-                    }
-                    else if (TipoUser == "Supervisor Instalaciones")
-                    {
+                        }
+                        else if (TipoUser == "Supervisor Instalaciones")
+                        {
 
 
 
-                    }
-                    else if (TipoUser == "Supervisor Campo")
-                    {
+                        }
+                        else if (TipoUser == "Supervisor Campo")
+                        {
+                            <li class="gui-folder">
+                                <a>
+                                    <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                                    <span class="title">Registro</span>
+                                </a>
+                                <!--start submenu -->
+                                <ul>
+                                    <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
+                                </ul><!--end /submenu -->
+                            </li><!--end /menu-li -->
+
+
+                        }
+                        else if (TipoUser == "Supervisor Adsl")
+                        {
 
 
 
-                    }
-                    else if (TipoUser == "Supervisor Adsl")
-                    {
-
-
-
-                    }
-                    else if (TipoUser == "Asesor Ventas Call")
-                    {
+                        }
+                        else if (TipoUser == "Asesor Ventas Call")
+                        {
                         <!-- BEGIN FORMS -->
                         <li class="gui-folder">
                             <a>

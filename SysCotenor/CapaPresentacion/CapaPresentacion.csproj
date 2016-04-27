@@ -113,6 +113,7 @@
     <Compile Include="Controllers\Intranet\AdministradorController.cs" />
     <Compile Include="Controllers\Intranet\AsesorVentasCallController.cs" />
     <Compile Include="Controllers\Intranet\AsesorVentasCampoController.cs" />
+    <Compile Include="Controllers\Intranet\ComunController.cs" />
     <Compile Include="Controllers\Intranet\GerenteController.cs" />
     <Compile Include="Controllers\Intranet\InicioController.cs" />
     <Compile Include="Controllers\Intranet\SupervisorAdslController.cs" />
@@ -1957,6 +1958,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\SupervisorCall\ListaUsuarios.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Comun\ListaUsuarios.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Comun\DetalleUsuario.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
