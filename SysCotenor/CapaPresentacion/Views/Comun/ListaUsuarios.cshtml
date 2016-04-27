@@ -11,14 +11,8 @@
                 <div class="card-body">
                     @{
                         entUsuario u = (entUsuario)Session["usuario"];
-                        if (u.TipoUsuario.TipUsu_Id == 3)
-                        {
-                            <h2>Lista Usuario Asesor Call</h2>
-                        }
-                        if (u.TipoUsuario.TipUsu_Id == 6)
-                        {
-                             <h2>ListaUsuarioAsesorCampo</h2>
-                        }
+                        if (u.TipoUsuario.TipUsu_Id == 3) {<h2>Lista Usuario Asesor Call</h2>}
+                        if (u.TipoUsuario.TipUsu_Id == 6) {<h2>Lista Usuario Asesor Campo</h2>}
                     }
                    
                     <section class="style-default-bright">
