@@ -323,6 +323,30 @@
         }
     </script>
 
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('#myModalEliminar').on('show.bs.modal', function (e) {
+                var id = $(e.relatedTarget).data().id;
+                $(e.currentTarget).find('#Id').val(id);
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('#myModalBloquear').on('show.bs.modal', function (e) {
+                var id = $(e.relatedTarget).data().id;
+                $(e.currentTarget).find('#Id').val(id);
+            });
+        });
+    </script>
+    <script type="text/javascript">
+        jQuery(function ($) {
+            $('#myModalActivar').on('show.bs.modal', function (e) {
+                var id = $(e.relatedTarget).data().id;
+                $(e.currentTarget).find('#Id').val(id);
+            });
+        });
+    </script>
 
 </body>
 </html>
