@@ -1,0 +1,201 @@
+﻿@using CapaEntidades
+@model CapaEntidades.entUsuario
+@{
+    ViewBag.Title = "InsEditUsuario";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+
+
+<div id="content">
+    <section>
+        <!-- BEGIN INTRO -->
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="text-primary">USUARIO</h1>
+            </div><!--end .col -->
+            <div class="col-lg-8">
+                <article class="margin-bottom-xxl">
+                    <p class="lead">
+                     Nuevo o Editar 
+                    </p>
+                </article>
+            </div><!--end .col -->
+        </div><!--end .row -->
+        <!-- END INTRO -->
+        <!-- BEGIN FORM WIZARD -->
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-body ">
+                        <div id="rootwizard1" class="form-wizard form-wizard-horizontal">
+                            <form class="form floating-label" action="InsEditUsuario" method="post">
+                                @{ 
+
+                                    Int32 idusuario=0;
+                                    String Usu_Codigo="";
+                                    String Usu_Login="";
+                                    String Usu_Password = "";
+                                    String Usu_Estado="";
+                                    DateTime Usu_FechaHasta = DateTime.Now;
+
+
+                                    Int32 idpersona = 0;
+                                    String Per_Codigo = "";
+                                    String Per_Nombres="";
+                                    String Per_Apellidos = "";
+                                    String Per_DNI = "";
+                                    String Per_Celular = "";
+                                    String Per_Correo = "";
+                                    String Per_Telefono = "";
+                                    String Per_Direccion = "";
+                                    String Per_Foto = "";
+                                    DateTime Per_FechaNacimiento = DateTime.Now;
+                                    String Per_LugarNacimiento = "";
+                                    if (ViewBag.accion == 1)
+                                    {
+                                        idusuario = Model.Usu_Id;
+                                        Usu_Codigo = Model.Usu_Codigo;
+                                        Usu_Login = Model.Usu_Login;
+                                        Usu_Password = Model.Usu_Password;
+                                        Usu_Estado = Model.Usu_Estado;
+                                        Usu_FechaHasta = Model.Usu_FechaHasta;
+
+                                        idpersona = Model.Persona.Per_Id;
+                                        Per_Codigo = Model.Persona.Per_Codigo;
+                                        Per_Nombres = Model.Persona.Per_Nombres;
+                                        Per_Apellidos = Model.Persona.Per_Apellidos;
+                                        Per_DNI = Model.Persona.Per_DNI;
+                                        Per_Celular = Model.Persona.Per_Celular;
+                                        Per_Correo = Model.Persona.Per_Correo;
+                                        Per_Telefono = Model.Persona.Per_Telefono;
+                                        Per_Direccion = Model.Persona.Per_Direccion;
+                                        Per_Foto = Model.Persona.Per_Foto;
+                                        Per_FechaNacimiento = Model.Persona.Per_FechaNacimiento;
+                                        Per_LugarNacimiento = Model.Persona.Per_LugarNacimiento;
+                                    }
+                                }
+
+
+
+
+                                <div class="form-wizard-nav">
+                                    <div class="progress"><div class="progress-bar progress-bar-primary"></div></div>
+                                    <ul class="nav nav-justified">
+                                        <li class="active"><a href="#tab1" data-toggle="tab"><span class="step">1</span> <span class="title">GENERAL</span></a></li>
+                                        <li><a href="#tab4" data-toggle="tab"><span class="step">4</span> <span class="title">USUARIO</span></a></li>
+                                    </ul>
+                                </div><!--end .form-wizard-nav -->
+                                <div class="tab-content clearfix">
+                                    <div class="tab-pane active" id="tab1">
+                                        <br /><br />
+                                        <div class="form-group">
+                                            <input type="text" value="@Usu_Codigo" name="codigop" id="Address" disabled="disabled"  class="form-control">
+                                            <label for="Address" class="control-label">Codigo</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" value="@Per_Nombres" name="nombres" id="Address" class="form-control">
+                                            <label for="Address" class="control-label">Nombres</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" value="@Per_Apellidos" name="apellidos" id="Address" class="form-control">
+                                            <label for="Address" class="control-label">Apellidos</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" value="@Per_DNI" name="dni" id="Address" class="form-control">
+                                            <label for="Address" class="control-label">DNI</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" value="@Per_Celular" name="celular" id="Address" class="form-control">
+                                            <label for="Address" class="control-label">Celular</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" value="@Per_Correo" name="correo" id="Address" class="form-control">
+                                            <label for="Address" class="control-label">Correo</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" value="@Per_Direccion" name="direccion" id="Address" class="form-control">
+                                            <label for="Address" class="control-label">Direccion</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" value="@Per_FechaNacimiento" name="fecnacimiento" class="form-control" data-inputmask="'alias': 'date'">
+                                            <label>Fecha Nacimiento</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" value="@Per_LugarNacimiento"  name="lugnacimiento" class="form-control">
+                                            <label>Lugar Nacimiento</label>
+                                        </div>
+
+                                       
+                                    </div><!--end #tab1 -->
+
+                                    <div class="tab-pane" id="tab4">
+                                        <br /><br />
+
+                                        <div class="form-group">
+                                            <input type="text" value="@Usu_Codigo" name="codigou" disabled="disabled" id="Address" class="form-control">
+                                            <label for="Address" class="control-label">Codigo</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                           @Html.DropDownList("cbotipuser", (SelectList)ViewBag.ListaTipoUsuario,"  ", new {@class="form-control" })
+                                            <label for="Age1">Selecciona Tipo Usuario</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            @Html.DropDownList("cbosucursal",(SelectList)ViewBag.ListSucursale, " ",new { @class="form-control"})
+                                            <label for="Age1">Seleccionar Sucursal</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" value="@Usu_Login" name="usuario" id="Address" class="form-control">
+                                            <label for="Address" class="control-label">Usuario</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" value="@Usu_Password" name="clave" id="Address" class="form-control">
+                                            <label for="Address" class="control-label">Contraseña</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" value="@Usu_Estado" name="estado" id="Address" class="form-control">
+                                            <label for="Address" class="control-label">Estado</label>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <input type="text" value="@Usu_FechaHasta" name="vigfecha" id="demo-date" class="form-control">
+                                            <label for="Address" class="control-label">Vigencia Fecha</label>
+                                        </div>
+
+                                    </div><!--end #tab4 -->
+                                </div><!--end .tab-content -->
+                                <ul class="pager wizard">
+                                    <li class="previous first"><a class="btn-raised" href="javascript:void(0);">First</a></li>
+                                    <li class="previous"><a class="btn-raised" href="javascript:void(0);">Previous</a></li>
+                                    <li class="next last"><a class="btn-raised" href="javascript:void(0);">Last</a></li>
+                                    <li class="next"><a class="btn-raised" href="javascript:void(0);">Next</a></li>
+                                </ul>
+                                <div style="align-content:center">
+                                    <input type="submit" name="guardar" value="Guardar" class="btn btn-info btn-block">
+                                 </div>
+                            </form>
+                        </div><!--end #rootwizard -->
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+            </div><!--end .col -->
+        </div><!--end .row -->
+
+    </section>
+</div><!--end #content-->
+<!-- END CONTENT -->
+<!-- BEGIN MENUBAR-->
+
+
