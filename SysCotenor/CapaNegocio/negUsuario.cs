@@ -22,6 +22,18 @@ namespace CapaNegocio
         #endregion Singleton
 
         #region metodos
+
+        public entUsuario BuscarUsario(Int32 idusuario){
+            try{
+                entUsuario u = null;
+                u = datUsuario.Instancia.BuscarUsuario(idusuario);
+                return u;
+            }
+            catch (Exception){
+                throw;
+            }
+
+        }
       
         public entUsuario VerificarAccesoIntranet(String prmstrLogin, String prmstrPassw)
         {
