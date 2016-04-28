@@ -29,8 +29,7 @@
     <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/bootstrap-tagsinput/bootstrap-tagsinput.css?1424887862" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/typeahead/typeahead.css?1424887863" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/dropzone/dropzone-theme.css?1424887864" />
-  
- 
+
      <!-- END STYLESHEETS -->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -39,7 +38,6 @@
     <![endif]-->
 </head>
 <body class="menubar-hoverable header-fixed menubar-pin ">
-
     <!-- BEGIN HEADER-->
     <header id="header">
         <div class="headerbar">
@@ -215,8 +213,8 @@
                             </a>
                             <!--start submenu -->
                             <ul>
-                                <li><a href="../../html/forms/basic.html"><span class="title">Asignar Clientes</span></a></li>
-                                <li><a href="../../html/forms/basic.html"><span class="title">Seguimiento Ventas</span></a></li>
+                                <li><a href="@Url.Action("ExtraerDatosAsignar","SupervisorCall")"><span class="title">Asignar Clientes</span></a></li>
+                                <li><a href=""><span class="title">Seguimiento Ventas</span></a></li>
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
                     <!-- END CHARTS -->
@@ -243,7 +241,7 @@
                                 </a>
                                 <!--start submenu -->
                                 <ul>
-                                    <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
+                                    <li><a href="@Url.Action("", "")"><span class="title">Mantenedor Asesores</span></a></li>
                                 </ul><!--end /submenu -->
                             </li><!--end /menu-li -->
 
@@ -386,74 +384,6 @@
     <script src="../../assets/js/libs/dropzone/dropzone.min.js"></script>
     <script src="../../assets/js/core/demo/DemoFormComponents.js"></script>
     <!-- END JAVASCRIPT -->
-
-    <script type="text/javascript">
-  $(function() {
-    $('.date').mask('00/00/0000');
-    $('.time').mask('00:00:00');
-    $('.date_time').mask('00/00/0000 00:00:00');
-    $('.cep').mask('00000-000');
-    $('.phone').mask('0000-0000');
-    $('.phone_with_ddd').mask('(00) 0000-0000');
-    $('.phone_us').mask('(000) 000-0000');
-    $('.mixed').mask('AAA 000-S0S');
-    $('.ip_address').mask('099.099.099.099');
-    $('.percent').mask('##0,00%', {reverse: true});
-    $('.clear-if-not-match').mask("00/00/0000", {clearIfNotMatch: true});
-    $('.placeholder').mask("00/00/0000", {placeholder: "__/__/____"});
-    $('.fallback').mask("00r00r0000", {
-      translation: {
-        'r': {
-          pattern: /[\/]/,
-          fallback: '/'
-        },
-        placeholder: "__/__/____"
-      }
-    });
-
-    $('.selectonfocus').mask("00/00/0000", {selectOnFocus: true});
-
-    $('.cep_with_callback').mask('00000-000', {onComplete: function(cep) {
-        console.log('Mask is done!:', cep);
-      },
-       onKeyPress: function(cep, event, currentField, options){
-        console.log('An key was pressed!:', cep, ' event: ', event, 'currentField: ', currentField.attr('class'), ' options: ', options);
-      },
-      onInvalid: function(val, e, field, invalid, options){
-        var error = invalid[0];
-        console.log ("Digit: ", error.v, " is invalid for the position: ", error.p, ". We expect something like: ", error.e);
-      }
-    });
-
-    $('.crazy_cep').mask('00000-000', {onKeyPress: function(cep, e, field, options){
-      var masks = ['00000-000', '0-00-00-00'];
-        mask = (cep.length>7) ? masks[1] : masks[0];
-      $('.crazy_cep').mask(mask, options);
-    }});
-
-    $('.cnpj').mask('00.000.000/0000-00', {reverse: true});
-    $('.cpf').mask('000.000.000-00', {reverse: true});
-    $('.money').mask('#.##0,00', {reverse: true});
-
-    var SPMaskBehavior = function (val) {
-      return val.replace(/\D/g, '').length === 11 ? '(00) 00000-0000' : '(00) 0000-00009';
-    },
-    spOptions = {
-      onKeyPress: function(val, e, field, options) {
-          field.mask(SPMaskBehavior.apply({}, arguments), options);
-        }
-    };
-
-    $('.sp_celphones').mask(SPMaskBehavior, spOptions);
-
-    $(".bt-mask-it").click(function(){
-      $(".mask-on-div").mask("000.000.000-00");
-      $(".mask-on-div").fadeOut(500).fadeIn(500)
-    })
-
-    $('pre').each(function(i, e) {hljs.highlightBlock(e)});
-  });
-    </script>
 
     <script>
         function valida(e) {
