@@ -19,7 +19,7 @@ namespace CapaPresentacion.Controllers.Intranet
         }
 
 
-        public ActionResult InsEditUsuario(Int32? idusuario)
+        public ActionResult InsEditUsuario(Int32? UsuarioId)
         {
 
            
@@ -45,11 +45,11 @@ namespace CapaPresentacion.Controllers.Intranet
                 Ls = negSucursal.Instancia.ListarSucursales(u.Sucursal.Suc_Id);
                 var lstSucursal = new SelectList(Ls, "Suc_Id", "Suc_Nombre");
                 ViewBag.ListSucursale = lstSucursal;
-            if (idusuario == null){
+            if (UsuarioId == null){
                 ViewBag.accion = 0;
                 return View();
-            } else if (idusuario != null) {
-                Int32 id =Convert.ToInt32(idusuario);
+            } else if (UsuarioId != null) {
+                Int32 id =Convert.ToInt32(UsuarioId);
                 entUsuario us = negUsuario.Instancia.BuscarUsario(id);
                 ViewBag.accion = 1;
                 return View(us);
