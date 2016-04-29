@@ -19,41 +19,29 @@ namespace CapaPresentacion.Controllers.Intranet
         }
 
 
-        public ActionResult InsEditUsuario(Int32? UsuarioId)
+        public ActionResult InsUsuario()
         {
-
-           
             entUsuario u = (entUsuario)Session["usuario"];
-                if (u != null)
+            if (u != null)
+            {
+                List<entTipoUsuario> t = null;
+                
+                if (u.TipoUsuario.TipUsu_Id == 3)
                 {
-                    List<entTipoUsuario> t = null;
-                    if (u.TipoUsuario.TipUsu_Id == 3)
-                    {
-                        t = negTipoUsuario.Instancia.ListaTipoUsuarioxId(8);
-                    }
-                    if (u.TipoUsuario.TipUsu_Id == 6)
-                    {
-                        t = negTipoUsuario.Instancia.ListaTipoUsuarioxId(9);
-                    }
-                    var lsTipoUsuario = new SelectList(t, "TipUsu_Id", "TipUsu_Nombre");
-                    ViewBag.ListaTipoUsuario = lsTipoUsuario;
+                    t = negTipoUsuario.Instancia.ListaTipoUsuarioxId(8);
                 }
+                if (u.TipoUsuario.TipUsu_Id == 6)
+                {
+                    t = negTipoUsuario.Instancia.ListaTipoUsuarioxId(9);
+                }
+                var lsTipoUsuario = new SelectList(t, "TipUsu_Id", "TipUsu_Nombre");
+                ViewBag.ListaTipoUsuario = lsTipoUsuario;
 
-                // para sucursal -----------------
+                List<entSucursal> s = negSucursal.Instancia.ListaSucursalxId(u.Sucursal.Suc_Id);
+                var lsSucursal = new SelectList(s, "Suc_Id", "Suc_Nombre");
+                ViewBag.ListaSucursal = lsSucursal;
 
-                List<entSucursal> Ls = null;
-                Ls = negSucursal.Instancia.ListarSucursales(u.Sucursal.Suc_Id);
-                var lstSucursal = new SelectList(Ls, "Suc_Id", "Suc_Nombre");
-                ViewBag.ListSucursale = lstSucursal;
-            if (UsuarioId == null){
-                ViewBag.accion = 0;
                 return View();
-            } else if (UsuarioId != null) {
-                Int32 id =Convert.ToInt32(UsuarioId);
-                entUsuario us = negUsuario.Instancia.BuscarUsario(id);
-                ViewBag.accion = 1;
-                return View(us);
-               
             }
             else
             {
@@ -62,7 +50,8 @@ namespace CapaPresentacion.Controllers.Intranet
         }
 
         [HttpPost]
-        public ActionResult InsEditUsuario(FormCollection frm) {
+        public ActionResult InsUsuario(entUsuario u, HttpPostedFileBase archivo)
+        {
 
             return View();
 

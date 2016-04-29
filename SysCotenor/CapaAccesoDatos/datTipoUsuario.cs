@@ -40,8 +40,8 @@ namespace CapaAccesoDatos
                 cmd.CommandType = CommandType.StoredProcedure;
                 cn.Open();
                 dr = cmd.ExecuteReader();
-
                 Lista = new List<entTipoUsuario>();
+
                 if (dr.Read())
                 {
                     entTipoUsuario t = new entTipoUsuario();
