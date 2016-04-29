@@ -22,6 +22,12 @@ namespace CapaPresentacion.Controllers.Intranet
             return View(u);
         }
 
+        public ActionResult ExtraerDatosAsignar() {
+            return View();
+
+
+        }
+
         
         //public ActionResult InsUsuario()
         //{

@@ -18,6 +18,8 @@
     <link type="text/css" rel="stylesheet" href="../../assets/css/theme-1/materialadmin.css?1425466319" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/theme-1/font-awesome.min.css?1422529194" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/theme-1/material-design-iconic-font.min.css?1421434286" />
+    <link type="text/css" rel="stylesheet" href="assets/theme-default/libs/bootstrap-datepicker/datepicker3.css">
+
 </head>
 <body class="menubar-hoverable header-fixed ">
     <section class="section-account">
@@ -33,7 +35,7 @@
                         <form class="form floating-label" action="VerificarAcceso" accept-charset="utf-8" method="post">
                              
                                 <div class="form-group">
-                                    <input type="text" class="form-control" id="username" name="txtUsuario" onkeypress="return valida(event)" maxlength="8">
+                                    <input type="text" class="form-control" id="datepicker" name="txtUsuario" onkeypress="return valida(event)" maxlength="8">
                                     <label for="username">Usuario</label>
                                 </div>
                                 <div class="form-group">
@@ -96,6 +98,11 @@
     <script src="../../assets/js/core/source/AppNavSearch.js"></script>
     <script src="../../assets/js/core/source/AppVendor.js"></script>
     <script src="../../assets/js/core/demo/Demo.js"></script>
+
+    <script src="assets/js/libs/moment/moment.min.js"></script>
+    <script src="assets/js/libs/bootstrap-datepicker/bootstrap-datepicker.js"></script>
+
+
     <script>
         function valida(e) {
             tecla = (document.all) ? e.keyCode : e.which;
@@ -108,6 +115,16 @@
             tecla_final = String.fromCharCode(tecla);
             return patron.test(tecla_final);
         }
+
+        $('#datepicker').datepicker()
+
     </script>
+
+    <script type="text/javascript">
+
+        $('#datepicker').datepicker()
+
+        </script>
+
 </body>
 </html>
