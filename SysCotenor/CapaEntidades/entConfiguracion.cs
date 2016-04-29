@@ -10,6 +10,8 @@ namespace CapaEntidades
     {
         public int ConfiguracionID { get; set; }
         public entUsuario Usu_Id { get; set; }
-        public char configuracionTema { get; set; }
+        public char configuracionColorGeneral { get; set; }
+        public char configuracionColorMenuS { get; set; }
+        public char configuracionColorMenuI { get; set; }
     }
 }
