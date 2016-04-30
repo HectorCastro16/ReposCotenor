@@ -1966,7 +1966,7 @@
     <Content Include="Views\Comun\DetalleUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Comun\InsEditUsuario.cshtml" />
+    <Content Include="Views\Comun\InsUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\SupervisorCall\ExtraerDatosAsignar.cshtml" />
