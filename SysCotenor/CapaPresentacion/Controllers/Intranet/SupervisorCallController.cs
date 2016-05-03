@@ -28,10 +28,6 @@ namespace CapaPresentacion.Controllers.Intranet
             return View();
         }
 
-        public ActionResult AsignarCliente() {
-            return PartialView();
-        }
-
         public ActionResult EliminarFila(String telef)
         {
 
