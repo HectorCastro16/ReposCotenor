@@ -1,4 +1,4 @@
-﻿
+﻿@using CapaEntidades;
 @using System.Data 
 @{
     ViewBag.Title = "ExtraerDatosAsignar";
@@ -9,17 +9,17 @@
 <div id="content">
 <section> 
     <div class="card card-bordered style-primary">
-        ASESOR : JUAN ALFREDO VASQUEZ ACERO
+        @{ String asesor = (String)Session["user"];}
+       ASESOR:@asesor
         <div class="card-body style-default-bright">
             <form method="post" action="ExtraerDatosAsignarSession">
-               
                     <section>
                         <div class="row">
-                            
-                                <div class="card">
+                                  <div class="card">
                                     <div class="card-body">
                                         <div class="table-responsive">
                                             <table class="table table-striped no-margin">
+                                               
                                                 <tr style="background-color:darkgray">
                                                     <td>Telefono</td>
                                                     <td>Cliente</td>
@@ -29,15 +29,41 @@
                                                     <td>SVA</td>
                                                     <td>INICIO VIGENCIA</td>
                                                 </tr>
-                                                <tr>
-                                                    <td><input type="text" name="telefono"></td>
-                                                    <td><input type="text" name="cliente"></td>
-                                                    <td><input type="text" name="f1"></td>
-                                                    <td><input type="text" name="f2"></td>
-                                                    <td><input type="text" name="f3"></td>
-                                                    <td><input type="text" name="sva"></td>
-                                                    <td><input type="text" name="iniciovigencia"></td>
+                                                @{
+                                                    if (Session["asllamadas"] != null)
+                                                    {
+                                                        entAsigncionLlamadas ac = new entAsigncionLlamadas();
+                                                        ac = (entAsigncionLlamadas)Session["asllamadas"];
+                                                        String Asi_NumTelf = ac.Asi_NumTelf;
+                                                        String Cliente = ac.Cliente;
+                                                        Double Asi_F1 = ac.Asi_F1;
+                                                        Double Asi_F2 = ac.Asi_F2;
+                                                        Double Asi_F3 = ac.Asi_F3;
+                                                        String Asi_SVA = ac.Asi_SVA;
+                                                        String Asi_FechInicioCliente = ac.Asi_FechInicioCliente;
+                                                        Session.Remove("asllamadas");
+                                                    <tr>
+                                                        <td><input type="text" name="telefono" value="@Asi_NumTelf"></td>
+                                                        <td><input type="text" name="cliente" value="@Cliente"></td>
+                                                        <td><input type="text" name="f1" value="@Asi_F1"></td>
+                                                        <td><input type="text" name="f2" value="@Asi_F2"></td>
+                                                        <td><input type="text" name="f3" value="@Asi_F3"></td>
+                                                        <td><input type="text" name="sva" value="@Asi_SVA"></td>
+                                                        <td><input type="text" name="iniciovigencia" value="@Asi_FechInicioCliente"></td>
+                                                    </tr>
+                                                    }
+                                                    else{ 
+                                                    <tr>
+                                                    <td><input type="text" name="telefono" ></td>
+                                                    <td><input type="text" name="cliente" ></td>
+                                                    <td><input type="text" name="f1" value="0.0"></td>
+                                                    <td><input type="text" name="f2" value="0.0"></td>
+                                                    <td><input type="text" name="f3" value="0.0"></td>
+                                                    <td><input type="text" name="sva"  ></td>
+                                                    <td><input type="text" name="iniciovigencia" value="00/00/00"></td>
                                                 </tr>
+                                                    }
+                                                }
                                             </table>
                                         </div>
                                     </div>
@@ -51,7 +77,7 @@
             </form>
         </div>
         <h2>@ViewBag.mensaje</h2>
-        <form>
+        <form method="post" action="ExtraerDatosAsignarSession">
         <div class="row">
             <div class="col-lg-12">
                 <div class="card">
@@ -89,7 +115,7 @@
                                                     <td>@row["sva"]</td>
                                                     <td>@row["iniciovigencia"]</td>
                                                     <td>@Html.ActionLink("Quitar", "EliminarFila", new { telef = row["telefono"] })</td>
-                                                    <td>@Html.ActionLink("Editar", "AsignarCliente", new { telef = row["telefono"] })</td>
+                                                    <td>@Html.ActionLink("Editar", "BuscaFilaSession", new { telef = row["telefono"] })</td>
                                                 </tr>
                                             }
                                         }

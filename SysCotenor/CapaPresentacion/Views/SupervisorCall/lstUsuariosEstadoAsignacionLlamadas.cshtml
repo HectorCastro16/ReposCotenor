@@ -1,0 +1,28 @@
+﻿@model IEnumerable<CapaEntidades.entUsuario>
+
+@{
+    ViewBag.Title = "lstUsuariosEstadoAsignacionLlamadas";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<table align="center" border="1">
+    <tr>
+        <th>
+           CODIGO
+        </th>
+        <th>
+           ASESOR
+        </th>
+        <th>Opcion</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td> @Html.DisplayFor(modelItem => item.Usu_Codigo)</td>
+        <td>@Html.DisplayFor(modelItem=> item.Persona.NombreCompleto)</td>
+        <td> @Html.ActionLink("Asignar Data", "ExtraerDatosAsignar", new {iduser=item.Usu_Id,  usuario = item.Persona.NombreCompleto })</td>
+    </tr>
+}
+
+</table>

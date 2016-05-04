@@ -23,56 +23,118 @@ namespace CapaPresentacion.Controllers.Intranet
             return View(u);
         }
 
-        public ActionResult ExtraerDatosAsignar(String mensaje) {
-            ViewBag.mensaje = mensaje;
-            return View();
+
+        public ActionResult lstUsuariosEstadoAsignacionLlamadas()
+        {
+            entUsuario u = (entUsuario)Session["usuario"];
+            if (u != null)
+            {
+                Int32 sucursalId = u.Sucursal.Suc_Id;
+                Int32 UsuarioId = u.Usu_Id;
+                List<entUsuario> lista = negUsuario.Instancia.ListaUsuarios(UsuarioId, sucursalId);
+                return View(lista);
+            } else
+            {
+                return RedirectToAction("Index", "Inicio");
+            }
         }
 
-        public ActionResult EliminarFila(String telef)
-        {
+        public ActionResult ExtraerDatosAsignar(String mensaje,Int32? iduser, String usuario) {
+            ViewBag.mensaje = mensaje;
+            if (iduser != null) {
+                Session["id"] = iduser;
+                Session["user"] = usuario;
+            }
+            return View();
+        }
+        
+        public ActionResult BuscaFilaSession(String telef){
+            if (Session["asignacion"] != null){
+                DataTable dt = (DataTable)Session["asignacion"];
+                foreach (DataRow dr in dt.Rows){
+                    if (dr["telefono"].ToString() == telef){
+                        entAsigncionLlamadas ac = new entAsigncionLlamadas();
+                        ac.Asi_NumTelf= dr["telefono"].ToString();
+                        ac.Cliente = dr["cliente"].ToString();
+                        ac.Asi_F1 = Convert.ToDouble(dr["f1"].ToString());
+                        ac.Asi_F2 = Convert.ToDouble(dr["f2"]);
+                        ac.Asi_F3 = Convert.ToDouble(dr["f3"]);
+                        ac.Asi_SVA = dr["iniciovigencia"].ToString();
+                        ac.Asi_FechInicioCliente = dr["iniciovigencia"].ToString();
+                        Session["asllamadas"] = ac;
+                        return RedirectToAction("ExtraerDatosAsignar");
+                    }
+                }
+            }
+            return RedirectToAction("Index", "Inicio");
 
+        }
+
+        public ActionResult EliminarFila(String telef) {
             if(Session["asignacion"] ==null) CrearTablaSessionAsig();
               DataTable dt = (DataTable)Session["asignacion"];
-            if (dt.Rows.Count > 0)
-            {
-                foreach (DataRow ror in dt.Rows)
-                {
-                    if (ror["telefono"].ToString() == telef || ror["telefono"].ToString()=="")
-                    {
+            if (dt.Rows.Count > 0){
+                foreach (DataRow ror in dt.Rows){
+                    if (ror["telefono"].ToString() == telef || ror["telefono"].ToString()==""){
                         ror.Delete();
                         break;
                     }
-
                 }
             }
-
             return RedirectToAction("ExtraerDatosAsignar");
         }
  
-        public ActionResult ExtraerDatosAsignarSession(FormCollection form,String agregar,String guardar){
-            if (agregar != null)
-            {
+        public ActionResult ExtraerDatosAsignarSession(FormCollection form,String agregar,String GuadarTodo)
+        {
+            if (agregar != null){
+                
                 if (Session["asignacion"] == null) CrearTablaSessionAsig();
                 DataTable dt = (DataTable)Session["asignacion"];
-                if (form["telefono"] == "")
-                {
+                if (form["telefono"] == "") {
                     String msje = "No se pudo agregar, ingrese un numero valido,ó /cel/dni";
-                    return RedirectToAction("ExtraerDatosAsignar",new {mensaje=msje });
-                    
+                    return RedirectToAction("ExtraerDatosAsignar", new { mensaje = msje });
                 }
-                else
-                {
+                else {
+                    if (dt.Rows.Count > 0)
+                    {
+                        foreach (DataRow dr in dt.Rows)
+                        {
+                            if (form["telefono"] == dr["telefono"].ToString())
+                            {
+                                dr["cliente"] = form["cliente"];
+                                dr["f1"] = form["f1"];
+                                dr["f2"] = form["f2"];
+                                dr["f3"] = form["f3"];
+                                dr["sva"] = form["sva"];
+                                dr["iniciovigencia"] = form["iniciovigencia"];
+                                return RedirectToAction("ExtraerDatosAsignar");      
+                            }
 
-                    DataRow r = dt.NewRow();
-                    r["telefono"] = form["telefono"];
-                    r["cliente"] = form["cliente"];
-                    r["f1"] = form["f1"];
-                    r["f2"] = form["f2"];
-                    r["f3"] = form["f3"];
-                    r["sva"] = form["sva"];
-                    r["iniciovigencia"] = form["iniciovigencia"];
-                    dt.Rows.Add(r);
-                }
+                        }                    
+                    }
+                        DataRow r = dt.NewRow();
+                        r["telefono"] = form["telefono"];
+                        r["cliente"] = form["cliente"];
+                        r["f1"] = form["f1"];
+                        r["f2"] = form["f2"];
+                        r["f3"] = form["f3"];
+                        r["sva"] = form["sva"];
+                        r["iniciovigencia"] = form["iniciovigencia"];
+                        dt.Rows.Add(r);
+                       }            
+                    }
+            // guarda todos los registros de la session
+                    if (GuadarTodo != null){
+                Int32 idasesor = (Int32)Session["id"];
+                entUsuario u = null;
+                u = (entUsuario)Session["usuario"];
+                Int32 iduser = u.Usu_Id;
+                DataTable dt = (DataTable)Session["asignacion"];
+                int i = negAsLlamadas.Instancia.GuardarAsLlamadas(dt, 1, idasesor, iduser);
+                Session.Remove("id");
+                Session.Remove("asignacion");
+                Session.Remove("user");
+                return RedirectToAction("lstUsuariosEstadoAsignacionLlamadas"); 
             }
             return RedirectToAction("ExtraerDatosAsignar");
         }
@@ -82,19 +144,18 @@ namespace CapaPresentacion.Controllers.Intranet
                 DataTable dt = new DataTable();
                 dt.Columns.Add("telefono", Type.GetType("System.String"));
                 dt.Columns.Add("cliente", Type.GetType("System.String"));
-                dt.Columns.Add("f1", Type.GetType("System.String"));
-                dt.Columns.Add("f2", Type.GetType("System.String"));
-                dt.Columns.Add("f3", Type.GetType("System.String"));
+                dt.Columns.Add("f1", Type.GetType("System.Double"));
+                dt.Columns.Add("f2", Type.GetType("System.Double"));
+                dt.Columns.Add("f3", Type.GetType("System.Double"));
                 dt.Columns.Add("sva", Type.GetType("System.String"));
-                dt.Columns.Add("iniciovigencia", Type.GetType("System.DateTime"));
-
+                dt.Columns.Add("iniciovigencia", Type.GetType("System.String"));
+                dt.Columns.Add("tioedicion", Type.GetType("System.Int32"));
+               
                 Session["asignacion"] = dt;
-
             }
             catch (Exception){
                 throw;
             }
-
         }
 
 
