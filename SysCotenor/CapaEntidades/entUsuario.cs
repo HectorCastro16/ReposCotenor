@@ -31,6 +31,7 @@ namespace CapaEntidades
         public String Usu_UsuarioRegistro { get; set; }
         public DateTime Usu_FechaModificacion { get; set; }
         public String Usu_UsuarioModificacion { get; set; }
+        public String usu_Config_Color { get; set; }
 
     }
 }

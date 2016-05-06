@@ -46,6 +46,7 @@ namespace CapaAccesoDatos
                     u.Usu_Password = dr["Usu_Password"].ToString();
                     u.Usu_FechaHasta =Convert.ToDateTime(dr["Usu_FechaHasta"]);
                     u.Usu_FechaRegistro = Convert.ToDateTime(dr["Usu_FechaRegistro"]);
+                        
                         entPersona p = new entPersona();
                         p.Per_Nombres = dr["Per_Nombres"].ToString();
                         p.Per_Apellidos = dr["Per_Apellidos"].ToString();
@@ -69,10 +70,12 @@ namespace CapaAccesoDatos
                         s.Suc_Codigo = dr["Suc_Codigo"].ToString();
                         s.Suc_Nombre = dr["Suc_Nombre"].ToString();
                         u.Sucursal = s;
+                        
+                        
+
                     u.Persona = p;
                     u.TipoUsuario = t;
                     u.Sucursal = s;
-
                 }
             }catch (Exception){
                 throw;
@@ -101,6 +104,7 @@ namespace CapaAccesoDatos
                     u = new entUsuario();
                     u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
                     u.Usu_Codigo = dr["Usu_Codigo"].ToString();
+                    u.usu_Config_Color = dr["usu_Config_Color"].ToString();
 
                     entPersona p = new entPersona();
                     p.Per_Nombres = dr["Per_Nombres"].ToString();
