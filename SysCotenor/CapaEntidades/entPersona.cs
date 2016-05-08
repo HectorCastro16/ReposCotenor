@@ -28,7 +28,7 @@ namespace CapaEntidades
         public String Per_Foto { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
         public DateTime Per_FechaNacimiento { get; set; }
         [Required]
         public String Per_LugarNacimiento { get; set; }
