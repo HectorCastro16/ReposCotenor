@@ -13,33 +13,62 @@
     <!-- END META -->
     <!-- BEGIN STYLESHEETS -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css' />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/bootstrap.css?1422792965" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/materialadmin.css?1425466319" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/font-awesome.min.css?1422529194" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/material-design-iconic-font.min.css?1421434286" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/DataTables/jquery.dataTables.css?1423553989" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/DataTables/extensions/dataTables.colVis.css?1422823421" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/DataTables/extensions/dataTables.tableTools.css?1422823422" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/wizard/wizard.css?1425466601" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/select2/select2.css?1424887856" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/multi-select/multi-select.css?1424887857" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/bootstrap-datepicker/datepicker3.css?1424887858" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/bootstrap-datepicker/datepicker3.css">
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/jquery-ui/jquery-ui-theme.css?1423393666" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/bootstrap-colorpicker/bootstrap-colorpicker.css?1424887860" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/bootstrap-tagsinput/bootstrap-tagsinput.css?1424887862" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/typeahead/typeahead.css?1424887863" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/theme-default/libs/dropzone/dropzone-theme.css?1424887864" />
-
+        @{entUsuario u = null;
+          String nombreTema = "";
+           if (Session["usuario"] != null)
+           {
+               u = (entUsuario)Session["usuario"];
+               
+               if(u.usu_Config_Color=="D"){
+                   nombreTema = "theme-default";
+               }
+               else if (u.usu_Config_Color == "C")
+               {
+                   nombreTema = "theme-1";
+               }
+               else if (u.usu_Config_Color=="N")
+               {
+                   nombreTema = "theme-2";
+               }
+               else if (u.usu_Config_Color == "A")
+               {
+                   nombreTema = "theme-3";
+               }
+               else if (u.usu_Config_Color == "V")
+               {
+                   nombreTema = "theme-4";
+               }
+               else if (u.usu_Config_Color == "R")
+               {
+                   nombreTema = "theme-5";
+               }
+               
+           }
+        }
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/bootstrap.css?1422792965" />
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/materialadmin.css?1425466319" />
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/font-awesome.min.css?1422529194" />
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/material-design-iconic-font.min.css?1421434286" />
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/DataTables/jquery.dataTables.css?1423553989" />
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/DataTables/extensions/dataTables.colVis.css?1422823421" />
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/DataTables/extensions/dataTables.tableTools.css?1422823422" />
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/wizard/wizard.css?1425466601" />
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/select2/select2.css?1424887856" />
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/multi-select/multi-select.css?1424887857" />
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/bootstrap-datepicker/datepicker3.css?1424887858" />
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/bootstrap-datepicker/datepicker3.css">
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/jquery-ui/jquery-ui-theme.css?1423393666" />
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/bootstrap-colorpicker/bootstrap-colorpicker.css?1424887860" />
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/bootstrap-tagsinput/bootstrap-tagsinput.css?1424887862" />
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/typeahead/typeahead.css?1424887863" />
+    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/dropzone/dropzone-theme.css?1424887864" />
+        
      <!-- END STYLESHEETS -->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script type="text/javascript" src="../../assets/js/libs/utils/html5shiv.js?1403934957"></script>
     <script type="text/javascript" src="../../assets/js/libs/utils/respond.min.js?1403934956"></script>
     <![endif]-->
-    <script type="text/javascript">
-        $('#datepicker').datepicker()
-    </script>
 
 </head>
 <body class="menubar-hoverable header-fixed menubar-pin ">
@@ -76,8 +105,7 @@
                         </form>
                     </li>
                 </ul><!--end .header-nav-options -->
-                @{
-                    entUsuario u = null;
+                @{                    
                     String NombreUser = "";
                     String TipoUser = null;
                     String foto = "";
@@ -218,7 +246,7 @@
                             </a>
                             <!--start submenu -->
                             <ul>
-                                <li><a href="@Url.Action("ExtraerDatosAsignar","SupervisorCall")"><span class="title">Asignar Clientes</span></a></li>
+                                <li><a href="@Url.Action("lstUsuariosEstadoAsignacionLlamadas","SupervisorCall")"><span class="title">Asignar Clientes</span></a></li>
                                 <li><a href=""><span class="title">Seguimiento Ventas</span></a></li>
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
@@ -246,7 +274,7 @@
                                 </a>
                                 <!--start submenu -->
                                 <ul>
-                                    <li><a href="@Url.Action("", "")"><span class="title">Mantenedor Asesores</span></a></li>
+                                    <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
                                 </ul><!--end /submenu -->
                             </li><!--end /menu-li -->
 
@@ -431,12 +459,6 @@
         });
     </script>
 
-    <script type="text/javascript">
-    $("#NuevoCliente").click(function () {
-        $("#MostrarForm").load('@Url.Action("AsignarCliente", "SupervisorCall")') } );
-    </script>
-
-   
 
 </body>
 </html>

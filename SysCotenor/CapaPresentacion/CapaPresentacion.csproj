@@ -1972,7 +1972,7 @@
     <Content Include="Views\SupervisorCall\ExtraerDatosAsignar.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\SupervisorCall\AsignarCliente.cshtml" />
+    <Content Include="Views\SupervisorCall\lstUsuariosEstadoAsignacionLlamadas.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
