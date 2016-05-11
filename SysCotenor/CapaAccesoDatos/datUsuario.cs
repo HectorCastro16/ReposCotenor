@@ -114,7 +114,7 @@ namespace CapaAccesoDatos
                     p.Per_DNI = dr["Per_DNI"].ToString();
                     p.Per_Celular = dr["Per_Celular"].ToString();
                     p.Per_Correo = dr["Per_Correo"].ToString();
-                    p.Per_Telefono = dr["Per_Telefono"].ToString();
+                //    p.Per_Telefono = dr["Per_Telefono"].ToString();
                     p.Per_Direccion = dr["Per_Direccion"].ToString();
                     p.Per_Foto = dr["Per_Foto"].ToString();
                     p.Per_FechaNacimiento = Convert.ToDateTime(dr["Per_FechaNacimiento"]);
@@ -213,7 +213,7 @@ namespace CapaAccesoDatos
                     p.Per_Apellidos = dr["Per_Apellidos"].ToString();
                     p.Per_DNI = dr["Per_DNI"].ToString();
                     p.Per_Celular = dr["Per_Celular"].ToString();
-                    p.Per_Telefono = dr["Per_Telefono"].ToString();
+                 //   p.Per_Telefono = dr["Per_Telefono"].ToString();
                     u.Persona = p;
 
                     u.Usu_Estado = dr["Usu_Estado"].ToString();

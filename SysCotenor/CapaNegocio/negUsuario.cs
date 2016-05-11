@@ -84,7 +84,7 @@ namespace CapaNegocio
                     ReturnF.Add(ListaTotal[j]);
                       for (int i = 0; i < Lista.Count; i++){
                         if (ListaTotal[j].Usu_Id == Lista[i].Usu_Id){
-                            ListaTotal.Remove(ListaTotal[j]);
+                            ReturnF.Remove(ListaTotal[j]);
                             ReturnF.Add(Lista[i]);
                         }
                     }

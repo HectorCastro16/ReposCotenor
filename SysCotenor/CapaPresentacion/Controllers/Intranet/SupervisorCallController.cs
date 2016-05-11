@@ -63,6 +63,7 @@ namespace CapaPresentacion.Controllers.Intranet
                             r["sva"] = Lista[i].Asi_SVA;
                             r["iniciovigencia"] = Lista[i].Asi_FechInicioCliente;
                             r["Estadooedicion"] = 0;
+                            r["estadoAtencion"] = Lista[i].Asi_Estado;
                             dt.Rows.Add(r);
                         }
                     }
@@ -191,6 +192,7 @@ namespace CapaPresentacion.Controllers.Intranet
                 dt.Columns.Add("sva", Type.GetType("System.String"));
                 dt.Columns.Add("iniciovigencia", Type.GetType("System.String"));
                 dt.Columns.Add("Estadooedicion", Type.GetType("System.Int32"));
+                dt.Columns.Add("estadoAtencion", Type.GetType("System.Boolean"));
                 Session["asignacion"] = dt;
             }
             catch (Exception){
