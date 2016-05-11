@@ -72,6 +72,7 @@ namespace CapaAccesoDatos
                     call.Asi_SVA = dr["Asi_SVA"].ToString();
                     call.Asi_FechInicioCliente = dr["Asi_FechInicioCliente"].ToString();
                     call.Asi_FechaRegistro = Convert.ToDateTime(dr["Asi_FechaRegistro"]);
+                    call.Asi_Estado = Convert.ToBoolean(dr["Asi_Estado"]);
                     entUsuario u = new entUsuario();
                     u.Usu_Id = Convert.ToInt32(dr["Asi_Usu_Id"]);
                     call.Usuario = u;

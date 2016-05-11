@@ -8,7 +8,7 @@
 
 <div id="content">
 <section> 
-    <div class="card card-bordered style-primary">
+    <div class="card card-bordered style-accent">
         @{ String asesor = (String)Session["user"];}
        ASESOR:@asesor
         <div class="card-body style-default-bright">
@@ -52,7 +52,7 @@
                                                         <td><input type="text" name="iniciovigencia" value="@Asi_FechInicioCliente"></td>
                                                     </tr>
                                                     }
-                                                    else{ 
+                                                    else {
                                                     <tr>
                                                     <td><input type="text" name="telefono" ></td>
                                                     <td><input type="text" name="cliente" ></td>
@@ -68,9 +68,26 @@
                                         </div>
                                     </div>
                                     <br />
-                                    <input type="submit" class="btn btn-block ink-reaction btn-primary-bright" name="agregar" value="Agregar">
+                                    <input type="submit" class="btn btn-block ink-reaction btn-default-light" name="agregar" value="Agregar">
                                 </div>
-                            
+                            @{ 
+                                int count=0;
+                                int count2 = 0;
+                                int count3= 0;
+                                DataTable dtl = new DataTable();
+                                if (Session["asignacion"] != null){
+                                    dtl = (DataTable)Session["asignacion"];
+                                    foreach (DataRow row in dtl.Rows){
+                                        count3++;
+                                        if (row["Asi_Estado"].ToString() == "0"){ count++;}
+                                        else if (row["Asi_Estado"].ToString() == "1") { count2++; }
+                                    }
+
+                                }
+                            }
+                            <p style="font-family:'Californian FB';font-size:large">Sin Atencion: @count &nbsp;&nbsp; Atendias: @count2 &nbsp;&nbsp;  Total: @count3</p> 
+                           
+
                         </div>
                     </section>
               
@@ -101,11 +118,12 @@
                                         int i = 0;
                                         DataTable dt = (DataTable)Session["asignacion"];
                                         if (dt != null)
-                                        {
+                                        { String color="";
                                             foreach (DataRow row in dt.Rows)
                                             {
                                                 i++;
-                                                <tr>
+                                                if (row["Asi_Estado"].ToString() == "1") { color = "aquamarine"; } else { color = ""; }
+                                                <tr style="background-color:@color">
                                                     <td>@i</td>
                                                     <td>@row["telefono"]</td>
                                                     <td>@row["cliente"]</td>
@@ -118,6 +136,7 @@
                                                     <td>@Html.ActionLink("Editar", "BuscaFilaSession", new { telef = row["telefono"] })</td>
                                                 </tr>
                                             }
+
                                         }
                                     }
 
@@ -134,6 +153,7 @@
       <input type="submit" class="btn btn-block ink-reaction btn-default" name="Cancelar" value="Cancelar-Todo/Terminar">
         </div>
     </form>
+       
     </div>
 </section>
 </div>

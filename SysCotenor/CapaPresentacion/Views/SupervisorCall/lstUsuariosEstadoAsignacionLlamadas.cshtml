@@ -22,15 +22,21 @@
                                         <th>
                                             ASESOR
                                         </th>
+                                        <th>CLIENTES ASIGNADOS</th>
                                         <th>Opcion</th>
                                     </tr>
 
                                     @foreach (var item in Model)
                                     {
-                                        <tr>
+                                        String color = "";
+                                        if (item.Contador > 0){
+                                            color = "aquamarine";
+                                        }
+                                        <tr style="background-color:@color">
 
                                             <td> @Html.DisplayFor(modelItem => item.Usu_Codigo)</td>
                                             <td>@Html.DisplayFor(modelItem => item.Persona.NombreCompleto)</td>
+                                            <td>@Html.DisplayFor(modelItem => item.Contador)</td>
                                             <td> @Html.ActionLink("Asignar Data", "ExtraerDatosAsignar", new { iduser = item.Usu_Id, usuario = item.Persona.NombreCompleto })</td>
                                         </tr>
                                     }
