@@ -22,7 +22,7 @@ namespace CapaEntidades
         public String Per_Celular { get; set; }
         //[DataType(DataType.EmailAddress)]
         public String Per_Correo { get; set; }
-        public String Per_Telefono { get; set; }
+        //public String Per_Telefono { get; set; }
         [Required]
         public String Per_Direccion { get; set; }
         public String Per_Foto { get; set; }

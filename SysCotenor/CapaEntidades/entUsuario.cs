@@ -16,6 +16,7 @@ namespace CapaEntidades
         public entPersona Persona { get; set; }
         public entTipoUsuario TipoUsuario { get; set; }
         public entSucursal Sucursal { get; set; }
+        public String Usu_Telefono { get; set; }
 
         [Required(ErrorMessage = "Usuario Requerido")]
         public String Usu_Login { get; set; }
@@ -32,6 +33,8 @@ namespace CapaEntidades
         public DateTime Usu_FechaModificacion { get; set; }
         public String Usu_UsuarioModificacion { get; set; }
         public String usu_Config_Color { get; set; }
+
+        //public List<entPersona> lsPersona { get; set; }
 
     }
 }

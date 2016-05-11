@@ -24,7 +24,12 @@
             <div class="card">
                 <div class="card-body ">
                     <div id="rootwizard2" class="form-wizard form-wizard-horizontal">
-                        <form class="form form-validation" role="form" novalidate="novalidate">
+                        
+                    @using (Html.BeginForm("InsUsuario", "Comun", FormMethod.Post, new { enctype = "multipart/form-data", @Class = "form form-validation", @novalidate = "novalidate" }))
+                    {@Html.AntiForgeryToken()
+                        @Html.ValidationSummary(true)
+
+                        //<form class="form form-validation" role="form" novalidate="novalidate">
                             <div class="form-wizard-nav">
                                 <div class="progress"><div class="progress-bar progress-bar-primary"></div></div>
                                 <ul class="nav nav-justified">
@@ -37,13 +42,13 @@
                             <div class="tab-content clearfix">
                                 <div class="tab-pane active" id="step1">
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 @Html.TextBoxFor(model => model.Persona.Per_Nombres, new { @class = "form-control", @required = "required" })
                                                 <label for="firstname" class="control-label">Nombres</label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 @Html.TextBoxFor(model => model.Persona.Per_Apellidos, new { @class = "form-control", @required = "required" })
                                                 <label for="lastname" class="control-label">Apellidos</label>
@@ -51,13 +56,13 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 @Html.TextBoxFor(model => model.Persona.Per_DNI, new { @class = "form-control", @required = "required", @minlength = "8", @maxlength = "8", @onkeypress = "return valida(event)" })
                                                 <label for="firstname" class="control-label">DNI</label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 @Html.TextBoxFor(model => model.Persona.Per_Celular, new { @class = "form-control", @required = "required", @minlength = "9", @maxlength = "9", @onkeypress = "return valida(event)" })
                                                 <label for="lastname" class="control-label">Celular</label>
@@ -65,41 +70,53 @@
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-lg-4">
                                             <div class="form-group">
-                                                @Html.TextBoxFor(model => model.Persona.Per_Correo, new { @class = "form-control", @required = "required", @type = "email" })
+                                                @Html.TextBoxFor(model => model.Persona.Per_Correo, new { @class = "form-control" })
                                                 <label for="firstname" class="control-label">Correo</label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-lg-2">
                                             <div class="form-group">
-                                                @Html.TextBoxFor(model => model.Persona.Per_Telefono, new { @class = "form-control", @required = "required", @onkeypress = "return valida(event)" })
+                                                <select id="select1" name="dominio" class="form-control">               
+                                                    <option value="hotmail.com">&#64;hotmail.com</option>
+                                                    <option value="gmail.com">&#64;gmail.com</option>
+                                                    <option value="outlook.com">&#64;outlook.com</option>
+                                                    <option value="yahoo.com">&#64;yahoo.com</option>
+                                                    <option value="otros">otros</option>
+                                                </select>
+                                                <label for="select1">Dominio</label>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-6">
+                                            <div class="form-group">
+                                                @Html.TextBoxFor(model => model.Usu_Telefono, new { @class = "form-control", @onkeypress = "return valida(event)" })
                                                 <label for="lastname" class="control-label">Telefono</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 @Html.TextBoxFor(model => model.Persona.Per_Direccion, new { @class = "form-control", @required = "required" })
                                                 <label for="firstname" class="control-label">Direccion</label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
-                                                @Html.TextBoxFor(model => model.Persona.Per_FechaNacimiento, new { @class = "form-control", @required = "required", @data_inputmask = "'alias': 'date'" })
-                                               <label for="lastname" class="control-label">Fecha Nacimiento</label>
+                                                @Html.EditorFor(model => model.Persona.Per_FechaNacimiento)
+                                                <label for="lastname" class="control-label">Fecha Nacimiento</label>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="row">
-                                        <div class="col-sm-6">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 @Html.TextBoxFor(model => model.Persona.Per_LugarNacimiento, new { @class = "form-control", @required = "required" })
                                                 <label for="firstname" class="control-label">Lugar Nacimiento</label>
                                             </div>
                                         </div>
-                                        <div class="col-sm-6">
+                                        <div class="col-lg-6">
                                             <div class="form-group">
                                                 <input type="file" class="form-control" name="archivo" />
                                                 <label for="firstname" class="control-label">Fotografia</label>
@@ -145,7 +162,8 @@
                                 <li class="next last"><a class="btn-raised" href="javascript:void(0);">Last</a></li>
                                 <li class="next"><a class="btn-raised" href="javascript:void(0);">Next</a></li>
                             </ul>
-                        </form>
+                        
+                    }
                     </div><!--end #rootwizard -->
                 </div><!--end .card-body -->
             </div><!--end .card -->

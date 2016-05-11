@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.IO;
 
 namespace CapaPresentacion.Controllers.Intranet
 {
@@ -50,10 +51,60 @@ namespace CapaPresentacion.Controllers.Intranet
         }
 
         [HttpPost]
-        public ActionResult InsUsuario(entUsuario u, HttpPostedFileBase archivo)
+        public ActionResult InsUsuario(entUsuario u, HttpPostedFileBase archivo, FormCollection form)
         {
+            try
+            {
+                String dominio = form["dominio"];
+                u.Persona.Per_Correo += "@" + dominio;
 
-            return View();
+                if (archivo != null && archivo.ContentLength > 0)
+                {
+                    u.Persona.Per_Foto = Path.GetFileName(archivo.FileName);
+                }
+                else
+                {
+                    u.Persona.Per_Foto = "foto.png";
+                }
+                //List<entPersona> per = new List<entPersona>();
+                //per.Add(u.Persona);
+
+                //para capturar el usuario en sesion////////////
+                entUsuario us = (entUsuario)Session["usuario"];
+                String userRegistro = us.Persona.NombreCompleto;
+
+                u.Usu_UsuarioRegistro = userRegistro;
+                ///////////////////////////////////////////
+
+                int i = negUsuario.Instancia.InsUpdUsuario(u, 1);
+                //int i = 0;
+
+                if (i > 0)
+                {
+                    if (archivo != null && archivo.ContentLength > 0)
+                    {
+
+                        var namearchivo = Path.GetFileName(archivo.FileName);
+                        var ruta = Path.Combine(Server.MapPath("~/assets/Imagenes/Fotos"), namearchivo);
+                        archivo.SaveAs(ruta);
+                    }
+                    return RedirectToAction("ListaUsuarios", new { mensaje = "Se Inserto Satisfactoriamente", identificador = 3 });
+                }
+                else
+                {
+                    return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = "No se pudo registrar", identificador = 2 });
+                }
+            }
+            catch (ApplicationException x)
+            {
+                ViewBag.mensaje = x.Message;
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = x.Message, identificador = 1 });
+            }
+            catch (Exception e)
+            {
+
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
+            }
 
         }
 
@@ -61,20 +112,33 @@ namespace CapaPresentacion.Controllers.Intranet
 
 
 
-        public ActionResult ListaUsuarios()
+        public ActionResult ListaUsuarios(String mensaje, Int16? identificador)
         {
-            entUsuario u = (entUsuario)Session["usuario"];
-            if (u != null)
+
+            ViewBag.mensaje = mensaje;
+            ViewBag.identificador = identificador;
+
+            try
             {
-                Int32 sucursalId = u.Sucursal.Suc_Id;
-                Int32 UsuarioId = u.Usu_Id;
-                List<entUsuario> lista = negUsuario.Instancia.ListaUsuarios(UsuarioId, sucursalId);
-                return View(lista);
+                entUsuario u = (entUsuario)Session["usuario"];
+                if (u != null)
+                {
+                    Int32 sucursalId = u.Sucursal.Suc_Id;
+                    Int32 UsuarioId = u.Usu_Id;
+                    List<entUsuario> lista = negUsuario.Instancia.ListaUsuarios(UsuarioId, sucursalId);
+                    return View(lista);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Inicio");
+                }
             }
-            else
+            catch (Exception)
             {
-                return RedirectToAction("Index", "Inicio");
+                
+                throw;
             }
+            
         }
 
 

@@ -23,17 +23,17 @@ namespace CapaNegocio
 
         #region metodos
 
-        public entUsuario BuscarUsario(Int32 idusuario){
-            try{
-                entUsuario u = null;
-                u = datUsuario.Instancia.BuscarUsuario(idusuario);
-                return u;
-            }
-            catch (Exception){
-                throw;
-            }
+        //public entUsuario BuscarUsario(Int32 idusuario){
+        //    try{
+        //        entUsuario u = null;
+        //        u = datUsuario.Instancia.BuscarUsuario(idusuario);
+        //        return u;
+        //    }
+        //    catch (Exception){
+        //        throw;
+        //    }
 
-        }
+        //}
       
         public entUsuario VerificarAccesoIntranet(String prmstrLogin, String prmstrPassw)
         {
@@ -126,46 +126,50 @@ namespace CapaNegocio
         }
 
 
+        public int InsUpdUsuario(entUsuario u, Int16 TipoEdicion)
+        {
 
+            try
+            {
+                String cadXml = "";
+                cadXml += "<Persona ";
+                cadXml += "Per_Nombres='" + u.Persona.Per_Nombres + "' ";
+                cadXml += "Per_Apellidos='" + u.Persona.Per_Apellidos + "' ";
+                cadXml += "Per_DNI='" + u.Persona.Per_DNI + "' ";
+                cadXml += "Per_Celular='" + u.Persona.Per_Celular + "' ";
+                cadXml += "Per_Correo='" + u.Persona.Per_Correo + "' ";
+                cadXml += "Per_Direccion='" + u.Persona.Per_Direccion + "' ";
+                cadXml += "Per_Foto='" + u.Persona.Per_Foto + "' ";
+                cadXml += "Per_FechaNacimiento='" + u.Persona.Per_FechaNacimiento.ToString("dd/MM/yyyy") + "' ";
+                cadXml += "Per_LugarNacimiento='" + u.Persona.Per_LugarNacimiento + "' ";
+                cadXml += "TipoEdicion='" + TipoEdicion + "'>";
 
+                    cadXml += "<Usuario ";
+                    cadXml += "Usu_TipUsu_Id='" + u.TipoUsuario.TipUsu_Id + "' ";
+                    cadXml += "Usu_Suc_Id='" + u.Sucursal.Suc_Id + "' ";
+                    cadXml += "Usu_FechaHasta='" + u.Usu_FechaHasta.ToString("dd/MM/yyyy") + "' ";
+                    cadXml += "Usu_UsuarioRegistro='" + u.Usu_UsuarioRegistro + "' ";
+                    cadXml += "Usu_Telefono='" + u.Usu_Telefono + "' ";
+                    cadXml += "TipoEdicion='" + TipoEdicion + "'/>";
 
+                cadXml += "</Persona>";
+                cadXml = "<root>" + cadXml + "</root>";
+                 //variable i llega el resultado
+                int i = datUsuario.Instancia.InsUpdDelBloAct(cadXml);
+                if (i <= 0)
+                {
+                    throw new ApplicationException("No se Pudo insertar a el trabajador");
+                }
+                return i;
 
-        //public int InsUpdUsuario(entPersona p, Int16 TipoEdicion) {
+            }
+            catch (Exception e)
+            {
 
-        //    try
-        //    {
-        //        String cadXml = "";
-        //        cadXml += "<Pedido ";
-        //        cadXml += "idCliente='" + p.Cliente.idCliente + "' ";
-        //        cadXml += "idTarjetaCredito='" + p.idTarjetaCredito + "' ";
-        //        cadXml += "UsuarioTarjeta='" + p.UsuarioTarjeta + "' ";
-        //        cadXml += "NumeroTarjeta='" + p.NumeroTarjeta + "' ";
-        //        cadXml += "Total='" + p.Total + "'>";
-        //        foreach (entUsuario d in p.DPedido)
-        //        {
-        //            cadXml += "<DPedido ";
-        //            cadXml += "idProducto='" + d.idProducto + "' ";
-        //            cadXml += "Cantidad='" + d.Cantidad + "' ";
-        //            cadXml += "Precio='" + d.Precio + "'/>";
-        //        }
-        //        cadXml += "</Pedido>";
-        //        cadXml = "<root>" + cadXml + "</root>";
-        //        // variable i llega el resultado
-        //        int i = datUsuario.Instancia.InsUpdDelBloAct(cadXml);
-        //        if (i <= 0)
-        //        {
-        //            throw new ApplicationException("No se Pudo insertar a el trabajador");
-        //        }
-        //        return i;
+                throw e;
+            }
 
-        //    }
-        //    catch (Exception e)
-        //    {
-
-        //        throw e;
-        //    }
-
-        //}
+        }
 
         #endregion metodos
     }
