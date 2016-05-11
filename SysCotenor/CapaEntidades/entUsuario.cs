@@ -33,5 +33,9 @@ namespace CapaEntidades
         public String Usu_UsuarioModificacion { get; set; }
         public String usu_Config_Color { get; set; }
 
+        // ATRIBUTOS REQUERIDOS 
+
+        public int Contador { get; set; }
+
     }
 }

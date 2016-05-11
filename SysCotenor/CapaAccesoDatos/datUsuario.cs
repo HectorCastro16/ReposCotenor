@@ -26,6 +26,8 @@ namespace CapaAccesoDatos
 
         #region metodos
 
+        
+
 
         public entUsuario BuscarUsuario(Int32 id) {
             SqlCommand cmd = null;
@@ -150,6 +152,39 @@ namespace CapaAccesoDatos
         }
 
 
+        public List<entUsuario> ListarUusariosConAsignacionCalls(Int32 user){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entUsuario> Lista = null;
+            try{
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("sp_ListaAsLlamadas", cn);
+                cmd.Parameters.AddWithValue("@idsuper", user);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entUsuario>();
+                while (dr.Read()){
+                    entUsuario u = new entUsuario();
+                    u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
+                    u.Usu_Codigo = dr["Usu_Codigo"].ToString();
+                    
+                    entPersona p = new entPersona();
+                    p.Per_Nombres = dr["Per_Nombres"].ToString();
+                    p.Per_Apellidos = dr["Per_Apellidos"].ToString();   
+                    u.Persona = p;
+
+                    u.Contador = Convert.ToInt32(dr["Asgnadas"]);
+                    Lista.Add(u);
+                }
+            }
+            catch (Exception ex){
+                throw ex;
+            }finally { cmd.Connection.Close(); }
+            return Lista;
+        }
+
+
         public List<entUsuario> ListaUsuarios(Int32 UsuarioId,  Int32 SucursalId)
         {
 
@@ -183,6 +218,7 @@ namespace CapaAccesoDatos
 
                     u.Usu_Estado = dr["Usu_Estado"].ToString();
                     u.Usu_FechaHasta = Convert.ToDateTime(dr["Usu_FechaHasta"]);
+                    u.Contador = 0;
                     Lista.Add(u);
                 }
 
