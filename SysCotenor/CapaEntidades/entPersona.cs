@@ -20,7 +20,7 @@ namespace CapaEntidades
         [StringLength(8)]
         public String Per_DNI { get; set; }
         public String Per_Celular { get; set; }
-        [DataType(DataType.EmailAddress)]
+        //[DataType(DataType.EmailAddress)]
         public String Per_Correo { get; set; }
         public String Per_Telefono { get; set; }
         [Required]
@@ -28,7 +28,7 @@ namespace CapaEntidades
         public String Per_Foto { get; set; }
         [Required]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
         public DateTime Per_FechaNacimiento { get; set; }
         [Required]
         public String Per_LugarNacimiento { get; set; }
