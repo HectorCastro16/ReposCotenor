@@ -27,63 +27,62 @@ namespace CapaAccesoDatos
         #region metodos
 
 
-        //public entUsuario BuscarUsuario(Int32 id) {
-        //    SqlCommand cmd = null;
-        //    SqlDataReader dr = null;
-        //    entUsuario u = null;
-        //    try{
-        //        SqlConnection cn = Conexion.Instancia.Conectar();
-        //        cmd = new SqlCommand("spBuscaUsuarioEditar", cn);
-        //        cmd.CommandType = CommandType.StoredProcedure;
-        //        cmd.Parameters.AddWithValue("@iduser", id);
-        //        cn.Open();
-        //        dr = cmd.ExecuteReader();
-        //       if (dr.Read()) {
-        //            u = new entUsuario();
-        //            u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
-        //            u.Usu_Codigo = dr["Usu_Codigo"].ToString();
-        //            u.Usu_Telefono = dr["Usu_Telefono"].ToString();
-        //            u.Usu_Login = dr["Usu_Login"].ToString();
-        //            u.Usu_Password = dr["Usu_Password"].ToString();
-        //            u.Usu_FechaHasta =Convert.ToDateTime(dr["Usu_FechaHasta"]);
-        //            u.Usu_FechaRegistro = Convert.ToDateTime(dr["Usu_FechaRegistro"]);
+        public entUsuario BuscarUsuario(Int32 id) {
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            entUsuario u = null;
+            try{
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spBuscaUsuarioEditar", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@iduser", id);
+                cn.Open();
+                dr = cmd.ExecuteReader();
+               if (dr.Read()) {
+                    u = new entUsuario();
+                    u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
+                    u.Usu_Codigo = dr["Usu_Codigo"].ToString();
+                    u.Usu_Login = dr["Usu_Login"].ToString();
+                    u.Usu_Password = dr["Usu_Password"].ToString();
+                    u.Usu_FechaHasta =Convert.ToDateTime(dr["Usu_FechaHasta"]);
+                    u.Usu_FechaRegistro = Convert.ToDateTime(dr["Usu_FechaRegistro"]);
                         
-        //                entPersona p = new entPersona();
-        //                p.Per_Nombres = dr["Per_Nombres"].ToString();
-        //                p.Per_Apellidos = dr["Per_Apellidos"].ToString();
-        //                p.Per_DNI = dr["Per_DNI"].ToString();
-        //                p.Per_Celular = dr["Per_Celular"].ToString();
-        //                p.Per_Correo = dr["Per_Correo"].ToString();
-        //                //p.Per_Telefono = dr["Per_Telefono"].ToString();
-        //                p.Per_Direccion = dr["Per_Direccion"].ToString();
-        //                p.Per_Foto = dr["Per_Foto"].ToString();
-        //                p.Per_FechaNacimiento = Convert.ToDateTime(dr["Per_FechaNacimiento"]);
-        //                p.Per_LugarNacimiento = dr["Per_LugarNacimiento"].ToString();
+                        entPersona p = new entPersona();
+                        p.Per_Nombres = dr["Per_Nombres"].ToString();
+                        p.Per_Apellidos = dr["Per_Apellidos"].ToString();
+                        p.Per_DNI = dr["Per_DNI"].ToString();
+                        p.Per_Celular = dr["Per_Celular"].ToString();
+                        p.Per_Correo = dr["Per_Correo"].ToString();
+                        //p.Per_Telefono = dr["Per_Telefono"].ToString();
+                        p.Per_Direccion = dr["Per_Direccion"].ToString();
+                        p.Per_Foto = dr["Per_Foto"].ToString();
+                        p.Per_FechaNacimiento = Convert.ToDateTime(dr["Per_FechaNacimiento"]);
+                        p.Per_LugarNacimiento = dr["Per_LugarNacimiento"].ToString();
 
-        //                entTipoUsuario t = new entTipoUsuario();
-        //                t.TipUsu_Id = Convert.ToInt32(dr["TipUsu_Id"]);
-        //                t.TipUsu_Codigo = dr["TipUsu_Codigo"].ToString();
-        //                t.TipUsu_Nombre = dr["TipUsu_Nombre"].ToString();
-        //                u.TipoUsuario = t;
+                        entTipoUsuario t = new entTipoUsuario();
+                        t.TipUsu_Id = Convert.ToInt32(dr["TipUsu_Id"]);
+                        t.TipUsu_Codigo = dr["TipUsu_Codigo"].ToString();
+                        t.TipUsu_Nombre = dr["TipUsu_Nombre"].ToString();
+                        u.TipoUsuario = t;
 
-        //                entSucursal s = new entSucursal();
-        //                s.Suc_Id = Convert.ToInt32(dr["Suc_Id"]);
-        //                s.Suc_Codigo = dr["Suc_Codigo"].ToString();
-        //                s.Suc_Nombre = dr["Suc_Nombre"].ToString();
-        //                u.Sucursal = s;
+                        entSucursal s = new entSucursal();
+                        s.Suc_Id = Convert.ToInt32(dr["Suc_Id"]);
+                        s.Suc_Codigo = dr["Suc_Codigo"].ToString();
+                        s.Suc_Nombre = dr["Suc_Nombre"].ToString();
+                        u.Sucursal = s;
                         
                         
 
-        //            u.Persona = p;
-        //            u.TipoUsuario = t;
-        //            u.Sucursal = s;
-        //        }
-        //    }catch (Exception){
-        //        throw;
-        //    }
-        //    return u;
+                    u.Persona = p;
+                    u.TipoUsuario = t;
+                    u.Sucursal = s;
+                }
+            }catch (Exception){
+                throw;
+            }
+            return u;
 
-        //}
+        }
 
 
         public entUsuario VerificarAccesoIntranet(String prmstrLogin, String prmstrPassw)
@@ -113,7 +112,7 @@ namespace CapaAccesoDatos
                     p.Per_DNI = dr["Per_DNI"].ToString();
                     p.Per_Celular = dr["Per_Celular"].ToString();
                     p.Per_Correo = dr["Per_Correo"].ToString();
-                    //p.Per_Telefono = dr["Per_Telefono"].ToString();
+                //    p.Per_Telefono = dr["Per_Telefono"].ToString();
                     p.Per_Direccion = dr["Per_Direccion"].ToString();
                     p.Per_Foto = dr["Per_Foto"].ToString();
                     p.Per_FechaNacimiento = Convert.ToDateTime(dr["Per_FechaNacimiento"]);
@@ -132,7 +131,6 @@ namespace CapaAccesoDatos
                     s.Suc_Nombre = dr["Suc_Nombre"].ToString();
                     u.Sucursal = s;
 
-                    u.Usu_Telefono = dr["Usu_Telefono"].ToString();
                     u.Usu_Login = dr["Usu_Login"].ToString();
                     u.Usu_Estado = dr["Usu_Estado"].ToString();
                     u.Usu_FechaHasta = Convert.ToDateTime(dr["Usu_FechaHasta"]);
@@ -149,6 +147,39 @@ namespace CapaAccesoDatos
             }
             finally { cmd.Connection.Close(); }
             return u;
+        }
+
+
+        public List<entUsuario> ListarUusariosConAsignacionCalls(Int32 user){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entUsuario> Lista = null;
+            try{
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("sp_ListaAsLlamadas", cn);
+                cmd.Parameters.AddWithValue("@idsuper", user);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entUsuario>();
+                while (dr.Read()){
+                    entUsuario u = new entUsuario();
+                    u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
+                    u.Usu_Codigo = dr["Usu_Codigo"].ToString();
+                    
+                    entPersona p = new entPersona();
+                    p.Per_Nombres = dr["Per_Nombres"].ToString();
+                    p.Per_Apellidos = dr["Per_Apellidos"].ToString();   
+                    u.Persona = p;
+
+                    u.Contador = Convert.ToInt32(dr["Asgnadas"]);
+                    Lista.Add(u);
+                }
+            }
+            catch (Exception ex){
+                throw ex;
+            }finally { cmd.Connection.Close(); }
+            return Lista;
         }
 
 
@@ -174,18 +205,18 @@ namespace CapaAccesoDatos
                     entUsuario u = new entUsuario();
                     u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
                     u.Usu_Codigo = dr["Usu_Codigo"].ToString();
-                    u.Usu_Telefono = dr["Usu_Telefono"].ToString();
 
                     entPersona p = new entPersona();
                     p.Per_Nombres = dr["Per_Nombres"].ToString();
                     p.Per_Apellidos = dr["Per_Apellidos"].ToString();
                     p.Per_DNI = dr["Per_DNI"].ToString();
                     p.Per_Celular = dr["Per_Celular"].ToString();
-                    //p.Per_Telefono = dr["Per_Telefono"].ToString();
+                 //   p.Per_Telefono = dr["Per_Telefono"].ToString();
                     u.Persona = p;
 
                     u.Usu_Estado = dr["Usu_Estado"].ToString();
                     u.Usu_FechaHasta = Convert.ToDateTime(dr["Usu_FechaHasta"]);
+                    u.Contador = 0;
                     Lista.Add(u);
                 }
 
@@ -255,7 +286,6 @@ namespace CapaAccesoDatos
                     s.Suc_Telefono = dr["Suc_Telefono"].ToString();
                     u.Sucursal = s;
 
-                    u.Usu_Telefono = dr["Usu_Telefono"].ToString();
                     u.Usu_UsuarioRegistro = dr["Usu_UsuarioRegistro"].ToString();
                     u.Usu_FechaRegistro = Convert.ToDateTime(dr["Usu_FechaRegistro"]);
                     u.Usu_FechaModificacion = Convert.ToDateTime(dr["Usu_FechaModificacion"]);
@@ -306,7 +336,6 @@ namespace CapaAccesoDatos
                 cmd.Connection.Close();
             }
         }
-
 
 
         public int InsUpdDelBloAct(String cadXML)
