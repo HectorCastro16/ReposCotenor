@@ -42,8 +42,8 @@ namespace CapaPresentacion.Controllers.Intranet
 
         public ActionResult ExtraerDatosAsignar(String mensaje,Int32? iduser, String usuario) {
             ViewBag.mensaje = mensaje;
-            if (iduser != null) {
-                if (Session["asignacion"] == null) CrearTablaSessionAsig();{
+            if (iduser != null && Session["asignacion"] == null) {
+                 CrearTablaSessionAsig();
                     DataTable dt = new DataTable();
                     dt = (DataTable)Session["asignacion"];
                     List<entAsigncionLlamadas> Lista = negAsLlamadas.Instancia.ListaLamadasAsig(Convert.ToInt32(iduser));
@@ -61,12 +61,11 @@ namespace CapaPresentacion.Controllers.Intranet
                             r["f2"] = Lista[i].Asi_F2;
                             r["f3"] = Lista[i].Asi_F3;
                             r["sva"] = Lista[i].Asi_SVA;
-                            r["iniciovigencia"] = Lista[i].Asi_FechInicioCliente;
+                            r["iniciovigencia"] = Convert.ToDateTime(Lista[i].Asi_FechInicioCliente).ToShortDateString();
                             r["Estadooedicion"] = 0;
                             r["estadoAtencion"] = Lista[i].Asi_Estado;
                             dt.Rows.Add(r);
                         }
-                    }
                 }
                 Session["id"] = iduser;
                 Session["user"] = usuario;
@@ -112,65 +111,76 @@ namespace CapaPresentacion.Controllers.Intranet
  
         public ActionResult ExtraerDatosAsignarSession(FormCollection form,String agregar,String GuadarTodo,String Cancelar)
         {
-            if (Cancelar != null){
-                RemoverSessiones();
-                String msje = "Se ha cancelado todo el proceso";
-                return RedirectToAction("ExtraerDatosAsignar", new { mensaje = msje });
-            }
-
-            if (agregar != null){
-                
-                if (Session["asignacion"] == null) CrearTablaSessionAsig();
-                DataTable dt = (DataTable)Session["asignacion"];
-                if (form["telefono"] == "") {
-                    String msje = "No se pudo agregar, ingrese un numero valido,ó /cel/dni";
+            try
+            {
+                if (Cancelar != null)
+                {
+                    RemoverSessiones();
+                    String msje = "Se ha cancelado todo el proceso";
                     return RedirectToAction("ExtraerDatosAsignar", new { mensaje = msje });
                 }
-                else {
-                    if (dt.Rows.Count > 0)
-                    {
-                        foreach (DataRow dr in dt.Rows)
-                        {
-                            if (form["telefono"] == dr["telefono"].ToString())
-                            {
-                                dr["cliente"] = form["cliente"];
-                                dr["f1"] = form["f1"];
-                                dr["f2"] = form["f2"];
-                                dr["f3"] = form["f3"];
-                                dr["sva"] = form["sva"];
-                                dr["iniciovigencia"] = form["iniciovigencia"];
-                                if (dr["Estadooedicion"].ToString() == "0") {
-                                    dr["Estadooedicion"] = 2;
-                                }
-                                return RedirectToAction("ExtraerDatosAsignar");      
-                            }
 
-                        }                    
+                if (agregar != null)
+                {
+
+                    if (Session["asignacion"] == null) CrearTablaSessionAsig();
+                    DataTable dt = (DataTable)Session["asignacion"];
+                    if (form["telefono"] == "")
+                    {
+                        String msje = "No se pudo agregar, ingrese un numero valido,ó /cel/dni";
+                        return RedirectToAction("ExtraerDatosAsignar", new { mensaje = msje });
                     }
+                    else
+                    {
+                        if (dt.Rows.Count > 0)
+                        {
+                            foreach (DataRow dr in dt.Rows)
+                            {
+                                if (form["telefono"] == dr["telefono"].ToString())
+                                {
+                                    dr["cliente"] = form["cliente"];
+                                    dr["f1"] = form["f1"].Replace(".", ",");
+                                    dr["f2"] = form["f2"].Replace(".", ",");
+                                    dr["f3"] = form["f3"].Replace(".", ",");
+                                    dr["sva"] = form["sva"];
+                                    dr["iniciovigencia"] = form["iniciovigencia"];
+                                    if (dr["Estadooedicion"].ToString() == "0")
+                                    {
+                                        dr["Estadooedicion"] = 2;
+                                    }
+                                    return RedirectToAction("ExtraerDatosAsignar");
+                                }
+
+                            }
+                        }
                         DataRow r = dt.NewRow();
                         r["telefono"] = form["telefono"];
                         r["cliente"] = form["cliente"];
-                        r["f1"] = form["f1"];
-                        r["f2"] = form["f2"];
-                        r["f3"] = form["f3"];
+                        r["f1"] = form["f1"].Replace(".", ",");
+                        r["f2"] = form["f2"].Replace(".", ",");
+                        r["f3"] = form["f3"].Replace(".", ",");
                         r["sva"] = form["sva"];
                         r["iniciovigencia"] = form["iniciovigencia"];
                         r["Estadooedicion"] = 1;
                         dt.Rows.Add(r);
-                       }            
                     }
-            // guarda todos los registros de la session
-                    if (GuadarTodo != null){
-                Int32 idasesor = (Int32)Session["id"];
-                entUsuario u = null;
-                u = (entUsuario)Session["usuario"];
-                Int32 iduser = u.Usu_Id;
-                DataTable dt = (DataTable)Session["asignacion"];
-                int i = negAsLlamadas.Instancia.GuardarAsLlamadas(dt, idasesor, iduser);
-                RemoverSessiones();
-                return RedirectToAction("lstUsuariosEstadoAsignacionLlamadas"); 
+                }
+                // guarda todos los registros de la session
+                if (GuadarTodo != null)
+                {
+                    Int32 idasesor = (Int32)Session["id"];
+                    entUsuario u = null;
+                    u = (entUsuario)Session["usuario"];
+                    Int32 iduser = u.Usu_Id;
+                    DataTable dt = (DataTable)Session["asignacion"];
+                    int i = negAsLlamadas.Instancia.GuardarAsLlamadas(dt, idasesor, iduser);
+                    RemoverSessiones();
+                    return RedirectToAction("lstUsuariosEstadoAsignacionLlamadas");
+                }
+                return RedirectToAction("ExtraerDatosAsignar");
+            }catch(Exception ex) {
+                return RedirectToAction("Error", "Error",new {mensaje=ex.Message});
             }
-            return RedirectToAction("ExtraerDatosAsignar");
         }
 
         private void RemoverSessiones(){
