@@ -22,149 +22,157 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
+                @if (@ViewBag.mensaje != null)
+                {
+                    if (@ViewBag.identificador == 1)
+                    {
+                        <div class="alert alert-callout alert-warning" role="alert">
+                            <strong>Atención!</strong> @ViewBag.mensaje
+                        </div>
+                    }
+                    else if (@ViewBag.identificador == 2)
+                    {
+                        <div class="alert alert-callout alert-danger" role="alert">
+                            <strong>Ooops!</strong> @ViewBag.mensaje
+                        </div>
+                    }
+                    else if (@ViewBag.identificador == 3)
+                    {
+                        <div class="alert alert-callout alert-success" role="alert">
+                            <strong>Atención!</strong> @ViewBag.mensaje
+                        </div>
+                    }
+                }
+                
                 <div class="card-body ">
-                    <div id="rootwizard2" class="form-wizard form-wizard-horizontal">
-                        
-                    @using (Html.BeginForm("InsUsuario", "Comun", FormMethod.Post, new { enctype = "multipart/form-data", @Class = "form form-validation", @novalidate = "novalidate" }))
+
+
+                    @using (Html.BeginForm("InsUsuario", "Comun", FormMethod.Post, new { @Class = "form form-validation", enctype = "multipart/form-data", role = "form" }))
                     {@Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
 
                         //<form class="form form-validation" role="form" novalidate="novalidate">
-                            <div class="form-wizard-nav">
-                                <div class="progress"><div class="progress-bar progress-bar-primary"></div></div>
-                                <ul class="nav nav-justified">
-                                    <li class="active"><a href="#step1" data-toggle="tab"><span class="step">1</span> <span class="title">Datos Personales</span></a></li>
-                                    <li><a href="#step2" data-toggle="tab"><span class="step">2</span> <span class="title">Datos Laborales</span></a></li>
-                                    @*<li><a href="#step3" data-toggle="tab"><span class="step">3</span> <span class="title">SETTINGS</span></a></li>
-                                        <li><a href="#step4" data-toggle="tab"><span class="step">4</span> <span class="title">CONFIRM</span></a></li>*@
-                                </ul>
-                            </div><!--end .form-wizard-nav -->
-                            <div class="tab-content clearfix">
-                                <div class="tab-pane active" id="step1">
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(model => model.Persona.Per_Nombres, new { @class = "form-control", @required = "required" })
-                                                <label for="firstname" class="control-label">Nombres</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(model => model.Persona.Per_Apellidos, new { @class = "form-control", @required = "required" })
-                                                <label for="lastname" class="control-label">Apellidos</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(model => model.Persona.Per_DNI, new { @class = "form-control", @required = "required", @minlength = "8", @maxlength = "8", @onkeypress = "return valida(event)" })
-                                                <label for="firstname" class="control-label">DNI</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(model => model.Persona.Per_Celular, new { @class = "form-control", @required = "required", @minlength = "9", @maxlength = "9", @onkeypress = "return valida(event)" })
-                                                <label for="lastname" class="control-label">Celular</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-4">
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(model => model.Persona.Per_Correo, new { @class = "form-control" })
-                                                <label for="firstname" class="control-label">Correo</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-2">
-                                            <div class="form-group">
-                                                <select id="select1" name="dominio" class="form-control">               
-                                                    <option value="hotmail.com">&#64;hotmail.com</option>
-                                                    <option value="gmail.com">&#64;gmail.com</option>
-                                                    <option value="outlook.com">&#64;outlook.com</option>
-                                                    <option value="yahoo.com">&#64;yahoo.com</option>
-                                                    <option value="otros">otros</option>
-                                                </select>
-                                                <label for="select1">Dominio</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(model => model.Usu_Telefono, new { @class = "form-control", @onkeypress = "return valida(event)" })
-                                                <label for="lastname" class="control-label">Telefono</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(model => model.Persona.Per_Direccion, new { @class = "form-control", @required = "required" })
-                                                <label for="firstname" class="control-label">Direccion</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                @Html.EditorFor(model => model.Persona.Per_FechaNacimiento)
-                                                <label for="lastname" class="control-label">Fecha Nacimiento</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                @Html.TextBoxFor(model => model.Persona.Per_LugarNacimiento, new { @class = "form-control", @required = "required" })
-                                                <label for="firstname" class="control-label">Lugar Nacimiento</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-lg-6">
-                                            <div class="form-group">
-                                                <input type="file" class="form-control" name="archivo" />
-                                                <label for="firstname" class="control-label">Fotografia</label>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                </div><!--end #step1 -->
-                                <div class="tab-pane" id="step2">
-                                    <br /><br />
-                                    <div class="row">
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                @Html.DropDownListFor(model => model.TipoUsuario.TipUsu_Id, (SelectList)ViewBag.ListaTipoUsuario, "<<Seleccionar>>", new { @class = "form-control", @required = "required" })
-                                                <label for="tipousuario" class="control-label">Tipo Usuario</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                @Html.DropDownListFor(model => model.Sucursal.Suc_Id, (SelectList)ViewBag.ListaSucursal, "<<Seleccionar>>", new { @class = "form-control", @required = "required" })
-                                                <label for="sucursal" class="control-label">Sucursal</label>
-                                            </div>
-                                        </div>
-                                        <div class="col-sm-4">
-                                            <div class="form-group">
-                                                @Html.EditorFor(model => model.Usu_FechaHasta)
-                                                <label for="vigencia" class="control-label">Vigencia Fecha</label>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div style="text-align:center">
-                                            <input type="submit" class="btn btn-success" value="Registrar" />
-                                            <input type="reset" class="btn btn-default" value="Borrar" />
-                                            @Html.ActionLink("Cancelar", "ListaUsuarios", null, htmlAttributes: new { @class = "btn btn-warning" })
-                                        </div>
-                                    </div>
-                                </div><!--end #step2 -->
-                            </div><!--end .tab-content -->
-                            <ul class="pager wizard">
-                                <li class="previous first"><a class="btn-raised" href="javascript:void(0);">First</a></li>
-                                <li class="previous"><a class="btn-raised" href="javascript:void(0);">Previous</a></li>
-                                <li class="next last"><a class="btn-raised" href="javascript:void(0);">Last</a></li>
-                                <li class="next"><a class="btn-raised" href="javascript:void(0);">Next</a></li>
-                            </ul>
-                        
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @{String required = "required";}
+                                    @Html.TextBoxFor(model => model.Persona.Per_Nombres, new { @class = "form-control", required })
+                                    <label for="dgdsg" class="control-label">Nombres</label>
+                                </div>
+
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Persona.Per_Apellidos, new { @class = "form-control", @required = "required" })
+                                    <label for="dgsdgds" class="control-label">Apellidos</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Persona.Per_DNI, new { @class = "form-control", @required = "required", @minlength = "8", @maxlength = "8", @onkeypress = "return valida(event)" })
+                                    <label for="firstname" class="control-label">DNI</label>
+                                </div>
+                            </div>
+                        </div><br />
+                        <div class="row">
+                            
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Persona.Per_Celular, new { @class = "form-control", @required = "required", @minlength = "9", @maxlength = "9", @onkeypress = "return valida(event)"})
+                                    <label for="lastname" class="control-label">Celular</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Persona.Per_Correo, new { @class = "form-control" })
+                                    <label for="firstname" class="control-label">Correo</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-2">
+                                <div class="form-group">
+                                    <select id="select1" name="dominio" class="form-control">
+                                        <option value="Seleccionar">Seleccionar</option>
+                                        <option value="hotmail.com">&#64;hotmail.com</option>
+                                        <option value="gmail.com">&#64;gmail.com</option>
+                                        <option value="outlook.com">&#64;outlook.com</option>
+                                        <option value="yahoo.com">&#64;yahoo.com</option>
+                                        <option value="Otros">Otros</option>
+                                    </select>
+                                    <label for="select1">Dominio</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Usu_Telefono, new { @class = "form-control", @onkeypress = "return valida(event)" })
+                                    <label for="lastname" class="control-label">Telefono</label>
+                                </div>
+                            </div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Persona.Per_Direccion, new { @class = "form-control", @required = "required" })
+                                    <label for="firstname" class="control-label">Direccion</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.Persona.Per_FechaNacimiento, new { @class = "form-control", @required = "required" })
+                                    <label for="lastname" class="control-label">Fecha Nacimiento</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div class="form-group">
+                                    @Html.TextBoxFor(model => model.Persona.Per_LugarNacimiento, new { @class = "form-control"})
+                                    <label for="firstname" class="control-label">Lugar Nacimiento</label>
+                                </div>
+                            </div>
+                        </div><br />
+                        <div class="row">
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    @Html.DropDownListFor(model => model.TipoUsuario.TipUsu_Id, (SelectList)ViewBag.ListaTipoUsuario, "<<Seleccionar>>", new { @class = "form-control", @required = "required" })
+                                    <label for="tipousuario" class="control-label">Tipo Usuario</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    @Html.DropDownListFor(model => model.Sucursal.Suc_Id, (SelectList)ViewBag.ListaSucursal, "<<Seleccionar>>", new { @class = "form-control", @required = "required" })
+                                    <label for="sucursal" class="control-label">Sucursal</label>
+                                </div>
+                            </div>
+                            <div class="col-sm-4">
+                                <div class="form-group">
+                                    @Html.EditorFor(model => model.Usu_FechaHasta, new { @class = "form-control", style = "width: 100%" })
+                                    <label for="vigencia" class="control-label">Vigencia Fecha</label>
+                                </div>
+                            </div>
+                        </div><br />                        
+                        <div class="row">
+                            <div class="col-lg-8">
+                                <div class="form-group">
+                                    <input type="file" class="form-control" name="archivo" />
+                                    <label for="firstname" class="control-label">Fotografia</label>
+                                </div>
+                            </div>
+                            <div class="col-lg-4">
+                                <div style="text-align:center">
+                                    <input type="submit" class="btn btn-success" value="Registrar" />
+                                    <input type="reset" class="btn btn-default" value="Borrar" />
+                                    @Html.ActionLink("Cancelar", "ListaUsuarios", null, htmlAttributes: new { @class = "btn btn-warning" })
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            
+                        </div>
+
+
+
+
                     }
-                    </div><!--end #rootwizard -->
+
                 </div><!--end .card-body -->
             </div><!--end .card -->
         </div><!--end .col -->

@@ -13,12 +13,12 @@
     <!-- END META -->
     <!-- BEGIN STYLESHEETS -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css' />
-        @{entUsuario u = null;
+    @{entUsuario u = null;
           String nombreTema = "";
            if (Session["usuario"] != null)
            {
                u = (entUsuario)Session["usuario"];
-               
+
                if(u.usu_Config_Color=="D"){
                    nombreTema = "theme-default";
                }
@@ -42,9 +42,9 @@
                {
                    nombreTema = "theme-5";
                }
-               
+
            }
-        }
+    }
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/bootstrap.css?1422792965" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/materialadmin.css?1425466319" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/font-awesome.min.css?1422529194" />
@@ -56,14 +56,13 @@
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/select2/select2.css?1424887856" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/multi-select/multi-select.css?1424887857" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/bootstrap-datepicker/datepicker3.css?1424887858" />
-    <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/bootstrap-datepicker/datepicker3.css">
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/jquery-ui/jquery-ui-theme.css?1423393666" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/bootstrap-colorpicker/bootstrap-colorpicker.css?1424887860" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/bootstrap-tagsinput/bootstrap-tagsinput.css?1424887862" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/typeahead/typeahead.css?1424887863" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/dropzone/dropzone-theme.css?1424887864" />
-        
-     <!-- END STYLESHEETS -->
+
+    <!-- END STYLESHEETS -->
     <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script type="text/javascript" src="../../assets/js/libs/utils/html5shiv.js?1403934957"></script>
@@ -105,7 +104,7 @@
                         </form>
                     </li>
                 </ul><!--end .header-nav-options -->
-                @{                    
+                @{
                     String NombreUser = "";
                     String TipoUser = null;
                     String foto = "";
@@ -117,7 +116,7 @@
                     else
                     {
                         u = (entUsuario)Session["usuario"];
-                        NombreUser = u.Persona.Per_Nombres;
+                        NombreUser = u.Persona.NombreCompleto;
                         TipoUser = u.TipoUsuario.TipUsu_Nombre;
                         foto = u.Persona.Per_Foto;
                     }
@@ -148,9 +147,9 @@
                     <li>
                         <a class="btn btn-icon-toggle btn-default" href="#offcanvas-demo-size1" data-toggle="offcanvas">
                             <i class="fa md-color-lens"></i>
-                        </a>                        
+                        </a>
                     </li>
-                </ul>                   
+                </ul>
             </div><!--end #header-navbar-collapse -->
         </div>
     </header>
@@ -233,7 +232,7 @@
                             <!--start submenu -->
                             <ul>
                                 <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
-                              
+
                                 <li><a href="#"><span class="title">Mantenedor Clientes</span></a></li>
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
@@ -276,7 +275,7 @@
                                 <ul>
                                     <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
                                     <li><a href="@Url.Action("lstUsuariosEstadoAsignacionLlamadas","SupervisorCall")"><span class="title">Asignar Clientes</span></a></li>
-                                
+
                                 </ul><!--end /submenu -->
                             </li><!--end /menu-li -->
 
@@ -291,17 +290,17 @@
                         else if (TipoUser == "Asesor Ventas Call")
                         {
                         <!-- BEGIN FORMS -->
-                        <li class="gui-folder">
-                            <a>
-                                <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                                <span class="title">Registro</span>
-                            </a>
-                            <!--start submenu -->
-                            <ul>
-                                <li><a href="../../html/forms/basic.html"><span class="title">Registro Ventas</span></a></li>
+                            <li class="gui-folder">
+                                <a>
+                                    <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                                    <span class="title">Registro</span>
+                                </a>
+                                <!--start submenu -->
+                                <ul>
+                                    <li><a href="../../html/forms/basic.html"><span class="title">Registro Ventas</span></a></li>
 
-                            </ul><!--end /submenu -->
-                        </li><!--end /menu-li -->
+                                </ul><!--end /submenu -->
+                            </li><!--end /menu-li -->
                     <!-- END FORMS -->
 
                     }
@@ -311,7 +310,7 @@
 
 
                     }
-                    
+
                     }
                 </ul>
                 <div class="menubar-foot-panel">
@@ -373,17 +372,17 @@
                             </label>
                         </div>
                     </div>
-                </div>                
-                    <div class="force-padding stick-bottom-right">
-                        <a class="btn btn-floating-action btn-accent " href="#offcanvas-demo-size2" data-toggle="offcanvas">
-                            <i class="md md-arrow-forward"></i>
-                        </a>
-                    </div>
                 </div>
+                <div class="force-padding stick-bottom-right">
+                    <a class="btn btn-floating-action btn-accent " href="#offcanvas-demo-size2" data-toggle="offcanvas">
+                        <i class="md md-arrow-forward"></i>
+                    </a>
+                </div>
+            </div>
 
-        </div>        
+        </div>
     </div>
-    
+
     <script src="../../assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
     <script src="../../assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
     <script src="../../assets/js/libs/bootstrap/bootstrap.min.js"></script>
