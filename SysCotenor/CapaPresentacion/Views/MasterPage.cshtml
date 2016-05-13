@@ -1,28 +1,19 @@
 ﻿@using CapaEntidades
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <title>@ViewBag.Title</title>
-
-    <!-- BEGIN META -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="keywords" content="your,keywords">
     <meta name="description" content="Short explanation about this website">
-    <!-- END META -->
-    <!-- BEGIN STYLESHEETS -->
     <link href='http://fonts.googleapis.com/css?family=Roboto:300italic,400italic,300,400,500,700,900' rel='stylesheet' type='text/css' />
         @{entUsuario u = null;
           String nombreTema = "";
            if (Session["usuario"] != null)
            {
                u = (entUsuario)Session["usuario"];
-               
-               if(u.usu_Config_Color=="D"){
-                   nombreTema = "theme-default";
-               }
-               else if (u.usu_Config_Color == "C")
+               if (u.usu_Config_Color == "C")
                {
                    nombreTema = "theme-1";
                }
@@ -42,7 +33,10 @@
                {
                    nombreTema = "theme-5";
                }
-               
+               else
+               {
+                   nombreTema = "theme-default";
+               }               
            }
         }
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/bootstrap.css?1422792965" />
@@ -62,20 +56,10 @@
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/bootstrap-tagsinput/bootstrap-tagsinput.css?1424887862" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/typeahead/typeahead.css?1424887863" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/libs/dropzone/dropzone-theme.css?1424887864" />
-        
-     <!-- END STYLESHEETS -->
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-    <script type="text/javascript" src="../../assets/js/libs/utils/html5shiv.js?1403934957"></script>
-    <script type="text/javascript" src="../../assets/js/libs/utils/respond.min.js?1403934956"></script>
-    <![endif]-->
-
 </head>
 <body class="menubar-hoverable header-fixed menubar-pin ">
-    <!-- BEGIN HEADER-->
     <header id="header">
         <div class="headerbar">
-            <!-- Brand and toggle get grouped for better mobile display -->
             <div class="headerbar-left">
                 <ul class="header-nav header-nav-options">
                     <li class="header-nav-brand">
@@ -92,11 +76,9 @@
                     </li>
                 </ul>
             </div>
-            <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="headerbar-right">
                 <ul class="header-nav header-nav-options">
                     <li>
-                        <!-- Search form -->
                         <form class="navbar-search" role="search">
                             <div class="form-group">
                                 <input type="text" class="form-control" name="headerSearch" placeholder="Enter your keyword">
@@ -104,7 +86,7 @@
                             <button type="submit" class="btn btn-icon-toggle ink-reaction"><i class="fa fa-search"></i></button>
                         </form>
                     </li>
-                </ul><!--end .header-nav-options -->
+                </ul>
                 @{                    
                     String NombreUser = "";
                     String TipoUser = null;
@@ -121,9 +103,7 @@
                         TipoUser = u.TipoUsuario.TipUsu_Nombre;
                         foto = u.Persona.Per_Foto;
                     }
-
                 }
-
                 <ul class="header-nav header-nav-profile">
                     <li class="dropdown">
                         <a href="javascript:void(0);" class="dropdown-toggle ink-reaction" data-toggle="dropdown">
@@ -141,9 +121,9 @@
                             <li class="divider"></li>
                             <li><a href="../../html/pages/locked.html"><i class="fa fa-fw fa-lock"></i> Lock</a></li>
                             <li><a href="@Url.Action("CerrarSession", "Inicio")"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
-                        </ul><!--end .dropdown-menu -->
-                    </li><!--end .dropdown -->
-                </ul><!--end .header-nav-profile -->
+                        </ul>
+                    </li>
+                </ul>
                 <ul class="header-nav header-nav-toggle">
                     <li>
                         <a class="btn btn-icon-toggle btn-default" href="#offcanvas-demo-size1" data-toggle="offcanvas">
@@ -151,23 +131,15 @@
                         </a>                        
                     </li>
                 </ul>                   
-            </div><!--end #header-navbar-collapse -->
+            </div>
         </div>
     </header>
-    <!-- END HEADER-->
-    <!-- BEGIN BASE-->
     <div id="base">
-
-        <!-- BEGIN OFFCANVAS LEFT -->
         <div class="offcanvas">
-        </div><!--end .offcanvas-->
-        <!-- END OFFCANVAS LEFT -->
-        <!-- BEGIN CONTENT-->
+        </div>
         <div id="content">
             @RenderBody()
-        </div><!--end #content-->
-        <!-- END CONTENT -->
-        <!-- BEGIN MENUBAR-->
+        </div>
         <div id="menubar" class="menubar-inverse ">
             <div class="menubar-fixed-panel">
                 <div>
@@ -177,13 +149,11 @@
                 </div>
                 <div class="expanded">
                     <a href="../../html/dashboards/dashboard.html">
-                        <span class="text-lg text-bold text-primary ">MATERIAL&nbsp;ADMIN</span>
+                        <span class="text-lg text-bold text-primary ">COTENOR</span>
                     </a>
                 </div>
             </div>
             <div class="menubar-scroll-panel">
-
-                <!-- BEGIN MAIN MENU -->
                 <ul id="main-menu" class="gui-controls">
 
                     @{if (TipoUser == "Administrador")
@@ -193,65 +163,48 @@
                     }
                     else if (TipoUser == "Gerente")
                     {
-
-                     <!-- BEGIN FORMS -->
                         <li class="gui-folder">
                             <a>
                                 <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
                                 <span class="title">Registro</span>
                             </a>
-                            <!--start submenu -->
                             <ul>
                                 <li><a href="../../html/forms/basic.html"><span class="title">Mantenedor Supervisor</span></a></li>
-                            </ul><!--end /submenu -->
-                        </li><!--end /menu-li -->
-                    <!-- END FORMS -->
-                    <!-- BEGIN CHARTS -->
+                            </ul>
+                        </li>
                         <li class="gui-folder">
                             <a>
                                 <div class="gui-icon"><i class="md md-assessment"></i></div>
                                 <span class="title">Reportes</span>
                             </a>
-                            <!--start submenu -->
                             <ul>
                                 <li><a href="../../html/forms/basic.html"><span class="title">Reporte Ventas Supervisor</span></a></li>
                                 <li><a href="../../html/forms/basic.html"><span class="title">Peporte Ventas Asesor</span></a></li>
-                            </ul><!--end /submenu -->
-                        </li><!--end /menu-li -->
-                    <!-- END CHARTS -->
-                        //
+                            </ul>
+                        </li>
                     }
                     else if (TipoUser == "Supervisor Call")
                     {
-
-                        <!-- BEGIN FORMS -->
                         <li class="gui-folder">
                             <a>
                                 <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
                                 <span class="title">Registro</span>
                             </a>
-                            <!--start submenu -->
                             <ul>
-                                <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
-                              
+                                <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>                              
                                 <li><a href="#"><span class="title">Mantenedor Clientes</span></a></li>
-                            </ul><!--end /submenu -->
-                        </li><!--end /menu-li -->
-                    <!-- END FORMS -->
-                   <!-- BEGIN CHARTS -->
+                            </ul>
+                        </li>
                         <li class="gui-folder">
                             <a>
                                 <div class="gui-icon"><i class="glyphicon glyphicon-th-list"></i></div>
                                 <span class="title">Ventas</span>
                             </a>
-                            <!--start submenu -->
                             <ul>
                                 <li><a href="@Url.Action("lstUsuariosEstadoAsignacionLlamadas","SupervisorCall")"><span class="title">Asignar Clientes</span></a></li>
                                 <li><a href=""><span class="title">Seguimiento Ventas</span></a></li>
-                            </ul><!--end /submenu -->
-                        </li><!--end /menu-li -->
-                    <!-- END CHARTS -->
-
+                            </ul>
+                        </li>
                         }
                         else if (TipoUser == "Supervisor Ventas")
                         {
@@ -272,13 +225,10 @@
                                     <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
                                     <span class="title">Registro</span>
                                 </a>
-                                <!--start submenu -->
                                 <ul>
                                     <li><a href="@Url.Action("", "")"><span class="title">Mantenedor Asesores</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
-
-
+                                </ul>
+                            </li>
                         }
                         else if (TipoUser == "Supervisor Adsl")
                         {
@@ -288,28 +238,22 @@
                         }
                         else if (TipoUser == "Asesor Ventas Call")
                         {
-                        <!-- BEGIN FORMS -->
                         <li class="gui-folder">
                             <a>
                                 <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
                                 <span class="title">Registro</span>
                             </a>
-                            <!--start submenu -->
                             <ul>
                                 <li><a href="../../html/forms/basic.html"><span class="title">Registro Ventas</span></a></li>
-
-                            </ul><!--end /submenu -->
-                        </li><!--end /menu-li -->
-                    <!-- END FORMS -->
-
+                            </ul>
+                        </li>
                     }
                     else if (TipoUser == "Asesor Ventas Campo")
                     {
 
 
 
-                    }
-                    
+                    }                    
                     }
                 </ul>
                 <div class="menubar-foot-panel">
@@ -320,7 +264,7 @@
             </div>
         </div>
         <div class="offcanvas">
-            <!--Themas-->
+            <!--Temas-->
             <div id="offcanvas-demo-size1" class="offcanvas-pane width-4">
                 <div class="offcanvas-head">
                     <header>Temas</header>
@@ -332,7 +276,7 @@
                 </div>
                 <div class="offcanvas-body">
                     <div class="col-lg-12">
-                        <button type="button" class="btn btn-block ink-reaction btn-primary">Principal</button>
+                        <button type="button" class="btn btn-block ink-reaction" style="background-color:#0aa89e; color:#ffffff">Principal</button>
                         <button type="button" class="btn btn-block ink-reaction btn-info">Celeste</button>
                         <button type="button" class="btn btn-block ink-reaction" style="color: #ff5722; color: #ffffff; background-color: #ff5722; border-color: #ff5722; ">Naranja</button>
                         <button type="button" class="btn btn-block ink-reaction" style="color: #3f51b5; color: #ffffff; background-color: #3f51b5; border-color: #3f51b5; ">
@@ -378,10 +322,8 @@
                         </a>
                     </div>
                 </div>
-
         </div>        
-    </div>
-    
+    </div>    
     <script src="../../assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
     <script src="../../assets/js/libs/jquery/jquery-migrate-1.2.1.min.js"></script>
     <script src="../../assets/js/libs/bootstrap/bootstrap.min.js"></script>
@@ -405,7 +347,6 @@
     <script src="../../assets/js/libs/jquery-validation/dist/additional-methods.min.js"></script>
     <script src="../../assets/js/libs/wizard/jquery.bootstrap.wizard.min.js"></script>
     <script src="../../assets/js/core/demo/DemoFormWizard.js"></script>
-
     <script src="../../assets/js/libs/select2/select2.min.js"></script>
     <script src="../../assets/js/libs/bootstrap-tagsinput/bootstrap-tagsinput.min.js"></script>
     <script src="../../assets/js/libs/multi-select/jquery.multi-select.js"></script>
@@ -416,17 +357,13 @@
     <script src="../../assets/js/libs/typeahead/typeahead.bundle.min.js"></script>
     <script src="../../assets/js/libs/dropzone/dropzone.min.js"></script>
     <script src="../../assets/js/core/demo/DemoFormComponents.js"></script>
-    <!-- END JAVASCRIPT -->
-
     <script>
         function valida(e) {
             tecla = (document.all) ? e.keyCode : e.which;
-
             //Tecla de retroceso para borrar, siempre la permite
             if (tecla == 8) {
                 return true;
             }
-
             // Patron de entrada, en este caso solo acepta numeros
             patron = /[0-9]/;
             tecla_final = String.fromCharCode(tecla);
