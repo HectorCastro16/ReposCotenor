@@ -22,19 +22,22 @@ namespace CapaNegocio
         public int GuardarAsLlamadas(DataTable dt,Int32 idasesor, Int32 iduser){
             try{
                 String cadxml = "";
+                String f1, f2, f3;
                 foreach (DataRow dr in dt.Rows)
                 {
                     if (dr["Estadooedicion"].ToString() != "0")
                     {
+                        f1 = dr["f1"].ToString(); f2 = dr["f2"].ToString(); f3 = dr["f3"].ToString();
+
                         Int32  tipoedicion =Convert.ToInt32(dr["Estadooedicion"]);
                         cadxml += "<asignacionllamads ";
                         cadxml += "idasLlamadas='" + dr["Asi_id"] + "' ";
                         cadxml += "idasesor='" + idasesor + "' ";
                         cadxml += "telefono='" + dr["telefono"] + "' ";
                         cadxml += "cliente='" + dr["cliente"] + "' ";
-                        cadxml += "f1='" + dr["f1"] + "' ";
-                        cadxml += "f2='" + dr["f2"] + "' ";
-                        cadxml += "f3='" + dr["f3"] + "' ";
+                        cadxml += "f1='" + f1.Replace(",",".") + "' ";
+                        cadxml += "f2='" + f1.Replace(",", ".") + "' ";
+                        cadxml += "f3='" + f1.Replace(",", ".") + "' ";
                         cadxml += "sva='" + dr["sva"] + "' ";
                         cadxml += "fechainicio='" + dr["iniciovigencia"] + "' ";
                         cadxml += "tipoedicion='" + tipoedicion + "' ";
