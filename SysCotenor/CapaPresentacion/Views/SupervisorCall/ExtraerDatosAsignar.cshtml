@@ -30,16 +30,13 @@
             return patron.test(tecla_final);
         }
 </script>
-
-
-
 <div id="content">
 <section> 
     <div class="card card-bordered style-accent">
         @{ String asesor = (String)Session["user"];}
        ASESOR:@asesor
         <div class="card-body style-default-bright">
-            <form method="post" action="ExtraerDatosAsignarSession">
+            <form method="post" action="ExtraerDatosAsignarSession" name="eda" onsubmit="return validar()">
                     <section>
                         <div class="row">
                                   <div class="card">
@@ -73,7 +70,7 @@
                                                     <tr>
                                                         <td><input type="text" name="telefono" value="@Asi_NumTelf"></td>
                                                         <td><input type="text" name="cliente" value="@Cliente"></td>
-                                                        <td><input type="text" name="f1" value="@Asi_F1" onkeypress="return validarField(event)"></td>
+                                                        <td><input type="text"  name="f1" value="@Asi_F1" onkeypress="return validarField(event)"></td>
                                                         <td><input type="text" name="f2" value="@Asi_F2" onkeypress="return validarField(event)"></td>
                                                         <td><input type="text" name="f3" value="@Asi_F3" onkeypress="return validarField(event)"></td>
                                                         <td><input type="text" name="sva" value="@Asi_SVA"></td>
@@ -193,3 +190,15 @@
         $("#MostrarForm").load('@Url.Action("AsignarCliente", "SupervisorCall")') } );
 </script>
 
+<script languaje="javascript">
+    function validar() {
+        if (document.eda.f1.value == '') {
+            document.eda.f1.value = 0.0;
+        } if (document.eda.f2.value == '') {
+            document.eda.f2.value = 0.0;
+        } if (document.eda.f3.value == '') {
+        document.eda.f3.value = 0.0;
+    }
+        return true;
+}
+</script>

@@ -81,7 +81,7 @@ namespace CapaPresentacion.Controllers.Intranet
                         entAsigncionLlamadas ac = new entAsigncionLlamadas();
                         ac.Asi_NumTelf= dr["telefono"].ToString();
                         ac.Cliente = dr["cliente"].ToString();
-                        ac.Asi_F1 = Convert.ToDouble(dr["f1"].ToString());
+                        ac.Asi_F1 = Convert.ToDouble(dr["f1"]);
                         ac.Asi_F2 = Convert.ToDouble(dr["f2"]);
                         ac.Asi_F3 = Convert.ToDouble(dr["f3"]);
                         ac.Asi_SVA = dr["sva"].ToString();
