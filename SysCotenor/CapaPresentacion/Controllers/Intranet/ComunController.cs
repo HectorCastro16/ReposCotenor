@@ -20,43 +20,68 @@ namespace CapaPresentacion.Controllers.Intranet
         }
 
 
-        public ActionResult InsUsuario()
+        public ActionResult InsUsuario(String mensaje, Int16? identificador)
         {
-            entUsuario u = (entUsuario)Session["usuario"];
-            if (u != null)
+            try
             {
-                List<entTipoUsuario> t = null;
-                
-                if (u.TipoUsuario.TipUsu_Id == 3)
+                ViewBag.mensaje = mensaje;
+                ViewBag.identificador = identificador;
+                entUsuario u = (entUsuario)Session["usuario"];
+                if (u != null)
                 {
-                    t = negTipoUsuario.Instancia.ListaTipoUsuarioxId(8);
+                    List<entTipoUsuario> t = null;
+
+                    if (u.TipoUsuario.TipUsu_Id == 3)
+                    {
+                        t = negTipoUsuario.Instancia.ListaTipoUsuarioxId(8);
+                    }
+                    if (u.TipoUsuario.TipUsu_Id == 6)
+                    {
+                        t = negTipoUsuario.Instancia.ListaTipoUsuarioxId(9);
+                    }
+                    var lsTipoUsuario = new SelectList(t, "TipUsu_Id", "TipUsu_Nombre");
+                    ViewBag.ListaTipoUsuario = lsTipoUsuario;
+
+                    List<entSucursal> s = negSucursal.Instancia.ListaSucursalxId(u.Sucursal.Suc_Id);
+                    var lsSucursal = new SelectList(s, "Suc_Id", "Suc_Nombre");
+                    ViewBag.ListaSucursal = lsSucursal;
+
+                    return View();
+
                 }
-                if (u.TipoUsuario.TipUsu_Id == 6)
+                else
                 {
-                    t = negTipoUsuario.Instancia.ListaTipoUsuarioxId(9);
+                    return RedirectToAction("Index", "Inicio");
                 }
-                var lsTipoUsuario = new SelectList(t, "TipUsu_Id", "TipUsu_Nombre");
-                ViewBag.ListaTipoUsuario = lsTipoUsuario;
 
-                List<entSucursal> s = negSucursal.Instancia.ListaSucursalxId(u.Sucursal.Suc_Id);
-                var lsSucursal = new SelectList(s, "Suc_Id", "Suc_Nombre");
-                ViewBag.ListaSucursal = lsSucursal;
-
-                return View();
             }
-            else
+            catch (ApplicationException x)
             {
-                return RedirectToAction("Index", "Inicio");
+                ViewBag.mensaje = x.Message;
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = x.Message, identificador = 1 });
             }
+            catch (Exception e)
+            {
+
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
+            }
+
+
+
+           
         }
 
         [HttpPost]
         public ActionResult InsUsuario(entUsuario u, HttpPostedFileBase archivo, FormCollection form)
         {
+            
+            
             try
             {
                 String dominio = form["dominio"];
-                u.Persona.Per_Correo += "@" + dominio;
+                if (dominio != "Otros" && dominio != "Seleccionar")
+                    u.Persona.Per_Correo += "@" + dominio;
+                
 
                 if (archivo != null && archivo.ContentLength > 0)
                 {
@@ -66,8 +91,6 @@ namespace CapaPresentacion.Controllers.Intranet
                 {
                     u.Persona.Per_Foto = "foto.png";
                 }
-                //List<entPersona> per = new List<entPersona>();
-                //per.Add(u.Persona);
 
                 //para capturar el usuario en sesion////////////
                 entUsuario us = (entUsuario)Session["usuario"];
@@ -98,12 +121,12 @@ namespace CapaPresentacion.Controllers.Intranet
             catch (ApplicationException x)
             {
                 ViewBag.mensaje = x.Message;
-                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = x.Message, identificador = 1 });
+                return RedirectToAction("InsUsuario", "Comun", new { mensaje = x.Message, identificador = 1 });
             }
             catch (Exception e)
             {
 
-                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
+                return RedirectToAction("InsUsuario", "Comun", new { mensaje = e.Message, identificador = 2 });
             }
 
         }
@@ -115,11 +138,13 @@ namespace CapaPresentacion.Controllers.Intranet
         public ActionResult ListaUsuarios(String mensaje, Int16? identificador)
         {
 
-            ViewBag.mensaje = mensaje;
-            ViewBag.identificador = identificador;
+           
 
             try
             {
+                ViewBag.mensaje = mensaje;
+                ViewBag.identificador = identificador;
+
                 entUsuario u = (entUsuario)Session["usuario"];
                 if (u != null)
                 {
