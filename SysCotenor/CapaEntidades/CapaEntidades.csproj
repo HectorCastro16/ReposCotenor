@@ -46,7 +46,6 @@
     <Compile Include="entAsigncionUsuarios.cs" />
     <Compile Include="entCategoria.cs" />
     <Compile Include="entCliente.cs" />
-    <Compile Include="entConfiguracion.cs" />
     <Compile Include="entDetAcc_GruCom.cs" />
     <Compile Include="entDetalleAccionComercial.cs" />
     <Compile Include="entDetallePedido.cs" />

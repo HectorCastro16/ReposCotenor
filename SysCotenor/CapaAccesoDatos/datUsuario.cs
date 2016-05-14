@@ -53,7 +53,7 @@ namespace CapaAccesoDatos
                         p.Per_DNI = dr["Per_DNI"].ToString();
                         p.Per_Celular = dr["Per_Celular"].ToString();
                         p.Per_Correo = dr["Per_Correo"].ToString();
-                        p.Per_Telefono = dr["Per_Telefono"].ToString();
+                        //p.Per_Telefono = dr["Per_Telefono"].ToString();
                         p.Per_Direccion = dr["Per_Direccion"].ToString();
                         p.Per_Foto = dr["Per_Foto"].ToString();
                         p.Per_FechaNacimiento = Convert.ToDateTime(dr["Per_FechaNacimiento"]);
@@ -112,7 +112,7 @@ namespace CapaAccesoDatos
                     p.Per_DNI = dr["Per_DNI"].ToString();
                     p.Per_Celular = dr["Per_Celular"].ToString();
                     p.Per_Correo = dr["Per_Correo"].ToString();
-                    p.Per_Telefono = dr["Per_Telefono"].ToString();
+                //    p.Per_Telefono = dr["Per_Telefono"].ToString();
                     p.Per_Direccion = dr["Per_Direccion"].ToString();
                     p.Per_Foto = dr["Per_Foto"].ToString();
                     p.Per_FechaNacimiento = Convert.ToDateTime(dr["Per_FechaNacimiento"]);
@@ -136,8 +136,8 @@ namespace CapaAccesoDatos
                     u.Usu_FechaHasta = Convert.ToDateTime(dr["Usu_FechaHasta"]);
                     u.Usu_FechaRegistro = Convert.ToDateTime(dr["Usu_FechaRegistro"]);
                     u.Usu_UsuarioRegistro = dr["Usu_UsuarioRegistro"].ToString();
-                    u.Usu_FechaModificacion = Convert.ToDateTime(dr["Usu_FechaModificacion"]);
-                    u.Usu_UsuarioModificacion = dr["Usu_UsuarioModificacion"].ToString();
+                    //u.Usu_FechaModificacion = Convert.ToDateTime(dr["Usu_FechaModificacion"]);
+                    //u.Usu_UsuarioModificacion = dr["Usu_UsuarioModificacion"].ToString();
                 }
             }
             catch (Exception e)
@@ -147,6 +147,39 @@ namespace CapaAccesoDatos
             }
             finally { cmd.Connection.Close(); }
             return u;
+        }
+
+
+        public List<entUsuario> ListarUusariosConAsignacionCalls(Int32 user){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entUsuario> Lista = null;
+            try{
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("sp_ListaAsLlamadas", cn);
+                cmd.Parameters.AddWithValue("@idsuper", user);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entUsuario>();
+                while (dr.Read()){
+                    entUsuario u = new entUsuario();
+                    u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
+                    u.Usu_Codigo = dr["Usu_Codigo"].ToString();
+                    
+                    entPersona p = new entPersona();
+                    p.Per_Nombres = dr["Per_Nombres"].ToString();
+                    p.Per_Apellidos = dr["Per_Apellidos"].ToString();   
+                    u.Persona = p;
+
+                    u.Contador = Convert.ToInt32(dr["Asgnadas"]);
+                    Lista.Add(u);
+                }
+            }
+            catch (Exception ex){
+                throw ex;
+            }finally { cmd.Connection.Close(); }
+            return Lista;
         }
 
 
@@ -178,11 +211,12 @@ namespace CapaAccesoDatos
                     p.Per_Apellidos = dr["Per_Apellidos"].ToString();
                     p.Per_DNI = dr["Per_DNI"].ToString();
                     p.Per_Celular = dr["Per_Celular"].ToString();
-                    p.Per_Telefono = dr["Per_Telefono"].ToString();
+                 //   p.Per_Telefono = dr["Per_Telefono"].ToString();
                     u.Persona = p;
 
                     u.Usu_Estado = dr["Usu_Estado"].ToString();
                     u.Usu_FechaHasta = Convert.ToDateTime(dr["Usu_FechaHasta"]);
+                    u.Contador = 0;
                     Lista.Add(u);
                 }
 
@@ -228,7 +262,7 @@ namespace CapaAccesoDatos
                     p.Per_Foto = dr["Per_Foto"].ToString();
                     p.Per_Celular = dr["Per_Celular"].ToString();
                     p.Per_Correo = dr["Per_Correo"].ToString();
-                    p.Per_Telefono = dr["Per_Telefono"].ToString();
+                    //p.Per_Telefono = dr["Per_Telefono"].ToString();
                     p.Per_Direccion = dr["Per_Direccion"].ToString();
                     p.Per_FechaNacimiento = Convert.ToDateTime(dr["Per_FechaNacimiento"]);
                     p.Per_LugarNacimiento = dr["Per_LugarNacimiento"].ToString();
@@ -303,41 +337,41 @@ namespace CapaAccesoDatos
             }
         }
 
-        
 
-        //public int InsUpdDelBloAct(String cadXML) {
+        public int InsUpdDelBloAct(String cadXML)
+        {
 
-        //    SqlCommand cmd = null;
-        //    try
-        //    {
-        //        SqlConnection cn = Conexion.Instancia.Conectar();
-        //        cmd = new SqlCommand("spIsnUpdDelBloActUsuario", cn);
-        //        cmd.Parameters.AddWithValue("@prmstrCadXML", cadXML);
-        //        cmd.CommandType = CommandType.StoredProcedure;
+            SqlCommand cmd = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spIsnUpdDelBloActUsuario", cn);
+                cmd.Parameters.AddWithValue("@prmstrCadXML", cadXML);
+                cmd.CommandType = CommandType.StoredProcedure;
 
-        //        //creamos el parametro de retorno
-        //        SqlParameter m = new SqlParameter("@retorno", DbType.Int32);
-        //        m.Direction = ParameterDirection.ReturnValue;
-        //        cmd.Parameters.Add(m);
-        //        //fin parametro
-        //        cn.Open();
-        //        cmd.ExecuteNonQuery();
+                //creamos el parametro de retorno
+                SqlParameter m = new SqlParameter("@retorno", DbType.Int32);
+                m.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(m);
+                //fin parametro
+                cn.Open();
+                cmd.ExecuteNonQuery();
 
-        //        int i = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
+                int i = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
 
-        //        return i;
+                return i;
 
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw e;
-        //    }
-        //    finally
-        //    {
-        //        cmd.Connection.Close();
-        //    }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
 
-        //}
+        }
 
         #endregion metodos
     }
