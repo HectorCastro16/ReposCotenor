@@ -45,6 +45,12 @@
 
            }
     }
+     @* --------------Datepicker*@
+    <link type="text/css" rel="stylesheet" href="../../assets/css/Calendar/Jcalendar.css" />
+    <script src="../../assets/JcalendarQuery/jQueryui.js"></script>
+    <script src="../../assets/JcalendarQuery/QueryJcalendar.js"></script>
+    @* --------------Datepicker*@
+  
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/bootstrap.css?1422792965" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/materialadmin.css?1425466319" />
     <link type="text/css" rel="stylesheet" href="../../assets/css/@nombreTema/font-awesome.min.css?1422529194" />
@@ -68,6 +74,13 @@
     <script type="text/javascript" src="../../assets/js/libs/utils/html5shiv.js?1403934957"></script>
     <script type="text/javascript" src="../../assets/js/libs/utils/respond.min.js?1403934956"></script>
     <![endif]-->
+    
+    <script>
+        $(function () {
+            $("#fechaCalendar").datepicker();
+        });
+
+    </script>
 
 </head>
 <body class="menubar-hoverable header-fixed menubar-pin ">

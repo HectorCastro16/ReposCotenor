@@ -130,6 +130,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="assets\css\Calendar\Jcalendar.css" />
     <Content Include="assets\css\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\css\fonts\LICENSE.txt" />
@@ -535,6 +536,8 @@
     <Content Include="assets\img\log.png" />
     <Content Include="assets\img\super.jpg" />
     <Content Include="assets\img\welcome.jpg" />
+    <Content Include="assets\JcalendarQuery\jQueryui.js" />
+    <Content Include="assets\JcalendarQuery\QueryJcalendar.js" />
     <Content Include="assets\js\core\demo\Demo.js" />
     <Content Include="assets\js\core\demo\DemoCalendar.js" />
     <Content Include="assets\js\core\demo\DemoCharts.js" />
