@@ -40,10 +40,14 @@ namespace CapaPresentacion.Controllers.Intranet
             }
         }
 
-        public ActionResult ExtraerDatosAsignar(String mensaje,Int32? iduser, String usuario) {
-            ViewBag.mensaje = mensaje;
-            if (iduser != null && Session["asignacion"] == null) {
-                 CrearTablaSessionAsig();
+        public ActionResult ExtraerDatosAsignar(String mensaje, Int32? iduser, String usuario) {
+
+            try
+            {
+                ViewBag.mensaje = mensaje;
+                if (iduser != null && Session["asignacion"] == null)
+                {
+                    CrearTablaSessionAsig();
                     DataTable dt = new DataTable();
                     dt = (DataTable)Session["asignacion"];
                     List<entAsigncionLlamadas> Lista = negAsLlamadas.Instancia.ListaLamadasAsig(Convert.ToInt32(iduser));
@@ -66,12 +70,16 @@ namespace CapaPresentacion.Controllers.Intranet
                             r["estadoAtencion"] = Lista[i].Asi_Estado;
                             dt.Rows.Add(r);
                         }
+                    }
+                    Session["id"] = iduser;
+                    Session["user"] = usuario;
                 }
-                Session["id"] = iduser;
-                Session["user"] = usuario;
             }
-            return View();
-        }
+            catch (Exception e){
+                return RedirectToAction("Error", "Error", new { mensaje = e.Message });
+            }
+                return View();
+            }
         
         public ActionResult BuscaFilaSession(String telef){
             if (Session["asignacion"] != null){
