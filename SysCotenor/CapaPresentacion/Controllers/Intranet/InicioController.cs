@@ -165,5 +165,10 @@ namespace CapaPresentacion.Controllers
 
             return View();
         }
+
+        public ActionResult PruebaUi()
+        {
+            return View();
+        }
     }
 }
