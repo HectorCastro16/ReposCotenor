@@ -79,9 +79,13 @@ namespace CapaPresentacion.Controllers.Intranet
             try
             {
                 String dominio = form["dominio"];
+                String fecNac = form["txtFecNac"];
+                String fecHasta = form["txtFecHasta"];
                 if (dominio != "Otros" && dominio != "Seleccionar")
                     u.Persona.Per_Correo += "@" + dominio;
-                
+
+                u.Persona.Per_FechaNacimiento = Convert.ToDateTime(fecNac);
+                u.Usu_FechaHasta = Convert.ToDateTime(fecHasta);
 
                 if (archivo != null && archivo.ContentLength > 0)
                 {

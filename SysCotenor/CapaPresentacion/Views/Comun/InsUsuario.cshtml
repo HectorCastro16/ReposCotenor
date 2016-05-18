@@ -51,49 +51,29 @@
                 <div class="card-body ">
 
 
-                    @using (Html.BeginForm("InsUsuario", "Comun", FormMethod.Post, new { @Class = "form form-validation", enctype = "multipart/form-data", role = "form" }))
+                    @using (Html.BeginForm("InsUsuario", "Comun", FormMethod.Post, new { @Class = "form form-validate basic-label", enctype = "multipart/form-data", novalidate = "novalidate", role = "form" }))
                     {@Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
 
                         //<form class="form form-validation" role="form" novalidate="novalidate">
-
-                        <div class="row">
-                            <div class="col-lg-4">
-                                <div class="form-group control-width-normal">
-                                    <div class="input-group date" id="demo-date">
-                                        <div class="input-group-content">
-                                            <input type="text" class="form-control">
-                                            <label>Datepicker</label>
-                                        </div>
-                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
-                                    </div>
-                                </div><!--end .form-group -->
-                            </div>
-                            <div class="col-lg-4">
-                                <div class="form-group">
-                                    <input type="text" class="form-control" data-inputmask="'alias': 'date'">
-                                    <label>Date mask</label>
-                                </div>
-                            </div>
-                        </div>
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     @{String required = "required";}
-                                    @Html.TextBoxFor(model => model.Persona.Per_Nombres, new { @class = "form-control", required })
+                                    @Html.TextBoxFor(model => model.Persona.Per_Nombres, new { @class = "form-control", data_rule_minlength = "2", required })
                                     <label for="dgdsg" class="control-label">Nombres</label>
                                 </div>
 
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    @Html.TextBoxFor(model => model.Persona.Per_Apellidos, new { @class = "form-control", @required = "required" })
+                                    @Html.TextBoxFor(model => model.Persona.Per_Apellidos, new { @class = "form-control", data_rule_minlength = "2",required })
                                     <label for="dgsdgds" class="control-label">Apellidos</label>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    @Html.TextBoxFor(model => model.Persona.Per_DNI, new { @class = "form-control", @required = "required", @minlength = "8", @maxlength = "8", @onkeypress = "return valida(event)" })
+                                    @Html.TextBoxFor(model => model.Persona.Per_DNI, new { @class = "form-control",required, @data_rule_minlength = "8", @maxlength = "8", data_rule_number = "true", @onkeypress = "return valida(event)" })
                                     <label for="firstname" class="control-label">DNI</label>
                                 </div>
                             </div>
@@ -102,7 +82,7 @@
 
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    @Html.TextBoxFor(model => model.Persona.Per_Celular, new { @class = "form-control", @required = "required", @minlength = "9", @maxlength = "9", @onkeypress = "return valida(event)" })
+                                    @Html.TextBoxFor(model => model.Persona.Per_Celular, new { @class = "form-control",required, @data_rule_minlength = "9", @maxlength = "9", data_rule_number = "true", @onkeypress = "return valida(event)" })
                                     <label for="lastname" class="control-label">Celular</label>
                                 </div>
                             </div>
@@ -114,8 +94,8 @@
                             </div>
                             <div class="col-lg-2">
                                 <div class="form-group">
-                                    <select id="select1" name="dominio" class="form-control">
-                                        <option value="Seleccionar">Seleccionar</option>
+                                    <select id="select1" name="dominio" class="form-control" required>
+                                        <option value="Seleccionar">&nbsp;</option>
                                         <option value="hotmail.com">&#64;hotmail.com</option>
                                         <option value="gmail.com">&#64;gmail.com</option>
                                         <option value="outlook.com">&#64;outlook.com</option>
@@ -127,7 +107,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    @Html.TextBoxFor(model => model.Usu_Telefono, new { @class = "form-control", @onkeypress = "return valida(event)" })
+                                    @Html.TextBoxFor(model => model.Usu_Telefono, new { @class = "form-control", data_rule_number = "true", @onkeypress = "return valida(event)" })
                                     <label for="lastname" class="control-label">Telefono</label>
                                 </div>
                             </div>
@@ -135,14 +115,14 @@
                         <div class="row">
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    @Html.TextBoxFor(model => model.Persona.Per_Direccion, new { @class = "form-control", @required = "required" })
+                                    @Html.TextBoxFor(model => model.Persona.Per_Direccion, new { @class = "form-control", data_rule_minlength = "2", required })
                                     <label for="firstname" class="control-label">Direccion</label>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    @Html.EditorFor(model => model.Persona.Per_FechaNacimiento, new { @class = "form-control", @required = "required" })
-                                    <label for="lastname" class="control-label">Fecha Nacimiento</label>
+                                    <input type="text" name="txtFecNac" class="form-control"  data-inputmask="'alias': 'date'" required>
+                                    <label>Fecha de Nacimiento</label>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -155,21 +135,27 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    @Html.DropDownListFor(model => model.TipoUsuario.TipUsu_Id, (SelectList)ViewBag.ListaTipoUsuario, "<<Seleccionar>>", new { @class = "form-control", @required = "required" })
+                                    @Html.DropDownListFor(model => model.TipoUsuario.TipUsu_Id, (SelectList)ViewBag.ListaTipoUsuario, "", new { @class = "form-control",required })
                                     <label for="tipousuario" class="control-label">Tipo Usuario</label>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    @Html.DropDownListFor(model => model.Sucursal.Suc_Id, (SelectList)ViewBag.ListaSucursal, "<<Seleccionar>>", new { @class = "form-control", @required = "required" })
+                                    @Html.DropDownListFor(model => model.Sucursal.Suc_Id, (SelectList)ViewBag.ListaSucursal, "", new { @class = "form-control",required })
                                     <label for="sucursal" class="control-label">Sucursal</label>
                                 </div>
                             </div>
-                            <div class="col-sm-4">
-                                <div class="form-group">
-                                    @Html.EditorFor(model => model.Usu_FechaHasta, new { @class = "form-control", style = "width: 100%" })
-                                    <label for="vigencia" class="control-label">Vigencia Fecha</label>
-                                </div>
+                            <div class="col-lg-4">
+                                <div class="form-group control-width-normal">
+                                    <div class="input-group date" id="demo-date-format">
+                                        <div class="input-group-content">
+                                            <input type="text" name="txtFecHasta" class="form-control" required>
+                                            <label>Fecha Vigencia</label>
+                                            <p class="help-block">yyyy/mm/dd</p>
+                                        </div>
+                                        <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                    </div>
+                                </div><!--end .form-group -->
                             </div>
                         </div><br />
                         <div class="row">
