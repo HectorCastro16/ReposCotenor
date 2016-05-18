@@ -65,7 +65,39 @@ namespace CapaNegocio
         {
             try
             {
-                return datUsuario.Instancia.ListaUsuarios(UsuarioId, SucursalId);
+
+             
+               return datUsuario.Instancia.ListaUsuarios(UsuarioId, SucursalId);
+              
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+
+
+
+        public List<entUsuario> ListaUsuariosCall(Int32 UsuarioId,  Int32 SucursalId)
+        {
+            try{
+                
+                List<entUsuario> Lista = datUsuario.Instancia.ListarUusariosConAsignacionCalls(UsuarioId);
+                List<entUsuario> ListaTotal = datUsuario.Instancia.ListaUsuarios(UsuarioId, SucursalId);
+                List<entUsuario> ReturnF = new List<entUsuario>();
+                    for (int j = 0; j < ListaTotal.Count; j++){
+                    ReturnF.Add(ListaTotal[j]);
+                      for (int i = 0; i < Lista.Count; i++){
+                        if (ListaTotal[j].Usu_Id == Lista[i].Usu_Id){
+                            ReturnF.Remove(ListaTotal[j]);
+                            ReturnF.Add(Lista[i]);
+                        }
+                    }
+
+                }
+                return ReturnF;
             }
             catch (Exception e)
             {
@@ -78,15 +110,7 @@ namespace CapaNegocio
 
             try
             {
-                entUsuario u = datUsuario.Instancia.DetalleUsuario(UsuarioId, UsuarioIdSuper);
-                if (u == null) {
-                    throw new ApplicationException("Problemas - SQL Server");
-                }
-                return u;
-            }
-            catch (ApplicationException ae)
-            {
-                throw ae;
+                return datUsuario.Instancia.DetalleUsuario(UsuarioId, UsuarioIdSuper);
             }
             catch (Exception e)
             {
@@ -164,10 +188,6 @@ namespace CapaNegocio
                 }
                 return i;
 
-            }
-            catch (ApplicationException ae)
-            {
-                throw ae;
             }
             catch (Exception e)
             {

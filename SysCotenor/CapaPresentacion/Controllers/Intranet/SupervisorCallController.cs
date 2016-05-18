@@ -31,7 +31,7 @@ namespace CapaPresentacion.Controllers.Intranet
             {
                 Int32 sucursalId = u.Sucursal.Suc_Id;
                 Int32 UsuarioId = u.Usu_Id;
-                List<entUsuario> lista = negUsuario.Instancia.ListaUsuarios(UsuarioId, sucursalId);
+                List<entUsuario> lista = negUsuario.Instancia.ListaUsuariosCall(UsuarioId, sucursalId);
                 RemoverSessiones();
                 return View(lista);
             } else

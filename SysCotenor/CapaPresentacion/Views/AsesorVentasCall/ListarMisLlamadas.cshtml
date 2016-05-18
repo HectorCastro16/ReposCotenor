@@ -1,0 +1,84 @@
+﻿@model IEnumerable<CapaEntidades.entAsigncionLlamadas>
+
+@{
+    ViewBag.Title = "ListarMisLlamadas";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<table class="table" >
+    <tr>
+        <th>
+            #
+        </th>   
+        <th>
+           Teléfono
+        </th>
+        <th>
+           Cliente
+        </th>
+        <th>
+           F1
+        </th>
+        <th>
+            F2
+        </th>
+        <th>
+            F3
+        </th>
+        <th>
+           Sva
+        </th>
+        <th>
+           Desde
+        </th>
+        <th>
+            Estado
+        </th>
+        <th>
+            FF/hh-Registro
+        </th>       
+        <th></th>
+    </tr>
+   @{ int i = 0;}
+@foreach (var item in Model)
+{
+    i++;
+    <tr>
+        <td>
+          @i
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asi_NumTelf)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Cliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asi_F1)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asi_F2)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asi_F3)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asi_SVA)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asi_FechInicioCliente)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asi_Estado)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Asi_FechaRegistro)
+        </td>
+        <td>
+            @Html.ActionLink("LLAMAR","Venta", "AsesorVentasCall", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+        </td>
+    </tr>
+}
+
+</table>
