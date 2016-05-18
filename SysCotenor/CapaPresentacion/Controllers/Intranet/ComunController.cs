@@ -47,7 +47,6 @@ namespace CapaPresentacion.Controllers.Intranet
                     ViewBag.ListaSucursal = lsSucursal;
 
                     return View();
-
                 }
                 else
                 {
@@ -65,9 +64,6 @@ namespace CapaPresentacion.Controllers.Intranet
 
                 return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
             }
-
-
-
            
         }
 
@@ -135,10 +131,6 @@ namespace CapaPresentacion.Controllers.Intranet
 
         }
 
-
-
-
-
         public ActionResult ListaUsuarios(String mensaje, Int16? identificador)
         {
 
@@ -173,16 +165,78 @@ namespace CapaPresentacion.Controllers.Intranet
 
         public ActionResult DetalleUsuario(Int32 UsuarioId)
         {
-            entUsuario u = (entUsuario)Session["usuario"];
-            if (u != null)
+            try
             {
-                Int32 UsuaIDSuper = u.Usu_Id;
-                entUsuario us = negUsuario.Instancia.DetalleUsuario(UsuarioId, UsuaIDSuper);
-                return View(us);
+                entUsuario u = (entUsuario)Session["usuario"];
+                if (u != null)
+                {
+                    Int32 UsuaIDSuper = u.Usu_Id;
+                    entUsuario us = negUsuario.Instancia.DetalleUsuario(UsuarioId, UsuaIDSuper);
+                    return View(us);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Inicio");
+                }
             }
-            else
+            catch (ApplicationException x)
             {
-                return RedirectToAction("Index", "Inicio");
+                ViewBag.mensaje = x.Message;
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = x.Message, identificador = 1 });
+            }
+            catch (Exception e)
+            {
+
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
+            }
+           
+        }
+
+
+        public ActionResult UpdUsuario(Int16 UsuarioId, String mensaje, Int16? identificador) {
+
+            try
+            {
+                ViewBag.mensaje = mensaje;
+                ViewBag.identificador = identificador;
+                entUsuario u = (entUsuario)Session["usuario"];
+                if (u != null)
+                {
+                    List<entTipoUsuario> t = null;
+
+                    if (u.TipoUsuario.TipUsu_Id == 3)
+                    {
+                        t = negTipoUsuario.Instancia.ListaTipoUsuarioxId(8);
+                    }
+                    if (u.TipoUsuario.TipUsu_Id == 6)
+                    {
+                        t = negTipoUsuario.Instancia.ListaTipoUsuarioxId(9);
+                    }
+                    var lsTipoUsuario = new SelectList(t, "TipUsu_Id", "TipUsu_Nombre");
+                    ViewBag.ListaTipoUsuario = lsTipoUsuario;
+
+                    List<entSucursal> s = negSucursal.Instancia.ListaSucursalxId(u.Sucursal.Suc_Id);
+                    var lsSucursal = new SelectList(s, "Suc_Id", "Suc_Nombre");
+                    ViewBag.ListaSucursal = lsSucursal;
+
+                    entUsuario us = negUsuario.Instancia.DetalleUsuario(UsuarioId, u.Usu_Id);
+
+                    return View(us);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Inicio");
+                }
+            }
+            catch (ApplicationException x)
+            {
+                ViewBag.mensaje = x.Message;
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = x.Message, identificador = 1 });
+            }
+            catch (Exception e)
+            {
+
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
             }
         }
 

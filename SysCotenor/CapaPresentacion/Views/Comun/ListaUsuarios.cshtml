@@ -99,8 +99,6 @@
                                                                 <a class="btn ink-reaction btn-warning" role='button' data-toggle="tooltip" data-placement="top" title="Bloquear">.</a>
                                                             </span>
 
-
-
                                                         }
                                                         else
                                                         {
@@ -113,7 +111,7 @@
 
 
                                                         }
-                                                        @Html.ActionLink(".", "InsEditUsuario", "Comun", new { UsuarioId = item.Usu_Id }, htmlAttributes: new { @class = "btn ink-reaction btn-primary-dark", data_toggle = "tooltip", data_placement = "top", data_original_title = "Editar" })
+                                                        @Html.ActionLink(".", "UpdUsuario", "Comun", new { UsuarioId = item.Usu_Id }, htmlAttributes: new { @class = "btn ink-reaction btn-primary-dark", data_toggle = "tooltip", data_placement = "top", data_original_title = "Editar" })
                                                         @Html.ActionLink(".", "DetalleUsuario", "Comun", new { UsuarioId = item.Usu_Id }, htmlAttributes: new { @class = "btn ink-reaction btn-info", data_toggle = "tooltip", data_placement = "top", data_original_title = "Detalle" })
                                                         @*<a class="btn ink-reaction btn-danger" role='button' data-toggle='tooltip modal' data-target='#myModalEliminar' data-placement="top" data-original-title="Detalle" data-id="@Html.DisplayFor(modelItem => item.Usu_Id)">E</a>*@
 
