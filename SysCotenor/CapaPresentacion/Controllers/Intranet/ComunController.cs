@@ -132,14 +132,8 @@ namespace CapaPresentacion.Controllers.Intranet
         }
 
 
-
-
-
         public ActionResult ListaUsuarios(String mensaje, Int16? identificador)
         {
-
-           
-
             try
             {
                 ViewBag.mensaje = mensaje;
@@ -150,7 +144,7 @@ namespace CapaPresentacion.Controllers.Intranet
                 {
                     Int32 sucursalId = u.Sucursal.Suc_Id;
                     Int32 UsuarioId = u.Usu_Id;
-                    List<entUsuario> lista = negUsuario.Instancia.ListaUsuarios(UsuarioId, sucursalId);
+                   List<entUsuario> lista = negUsuario.Instancia.ListaUsuarios(UsuarioId, sucursalId);
                     return View(lista);
                 }
                 else

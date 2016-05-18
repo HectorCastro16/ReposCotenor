@@ -61,7 +61,26 @@ namespace CapaNegocio
             }
         }
 
-        public List<entUsuario> ListaUsuarios(Int32 UsuarioId,  Int32 SucursalId)
+        public List<entUsuario> ListaUsuarios(Int32 UsuarioId, Int32 SucursalId)
+        {
+            try
+            {
+
+             
+               return datUsuario.Instancia.ListaUsuarios(UsuarioId, SucursalId);
+              
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
+
+
+
+        public List<entUsuario> ListaUsuariosCall(Int32 UsuarioId,  Int32 SucursalId)
         {
             try{
                 

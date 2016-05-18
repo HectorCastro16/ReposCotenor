@@ -1,0 +1,57 @@
+﻿
+
+@{
+    ViewBag.Title = "Venta";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+
+<h2 style="text-align:center">Venta</h2>
+<div style="position:absolute;left:100px">
+
+    <form method="post">
+
+        
+        <label>Accion</label>
+        <br>
+        @{
+           // List<entAccionComercial> Lista1 = negArbolVenta.Instancia.ListaAcCbo();
+        <select id="Acccom" name="idAccCom">
+            <option value="0"><<<<<-Seleccionar->>>>></option>
+              @foreach (CapaEntidades.entAccionComercial ac 
+                   in CapaNegocio.negArbolVenta.Instancia.ListaAcCbo()){
+                  <option value="@ac.Acc_Id">@ac.Acc_Nombre</option>
+              }
+            </select>
+            }
+        <br>
+        <label>Detalle</label>
+        <br>
+        <select id="detAccCom">
+            <option value="0"><<<<<-Seleccionar->>>>></option>
+        </select>
+        <br>
+        <label>Grupo</label>
+        <br>
+        <select id="grupCom">
+            <option value="0"><<<<<-Seleccionar->>>>></option>
+          
+        </select>
+        <br>
+        <label>Categoria</label>
+        <br>
+        <select id="Cate">
+            <option value="0"><<<<<-Seleccionar->>>>></option>
+           
+        </select>
+        <br>
+        <label>Producto</label>
+        <br>
+        <select id="Products">
+            <option value="0"><<<<<-Seleccionar->>>>></option>
+           
+        </select>
+
+    </form>
+</div>
+

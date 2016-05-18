@@ -297,7 +297,7 @@
                                 </a>
                                 <!--start submenu -->
                                 <ul>
-                                    <li><a href="~/html/forms/basic.html"><span class="title">Registro Ventas</span></a></li>
+                                    <li><a href="@Url.Action("ListarMisLlamadas","AsesorVentasCall")"><span class="title">Registro Ventas</span></a></li>
 
                                 </ul><!--end /submenu -->
                             </li><!--end /menu-li -->
@@ -458,6 +458,90 @@
             });
         });
     </script>
+
+    <script type="text/javascript">
+
+        $("#Acccom").change(function () {
+            detAccCom()
+            var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+            $("#grupCom").html(opciones)
+            $("#Cate").html(opciones)
+            $("#Products").html(opciones)
+           
+
+        })
+
+        var detAccCom = function () {
+            $.getJSON('@Url.Action("LlenarDetAccComJSON", "AsesorVentasCall")', { idAccCom: $('#Acccom').val() },
+                function (data) {
+                    var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+                    $.each(data, function (i, item) {
+                        opciones += '<option value="' + item.DetAcc_ID + '">' + item.DetAcc_Nombre + '</option>'
+                    });
+                    $("#detAccCom").html(opciones);
+                })
+        }
+
+    </script>
+
+        <script type="text/javascript">
+         $("#detAccCom").change(function () {
+             grupCom()
+             var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+             $("#Cate").html(opciones)
+             $("#Products").html(opciones)
+        })
+
+        var grupCom = function () {
+         $.getJSON('@Url.Action("LlenarGrup_ComJSON", "AsesorVentasCall")', { id_detaCC_Com: $('#detAccCom').val() },
+         function (data) {
+             var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+          $.each(data, function (i, item) {
+          opciones += '<option value="' + item.Gru_ID + '">' + item.Gru_Nombre + '</option>'
+           });
+           $("#grupCom").html(opciones);
+          })
+        }
+    </script>
+
+    <script type="text/javascript">
+        $("#grupCom").change(function () {
+            Cate()
+            var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+            $("#Products").html(opciones)
+        })
+
+        var Cate = function () {
+            $.getJSON('@Url.Action("LlenarCatJSON", "AsesorVentasCall")', { id_Grup: $('#grupCom').val() },
+         function (data) {
+             var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+          $.each(data, function (i, item) {
+              opciones += '<option value="' + item.Cat_Id + '">' + item.Cat_Nombre + '</option>'
+           });
+          $("#Cate").html(opciones);
+          })
+        }
+    </script>
+
+
+    <script type="text/javascript">
+        $("#Cate").change(function () {
+            Products();
+        })
+
+        var Products = function () {
+            $.getJSON('@Url.Action("LlenarProdJSON", "AsesorVentasCall")', { id_Cat: $('#Cate').val() },
+         function (data) {
+             var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+          $.each(data, function (i, item) {
+              opciones += '<option value="' + item.Pro_ID + '">' + item.Pro_Nombre + '</option>'
+           });
+          $("#Products").html(opciones);
+          })
+        }
+    </script>
+
+
 
 
 </body>
