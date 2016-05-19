@@ -22,7 +22,7 @@ namespace CapaNegocio
         #endregion Singleton
 
         #region metodos
-      
+
         public entUsuario VerificarAccesoIntranet(String prmstrLogin, String prmstrPassw)
         {
             try
@@ -65,10 +65,7 @@ namespace CapaNegocio
         {
             try
             {
-
-             
-               return datUsuario.Instancia.ListaUsuarios(UsuarioId, SucursalId);
-              
+                return datUsuario.Instancia.ListaUsuarios(UsuarioId, SucursalId);
             }
             catch (Exception e)
             {
@@ -80,17 +77,21 @@ namespace CapaNegocio
 
 
 
-        public List<entUsuario> ListaUsuariosCall(Int32 UsuarioId,  Int32 SucursalId)
+        public List<entUsuario> ListaUsuariosCall(Int32 UsuarioId, Int32 SucursalId)
         {
-            try{
-                
+            try
+            {
+
                 List<entUsuario> Lista = datUsuario.Instancia.ListarUusariosConAsignacionCalls(UsuarioId);
                 List<entUsuario> ListaTotal = datUsuario.Instancia.ListaUsuarios(UsuarioId, SucursalId);
                 List<entUsuario> ReturnF = new List<entUsuario>();
-                    for (int j = 0; j < ListaTotal.Count; j++){
+                for (int j = 0; j < ListaTotal.Count; j++)
+                {
                     ReturnF.Add(ListaTotal[j]);
-                      for (int i = 0; i < Lista.Count; i++){
-                        if (ListaTotal[j].Usu_Id == Lista[i].Usu_Id){
+                    for (int i = 0; i < Lista.Count; i++)
+                    {
+                        if (ListaTotal[j].Usu_Id == Lista[i].Usu_Id)
+                        {
                             ReturnF.Remove(ListaTotal[j]);
                             ReturnF.Add(Lista[i]);
                         }
@@ -110,17 +111,27 @@ namespace CapaNegocio
 
             try
             {
-                return datUsuario.Instancia.DetalleUsuario(UsuarioId, UsuarioIdSuper);
+                entUsuario u = datUsuario.Instancia.DetalleUsuario(UsuarioId, UsuarioIdSuper);
+                if (u == null)
+                {
+                    throw new ApplicationException("Usuario no Encontrado");
+                }
+                return u;
+            }
+            catch (ApplicationException ae)
+            {
+                throw ae;
             }
             catch (Exception e)
             {
-                
+
                 throw e;
             }
         }
 
 
-        public int  RegUsuarioSecurity(entUsuario u, Int16 TipoEdicion,String IpAcceso) {
+        public int RegUsuarioSecurity(entUsuario u, Int16 TipoEdicion, String IpAcceso)
+        {
             try
             {
                 String cadXml = "";
@@ -133,16 +144,21 @@ namespace CapaNegocio
                 cadXml = "<root>" + cadXml + "</root>";
 
                 int i = datUsuario.Instancia.RegUsuarioSecurity(cadXml);
-                if (i == -2) { throw new ApplicationException("Problema 1"); }
-                if (i == -3) { throw new ApplicationException("Problema 2"); }
+                if (i <= 0) {
+                    throw new ApplicationException("Problema SQL Server !"); }
+                 
                 return i;
+            }
+            catch (ApplicationException ae)
+            {
+                throw ae;
             }
             catch (Exception e)
             {
-                
+
                 throw e;
             }
-        
+
         }
 
 
@@ -153,6 +169,7 @@ namespace CapaNegocio
             {
                 String cadXml = "";
                 cadXml += "<Persona ";
+                cadXml += "Per_Id='" + u.Persona.Per_Id + "' ";
                 cadXml += "Per_Nombres='" + u.Persona.Per_Nombres + "' ";
                 cadXml += "Per_Apellidos='" + u.Persona.Per_Apellidos + "' ";
                 cadXml += "Per_DNI='" + u.Persona.Per_DNI + "' ";
@@ -164,30 +181,53 @@ namespace CapaNegocio
                 cadXml += "Per_LugarNacimiento='" + u.Persona.Per_LugarNacimiento + "' ";
                 cadXml += "TipoEdicion='" + TipoEdicion + "'>";
 
-                    cadXml += "<Usuario ";
-                    cadXml += "Usu_TipUsu_Id='" + u.TipoUsuario.TipUsu_Id + "' ";
-                    cadXml += "Usu_Suc_Id='" + u.Sucursal.Suc_Id + "' ";
-                    cadXml += "Usu_FechaHasta='" + u.Usu_FechaHasta.ToString("yyyy/MM/dd") + "' ";
-                    cadXml += "Usu_UsuarioRegistro='" + u.Usu_UsuarioRegistro + "' ";
-                    cadXml += "Usu_Telefono='" + u.Usu_Telefono + "' ";
-                    cadXml += "TipoEdicion='" + TipoEdicion + "'/>";
+                        cadXml += "<Usuario ";
+                        cadXml += "Usu_Id='" + u.Usu_Id + "' ";
+                        cadXml += "Usu_TipUsu_Id='" + u.TipoUsuario.TipUsu_Id + "' ";
+                        cadXml += "Usu_Suc_Id='" + u.Sucursal.Suc_Id + "' ";
+                        cadXml += "Usu_FechaHasta='" + u.Usu_FechaHasta.ToString("yyyy/MM/dd") + "' ";
+                        cadXml += "Usu_UsuarioRegistro='" + u.Usu_UsuarioRegistro + "' ";
+                        cadXml += "Usu_UsuarioModificacion='" + u.Usu_UsuarioModificacion + "' ";
+                        cadXml += "Usu_Telefono='" + u.Usu_Telefono + "' ";
+                        cadXml += "TipoEdicion='" + TipoEdicion + "'/>";
 
                 cadXml += "</Persona>";
                 cadXml = "<root>" + cadXml + "</root>";
 
-                Int32 Dni_Ingreso = Convert.ToInt32(u.Persona.Per_DNI);
-                int val = datUsuario.Instancia.ValidaDni(Dni_Ingreso);
-                if (val > 0) {
-                    throw new ApplicationException("DNI Ya Registrado");
-                }
-                 //variable i llega el resultado
-                int i = datUsuario.Instancia.InsUpdDelBloAct(cadXml);
-                if (i <= 0)
+                if (TipoEdicion == 1)
                 {
-                    throw new ApplicationException("No se Pudo insertar a el trabajador");
+                    Int32 Dni_Ingreso = Convert.ToInt32(u.Persona.Per_DNI);
+                    int val = datUsuario.Instancia.ValidaDni(Dni_Ingreso);
+                    if (val > 0)
+                    {
+                        throw new ApplicationException("DNI Ya Registrado");
+                    }
                 }
+
+                //variable i llega el resultado
+                int i = datUsuario.Instancia.InsUpdDelBloAct(cadXml);
+
+                if (TipoEdicion == 1)
+                {
+                    if (i <= 0)
+                    {
+                        throw new ApplicationException("No se Pudo Insertar a el trabajador");
+                    }
+                }
+                if (TipoEdicion == 2)
+                {
+                    if (i <= 0)
+                    {
+                        throw new ApplicationException("No se Pudo Editar a el trabajador");
+                    }
+                }
+               
                 return i;
 
+            }
+            catch (ApplicationException ae)
+            {
+                throw ae;
             }
             catch (Exception e)
             {
@@ -195,6 +235,51 @@ namespace CapaNegocio
                 throw e;
             }
 
+        }
+
+        public int DelBloActUsurio(entUsuario u, Int16 TipoEdicion) {
+            try
+            {
+                String cadXml = "";
+                cadXml += "<Usuario ";
+                cadXml += "Usu_Id='" + u.Usu_Id + "' ";
+                cadXml += "Usu_UsuarioModificacion='" + u.Usu_UsuarioModificacion + "' ";
+                cadXml += "TipoEdicion='" + TipoEdicion + "'/>";
+                cadXml = "<root>" + cadXml + "</root>";
+                //variable i llega el resultado
+                int i = datUsuario.Instancia.InsUpdDelBloAct(cadXml);
+                if (TipoEdicion == 3)
+                {
+                    if (i <= 0)
+                    {
+                        throw new ApplicationException("No se Pudo Eliminar a el trabajador");
+                    }
+                }
+                if (TipoEdicion == 4)
+                {
+                    if (i <= 0)
+                    {
+                        throw new ApplicationException("No se Pudo Bloquear a el trabajador");
+                    }
+                }
+                if (TipoEdicion == 4)
+                {
+                    if (i <= 0)
+                    {
+                        throw new ApplicationException("No se Pudo Activar a el trabajador");
+                    }
+                }
+                return i;
+            }
+            catch (ApplicationException ae)
+            {
+                throw ae;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
         }
 
         #endregion metodos
