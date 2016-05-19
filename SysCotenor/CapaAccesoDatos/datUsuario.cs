@@ -338,7 +338,6 @@ namespace CapaAccesoDatos
                         i = val;
                     }
                 }
-                
                 return i;
             }
             catch (Exception e)

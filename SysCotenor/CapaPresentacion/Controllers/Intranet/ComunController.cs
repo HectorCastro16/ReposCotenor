@@ -19,6 +19,57 @@ namespace CapaPresentacion.Controllers.Intranet
             return View();
         }
 
+        public ActionResult ListaUsuarios(String mensaje, Int16? identificador)
+        {
+            try
+            {
+                ViewBag.mensaje = mensaje;
+                ViewBag.identificador = identificador;
+                entUsuario u = (entUsuario)Session["usuario"];
+                if (u != null)
+                {
+                    Int32 sucursalId = u.Sucursal.Suc_Id;
+                    Int32 UsuarioId = u.Usu_Id;
+                    List<entUsuario> lista = negUsuario.Instancia.ListaUsuarios(UsuarioId, sucursalId);
+                    return View(lista);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Inicio");
+                }
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
+            }
+        }
+
+        public ActionResult DetalleUsuario(Int32 UsuarioId)
+        {
+            try
+            {
+                entUsuario u = (entUsuario)Session["usuario"];
+                if (u != null)
+                {
+                    Int32 UsuaIDSuper = u.Usu_Id;
+                    entUsuario us = negUsuario.Instancia.DetalleUsuario(UsuarioId, UsuaIDSuper);
+                    return View(us);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Inicio");
+                }
+            }
+            catch (ApplicationException x)
+            {
+                ViewBag.mensaje = x.Message;
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = x.Message, identificador = 1 });
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
+            }
+        }
 
         public ActionResult InsUsuario(String mensaje, Int16? identificador)
         {
@@ -52,7 +103,6 @@ namespace CapaPresentacion.Controllers.Intranet
                 {
                     return RedirectToAction("Index", "Inicio");
                 }
-
             }
             catch (ApplicationException x)
             {
@@ -64,58 +114,58 @@ namespace CapaPresentacion.Controllers.Intranet
 
                 return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
             }
-           
         }
 
         [HttpPost]
         public ActionResult InsUsuario(entUsuario u, HttpPostedFileBase archivo, FormCollection form)
         {
-            
-            
             try
             {
-                String dominio = form["dominio"];
-                String fecNac = form["txtFecNac"];
-                String fecHasta = form["txtFecHasta"];
-                if (dominio != "Otros" && dominio != "Seleccionar")
-                    u.Persona.Per_Correo += "@" + dominio;
-
-                u.Persona.Per_FechaNacimiento = Convert.ToDateTime(fecNac);
-                u.Usu_FechaHasta = Convert.ToDateTime(fecHasta);
-
-                if (archivo != null && archivo.ContentLength > 0)
-                {
-                    u.Persona.Per_Foto = Path.GetFileName(archivo.FileName);
-                }
-                else
-                {
-                    u.Persona.Per_Foto = "foto.png";
-                }
-
-                //para capturar el usuario en sesion////////////
                 entUsuario us = (entUsuario)Session["usuario"];
-                String userRegistro = us.Persona.NombreCompleto;
-
-                u.Usu_UsuarioRegistro = userRegistro;
-                ///////////////////////////////////////////
-
-                int i = negUsuario.Instancia.InsUpdUsuario(u, 1);
-                //int i = 0;
-
-                if (i > 0)
+                if (us != null)
                 {
+                    String dominio = form["dominio"];
+                    String fecNac = form["txtFecNac"];
+                    String fecHasta = form["txtFecHasta"];
+                    if (dominio != "Otros" && dominio != "Seleccionar")
+                        u.Persona.Per_Correo += "@" + dominio;
+
+                    u.Persona.Per_FechaNacimiento = Convert.ToDateTime(fecNac);
+                    u.Usu_FechaHasta = Convert.ToDateTime(fecHasta);
+
                     if (archivo != null && archivo.ContentLength > 0)
                     {
-
-                        var namearchivo = Path.GetFileName(archivo.FileName);
-                        var ruta = Path.Combine(Server.MapPath("~/assets/Imagenes/Fotos"), namearchivo);
-                        archivo.SaveAs(ruta);
+                        u.Persona.Per_Foto = Path.GetFileName(archivo.FileName);
                     }
-                    return RedirectToAction("ListaUsuarios", new { mensaje = "Se Inserto Satisfactoriamente", identificador = 3 });
+                    else
+                    {
+                        u.Persona.Per_Foto = "foto.png";
+                    }
+                    //para capturar el usuario en sesion////////////
+                    entUsuario user = (entUsuario)Session["usuario"];
+                    String userRegistro = user.Persona.NombreCompleto;
+
+                    u.Usu_UsuarioRegistro = userRegistro;
+                    ///////////////////////////////////////////
+                    int i = negUsuario.Instancia.InsUpdUsuario(u, 1);
+                    if (i > 0)
+                    {
+                        if (archivo != null && archivo.ContentLength > 0)
+                        {
+                            var namearchivo = Path.GetFileName(archivo.FileName);
+                            var ruta = Path.Combine(Server.MapPath("~/assets/img/Fotos"), namearchivo);
+                            archivo.SaveAs(ruta);
+                        }
+                        return RedirectToAction("ListaUsuarios", new { mensaje = "Se Inserto Satisfactoriamente", identificador = 3 });
+                    }
+                    else
+                    {
+                        return RedirectToAction("InsUsuario", "Comun", new { mensaje = "Problemas al Registrar", identificador = 2 });
+                    }
                 }
                 else
                 {
-                    return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = "No se pudo registrar", identificador = 2 });
+                    return RedirectToAction("Index", "Inicio");
                 }
             }
             catch (ApplicationException x)
@@ -125,76 +175,12 @@ namespace CapaPresentacion.Controllers.Intranet
             }
             catch (Exception e)
             {
-
                 return RedirectToAction("InsUsuario", "Comun", new { mensaje = e.Message, identificador = 2 });
             }
-
         }
 
-        public ActionResult ListaUsuarios(String mensaje, Int16? identificador)
+        public ActionResult UpdUsuario(Int16 UsuarioId, String mensaje, Int16? identificador)
         {
-
-           
-
-            try
-            {
-                ViewBag.mensaje = mensaje;
-                ViewBag.identificador = identificador;
-
-                entUsuario u = (entUsuario)Session["usuario"];
-                if (u != null)
-                {
-                    Int32 sucursalId = u.Sucursal.Suc_Id;
-                    Int32 UsuarioId = u.Usu_Id;
-                    List<entUsuario> lista = negUsuario.Instancia.ListaUsuarios(UsuarioId, sucursalId);
-                    return View(lista);
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Inicio");
-                }
-            }
-            catch (Exception)
-            {
-                
-                throw;
-            }
-            
-        }
-
-
-        public ActionResult DetalleUsuario(Int32 UsuarioId)
-        {
-            try
-            {
-                entUsuario u = (entUsuario)Session["usuario"];
-                if (u != null)
-                {
-                    Int32 UsuaIDSuper = u.Usu_Id;
-                    entUsuario us = negUsuario.Instancia.DetalleUsuario(UsuarioId, UsuaIDSuper);
-                    return View(us);
-                }
-                else
-                {
-                    return RedirectToAction("Index", "Inicio");
-                }
-            }
-            catch (ApplicationException x)
-            {
-                ViewBag.mensaje = x.Message;
-                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = x.Message, identificador = 1 });
-            }
-            catch (Exception e)
-            {
-
-                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
-            }
-           
-        }
-
-
-        public ActionResult UpdUsuario(Int16 UsuarioId, String mensaje, Int16? identificador) {
-
             try
             {
                 ViewBag.mensaje = mensaje;
@@ -203,7 +189,6 @@ namespace CapaPresentacion.Controllers.Intranet
                 if (u != null)
                 {
                     List<entTipoUsuario> t = null;
-
                     if (u.TipoUsuario.TipUsu_Id == 3)
                     {
                         t = negTipoUsuario.Instancia.ListaTipoUsuarioxId(8);
@@ -218,9 +203,7 @@ namespace CapaPresentacion.Controllers.Intranet
                     List<entSucursal> s = negSucursal.Instancia.ListaSucursalxId(u.Sucursal.Suc_Id);
                     var lsSucursal = new SelectList(s, "Suc_Id", "Suc_Nombre");
                     ViewBag.ListaSucursal = lsSucursal;
-
                     entUsuario us = negUsuario.Instancia.DetalleUsuario(UsuarioId, u.Usu_Id);
-
                     return View(us);
                 }
                 else
@@ -235,10 +218,183 @@ namespace CapaPresentacion.Controllers.Intranet
             }
             catch (Exception e)
             {
-
                 return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
             }
         }
+
+        [HttpPost]
+        public ActionResult UpdUsuario(entUsuario u, HttpPostedFileBase archivo, FormCollection form)
+        {
+            try
+            {
+                entUsuario us = (entUsuario)Session["usuario"];
+                if (us != null)
+                {
+                    String fecNac = form["txtFecNac"];
+                    String fecHasta = form["txtFecHasta"];
+                    String foto = form["txtFoto"];
+                    u.Persona.Per_FechaNacimiento = Convert.ToDateTime(fecNac);
+                    u.Usu_FechaHasta = Convert.ToDateTime(fecHasta);
+
+                    if (archivo != null && archivo.ContentLength > 0)
+                    {
+                        u.Persona.Per_Foto = Path.GetFileName(archivo.FileName);
+                    }
+                    else
+                    {
+                        u.Persona.Per_Foto = foto;
+                    }
+                    //para capturar el usuario en sesion////////////
+                    entUsuario user = (entUsuario)Session["usuario"];
+                    String userModificacion = user.Persona.NombreCompleto;
+
+                    u.Usu_UsuarioModificacion = userModificacion;
+                    ///////////////////////////////////////////
+                    int i = negUsuario.Instancia.InsUpdUsuario(u, 2);
+
+                    if (i > 0)
+                    {
+                        if (archivo != null && archivo.ContentLength > 0)
+                        {
+                            var namearchivo = Path.GetFileName(archivo.FileName);
+                            var ruta = Path.Combine(Server.MapPath("~/assets/img/Fotos"), namearchivo);
+                            archivo.SaveAs(ruta);
+                        }
+                        return RedirectToAction("ListaUsuarios", new { mensaje = "Se Edito Satisfactoriamente", identificador = 3 });
+                    }
+                    else
+                    {
+                        return RedirectToAction("UpdUsuario", "Comun", new { UsuarioId = u.Usu_Id, mensaje = "Problemas al Editar", identificador = 2 });
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Inicio");
+                }
+            }
+            catch (ApplicationException x)
+            {
+                ViewBag.mensaje = x.Message;
+                return RedirectToAction("UpdUsuario", "Comun", new { UsuarioId = u.Usu_Id, mensaje = x.Message, identificador = 1 });
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("UpdUsuario", "Comun", new { UsuarioId = u.Usu_Id, mensaje = e.Message, identificador = 2 });
+            }
+        }
+
+        public ActionResult DelUsuario(FormCollection form)
+        {
+            try
+            {
+                entUsuario us = (entUsuario)Session["usuario"];
+                if (us != null)
+                {
+                    String idUsuDel = form["txtUserId"];
+                    Int16 idUser = Convert.ToInt16(idUsuDel);
+                    entUsuario u = new entUsuario();
+                    u.Usu_Id = idUser;
+                    //para capturar el usuario en sesion////////////
+                    entUsuario user = (entUsuario)Session["usuario"];
+                    String userModificacion = user.Persona.NombreCompleto;
+
+                    u.Usu_UsuarioModificacion = userModificacion;
+                    ///////////////////////////////////////////
+                    int i = negUsuario.Instancia.DelBloActUsurio(u, 3);
+                    return RedirectToAction("ListaUsuarios", new { mensaje = "Se Elimino Satisfactoriamente", identificador = 3 });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Inicio");
+                }
+            }
+            catch (ApplicationException x)
+            {
+                ViewBag.mensaje = x.Message;
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = x.Message, identificador = 1 });
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
+            }
+
+        }
+
+        public ActionResult BloUsuario(FormCollection form)
+        {
+            try
+            {
+                entUsuario us = (entUsuario)Session["usuario"];
+                if (us != null)
+                {
+                    String idUsuDel = form["txtUserId"];
+                    Int16 idUser = Convert.ToInt16(idUsuDel);
+                    entUsuario u = new entUsuario();
+                    u.Usu_Id = idUser;
+                    //para capturar el usuario en sesion////////////
+                    entUsuario user = (entUsuario)Session["usuario"];
+                    String userModificacion = user.Persona.NombreCompleto;
+
+                    u.Usu_UsuarioModificacion = userModificacion;
+                    ///////////////////////////////////////////
+                    int i = negUsuario.Instancia.DelBloActUsurio(u, 4);
+                    return RedirectToAction("ListaUsuarios");
+                    //return RedirectToAction("ListaUsuarios", new { mensaje = "Se Elimino Satisfactoriamente", identificador = 3 });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Inicio");
+                }
+            }
+            catch (ApplicationException x)
+            {
+                ViewBag.mensaje = x.Message;
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = x.Message, identificador = 1 });
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
+            }
+
+        }
+        public ActionResult ActUsuario(FormCollection form)
+        {
+            try
+            {
+                entUsuario us = (entUsuario)Session["usuario"];
+                if (us != null)
+                {
+                    String idUsuDel = form["txtUserId"];
+                    Int16 idUser = Convert.ToInt16(idUsuDel);
+                    entUsuario u = new entUsuario();
+                    u.Usu_Id = idUser;
+                    //para capturar el usuario en sesion////////////
+                    entUsuario user = (entUsuario)Session["usuario"];
+                    String userModificacion = user.Persona.NombreCompleto;
+
+                    u.Usu_UsuarioModificacion = userModificacion;
+                    ///////////////////////////////////////////
+                    int i = negUsuario.Instancia.DelBloActUsurio(u, 5);
+                    return RedirectToAction("ListaUsuarios");
+                    //return RedirectToAction("ListaUsuarios", new { mensaje = "Se Elimino Satisfactoriamente", identificador = 3 });
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Inicio");
+                }
+            }
+            catch (ApplicationException x)
+            {
+                ViewBag.mensaje = x.Message;
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = x.Message, identificador = 1 });
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
+            }
+
+        }
+
 
 
     }

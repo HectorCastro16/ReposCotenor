@@ -44,13 +44,17 @@
                 <div class="card-body ">
 
 
-                    @using (Html.BeginForm("", "Comun", FormMethod.Post, new { @Class = "form form-validate basic-label", enctype = "multipart/form-data", novalidate = "novalidate", role = "form" }))
+                    @using (Html.BeginForm("UpdUsuario", "Comun", FormMethod.Post, new { @Class = "form form-validate basic-label", enctype = "multipart/form-data", novalidate = "novalidate", role = "form" }))
                     {@Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
 
                         //<form class="form form-validation" role="form" novalidate="novalidate">
                         <div class="row">
                             <div class="col-lg-4">
+                                @Html.HiddenFor(model => model.Persona.Per_Id)
+                                @Html.HiddenFor(model => model.Usu_Id)
+                                <input type="hidden" name="txtFoto"  value="@Model.Persona.Per_Foto" >
+                                
                                 <div class="form-group">
                                     @{String required = "required";}
                                     @Html.TextBoxFor(model => model.Persona.Per_Nombres, new { @class = "form-control", data_rule_minlength = "2", required })
@@ -115,13 +119,13 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    @Html.DropDownListFor(model => model.TipoUsuario.TipUsu_Id, (SelectList)ViewBag.ListaTipoUsuario, "", new { @class = "form-control", required, @disabled = "disabled" })
+                                    @Html.DropDownListFor(model => model.TipoUsuario.TipUsu_Id, (SelectList)ViewBag.ListaTipoUsuario, "", new { @class = "form-control", required })
                                     <label for="tipousuario" class="control-label">Tipo Usuario</label>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    @Html.DropDownListFor(model => model.Sucursal.Suc_Id, (SelectList)ViewBag.ListaSucursal, "", new { @class = "form-control", required, @disabled = "disabled" })
+                                    @Html.DropDownListFor(model => model.Sucursal.Suc_Id, (SelectList)ViewBag.ListaSucursal, "", new { @class = "form-control", required })
                                     <label for="sucursal" class="control-label">Sucursal</label>
                                 </div>
                             </div>
@@ -151,7 +155,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <div style="text-align:center">
-                                    <input type="submit" class="btn btn-success" value="EDITAR" />
+                                    <input type="submit" class="btn btn-success" value="Editar" />
                                     @Html.ActionLink("Cancelar", "ListaUsuarios", "Comun", htmlAttributes: new { @class = "btn btn-warning" })
                                 </div>
                             </div>
