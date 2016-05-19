@@ -395,7 +395,10 @@ namespace CapaPresentacion.Controllers.Intranet
 
         }
 
-
+        public ActionResult Ajustes()
+        {
+            return View();
+        }
 
     }
 }
