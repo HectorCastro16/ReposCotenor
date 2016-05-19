@@ -3,55 +3,152 @@
 @{
     ViewBag.Title = "Venta";
     Layout = "~/Views/MasterPage.cshtml";
-}
+}             <h2></h2>
+                    <form method="post">
+
+                        <div class="col-lg-offset-1 col-md-4 col-sm-6">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="regular1">Accion</label>
+                                        @{// List<entAccionComercial> Lista1 = negArbolVenta.Instancia.ListaAcCbo();
+                                        <select id="Acccom" name="idAccCom" class="form-control">
+                                            <option value="0"><<<<<-Seleccionar->>>>></option>
+                                            @foreach (CapaEntidades.entAccionComercial ac
+                                        in CapaNegocio.negArbolVenta.Instancia.ListaAcCbo())
+                                            {
+                                                <option value="@ac.Acc_Id">@ac.Acc_Nombre</option>
+                                            }
+                                        </select>
+                                        }
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="regular1">Detalle</label>
+                                        <select id="detAccCom" name="DetaAccCom" class="form-control">
+                                            <option value="0"><<<<<-Seleccionar->>>>></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="regular1">Grupo</label>
+                                        <select id="grupCom" name="GrupCom" class="form-control">
+                                            <option value="0"><<<<<-Seleccionar->>>>></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="regular1">Categoria</label>
+                                        <select id="Cate" name="GrupCom" class="form-control">
+                                            <option value="0"><<<<<-Seleccionar->>>>></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="regular1">Producto</label>
+                                        <select id="Products" name="GrupCom" class="form-control">
+                                            <option value="0"><<<<<-Seleccionar->>>>></option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="regular1">Resultado</label>
+                                        <select id="Result" name="GrupCom" class="form-control">
+                                            <option value="0"><<<<<-Seleccionar->>>>></option>
+                                            <option value="1">Acepto</option>
+                                            <option value="2">Rechazo</option>
+                                            <option value="3">Pendiente</option>
+                                        </select>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <label for="textarea1">Descripcion</label>
+                                        <textarea name="Desc" id="textarea1" class="form-control" rows="2"></textarea>
+                                    </div>
+                                    <input type="submit" name="Guardar" value="Guardar">
+
+                                </div><!--end .card-body -->
+                            </div><!--end .card -->
+                            <em class="text-caption">ITN|CIBERTEC</em>
+                        </div><!--end .col -->
+                       
+                        <div id="MostrarForm" >
+                            <div id="mielemento">
+                                <div class="col-md-4 col-sm-6">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <div class="form-group floating-label">
+                                                <label for="regular2">Cliente</label>
+                                                <input type="text" class="form-control" id="regular2" name="cliente">
+                                            </div>
+                                            <div class="form-group floating-label">
+                                                <label for="regular2">RUC</label>
+                                                <input type="text" class="form-control" id="regular2" name="ruc">
+                                            </div>
+                                            <div class="form-group floating-label">
+                                                <label for="regular2">Empresa</label>
+                                                <input type="text" class="form-control" id="regular2" name="empresa">
+                                            </div>
+                                            <div class="form-group floating-label">
+                                                <label for="regular2">Direccion</label>
+                                                <input type="text" class="form-control" id="regular2" name="direccion">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label for="regular1">Departamento</label>
+                                                <select id="dept" name="depto" class="form-control">
+                                                    <option value="0"><<<<<-Seleccionar->>>>></option>
+                                                </select>
+                                            </div><div class="form-group">
+
+                                                <label for="regular1">Provincia</label>
+                                                <select id="prov" name="provin" class="form-control">
+                                                    <option value="0"><<<<<-Seleccionar->>>>></option>
+                                                </select>
+                                            </div><div class="form-group">
+                                                <label for="regular1">Distrito</label>
+                                                <select id="dist" name="distrit" class="form-control">
+                                                    <option value="0"><<<<<-Seleccionar->>>>></option>
+                                                </select>
+                                            </div><div class="form-group floating-label">
+                                                <label for="regular2">Fecha Nacimiento</label>
+                                                <input type="text" class="form-control" id="regular2" name="fnacim">
+                                            </div>
+                                            <div class="form-group floating-label">
+                                                <label for="regular2">Lugar Nacimiento</label>
+                                                <input type="text" class="form-control" id="regular2" name="lugnacimi">
+                                            </div><div class="form-group floating-label">
+                                                <label for="regular2">Correo</label><input type="text" class="form-control" id="regular2" name="correo">
+                                            </div>
+                                            <div class="form-group floating-label">
+                                                <label for="regular2">Telefono Ref</label>
+                                                <input type="text" class="form-control" id="regular2" name="telefref">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            </div>
+
+                    </form>
+              
 
 
-<h2 style="text-align:center">Venta</h2>
-<div style="position:absolute;left:100px">
 
-    <form method="post">
 
-        
-        <label>Accion</label>
-        <br>
-        @{
-           // List<entAccionComercial> Lista1 = negArbolVenta.Instancia.ListaAcCbo();
-        <select id="Acccom" name="idAccCom">
-            <option value="0"><<<<<-Seleccionar->>>>></option>
-              @foreach (CapaEntidades.entAccionComercial ac 
-                   in CapaNegocio.negArbolVenta.Instancia.ListaAcCbo()){
-                  <option value="@ac.Acc_Id">@ac.Acc_Nombre</option>
-              }
-            </select>
-            }
-        <br>
-        <label>Detalle</label>
-        <br>
-        <select id="detAccCom">
-            <option value="0"><<<<<-Seleccionar->>>>></option>
-        </select>
-        <br>
-        <label>Grupo</label>
-        <br>
-        <select id="grupCom">
-            <option value="0"><<<<<-Seleccionar->>>>></option>
-          
-        </select>
-        <br>
-        <label>Categoria</label>
-        <br>
-        <select id="Cate">
-            <option value="0"><<<<<-Seleccionar->>>>></option>
-           
-        </select>
-        <br>
-        <label>Producto</label>
-        <br>
-        <select id="Products">
-            <option value="0"><<<<<-Seleccionar->>>>></option>
-           
-        </select>
 
-    </form>
-</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
 

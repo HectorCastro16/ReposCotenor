@@ -75,7 +75,7 @@
             @Html.DisplayFor(modelItem => item.Asi_FechaRegistro)
         </td>
         <td>
-            @Html.ActionLink("LLAMAR","Venta", "AsesorVentasCall", new { /* id=item.PrimaryKey */ }) |
+            @Html.ActionLink("LLAMAR","Venta", "AsesorVentasCall", new {telef = item.Asi_NumTelf}) |
             @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
         </td>
     </tr>

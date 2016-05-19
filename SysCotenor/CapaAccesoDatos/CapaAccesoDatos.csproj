@@ -40,6 +40,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="datArbolUbigeo.cs" />
     <Compile Include="datArbolVenta.cs" />
     <Compile Include="datAsLlamadas.cs" />
     <Compile Include="datSucursal.cs" />

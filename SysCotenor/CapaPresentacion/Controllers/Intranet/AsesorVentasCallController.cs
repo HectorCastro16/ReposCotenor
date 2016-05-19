@@ -34,8 +34,11 @@ namespace CapaPresentacion.Controllers.Intranet
             }
         }
 
-        public ActionResult Venta(){
+      
+
+        public ActionResult Venta(String telef){
             try{
+                ViewBag.telef = telef;
                 return View();
             }
             catch (Exception e){
@@ -46,9 +49,9 @@ namespace CapaPresentacion.Controllers.Intranet
         public ActionResult Venta(FormCollection frm){
             try{
 
-                //String id = frm["Cbo_ac"].ToString();
-                //Int32 i = Convert.ToInt32(frm["Cbo_ac"]);
-                
+                String id = frm["idAccCom"].ToString();
+                Int32 i = Convert.ToInt32(frm["DetaAccCom"]);
+                String cliente = frm["cliente"].ToString();
                 return RedirectToAction("Venta");
             }
             catch (Exception e){
@@ -57,7 +60,35 @@ namespace CapaPresentacion.Controllers.Intranet
             }
           }
 
-        #region --------------------------ArbolJSON----------------------------------
+        #region ArbolUbigeoJSON------------------------------------------------------------
+
+
+        public ActionResult LlenarDistJSON(int idprov)
+        {
+            var Lista = negArbolUbigeo.Instancia.ListarDist(Convert.ToInt32(idprov));
+            var JsonLista = Json(Lista.ToList(), JsonRequestBehavior.AllowGet);
+            return JsonLista;
+        }
+
+        public ActionResult LlenarProvJSON(int iddepat)
+        {
+            var Lista = negArbolUbigeo.Instancia.ListarProv(Convert.ToInt32(iddepat));
+            var JsonLista = Json(Lista.ToList(), JsonRequestBehavior.AllowGet);
+            return JsonLista;
+        }
+
+        public ActionResult LlenarDeptJSON()
+        {
+            var Lista = negArbolUbigeo.Instancia.ListarDept();
+            var JsonLista = Json(Lista.ToList(), JsonRequestBehavior.AllowGet);
+            return JsonLista;
+        }
+
+        #endregion ArbolUbigeoJSON
+
+
+
+        #region --------------------------ArbolVentaJSON----------------------------------
 
         public ActionResult LlenarDetAccComJSON(int idAccCom)
         {
