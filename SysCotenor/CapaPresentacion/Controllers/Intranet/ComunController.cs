@@ -327,8 +327,8 @@ namespace CapaPresentacion.Controllers.Intranet
                 entUsuario us = (entUsuario)Session["usuario"];
                 if (us != null)
                 {
-                    String idUsuDel = form["txtUserId"];
-                    Int16 idUser = Convert.ToInt16(idUsuDel);
+                    String idUsuBlo = form["txtUserId"];
+                    Int16 idUser = Convert.ToInt16(idUsuBlo);
                     entUsuario u = new entUsuario();
                     u.Usu_Id = idUser;
                     //para capturar el usuario en sesion////////////
@@ -364,8 +364,8 @@ namespace CapaPresentacion.Controllers.Intranet
                 entUsuario us = (entUsuario)Session["usuario"];
                 if (us != null)
                 {
-                    String idUsuDel = form["txtUserId"];
-                    Int16 idUser = Convert.ToInt16(idUsuDel);
+                    String idUsuAct = form["txtUserId"];
+                    Int16 idUser = Convert.ToInt16(idUsuAct);
                     entUsuario u = new entUsuario();
                     u.Usu_Id = idUser;
                     //para capturar el usuario en sesion////////////
