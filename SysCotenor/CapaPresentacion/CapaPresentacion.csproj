@@ -1981,10 +1981,6 @@
     <Content Include="Views\Comun\UpdUsuario.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\AsesorVentasCall\ListarMisLlamadas.cshtml" />
-    <Content Include="Views\AsesorVentasCall\Venta.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Inicio\PruebaUi.cshtml" />
   </ItemGroup>
   <ItemGroup>
