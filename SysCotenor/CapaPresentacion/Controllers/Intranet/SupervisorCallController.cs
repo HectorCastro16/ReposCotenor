@@ -23,7 +23,6 @@ namespace CapaPresentacion.Controllers.Intranet
             return View(u);
         }
 
-
         public ActionResult lstUsuariosEstadoAsignacionLlamadas()
         {
             entUsuario u = (entUsuario)Session["usuario"];
