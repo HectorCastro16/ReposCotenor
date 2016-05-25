@@ -23,6 +23,20 @@ namespace CapaNegocio
 
         #region metodos
 
+        public int ActualizaPass(Int32 iduser,String newpass,String pasactual){
+            try{
+                Int32 i = datUsuario.Instancia.ActualizaPass(iduser,newpass,pasactual);
+                if (i == 2){
+                    throw new ArithmeticException("La contraseña ingresada no existe");
+                }
+
+                return i;
+            }catch (Exception){
+                throw;
+            }
+          }
+
+
         public entUsuario VerificarAccesoIntranet(String prmstrLogin, String prmstrPassw)
         {
             try

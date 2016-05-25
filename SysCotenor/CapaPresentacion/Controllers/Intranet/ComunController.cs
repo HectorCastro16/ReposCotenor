@@ -19,6 +19,42 @@ namespace CapaPresentacion.Controllers.Intranet
             return View();
         }
 
+        public ActionResult ActualizarPass(FormCollection valida){
+            try
+            {
+                Int32 iduser = 0;
+                String newpass = "", passactual = "";
+                if (Session["usuario"] != null)
+                {
+                    entUsuario u = (entUsuario)Session["usuario"];
+                    iduser = u.Usu_Id;
+                    passactual = valida["passactual"];
+                    newpass = valida["pass2"].ToString();
+                }
+                int i = negUsuario.Instancia.ActualizaPass(iduser, newpass, passactual);
+                return RedirectToAction("Ajustes", new { mensaje = "Su contraseña se actualizao de manera correcta" });
+
+            }
+            catch (ArithmeticException ex){
+                return RedirectToAction("Ajustes", new { mensaje = ex.Message,tiperror=2});
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Error", "Error", new { mensaje = e.Message });
+            }
+        }
+
+        public ActionResult Ajustes(String mensaje,int? tiperror)
+        {
+            if (mensaje != null)
+            {
+                ViewBag.terror = tiperror;
+                ViewBag.message = mensaje;
+            }
+            return View();
+        }
+
+
         public ActionResult ListaUsuarios(String mensaje, Int16? identificador)
         {
             try
@@ -394,11 +430,6 @@ namespace CapaPresentacion.Controllers.Intranet
             }
 
         }
-
-        public ActionResult Ajustes()
-        {
-            return View();
-        }
-
+        
     }
 }

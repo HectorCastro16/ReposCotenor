@@ -2,15 +2,40 @@
     ViewBag.Title = "Ajustes";
     Layout = "~/Views/MasterPage.cshtml";
 }
+ 
+
+<script type="text/javascript">
+    function validartext(){
+        nuevapass = document.valida.pass1.value
+        confnuevapass = document.valida.pass2.value
+        if (nuevapass == confnuevapass)
+            return true
+        else
+            mensaje = '<div class="alert alert-danger">Las contraseñas no Coinciden</div>'
+            $("#mensaje").html(mensaje)
+        return false
+    }
+</script>
+
 <section>
     <div class="section-body">
-        <h2>Ajustes</h2>
         <div class="row">
             <div class="col-lg-3 col-md-4">
                 <article class="margin-bottom-xxl">
                     <p>
-                        Accordions make use of cards.
-                        A selected card is slightly larger than the folded cards.
+                        @if (ViewBag.message != null)
+                        {
+                            if (ViewBag.terror == 2) {
+                                <div class="alert alert-danger">
+                                    @ViewBag.message
+                                </div>
+                            }
+                            else{
+                                <div class="alert alert-success">
+                                    @ViewBag.message
+                                </div>
+                            }
+                        }
                     </p>
                 </article>
             </div><!--end .col -->
@@ -27,23 +52,33 @@
                         <div id="accordion1-1" class="collapse">
                             <div class="card-body">
                                 <p>Per at postea mediocritatem, vim numquam aliquid eu, in nam sale gubergren. Fuisset delicatissimi duo, qui ut animal noluisse erroribus. Ea eum veniam audire. Dicant vituperata consequuntur.</p>
-                                <form class="form" role="form">
+                                <form class="form" method="post" action="ActualizarPass" name="valida">
                                     <div class="row">
                                         <div class="form-group has-warning col-lg-offset-1">
-                                            <input type="password" class="form-control" id="warning7">
+                                            <input type="password" class="form-control" id="warning7" name="passactual">
                                             <label for="warning7">CONTRASEÑA ACTUAL</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group has-success col-lg-offset-1">
-                                            <input type="password" class="form-control" id="success7">
+                                            <input type="password" class="form-control" name="pass1">
                                             <label for="success7">CONTRASEÑA NUEVA</label>
                                         </div>
                                     </div>
                                     <div class="row">
                                         <div class="form-group has-success col-lg-offset-1">
-                                            <input type="password" class="form-control" id="success7">
+                                            <input type="password" class="form-control" name="pass2" >
                                             <label for="success7">REPETIR CONTRASEÑA NUEVA</label>
+                                        </div>
+                                    </div>   
+                                    <div class="row">
+                                            <div class="form-group has-success col-lg-offset-1" id="mensaje">
+                                           </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="form-group has-success col-lg-offset-1">
+                                                <button class="btn ink-reaction btn-raised btn-primary" type="submit" onclick="return validartext()">Actualizar Contraseña</button>
                                         </div>
                                     </div>
                                 </form>
@@ -230,3 +265,4 @@
         <!-- END THEMES -->
     </div>
 </section>
+

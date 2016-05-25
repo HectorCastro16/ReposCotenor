@@ -20,8 +20,7 @@ namespace CapaPresentacion.Controllers.Intranet
         {
             return View();
         }
-
-
+        
         public ActionResult ListarMisLlamadas(){
             try
             {
