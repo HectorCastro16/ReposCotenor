@@ -73,10 +73,6 @@ namespace CapaNegocio
             }
         }
 
-
-
-
-
         public List<entUsuario> ListaUsuariosCall(Int32 UsuarioId, Int32 SucursalId)
         {
             try
@@ -129,7 +125,6 @@ namespace CapaNegocio
             }
         }
 
-
         public int RegUsuarioSecurity(entUsuario u, Int16 TipoEdicion, String IpAcceso)
         {
             try
@@ -160,8 +155,7 @@ namespace CapaNegocio
             }
 
         }
-
-
+        
         public int InsUpdUsuario(entUsuario u, Int16 TipoEdicion)
         {
 

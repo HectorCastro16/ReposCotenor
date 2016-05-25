@@ -58,17 +58,7 @@ namespace CapaAccesoDatos
             return Lista;
         }
 
-
-
-
-
-
-
-
-
-
-
-
+        
         public List<entCategoria> ListarCatGorias(Int32 id_GrupCom)
         {
 
@@ -103,9 +93,6 @@ namespace CapaAccesoDatos
 
             return Lista;
         }
-
-
-
 
         public List<entGrupoComercial> ListarGrup_Com(Int32 id_DetAcc){
 

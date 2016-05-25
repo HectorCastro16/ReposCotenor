@@ -23,12 +23,29 @@ namespace CapaPresentacion.Controllers.Intranet
             return View();
         }
 
-        //public ActionResult ListaUsuarios(String mensaje)
-        //{
+        public ActionResult ListaSupervisores(String mensaje, Int16? identificador)
+        {
+            try
+            {
+                ViewBag.mensaje = mensaje;
+                ViewBag.identificador = identificador;
+                entUsuario u = (entUsuario)Session["usuario"];
+                if (u != null)
+                {
+                    List<entUsuario> Lista = negGerente.Instancia.ListaSupervisores();
+                    return View(Lista);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Inicio");
+                }
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("ListaSupervisores", "Gerente", new { mensaje = e.Message, identificador = 2 });
+            }           
+        }
 
-        //    ViewBag.mensaje = mensaje;
-        //    List<entUsuario> Lista = negUsuario.Instancia.ListaUsuarios();
-        //    return View(Lista);
-        //}
     }
+
 }

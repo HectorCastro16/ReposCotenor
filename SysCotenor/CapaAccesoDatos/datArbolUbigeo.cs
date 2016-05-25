@@ -116,16 +116,8 @@ namespace CapaAccesoDatos
             return Lista;
         }
 
-
-
-
-
-
-
-
+        
         #endregion metodos
-
-
 
 
     }

@@ -127,7 +127,6 @@ namespace CapaAccesoDatos
 
         public List<entUsuario> ListaUsuarios(Int32 UsuarioId,  Int32 SucursalId)
         {
-
             SqlCommand cmd = null;
             SqlDataReader dr = null;
             List<entUsuario> Lista = null;
@@ -163,7 +162,6 @@ namespace CapaAccesoDatos
                     u.Contador = 0;
                     Lista.Add(u);
                 }
-
             }
             catch (Exception e)
             {

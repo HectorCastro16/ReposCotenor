@@ -1990,6 +1990,9 @@
     <Content Include="Views\AsesorVentasCall\ListarMisLlamadas.cshtml" />
     <Content Include="Views\AsesorVentasCall\Venta.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Gerente\ListaSupervisores.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
