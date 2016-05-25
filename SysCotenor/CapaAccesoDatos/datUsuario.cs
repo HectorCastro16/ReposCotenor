@@ -26,6 +26,32 @@ namespace CapaAccesoDatos
 
         #region metodos
 
+        public int ActualizaPass(Int32 iduser,String newpass,String actualpass){
+            SqlCommand cmd = null;
+            int i = 0;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spActualizarPass", cn);
+                cmd.Parameters.AddWithValue("@idusuario", iduser);
+                cmd.Parameters.AddWithValue("@nuevapass", newpass);
+                cmd.Parameters.AddWithValue("@passactual", actualpass);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter p = new SqlParameter("@retorno", DbType.Int32);
+                p.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(p);
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                i  = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
+            }
+            catch (Exception){
+                throw;
+            }finally { cmd.Connection.Close();}
+            return i;
+        }
+
+
 
        public entUsuario VerificarAccesoIntranet(String prmstrLogin, String prmstrPassw)
         {
