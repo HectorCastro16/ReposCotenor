@@ -62,6 +62,42 @@ namespace CapaAccesoDatos
             return Lista;
         }
 
+        public List<entTipoUsuario> ListaTipoUsuarioSupervisores()
+        {
+
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entTipoUsuario> Lista = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListaTipoUsuarioSupervisores", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entTipoUsuario>();
+
+                while (dr.Read())
+                {
+                    entTipoUsuario t = new entTipoUsuario();
+                    t.TipUsu_Id = Convert.ToInt32(dr["TipUsu_Id"]);
+                    t.TipUsu_Codigo = dr["TipUsu_Codigo"].ToString();
+                    t.TipUsu_Nombre = dr["TipUsu_Nombre"].ToString();
+                    Lista.Add(t);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+            return Lista;
+        }
+
+
         #endregion Metodos
     }
 }

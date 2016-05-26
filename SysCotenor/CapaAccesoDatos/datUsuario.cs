@@ -342,6 +342,40 @@ namespace CapaAccesoDatos
 
         }
 
+        public int InsUpdDelBloActSuper(String cadXML)
+        {
+
+            SqlCommand cmd = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spIsnUpdDelBloActSupervisor", cn);
+                cmd.Parameters.AddWithValue("@prmstrCadXML", cadXML);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                //creamos el parametro de retorno
+                SqlParameter m = new SqlParameter("@retorno", DbType.Int32);
+                m.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(m);
+                //fin parametro
+                cn.Open();
+                cmd.ExecuteNonQuery();
+
+                int i = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
+
+                return i;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+        }
 
         public int ValidaDni(Int32 dni) {
             SqlCommand cmd = null;

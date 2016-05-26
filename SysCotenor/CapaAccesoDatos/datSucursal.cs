@@ -45,7 +45,6 @@ namespace CapaAccesoDatos
                     s.Suc_Nombre = dr["Suc_Nombre"].ToString();
                     Lista.Add(s);
                 }
-
             }
             catch (Exception)
             {
@@ -54,6 +53,35 @@ namespace CapaAccesoDatos
             return Lista;
         }
 
+        public List<entSucursal> ListaSucursal()
+        {
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entSucursal> Lista = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListaSucursal", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entSucursal>();
+
+                while (dr.Read())
+                {
+                    entSucursal s = new entSucursal();
+                    s.Suc_Id = Convert.ToInt32(dr["Suc_Id"]);
+                    s.Suc_Codigo = dr["Suc_Codigo"].ToString();
+                    s.Suc_Nombre = dr["Suc_Nombre"].ToString();
+                    Lista.Add(s);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return Lista;
+        }
 
 
         #endregion metodos
