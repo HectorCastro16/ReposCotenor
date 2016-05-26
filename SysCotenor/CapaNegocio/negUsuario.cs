@@ -245,6 +245,79 @@ namespace CapaNegocio
 
         }
 
+        public int InsUpdSupervisor(entUsuario u, Int16 TipoEdicion)
+        {
+            try
+            {
+                String cadXml = "";
+                cadXml += "<Persona ";
+                cadXml += "Per_Id='" + u.Persona.Per_Id + "' ";
+                cadXml += "Per_Nombres='" + u.Persona.Per_Nombres + "' ";
+                cadXml += "Per_Apellidos='" + u.Persona.Per_Apellidos + "' ";
+                cadXml += "Per_DNI='" + u.Persona.Per_DNI + "' ";
+                cadXml += "Per_Celular='" + u.Persona.Per_Celular + "' ";
+                cadXml += "Per_Correo='" + u.Persona.Per_Correo + "' ";
+                cadXml += "Per_Direccion='" + u.Persona.Per_Direccion + "' ";
+                cadXml += "Per_Foto='" + u.Persona.Per_Foto + "' ";
+                cadXml += "Per_FechaNacimiento='" + u.Persona.Per_FechaNacimiento.ToString("yyyy/MM/dd") + "' ";
+                cadXml += "Per_LugarNacimiento='" + u.Persona.Per_LugarNacimiento + "' ";
+                cadXml += "TipoEdicion='" + TipoEdicion + "'>";
+
+                    cadXml += "<Usuario ";
+                    cadXml += "Usu_Id='" + u.Usu_Id + "' ";
+                    cadXml += "Usu_TipUsu_Id='" + u.TipoUsuario.TipUsu_Id + "' ";
+                    cadXml += "Usu_Suc_Id='" + u.Sucursal.Suc_Id + "' ";
+                    cadXml += "Usu_FechaHasta='" + u.Usu_FechaHasta.ToString("yyyy/MM/dd") + "' ";
+                    cadXml += "Usu_UsuarioRegistro='" + u.Usu_UsuarioRegistro + "' ";
+                    cadXml += "Usu_UsuarioModificacion='" + u.Usu_UsuarioModificacion + "' ";
+                    cadXml += "Usu_Telefono='" + u.Usu_Telefono + "' ";
+                    cadXml += "TipoEdicion='" + TipoEdicion + "'/>";
+
+                cadXml += "</Persona>";
+                cadXml = "<root>" + cadXml + "</root>";
+
+                if (TipoEdicion == 1)
+                {
+                    Int32 Dni_Ingreso = Convert.ToInt32(u.Persona.Per_DNI);
+                    int val = datUsuario.Instancia.ValidaDni(Dni_Ingreso);
+                    if (val > 0)
+                    {
+                        throw new ApplicationException("DNI Ya Registrado");
+                    }
+                }
+
+                //variable i llega el resultado
+                int i = datUsuario.Instancia.InsUpdDelBloActSuper(cadXml);
+
+                if (TipoEdicion == 1)
+                {
+                    if (i <= 0)
+                    {
+                        throw new ApplicationException("No se Pudo Insertar a el trabajador");
+                    }
+                }
+                if (TipoEdicion == 2)
+                {
+                    if (i <= 0)
+                    {
+                        throw new ApplicationException("No se Pudo Editar a el trabajador");
+                    }
+                }
+
+                return i;
+
+            }
+            catch (ApplicationException ae)
+            {
+                throw ae;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+
+        }
         public int DelBloActUsurio(entUsuario u, Int16 TipoEdicion) {
             try
             {
@@ -256,6 +329,52 @@ namespace CapaNegocio
                 cadXml = "<root>" + cadXml + "</root>";
                 //variable i llega el resultado
                 int i = datUsuario.Instancia.InsUpdDelBloAct(cadXml);
+                if (TipoEdicion == 3)
+                {
+                    if (i <= 0)
+                    {
+                        throw new ApplicationException("No se Pudo Eliminar a el trabajador");
+                    }
+                }
+                if (TipoEdicion == 4)
+                {
+                    if (i <= 0)
+                    {
+                        throw new ApplicationException("No se Pudo Bloquear a el trabajador");
+                    }
+                }
+                if (TipoEdicion == 4)
+                {
+                    if (i <= 0)
+                    {
+                        throw new ApplicationException("No se Pudo Activar a el trabajador");
+                    }
+                }
+                return i;
+            }
+            catch (ApplicationException ae)
+            {
+                throw ae;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
+        public int DelBloActSuper(entUsuario u, Int16 TipoEdicion)
+        {
+            try
+            {
+                String cadXml = "";
+                cadXml += "<Usuario ";
+                cadXml += "Usu_Id='" + u.Usu_Id + "' ";
+                cadXml += "Usu_UsuarioModificacion='" + u.Usu_UsuarioModificacion + "' ";
+                cadXml += "TipoEdicion='" + TipoEdicion + "'/>";
+                cadXml = "<root>" + cadXml + "</root>";
+                //variable i llega el resultado
+                int i = datUsuario.Instancia.InsUpdDelBloActSuper(cadXml);
                 if (TipoEdicion == 3)
                 {
                     if (i <= 0)

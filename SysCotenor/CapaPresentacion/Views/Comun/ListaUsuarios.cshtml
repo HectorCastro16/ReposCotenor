@@ -51,7 +51,7 @@
                                                 <th>Nº</th>
                                                 <th class="sort-alpha">Nombres y Apellidos</th>
                                                 <th class="sort-numeric">DNI</th>
-                                                <th class="sort-alpha">Correo</th>
+                                                @*<th class="sort-alpha">Correo</th>*@
                                                 <th class="sort-numeric">Celular</th>
                                                 <th class="sort-numeric">Telefono</th>
                                                 <th class="sort-alpha">Estado</th>
@@ -74,9 +74,9 @@
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.Persona.Per_DNI)
                                                     </td>
-                                                    <td>
+                                                    @*<td>
                                                         @Html.DisplayFor(modelItem => item.Persona.Per_Correo)
-                                                    </td>
+                                                    </td>*@
                                                     <td>
                                                         @Html.DisplayFor(modelItem => item.Persona.Per_Celular)
                                                     </td>

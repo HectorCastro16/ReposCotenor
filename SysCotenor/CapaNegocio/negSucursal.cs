@@ -32,6 +32,18 @@ namespace CapaNegocio
 
         }
 
+        public List<entSucursal> ListaSucursal()
+        {
+            try
+            {
+                return datSucursal.Instancia.ListaSucursal();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+
+        }
 
         # endregion metodos
 

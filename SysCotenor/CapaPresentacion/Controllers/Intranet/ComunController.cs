@@ -353,7 +353,6 @@ namespace CapaPresentacion.Controllers.Intranet
             {
                 return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
             }
-
         }
 
         public ActionResult BloUsuario(FormCollection form)
@@ -391,7 +390,6 @@ namespace CapaPresentacion.Controllers.Intranet
             {
                 return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
             }
-
         }
         public ActionResult ActUsuario(FormCollection form)
         {
@@ -428,7 +426,6 @@ namespace CapaPresentacion.Controllers.Intranet
             {
                 return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
             }
-
         }
         
     }

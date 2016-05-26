@@ -1,0 +1,128 @@
+﻿@model CapaEntidades.entUsuario
+
+@{
+    ViewBag.Title = "DetalleSupervisor";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+<section>
+    <div class="section-body">
+        <div class="card">
+            <div class="card-body">
+
+
+                <div class="row">
+                    <center>
+                        <h2>INFORMACION DE SUPERVISOR</h2>
+                    </center>
+                </div>
+                <br />
+                <div class="row">
+                    <div class="col-sm-3">
+                        <center>
+                            @*<img src="~/assets/img/avatar1.jpg" class="img-responsive" />*@
+                            <img src="~/assets/img/Fotos/@Html.DisplayFor(model => model.Persona.Per_Foto)" class="img-responsive" />
+                            <br />
+                            <div class="display-label">
+                                ESTADO
+                            </div>
+                            <div class="display-field">
+                                @Html.DisplayFor(model => model.Usu_Estado)
+                            </div>
+                        </center>
+                    </div>
+                    <form class="form" role="form">
+
+                        <div class="col-sm-3">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Usu_Codigo)" readonly>
+                                <label for="readonly5">CODIGO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.NombreCompleto)" readonly>
+                                <label for="readonly5">NOMBRES Y APELLIDOS</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_DNI)" readonly>
+                                <label for="readonly5">DNI</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Usu_Telefono)" readonly>
+                                <label for="readonly5">TELEFONO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_Direccion)" readonly>
+                                <label for="readonly5">DIRECCION</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_FechaNacimiento)" readonly>
+                                <label for="readonly5">FECHA NACIMIENTO</label>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-3">
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_LugarNacimiento)" readonly>
+                                <label for="readonly5">LUGAR NACIMIENTO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_Celular)" readonly>
+                                <label for="readonly5">CELULAR</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Usu_FechaHasta)" readonly>
+                                <label for="readonly5">FECHA HASTA</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.TipoUsuario.CodNomTipUsu)" readonly>
+                                <label for="readonly5">TIPO USUARIO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Sucursal.CodNomSuc)" readonly>
+                                <label for="readonly5">SUCURSAL</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Sucursal.DirCiuSuc)" readonly>
+                                <label for="readonly5">DIRECCION SUCURSAL</label>
+                            </div>
+
+                        </div>
+                        <div class="col-sm-3">
+
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Sucursal.Suc_Telefono)" readonly>
+                                <label for="readonly5">SUCRUSAL TELEFONO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Persona.Per_Correo)" readonly>
+                                <label for="readonly5">CORREO ELECTRONICO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Usu_UsuarioRegistro)" readonly>
+                                <label for="readonly5">USUARIO REGISTRO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Usu_FechaRegistro)" readonly>
+                                <label for="readonly5">FECHA REGISTRO</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Usu_UsuarioModificacion)" readonly>
+                                <label for="readonly5">USUARIO ULTIMA MODIFICACION</label>
+                            </div>
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="readonly5" value="@Html.DisplayFor(model => model.Usu_FechaModificacion)" readonly>
+                                <label for="readonly5">FECHA ULTIMA MODIFICACION</label>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+                <div class="row" style="text-align:right">
+                    <p>
+                        @Html.ActionLink("Regresar", "ListaSupervisores", "Gerente", htmlAttributes: new { @class = "btn btn-warning" })
+                    </p>
+                </div>
+            </div><!--end .card-body -->
+        </div>
+    </div><!--end .section-body -->
+</section>
