@@ -35,6 +35,29 @@ namespace CapaNegocio
             }
         }
 
+        public entUsuario DetalleSupervisor(Int32 UsuarioIdSuper)
+        {
+
+            try
+            {
+                entUsuario u = datGerente.Instancia.DetalleSupervisor(UsuarioIdSuper);
+                if (u == null)
+                {
+                    throw new ApplicationException("Supervisor no Encontrado");
+                }
+                return u;
+            }
+            catch (ApplicationException ae)
+            {
+                throw ae;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
         #endregion metodos
     }
 }

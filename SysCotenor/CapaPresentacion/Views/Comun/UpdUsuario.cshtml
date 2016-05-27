@@ -53,8 +53,8 @@
                             <div class="col-lg-4">
                                 @Html.HiddenFor(model => model.Persona.Per_Id)
                                 @Html.HiddenFor(model => model.Usu_Id)
-                                <input type="hidden" name="txtFoto"  value="@Model.Persona.Per_Foto" >
-                                
+                                <input type="hidden" name="txtFoto" value="@Model.Persona.Per_Foto">
+
                                 <div class="form-group">
                                     @{String required = "required";}
                                     @Html.TextBoxFor(model => model.Persona.Per_Nombres, new { @class = "form-control", data_rule_minlength = "2", required })
@@ -70,7 +70,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    @Html.TextBoxFor(model => model.Persona.Per_DNI, new { @class = "form-control", required, @data_rule_minlength = "8", @maxlength = "8", data_rule_number = "true", @onkeypress = "return valida(event)", @readonly= "readonly" })
+                                    @Html.TextBoxFor(model => model.Persona.Per_DNI, new { @class = "form-control", required, @data_rule_minlength = "8", @maxlength = "8", data_rule_number = "true", @onkeypress = "return valida(event)", @readonly = "readonly" })
                                     <label for="firstname" class="control-label">DNI</label>
                                 </div>
                             </div>
@@ -85,10 +85,10 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    @Html.TextBoxFor(model => model.Persona.Per_Correo, new { @class = "form-control" , type = "email" })
+                                    @Html.TextBoxFor(model => model.Persona.Per_Correo, new { @class = "form-control", type = "email" })
                                     <label for="firstname" class="control-label">Correo</label>
                                 </div>
-                            </div> 
+                            </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
                                     @Html.TextBoxFor(model => model.Usu_Telefono, new { @class = "form-control", data_rule_number = "true", @onkeypress = "return valida(event)" })
@@ -134,9 +134,9 @@
                                     <div class="input-group date" id="demo-date-format">
                                         <div class="input-group-content">
                                             @{
-                                                String feHasta = Model.Usu_FechaHasta.ToString("yyyy/MM/dd");
+                        String feHasta = Model.Usu_FechaHasta.ToString("yyyy/MM/dd");
 
-                                             }
+                                            }
                                             <input type="text" name="txtFecHasta" value="@feHasta" class="form-control" required>
                                             <label>Fecha Vigencia</label>
                                             <p class="help-block">yyyy/mm/dd</p>
@@ -161,12 +161,8 @@
                             </div>
                         </div>
                         <div class="row">
-
                         </div>
-
-
-                                        }
-
+                    }
                 </div><!--end .card-body -->
             </div><!--end .card -->
         </div><!--end .col -->

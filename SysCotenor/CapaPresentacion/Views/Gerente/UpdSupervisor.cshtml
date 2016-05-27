@@ -1,14 +1,15 @@
 ﻿@model CapaEntidades.entUsuario
 
 @{
-    ViewBag.Title = "InsUsuario";
+    ViewBag.Title = "UpdSupervisor";
     Layout = "~/Views/MasterPage.cshtml";
 }
+
 <div class="row">
     <div class="col-lg-12">
         <div class="card">
             <center>
-                <h2>NUEVO USUARIO</h2>
+                <h2>EDITAR SUPERVISOR</h2>
             </center>
         </div>
     </div>
@@ -43,13 +44,17 @@
                 <div class="card-body ">
 
 
-                    @using (Html.BeginForm("InsUsuario", "Comun", FormMethod.Post, new { @Class = "form form-validate basic-label", enctype = "multipart/form-data", novalidate = "novalidate", role = "form" }))
+                    @using (Html.BeginForm("UpdSupervisor", "Gerente", FormMethod.Post, new { @Class = "form form-validate basic-label", enctype = "multipart/form-data", novalidate = "novalidate", role = "form" }))
                     {@Html.AntiForgeryToken()
                         @Html.ValidationSummary(true)
 
                         //<form class="form form-validation" role="form" novalidate="novalidate">
                         <div class="row">
                             <div class="col-lg-4">
+                                @Html.HiddenFor(model => model.Persona.Per_Id)
+                                @Html.HiddenFor(model => model.Usu_Id)
+                                <input type="hidden" name="txtFoto" value="@Model.Persona.Per_Foto">
+
                                 <div class="form-group">
                                     @{String required = "required";}
                                     @Html.TextBoxFor(model => model.Persona.Per_Nombres, new { @class = "form-control", data_rule_minlength = "2", required })
@@ -59,13 +64,13 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    @Html.TextBoxFor(model => model.Persona.Per_Apellidos, new { @class = "form-control", data_rule_minlength = "2",required })
+                                    @Html.TextBoxFor(model => model.Persona.Per_Apellidos, new { @class = "form-control", data_rule_minlength = "2", required })
                                     <label for="dgsdgds" class="control-label">Apellidos</label>
                                 </div>
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    @Html.TextBoxFor(model => model.Persona.Per_DNI, new { @class = "form-control",required, @data_rule_minlength = "8", @maxlength = "8", data_rule_number = "true", @onkeypress = "return valida(event)" })
+                                    @Html.TextBoxFor(model => model.Persona.Per_DNI, new { @class = "form-control", required, @data_rule_minlength = "8", @maxlength = "8", data_rule_number = "true", @onkeypress = "return valida(event)", @readonly = "readonly" })
                                     <label for="firstname" class="control-label">DNI</label>
                                 </div>
                             </div>
@@ -74,27 +79,14 @@
 
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    @Html.TextBoxFor(model => model.Persona.Per_Celular, new { @class = "form-control",required, @data_rule_minlength = "9", @maxlength = "9", data_rule_number = "true", @onkeypress = "return valida(event)" })
+                                    @Html.TextBoxFor(model => model.Persona.Per_Celular, new { @class = "form-control", required, @data_rule_minlength = "9", @maxlength = "9", data_rule_number = "true", @onkeypress = "return valida(event)" })
                                     <label for="lastname" class="control-label">Celular</label>
                                 </div>
                             </div>
-                            <div class="col-lg-2">
+                            <div class="col-lg-4">
                                 <div class="form-group">
-                                    @Html.TextBoxFor(model => model.Persona.Per_Correo, new { @class = "form-control" })
+                                    @Html.TextBoxFor(model => model.Persona.Per_Correo, new { @class = "form-control", type = "email" })
                                     <label for="firstname" class="control-label">Correo</label>
-                                </div>
-                            </div>
-                            <div class="col-lg-2">
-                                <div class="form-group">
-                                    <select id="select1" name="dominio" class="form-control" required>
-                                        <option value="Seleccionar">&nbsp;</option>
-                                        <option value="hotmail.com">&#64;hotmail.com</option>
-                                        <option value="gmail.com">&#64;gmail.com</option>
-                                        <option value="outlook.com">&#64;outlook.com</option>
-                                        <option value="yahoo.com">&#64;yahoo.com</option>
-                                        <option value="Otros">Otros</option>
-                                    </select>
-                                    <label for="select1">Dominio</label>
                                 </div>
                             </div>
                             <div class="col-lg-4">
@@ -113,7 +105,7 @@
                             </div>
                             <div class="col-lg-4">
                                 <div class="form-group">
-                                    <input type="text" name="txtFecNac" class="form-control"  data-inputmask="'alias': 'date'" required>
+                                    <input type="text" name="txtFecNac" class="form-control" value="@Model.Persona.Per_FechaNacimiento" data-inputmask="'alias': 'date'" required>
                                     <label>Fecha de Nacimiento</label>
                                 </div>
                             </div>
@@ -127,13 +119,13 @@
                         <div class="row">
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    @Html.DropDownListFor(model => model.TipoUsuario.TipUsu_Id, (SelectList)ViewBag.ListaTipoUsuario, "", new { @class = "form-control",required })
+                                    @Html.DropDownListFor(model => model.TipoUsuario.TipUsu_Id, (SelectList)ViewBag.ListaTipoUsuario, "", new { @class = "form-control", required })
                                     <label for="tipousuario" class="control-label">Tipo Usuario</label>
                                 </div>
                             </div>
                             <div class="col-sm-4">
                                 <div class="form-group">
-                                    @Html.DropDownListFor(model => model.Sucursal.Suc_Id, (SelectList)ViewBag.ListaSucursal, "", new { @class = "form-control",required })
+                                    @Html.DropDownListFor(model => model.Sucursal.Suc_Id, (SelectList)ViewBag.ListaSucursal, "", new { @class = "form-control", required })
                                     <label for="sucursal" class="control-label">Sucursal</label>
                                 </div>
                             </div>
@@ -141,7 +133,11 @@
                                 <div class="form-group control-width-normal">
                                     <div class="input-group date" id="demo-date-format">
                                         <div class="input-group-content">
-                                            <input type="text" name="txtFecHasta" class="form-control" required>
+                                            @{
+                        String feHasta = Model.Usu_FechaHasta.ToString("yyyy/MM/dd");
+
+                                            }
+                                            <input type="text" name="txtFecHasta" value="@feHasta" class="form-control" required>
                                             <label>Fecha Vigencia</label>
                                             <p class="help-block">yyyy/mm/dd</p>
                                         </div>
@@ -159,19 +155,14 @@
                             </div>
                             <div class="col-lg-4">
                                 <div style="text-align:center">
-                                    <input type="submit" class="btn btn-success" value="Registrar" />
-                                    <input type="reset" class="btn btn-default" value="Borrar" />
-                                    @Html.ActionLink("Cancelar", "ListaUsuarios", null, htmlAttributes: new { @class = "btn btn-warning" })
+                                    <input type="submit" class="btn btn-success" value="Editar" />
+                                    @Html.ActionLink("Cancelar", "ListaSupervisores", "Gerente", htmlAttributes: new { @class = "btn btn-warning" })
                                 </div>
                             </div>
                         </div>
                         <div class="row">
-
                         </div>
-
-
                     }
-
                 </div><!--end .card-body -->
             </div><!--end .card -->
         </div><!--end .col -->
