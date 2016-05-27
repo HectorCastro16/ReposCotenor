@@ -327,6 +327,11 @@ namespace CapaNegocio
                 cadXml += "Usu_UsuarioModificacion='" + u.Usu_UsuarioModificacion + "' ";
                 cadXml += "TipoEdicion='" + TipoEdicion + "'/>";
                 cadXml = "<root>" + cadXml + "</root>";
+                
+                if(TipoEdicion ==3){
+                
+                
+                }
                 //variable i llega el resultado
                 int i = datUsuario.Instancia.InsUpdDelBloAct(cadXml);
                 if (TipoEdicion == 3)
