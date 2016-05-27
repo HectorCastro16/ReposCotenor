@@ -57,6 +57,7 @@
     <Compile Include="entGrupoComercial.cs" />
     <Compile Include="entPedido.cs" />
     <Compile Include="entPersona.cs" />
+    <Compile Include="entPersona_Telefono.cs" />
     <Compile Include="entPlazoAtencion.cs" />
     <Compile Include="entPrecio.cs" />
     <Compile Include="entProducto.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="entProvincia.cs" />
     <Compile Include="entSegmento.cs" />
     <Compile Include="entSucursal.cs" />
+    <Compile Include="entTelefono.cs" />
     <Compile Include="entTipoUsuario.cs" />
     <Compile Include="entUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
