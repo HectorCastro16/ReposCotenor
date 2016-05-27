@@ -5,11 +5,13 @@
     Layout = "~/Views/MasterPage.cshtml";
 }
 
-<script type="text/javascript">
+@*--- no permite la funcion control+ c para pegar 
+
+    <script type="text/javascript">
         function validarField(ex) {
             tecla = (document.all) ? ex.keyCode : ex.which;
             //Tecla de retroceso para borrar, siempre la permite
-            if (tecla == 8) {
+            if (tecla == 67 || tecla == 17) {
                 return true;
             }
             // Patron de entrada, en este caso solo acepta numeros
@@ -21,7 +23,7 @@
         function validarFecha(f) {
             tecla = (document.all) ? f.keyCode : f.which;
             //Tecla de retroceso para borrar, siempre la permite
-            if (tecla == 8) {
+            if (tecla == 8 || tecla == 67 || tecla == 86) {
                 return true;
             }
             // Patron de entrada, en este caso solo acepta numeros
@@ -29,7 +31,7 @@
             tecla_final = String.fromCharCode(tecla);
             return patron.test(tecla_final);
         }
-</script>
+</script>*@
 <div id="content">
     <section>
         <div class="card card-bordered style-accent">
@@ -68,7 +70,7 @@
                                                     String Asi_FechInicioCliente = ac.Asi_FechInicioCliente;
                                                     Session.Remove("asllamadas");
                                                     <tr>
-                                                        <td><input type="text" name="telefono" value="@Asi_NumTelf"></td>
+                                                        <td><input type="text" name="telefono" value="@Asi_NumTelf" onkeypress="return validarField(event)" maxlength="9"></td>
                                                         <td><input type="text" name="cliente" value="@Cliente"></td>
                                                         <td><input type="text" name="f1" value="@Asi_F1" onkeypress="return validarField(event)"></td>
                                                         <td><input type="text" name="f2" value="@Asi_F2" onkeypress="return validarField(event)"></td>
@@ -80,11 +82,11 @@
                                                 else
                                                 {
                                                     <tr>
-                                                        <td><input type="text" name="telefono" onkeypress="return valida(event)" maxlength="9"></td>
+                                                        <td><input type="text" name="telefono" onkeypress="return validarField(event)" maxlength="9"></td>
                                                         <td><input type="text" name="cliente"></td>
-                                                        <td><input type="text" name="f1" value="0.0" onkeypress="return validarField(event)"></td>
-                                                        <td><input type="text" name="f2" value="0.0" onkeypress="return validarField(event)"></td>
-                                                        <td><input type="text" name="f3" value="0.0" onkeypress="return validarField(event)"></td>
+                                                        <td><input type="text" name="f1" value="0" onkeypress="return validarField(event)"></td>
+                                                        <td><input type="text" name="f2" value="0" onkeypress="return validarField(event)"></td>
+                                                        <td><input type="text" name="f3" value="0" onkeypress="return validarField(event)"></td>
                                                         <td><input type="text" name="sva"></td>
                                                         <td><input type="text" name="iniciovigencia" value="01/01/0001" onkeypress="return validarFecha(event)"></td>
                                                     </tr>

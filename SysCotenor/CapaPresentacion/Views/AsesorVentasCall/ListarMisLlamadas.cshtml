@@ -36,7 +36,8 @@
         </th>
         <th>
             FF/hh-Registro
-        </th>       
+        </th>    
+           
         <th></th>
     </tr>
    @{ int i = 0;}
@@ -75,8 +76,8 @@
             @Html.DisplayFor(modelItem => item.Asi_FechaRegistro)
         </td>
         <td>
-            @Html.ActionLink("LLAMAR","Venta", "AsesorVentasCall", new {telef = item.Asi_NumTelf}) |
-            @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+            <a href="@Url.Action("Venta", "AsesorVentasCall", new {telef = item.Asi_NumTelf})" target="_blank">LLAMAR</a> ||       
+            @Html.ActionLink("DETALLE","Details", "Details", new { /* id=item.PrimaryKey */ })
         </td>
     </tr>
 }

@@ -42,6 +42,7 @@
     <Compile Include="negArbolUbigeo.cs" />
     <Compile Include="negArbolVenta.cs" />
     <Compile Include="negAsLlamadas.cs" />
+    <Compile Include="negCliente.cs" />
     <Compile Include="negGerente.cs" />
     <Compile Include="negSucursal.cs" />
     <Compile Include="negTipoUsuario.cs" />

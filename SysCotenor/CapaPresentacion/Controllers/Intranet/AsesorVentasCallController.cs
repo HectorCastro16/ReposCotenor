@@ -20,6 +20,8 @@ namespace CapaPresentacion.Controllers.Intranet
         {
             return View();
         }
+
+        
         
         public ActionResult ListarMisLlamadas(){
             try
@@ -37,7 +39,10 @@ namespace CapaPresentacion.Controllers.Intranet
 
         public ActionResult Venta(String telef){
             try{
-                ViewBag.telef = telef;
+
+                entCliente c = negCliente.Instancia.BuscaCliente(telef);
+                var cliente = c;
+                ViewBag.cliente = cliente;
                 return View();
             }
             catch (Exception e){

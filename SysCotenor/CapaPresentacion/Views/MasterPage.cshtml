@@ -550,7 +550,7 @@
         }
     </script>
 
-
+  
 
 
     <script type="text/javascript">
@@ -559,7 +559,7 @@
             if ($("#Result").val() == "1") {
                 //  var result = '<div class="col-md-4 col-sm-6"><div class="card"><div class="card-body"><div class="form-group floating-label"><label for="regular2">Cliente</label><input type="text" class="form-control" id="regular2" name="cliente"></div><div class="form-group floating-label"><label for="regular2">RUC</label><input type="text" class="form-control" id="regular2" name="ruc"></div><div class="form-group floating-label"><label for="regular2">Empresa</label><input type="text" class="form-control" id="regular2" name="empresa"></div><div class="form-group floating-label"><label for="regular2">Direccion</label><input type="text" class="form-control" id="regular2" name="direccion"></div><div class="form-group"><label for="regular1">Accion</label><select id="dept" name="depto" class="form-control"><option value="0"><<<<<-Seleccionar->>>>></option></select></div><div class="form-group"><label for="regular1">Detalle</label><select id="prov" name="provin" class="form-control"><option value="0"><<<<<-Seleccionar->>>>></option></select></div><div class="form-group"><label for="regular1">Grupo</label><select id="dist" name="distrit" class="form-control"><option value="0"><<<<<-Seleccionar->>>>></option></select></div><div class="form-group floating-label"><label for="regular2">Fecha Nacimiento</label><input type="text" class="form-control" id="regular2" name="fnacim"></div><div class="form-group floating-label"><label for="regular2">Lugar Nacimiento</label><input type="text" class="form-control" id="regular2" name="lugnacimi"></div><div class="form-group floating-label"><label for="regular2">Correo</label><input type="text" class="form-control" id="regular2" name="correo"></div><div class="form-group floating-label"><label for="regular2">Telefono Ref</label><input type="text" class="form-control" id="regular2" name="telefref"></div></div></div></div>'
                 $("#MostrarForm").show();
-                dept();
+                //dept();
             } else {
 
                 $("#MostrarForm").hide(true);
@@ -567,18 +567,19 @@
         });
     </script>
 
-    <script type="text/javascript">
+    @*<script type="text/javascript">
         var dept = function () {
             $.getJSON('@Url.Action("LlenarDeptJSON", "AsesorVentasCall")',
          function (data) {
-             var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+            var opciones ='<option value="0"><<<<<-Seleccionar->>>>></option>';
              $.each(data, function (i, item) {
+                
                  opciones += '<option value="' + item.idDepa + '">' + item.departamento + '</option>'
              });
              $("#dept").html(opciones);
          })
         }
-    </script>
+    </script>*@
 
     <script type="text/javascript">
         $("#dept").change(function () {

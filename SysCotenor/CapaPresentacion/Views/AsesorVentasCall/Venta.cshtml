@@ -1,5 +1,4 @@
-﻿
-
+﻿@using CapaEntidades
 @{
     ViewBag.Title = "Venta";
     Layout = "~/Views/MasterPage.cshtml";
@@ -72,6 +71,44 @@
                             <em class="text-caption">ITN|CIBERTEC</em>
                         </div><!--end .col -->
                        
+                        @{
+                            String cliente = "";
+                            String ruc = "";
+                            String empresa = "";
+                            String dni = "";
+                            String direccion = "";
+                            int iddepa = 0;
+                            String departamento = "";
+                            int idprov = 0;
+                            String provincia = "";
+                            int iddistr = 0;
+                            String distrito = "";
+                            String fechanacimiento = "";
+                            String lugnacimiento = "";
+                            String correo = "";
+                            String teelfref = "";
+                            if (ViewBag.cliente != null)
+                            {
+                                entCliente c = (entCliente)ViewBag.cliente;
+                                cliente = c.Persona_telef.persona.Per_Nombres + c.Persona_telef.persona.Per_Apellidos;
+                                ruc = c.Cli_Ruc;
+                                empresa = c.Cli_Empresa;
+                                dni = c.Persona_telef.persona.Per_DNI;
+                                direccion = c.Persona_telef.persona.Per_Direccion;
+                                iddepa = c.Cli_Depardamento.idDepa;
+                                departamento = c.Cli_Depardamento.departamento;
+                                idprov = c.Cli_Provincia.idProv;
+                                provincia = c.Cli_Provincia.provincia;
+                                iddistr = c.Cli_Distrito.idDist;
+                                distrito = c.Cli_Distrito.distrito;
+                                direccion = c.Persona_telef.persona.Per_Direccion;
+                                fechanacimiento = c.Persona_telef.persona.Per_FechaNacimiento.ToString();
+                                lugnacimiento = c.Persona_telef.persona.Per_LugarNacimiento;
+                                correo = c.Persona_telef.persona.Per_Correo;
+                                teelfref = c.Persona_telef.persona.Per_Celular;
+                            }
+                        }
+
                         <div id="MostrarForm" >
                             <div id="mielemento">
                                 <div class="col-md-4 col-sm-6">
@@ -79,50 +116,83 @@
                                         <div class="card-body">
                                             <div class="form-group floating-label">
                                                 <label for="regular2">Cliente</label>
-                                                <input type="text" class="form-control" id="regular2" name="cliente">
+                                                <input type="text" class="form-control" id="regular2" value="@cliente" name="cliente">
                                             </div>
                                             <div class="form-group floating-label">
                                                 <label for="regular2">RUC</label>
-                                                <input type="text" class="form-control" id="regular2" name="ruc">
+                                                <input type="text" class="form-control" id="regular2" value="@ruc"  name="ruc">
                                             </div>
                                             <div class="form-group floating-label">
                                                 <label for="regular2">Empresa</label>
-                                                <input type="text" class="form-control" id="regular2" name="empresa">
+                                                <input type="text" class="form-control" id="regular2" value="@empresa" name="empresa">
                                             </div>
+
+                                            <div class="form-group floating-label">
+                                                <label for="regular2">DNI</label>
+                                                <input type="text" class="form-control" id="regular2" value="@dni" name="dni">
+                                            </div>
+
                                             <div class="form-group floating-label">
                                                 <label for="regular2">Direccion</label>
-                                                <input type="text" class="form-control" id="regular2" name="direccion">
+                                                <input type="text" class="form-control" id="regular2" value="@direccion" name="direccion">
                                             </div>
 
                                             <div class="form-group">
                                                 <label for="regular1">Departamento</label>
                                                 <select id="dept" name="depto" class="form-control">
-                                                    <option value="0"><<<<<-Seleccionar->>>>></option>
+                                                    @if (iddepa != 0){
+                                                        <option value="@iddepa">@departamento</option>
+                                                    }
+                                                    else
+                                                    {
+                                                        <option value="0"><<<<<-Seleccionar->>>>></option>
+                                                    }@foreach (CapaEntidades.entDepartamento d in CapaNegocio.negArbolUbigeo.Instancia.ListarDept())
+                                                    {
+                                                        <option value="@d.idDepa">@d.departamento</option>
+                                                    }
+
                                                 </select>
                                             </div><div class="form-group">
 
                                                 <label for="regular1">Provincia</label>
                                                 <select id="prov" name="provin" class="form-control">
+                                                   @if (idprov != 0)
+                                                   {
+                                                    <option value="@idprov">@provincia</option>
+                                                   }
+                                                   else
+                                                   {
                                                     <option value="0"><<<<<-Seleccionar->>>>></option>
+                                                   }
+
                                                 </select>
                                             </div><div class="form-group">
                                                 <label for="regular1">Distrito</label>
                                                 <select id="dist" name="distrit" class="form-control">
+                                                   @if (iddistr != 0)
+                                                   {
+                                                    <option value="@iddistr">@distrito</option>
+                                                   }
+                                                   else
+                                                   {
                                                     <option value="0"><<<<<-Seleccionar->>>>></option>
+                                                   }
+
                                                 </select>
                                             </div><div class="form-group floating-label">
                                                 <label for="regular2">Fecha Nacimiento</label>
-                                                <input type="text" class="form-control" id="regular2" name="fnacim">
+                                                <input type="text" class="form-control" id="regular2" value="@fechanacimiento" name="fnacim">
                                             </div>
                                             <div class="form-group floating-label">
                                                 <label for="regular2">Lugar Nacimiento</label>
-                                                <input type="text" class="form-control" id="regular2" name="lugnacimi">
-                                            </div><div class="form-group floating-label">
-                                                <label for="regular2">Correo</label><input type="text" class="form-control" id="regular2" name="correo">
+                                                <input type="text" class="form-control" id="regular2" value="@lugnacimiento" name="lugnacimi">
+                                            </div>
+                                            <div class="form-group floating-label">
+                                                <label for="regular2">Correo</label><input type="text" class="form-control" value="@correo" id="regular2" name="correo">
                                             </div>
                                             <div class="form-group floating-label">
                                                 <label for="regular2">Telefono Ref</label>
-                                                <input type="text" class="form-control" id="regular2" name="telefref">
+                                                <input type="text" class="form-control" id="regular2" value="@teelfref" name="telefref">
                                             </div>
                                         </div>
                                     </div>
