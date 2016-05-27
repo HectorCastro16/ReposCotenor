@@ -2,17 +2,17 @@
     ViewBag.Title = "Ajustes";
     Layout = "~/Views/MasterPage.cshtml";
 }
- 
+
 
 <script type="text/javascript">
-    function validartext(){
+    function validartext() {
         nuevapass = document.valida.pass1.value
         confnuevapass = document.valida.pass2.value
         if (nuevapass == confnuevapass)
             return true
         else
-            mensaje = '<div class="alert alert-danger">Las contraseñas no Coinciden</div>'
-            $("#mensaje").html(mensaje)
+            mensaje = '<div class="alert alert-callout alert-danger"><strong>¡Oh no!</strong> Las contraseñas no coinciden.</div>'
+        $("#mensaje").html(mensaje)
         return false
     }
 </script>
@@ -20,18 +20,23 @@
 <section>
     <div class="section-body">
         <div class="row">
-            <div class="col-lg-3 col-md-4">
+            <div class="col-lg-12 col-md-12">
                 <article class="margin-bottom-xxl">
                     <p>
                         @if (ViewBag.message != null)
                         {
-                            if (ViewBag.terror == 2) {
-                                <div class="alert alert-danger">
+                            if (ViewBag.terror == 2)
+                            {
+                                <div class="alert alert-callout alert-danger">
+                                    <strong>¡Oh no!</strong>
+
                                     @ViewBag.message
                                 </div>
                             }
-                            else{
-                                <div class="alert alert-success">
+                            else
+                            {
+                                <div class="alert alert-callout alert-success">
+                                    <strong>¡Bien!</strong>
                                     @ViewBag.message
                                 </div>
                             }
@@ -51,7 +56,6 @@
                         </div>
                         <div id="accordion1-1" class="collapse">
                             <div class="card-body">
-                                <p>Per at postea mediocritatem, vim numquam aliquid eu, in nam sale gubergren. Fuisset delicatissimi duo, qui ut animal noluisse erroribus. Ea eum veniam audire. Dicant vituperata consequuntur.</p>
                                 <form class="form" method="post" action="ActualizarPass" name="valida">
                                     <div class="row">
                                         <div class="form-group has-warning col-lg-offset-1">
@@ -67,25 +71,32 @@
                                     </div>
                                     <div class="row">
                                         <div class="form-group has-success col-lg-offset-1">
-                                            <input type="password" class="form-control" name="pass2" >
+                                            <input type="password" class="form-control" name="pass2">
                                             <label for="success7">REPETIR CONTRASEÑA NUEVA</label>
                                         </div>
-                                    </div>   
+                                    </div>
                                     <div class="row">
-                                            <div class="form-group has-success col-lg-offset-1" id="mensaje">
-                                           </div>
+                                        <div class="form-group has-success col-lg-offset-1" id="mensaje">
+                                        </div>
                                     </div>
 
                                     <div class="row">
                                         <div class="form-group has-success col-lg-offset-1">
-                                                <button class="btn ink-reaction btn-raised btn-primary" type="submit" onclick="return validartext()">Actualizar Contraseña</button>
+                                            <button class="btn ink-reaction btn-raised btn-primary" type="submit" onclick="return validartext()">Actualizar Contraseña</button>
                                         </div>
                                     </div>
                                 </form>
+                                <blockquote>
+                                    <p>
+                                        Es aconsejable cambiar las contraseñas de manera periódica, como también considerar que no debe llevar menos de 8
+                                        caracteres y que estos se convinen entre letras mayusculas y minusculas, simbolos y números. Todo ello con el propósito
+                                        de mantener a salvo la información que usted maneja.
+                                    </p>
+                                    <footer>Equipo de Tecnologías de la Información</footer>
+                                </blockquote>
                             </div>
                         </div>
                     </div><!--end .panel -->
-
                     <div class="card panel">
                         <div class="card-head collapsed" data-toggle="collapse" data-parent="#accordion1" data-target="#accordion1-2">
                             <header>Temas</header>
@@ -110,11 +121,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="card-body small-padding text-center">
-                                                        <span class="text-default-dark">Default theme</span>
+                                                        <span class="text-default-dark">Normal</span>
                                                     </div>
-                                                </div><!--end .card -->
+                                                </div>
                                             </a>
-                                        </div><!--end .col -->
+                                        </div>
                                         <div class="col-sm-4">
                                             <a href="theme-1" class="clearfix">
                                                 <div class="card card-tiles ">
@@ -127,11 +138,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="card-body small-padding text-center">
-                                                        <span class="text-default-dark">Theme 1</span>
+                                                        <span class="text-default-dark">Celeste</span>
                                                     </div>
-                                                </div><!--end .card -->
+                                                </div>
                                             </a>
-                                        </div><!--end .col -->
+                                        </div>
                                         <div class="col-sm-4">
                                             <a href="theme-2" class="clearfix">
                                                 <div class="card card-tiles ">
@@ -144,12 +155,12 @@
                                                         </div>
                                                     </div>
                                                     <div class="card-body small-padding text-center">
-                                                        <span class="text-default-dark">Theme 2</span>
+                                                        <span class="text-default-dark">Naranja</span>
                                                     </div>
-                                                </div><!--end .card -->
+                                                </div>
                                             </a>
-                                        </div><!--end .col -->
-                                    </div><!--end .row -->
+                                        </div>
+                                    </div>
                                     <div class="row">
                                         <div class="col-sm-4">
                                             <a href="theme-3" class="clearfix">
@@ -163,13 +174,13 @@
                                                         </div>
                                                     </div>
                                                     <div class="card-body small-padding text-center">
-                                                        <span class="text-default-dark">Theme 3</span>
+                                                        <span class="text-default-dark">Azul</span>
                                                     </div>
-                                                </div><!--end .card -->
+                                                </div>
                                             </a>
-                                        </div><!--end .col -->
+                                        </div>
                                         <div class="col-sm-4">
-                                            <a href="theme-4" class="clearfix">
+                                            <a href="theme-4" id="4" class="clearfix">
                                                 <div class="card card-tiles ">
                                                     <div class="row">
                                                         <div class="col-xs-8">
@@ -180,11 +191,11 @@
                                                         </div>
                                                     </div>
                                                     <div class="card-body small-padding text-center">
-                                                        <span class="text-default-dark">Theme 4</span>
+                                                        <span class="text-default-dark">Verde</span>
                                                     </div>
-                                                </div><!--end .card -->
+                                                </div>
                                             </a>
-                                        </div><!--end .col -->
+                                        </div>
                                         <div class="col-sm-4">
                                             <a href="theme-5" class="clearfix">
                                                 <div class="card card-tiles ">
@@ -197,17 +208,16 @@
                                                         </div>
                                                     </div>
                                                     <div class="card-body small-padding text-center">
-                                                        <span class="text-default-dark">Theme 5</span>
+                                                        <span class="text-default-dark">Rojo</span>
                                                     </div>
-                                                </div><!--end .card -->
+                                                </div>
                                             </a>
-                                        </div><!--end .col -->
-                                    </div><!--end .row -->
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div><!--end .panel -->
-
+                    </div>
                     <div class="card panel">
                         <div class="card-head collapsed" data-toggle="collapse" data-parent="#accordion1" data-target="#accordion1-3">
                             <header>Barra de menús y Cabecera</header>
@@ -224,45 +234,48 @@
                                             <div class="radio radio-styled">
                                                 <label>
                                                     <input type="radio" name="headerInversed" value="0" checked>
-                                                    <span>Light header</span>
+                                                    <span>Menú superior claro</span>
                                                 </label>
                                             </div>
                                             <div class="radio radio-styled">
                                                 <label>
                                                     <input type="radio" name="headerInversed" value="1">
-                                                    <span>Dark header</span>
+                                                    <span>Menú superior oscuro</span>
                                                 </label>
                                             </div>
                                         </div>
-                                    </div><!--end .card -->
-                                </div><!--end .col -->
+                                    </div>
+                                </div>
                                 <div class="col-sm-6">
                                     <div class="card">
                                         <div class="card-body">
                                             <div class="radio radio-styled">
                                                 <label>
                                                     <input type="radio" name="menubarInversed" value="0">
-                                                    <span>Light menubar</span>
+                                                    <span>Menú izquierdo claro</span>
                                                 </label>
                                             </div>
                                             <div class="radio radio-styled">
                                                 <label>
                                                     <input type="radio" name="menubarInversed" value="1" checked>
-                                                    <span>Dark menubar</span>
+                                                    <span>Menú izquierdo oscuro</span>
                                                 </label>
                                             </div>
                                         </div>
-                                    </div><!--end .card -->
-
-                                </div><!--end .col -->
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div><!--end .panel -->
-
-                </div><!--end .panel-group -->
-            </div><!--end .col -->
-        </div><!--end .row -->
-        <!-- END THEMES -->
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 </section>
-
+<script>
+    $("a").click(function () {
+        var oID = $(this).attr("id");
+        alert(oID);
+    });
+    
+</script>
