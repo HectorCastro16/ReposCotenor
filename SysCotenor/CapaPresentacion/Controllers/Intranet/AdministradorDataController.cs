@@ -3,22 +3,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using CapaEntidades;
-using CapaNegocio;
 
 namespace CapaPresentacion.Controllers.Intranet
 {
-    public class AdministradorController : Controller
+    public class AdministradorDataController : Controller
     {
         //
-        // GET: /Administrador/
+        // GET: /AdministradorData/
 
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult PrincipalAdministrador()
+        public ActionResult PrincipalAdministradorData()
         {
             return View();
         }

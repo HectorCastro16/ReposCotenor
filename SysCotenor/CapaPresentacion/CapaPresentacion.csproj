@@ -110,7 +110,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Error\ErrorController.cs" />
-    <Compile Include="Controllers\Intranet\AdministradorController.cs" />
+    <Compile Include="Controllers\Intranet\AdministradorDataController.cs" />
+    <Compile Include="Controllers\Intranet\AdministradorSistemaController.cs" />
     <Compile Include="Controllers\Intranet\AsesorVentasCallController.cs" />
     <Compile Include="Controllers\Intranet\AsesorVentasCampoController.cs" />
     <Compile Include="Controllers\Intranet\ComunController.cs" />
@@ -1637,9 +1638,6 @@
     <Content Include="Views\MasterPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Administrador\PrincipalAdministrador.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Gerente\PrincipalGerente.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -2001,6 +1999,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\Gerente\UpdSupervisor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdministradorData\PrincipalAdministradorData.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdministradorSistema\PrincipalAdministradorSistema.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
