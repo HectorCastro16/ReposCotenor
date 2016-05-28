@@ -45,7 +45,7 @@
 
                                     <div class="form-group">
                                         <label for="regular1">Producto</label>
-                                        <select id="Products" name="GrupCom" class="form-control">
+                                        <select id="Products" name="Prod" class="form-control">
                                             <option value="0"><<<<<-Seleccionar->>>>></option>
                                         </select>
                                     </div>
@@ -87,10 +87,13 @@
                             String lugnacimiento = "";
                             String correo = "";
                             String teelfref = "";
+                            int idcliente = 0;
+                            int idpersona = 0;
                             if (ViewBag.cliente != null)
                             {
                                 entCliente c = (entCliente)ViewBag.cliente;
-                                cliente = c.Persona_telef.persona.Per_Nombres + c.Persona_telef.persona.Per_Apellidos;
+                                idcliente = c.Cli_Id;
+                                cliente = c.Persona_telef.persona.Per_Nombres +" "+ c.Persona_telef.persona.Per_Apellidos;
                                 ruc = c.Cli_Ruc;
                                 empresa = c.Cli_Empresa;
                                 dni = c.Persona_telef.persona.Per_DNI;
@@ -106,6 +109,7 @@
                                 lugnacimiento = c.Persona_telef.persona.Per_LugarNacimiento;
                                 correo = c.Persona_telef.persona.Per_Correo;
                                 teelfref = c.Persona_telef.persona.Per_Celular;
+                                idpersona = c.Persona_telef.persona.Per_Id;
                             }
                         }
 
@@ -194,6 +198,17 @@
                                                 <label for="regular2">Telefono Ref</label>
                                                 <input type="text" class="form-control" id="regular2" value="@teelfref" name="telefref">
                                             </div>
+
+                                            <div class="form-group floating-label">
+                                                <label for="regular2">A pagar</label>
+                                                <input type="text" class="form-control" id="regular2" value="0" name="apagar">
+                                            </div>
+
+                                            <input type="text" name="idcliente" value="@idcliente">
+                                            <input type="text" name="idpersona" value="@idpersona">
+                                            <input type="text" name="telefono" value="@ViewBag.tel">
+
+
                                         </div>
                                     </div>
                                 </div>

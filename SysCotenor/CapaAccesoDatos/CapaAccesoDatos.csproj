@@ -45,6 +45,7 @@
     <Compile Include="datAsLlamadas.cs" />
     <Compile Include="datCliente.cs" />
     <Compile Include="datGerente.cs" />
+    <Compile Include="datPedido.cs" />
     <Compile Include="datSucursal.cs" />
     <Compile Include="datTipoUsuario.cs" />
     <Compile Include="datUsuario.cs" />
