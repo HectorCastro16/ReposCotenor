@@ -196,6 +196,7 @@ namespace CapaPresentacion.Controllers.Intranet
             Session.Remove("user");
         }
 
+
         private void CrearTablaSessionAsig(){
             try{
                 DataTable dt = new DataTable();
