@@ -45,7 +45,7 @@
                                         <td> @Html.DisplayFor(modelItem => item.Usu_Codigo)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Persona.NombreCompleto)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Contador)</td>
-                                        <td><a href="@Url.Action("Asignar Data", "ExtraerDatosAsignar", new { iduser = item.Usu_Id, usuario = item.Persona.NombreCompleto })" class="btn ink-reaction btn-info"><i class="md md-undo"></i> Asignar</a></td>
+                                        <td><a href="@Url.Action("ExtraerDatosAsignar", "SupervisorCall", new { iduser = item.Usu_Id, usuario = item.Persona.NombreCompleto })" class="btn ink-reaction btn-info"><i class="md md-undo"></i> Asignar</a></td>
                                     </tr>
                                 }
 

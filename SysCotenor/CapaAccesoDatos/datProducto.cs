@@ -1,0 +1,131 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using CapaEntidades;
+using System.Data.SqlClient;
+using System.Data;
+
+namespace CapaAccesoDatos
+{
+    public class datProducto
+    {
+        #region singleton
+        private static readonly datProducto _intancia = new datProducto();
+        public static datProducto Instancia {
+            get { return datProducto._intancia; }
+        }
+        #endregion singletom
+
+
+        #region metodos
+
+        public List<entPrecio> Listprec(){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entPrecio> Lista = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListaPrecio", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entPrecio>();
+                while (dr.Read())
+                {
+                    entPrecio p = new entPrecio();
+                    p.Pre_ID = Convert.ToInt32(dr["Pre_ID"]);
+                    p.Pre_producto = Convert.ToDouble(dr["Pre_producto"].ToString());
+                    Lista.Add(p);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { cmd.Connection.Close(); }
+            return Lista;
+        }
+
+
+
+        public List<entCategoria> Listacat(){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entCategoria> Lista = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListaCategoria", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entCategoria>();
+                while (dr.Read())
+                {
+                    entCategoria c = new entCategoria();
+                    c.Cat_Id = Convert.ToInt32(dr["Cat_Id"]);
+                    c.Cat_Nombre = dr["Cat_Nombre"].ToString();
+                    Lista.Add(c);
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { cmd.Connection.Close(); }
+            return Lista;
+        }
+
+
+        public List<entProducto> ListaProd(){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entProducto> Lista = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListaProducto", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entProducto>();
+                while (dr.Read())
+                {
+                    entProducto p = new entProducto();
+                    p.Pro_ID = Convert.ToInt32(dr["Pro_ID"]);
+                    p.Pro_Codigo = dr["Pro_Codigo"].ToString();
+                    p.Pro_Nombre = dr["Pro_Nombre"].ToString();
+                    p.Pro_Descripcion = dr["Pro_Descripcion"].ToString();
+                    p.Pro_Imagen = dr["Pro_Imagen"].ToString();
+                    entCategoria c = new entCategoria();
+                    c.Cat_Id = Convert.ToInt32(dr["Cat_Id"]);
+                    c.Cat_Nombre = dr["Cat_Nombre"].ToString();
+                    p.Categoria = c;
+                    entPrecio pr = new entPrecio();
+                    pr.Pre_ID = Convert.ToInt32(dr["Pre_ID"]);
+                    pr.Pre_producto = Convert.ToDouble(dr["Pre_producto"]);
+                    p.Precio = pr;
+                    Lista.Add(p);
+                }
+            }
+            catch (Exception){
+                throw;
+            }
+            finally { cmd.Connection.Close(); }
+            return Lista;
+        }
+
+
+        #endregion metodos
+
+
+
+
+    }
+}

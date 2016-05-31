@@ -19,6 +19,22 @@ namespace CapaPresentacion.Controllers.Intranet
             return View();
         }
 
+
+        public ActionResult Productos(){
+            try{
+
+                List<entProducto> ListaP= null;
+                ListaP = negProducto.Instancia.ListProd();
+                return View(ListaP);
+            }catch (Exception error){
+                return RedirectToAction("Error", "Error", new { mensaje = error.Message });
+            }
+
+        }
+
+
+
+
         public ActionResult ActualizarPass(FormCollection valida){
             try
             {

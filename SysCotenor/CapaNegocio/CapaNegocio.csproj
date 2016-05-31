@@ -45,6 +45,7 @@
     <Compile Include="negCliente.cs" />
     <Compile Include="negGerente.cs" />
     <Compile Include="negPedido.cs" />
+    <Compile Include="negProducto.cs" />
     <Compile Include="negSucursal.cs" />
     <Compile Include="negTipoUsuario.cs" />
     <Compile Include="negUsuario.cs" />
