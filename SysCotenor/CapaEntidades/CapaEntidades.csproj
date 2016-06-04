@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="entAccCom_DetAccCom.cs" />
     <Compile Include="entAccionComercial.cs" />
+    <Compile Include="entArticulo.cs" />
     <Compile Include="entAsigncionLlamadas.cs" />
     <Compile Include="entAsigncionUsuarios.cs" />
     <Compile Include="entCategoria.cs" />
@@ -63,6 +64,7 @@
     <Compile Include="entProducto.cs" />
     <Compile Include="entProductoContratado.cs" />
     <Compile Include="entProvincia.cs" />
+    <Compile Include="entSecurity.cs" />
     <Compile Include="entSegmento.cs" />
     <Compile Include="entSucursal.cs" />
     <Compile Include="entTelefono.cs" />

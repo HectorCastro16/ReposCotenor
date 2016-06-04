@@ -23,6 +23,30 @@ namespace CapaNegocio
 
         #region metodos
 
+        public List<entSecurity> ReturUltimoLogeo(int iduser){
+            try
+            {
+                return  datUsuario.Instancia.UltimAcceso(iduser);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public List<entArticulo> ListaArt(){
+            try
+            {
+                return datUsuario.Instancia.ListaArticluos();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public int ActualizaPass(Int32 iduser,String newpass,String pasactual){
             try{
                 Int32 i = datUsuario.Instancia.ActualizaPass(iduser,newpass,pasactual);

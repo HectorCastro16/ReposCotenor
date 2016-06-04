@@ -6,6 +6,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using System.IO;
+using System.Data;
 
 namespace CapaPresentacion.Controllers.Intranet
 {
@@ -19,8 +20,101 @@ namespace CapaPresentacion.Controllers.Intranet
             return View();
         }
 
+        public ActionResult Perfil(){
+            try {
+                entUsuario u = null;
+                if (Session["usuario"] != null) {
+                     u = (entUsuario)Session["usuario"]; }
+               List<entSecurity> s = null;
+                s = negUsuario.Instancia.ReturUltimoLogeo(u.Usu_Id);
+                ViewBag.security = s;
+                return View();
 
-        public ActionResult Productos(){
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Error", "Error", new { mensaje = e.Message });
+            }
+        }
+
+        public ActionResult NoticiasEtc(){
+            try
+            {
+                List<entArticulo> Lista = null;
+                Lista = negUsuario.Instancia.ListaArt();
+                return View(Lista);
+            }
+            catch (Exception ex)
+            {
+
+                return RedirectToAction("Error", "Error", new { mensaje = ex.Message });
+            }
+        }
+
+        public ActionResult NuewUpdateProducto(int? idprod,String mensaje){
+            try
+            {
+                entProducto p = new entProducto();
+                if (idprod != null){
+                     p = negProducto.Instancia.BuscaProd(Convert.ToInt32(idprod));
+                }
+
+                List<entCategoria> cat = negProducto.Instancia.ListCatego();
+                List<entPrecio> prec = negProducto.Instancia.ListPrec();
+                var categoria = new SelectList(cat, "Cat_Id", "Cat_Nombre");
+                var precio = new SelectList(prec, "Pre_ID", "Pre_producto");
+                ViewBag.c = categoria;
+                ViewBag.prec = precio;
+                ViewBag.message = mensaje;
+                return View(p);
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction("Error", "Error", new { mensaje = error.Message });
+            }
+          
+        }
+        [HttpPost]
+        public ActionResult NuewUpdateProducto(entProducto p,HttpPostedFileBase image)
+        {
+            try {
+                String usuario = "";
+                int tipoEdit = 0;
+                if (p.Pro_ID != 0)
+                {
+                    tipoEdit = 2;
+                }
+                else { tipoEdit = 1; }
+                if (Session["usuario"] != null) {
+                    entUsuario u = (entUsuario)Session["usuario"]; usuario = u.Usu_Login; }
+               
+                entProducto pr = p;
+                if (image != null && image.ContentLength > 0)
+                {
+                    pr.Pro_Imagen = Path.GetFileName(image.FileName);
+                }
+                else { pr.Pro_Imagen = "defaultimg.jpg"; }
+                int i = negProducto.Instancia.InsUpdProducto(pr, tipoEdit, usuario);
+                if (i > 0){
+                    if (image != null && image.ContentLength > 0){
+                        var nombrearchivo = Path.GetFileName(image.FileName);
+                        var ruta = Path.Combine(Server.MapPath("~/assets/img/Producto"), nombrearchivo);
+                        image.SaveAs(ruta);
+
+                    }
+                }
+                String mensajet = ""; if (tipoEdit == 2) mensajet = "Se Edito de Manera Correcta";
+                else if (tipoEdit == 1) mensajet = "Se Inserto de Manera Correcta"; 
+                return RedirectToAction("NuewUpdateProducto",new {mensaje= mensajet });
+            }
+            catch (Exception error)
+            {
+                return RedirectToAction("Error", "Error", new { mensaje = error.Message });
+            }
+        }
+
+        
+        public ActionResult ProductosList(){
             try{
 
                 List<entProducto> ListaP= null;
@@ -30,11 +124,7 @@ namespace CapaPresentacion.Controllers.Intranet
                 return RedirectToAction("Error", "Error", new { mensaje = error.Message });
             }
 
-        }
-
-
-
-
+        }      
         public ActionResult ActualizarPass(FormCollection valida){
             try
             {

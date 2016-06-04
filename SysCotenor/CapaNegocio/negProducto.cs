@@ -20,6 +20,44 @@ namespace CapaNegocio
         #region metodos
 
 
+        public entProducto BuscaProd(int idpro){
+            try
+            {
+                return datProducto.Instancia.BucsaProd(idpro);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int InsUpdProducto(entProducto p,int tipedic,String userRM){
+            try
+            {
+                String cadxml = "";
+                cadxml += "<producto ";
+                cadxml += "id='" + p.Pro_ID + "' ";
+                cadxml +="categoria='"+p.Categoria.Cat_Id+ "' ";
+                cadxml += "precio='" + p.Precio.Pre_ID + "' ";
+                cadxml += "nombre='" + p.Pro_Nombre + "' ";
+                cadxml += "descripcion='" + p.Pro_Descripcion + "' ";
+                cadxml += "imagen='" + p.Pro_Imagen + "' ";
+                cadxml+="tipoedicion='"+tipedic+ "' ";
+                cadxml+= "userRM='"+ userRM+ "'/>";
+
+                cadxml = "<root>" + cadxml + "</root>";
+                int i = datProducto.Instancia.InsertUpdateProd(cadxml);
+                return i;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+
+        }
+
         public List<entPrecio> ListPrec()
         {
             try

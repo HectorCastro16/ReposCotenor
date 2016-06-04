@@ -516,6 +516,11 @@
     <Content Include="assets\css\theme-default\materialadmin.css" />
     <Content Include="assets\css\theme-default\materialadmin_demo.css" />
     <Content Include="assets\css\theme-default\materialadmin_print.css" />
+    <Content Include="assets\img\ArticulosImg\comision.jpg" />
+    <Content Include="assets\img\ArticulosImg\deco.jpg" />
+    <Content Include="assets\img\ArticulosImg\default.jpg" />
+    <Content Include="assets\img\ArticulosImg\inicio.jpg" />
+    <Content Include="assets\img\ArticulosImg\trujillo.jpg" />
     <Content Include="assets\img\Asesor.jpg" />
     <Content Include="assets\img\avatar1.jpg" />
     <Content Include="assets\img\avatar10.jpg" />
@@ -535,6 +540,7 @@
     <Content Include="assets\img\img16.jpg" />
     <Content Include="assets\img\LICENSE.txt" />
     <Content Include="assets\img\log.png" />
+    <Content Include="assets\img\Producto\defaultimg.jpg" />
     <Content Include="assets\img\super.jpg" />
     <Content Include="assets\img\welcome.jpg" />
     <Content Include="assets\JcalendarQuery\jQueryui.js" />
@@ -2007,7 +2013,16 @@
     <Content Include="Views\AdministradorSistema\PrincipalAdministradorSistema.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Comun\Productos.cshtml" />
+    <Content Include="Views\Comun\ProductosList.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Comun\NuewUpdateProducto.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Comun\NoticiasEtc.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Comun\Perfil.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

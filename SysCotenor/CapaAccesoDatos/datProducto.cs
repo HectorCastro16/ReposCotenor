@@ -21,6 +21,73 @@ namespace CapaAccesoDatos
 
         #region metodos
 
+        public entProducto BucsaProd(int idprod){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            entProducto p = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spBuscaProducto", cn);
+                cmd.Parameters.AddWithValue("@idprod", idprod);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    p = new entProducto();
+                    p.Pro_ID = Convert.ToInt32(dr["Pro_ID"]);
+                    p.Pro_Nombre = dr["Pro_Nombre"].ToString();
+                    p.Pro_Codigo = dr["Pro_Codigo"].ToString();
+                    p.Pro_Descripcion = dr["Pro_Descripcion"].ToString();
+                    p.Pro_Imagen = dr["Pro_Imagen"].ToString();
+                    entCategoria c = new entCategoria();
+                    c.Cat_Id = Convert.ToInt32(dr["Cat_Id"]);
+                    p.Categoria = c;
+                    entPrecio pr = new entPrecio();
+                    pr.Pre_ID = Convert.ToInt32(dr["Pre_ID"]);
+                    p.Precio = pr;
+
+                }
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { cmd.Connection.Close(); }
+            return p;
+
+        }
+
+
+        public int InsertUpdateProd(String cadxml){
+            SqlCommand cmd = null;
+            int result = 0;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spInsertarProducto", cn);
+                cmd.Parameters.AddWithValue("@cadXML", cadxml);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter pr = new SqlParameter("@retorno", DbType.Int32);
+                pr.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(pr);
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                return result = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { cmd.Connection.Close(); }
+
+        }
+
         public List<entPrecio> Listprec(){
             SqlCommand cmd = null;
             SqlDataReader dr = null;
