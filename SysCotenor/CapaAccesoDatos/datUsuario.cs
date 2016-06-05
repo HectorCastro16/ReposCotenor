@@ -26,6 +26,82 @@ namespace CapaAccesoDatos
 
         #region metodos
 
+        public List<entSecurity> UltimAcceso(int idUsuario){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+           List<entSecurity> sl = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListaLogeo", cn);
+                cmd.Parameters.AddWithValue("@iduser", idUsuario);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                sl = new List<entSecurity>();
+                while (dr.Read())
+                {
+                    entSecurity s = new entSecurity();
+                    s = new entSecurity();
+                    s.UsuarioSecurity = Convert.ToInt32(dr["UsuarioSecurity"]);
+                    s.UltimoAcceso = Convert.ToDateTime(dr["UltimoAcceso"].ToString());
+                    s.IPAcceso = dr["IPAcceso"].ToString();
+                    sl.Add(s);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { cmd.Connection.Close(); }return sl;
+        }
+
+        public List<entArticulo> ListaArticluos(){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entArticulo> Lista = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListArticulos", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entArticulo>();
+                while (dr.Read())
+                {
+                    entArticulo a = new entArticulo();
+                    a.Art_Id = Convert.ToInt32(dr["Art_Id"]);
+                    a.Art_FechaPublicacion = Convert.ToDateTime(dr["Art_FechaPublicacion"]);
+                    a.Art_Image = dr["Art_Image"].ToString();
+                    a.Art_Url = dr["Art_Url"].ToString();
+                    a.Art_Titulo = dr["Art_Titulo"].ToString();
+                    a.Art_Descripcion = dr["Art_Descripcion"].ToString();
+                    entUsuario u = new entUsuario();
+                    entTipoUsuario tu = new entTipoUsuario();
+                    tu.TipUsu_Nombre = dr["TipUsu_Nombre"].ToString();
+                    u.TipoUsuario = tu;
+                    entPersona p = new entPersona();
+                    p.Per_Nombres = dr["Per_Nombres"].ToString();
+                    p.Per_Apellidos = dr["Per_Apellidos"].ToString();
+                    u.Persona = p;
+                    a.usuario = u;
+                    Lista.Add(a);
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { cmd.Connection.Close(); }
+            return Lista;
+        }
+             
+
+
         public int ActualizaPass(Int32 iduser,String newpass,String actualpass){
             SqlCommand cmd = null;
             int i = 0;

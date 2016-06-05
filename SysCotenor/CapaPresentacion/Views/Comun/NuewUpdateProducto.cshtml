@@ -1,0 +1,97 @@
+﻿@model CapaEntidades.entProducto
+
+@{
+    ViewBag.Title = "NuewUpdateProducto";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+
+    <div class="base">
+    <div class="content">
+        <section>
+            <div class="section-body contain-lg">
+            <div class="row">
+                
+                <div class="col-lg-offset-1 col-md-8">
+
+        @using (Html.BeginForm("NuewUpdateProducto", "Comun", FormMethod.Post, new { @Class = "form form-validate basic-label", enctype = "multipart/form-data", novalidate = "novalidate", role = "form" }))
+        { @Html.AntiForgeryToken()
+            @Html.ValidationSummary(true)
+
+            <div class="card">
+                    @{ String accion = "NUEVO PRODUCTO";
+                        if (Model.Pro_ID != 0)
+                        {
+                            accion = "EDITAR PRODUCTO";
+                        }
+                    }
+                <div class="alert alert-warning">
+                    <strong>@accion</strong>
+                </div>
+                <div class="card-body">
+                    @Html.TextBoxFor(model => model.Pro_ID, new { @class = "form-control", data_rule_minlength = "2", @required = "required", @type = "hidden" })
+
+
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Pro_Codigo, new { @class = "form-control", data_rule_minlength = "2", @required = "required", @disabled = "disabled" })
+                        <label for="Name1">CODIGO</label>
+                    </div>
+                    <div class="form-group">
+                       @Html.DropDownListFor(model => model.Categoria.Cat_Id, (SelectList)ViewBag.c, "", new { @class = "form-control", @required = "requiered" })
+                        <label for="Name1">CATEGORIA</label>
+                    </div>
+                    <div class="form-group">
+                        <div class="form-group">
+                            @Html.DropDownListFor(model => model.Precio.Pre_ID, (SelectList)ViewBag.prec, "", new { @class = "form-control", @required = "requiered" })
+                            <label for="Name1">LISTA DE PRECIOS</label>
+                        </div>                    
+                    </div>
+
+                    <div class="form-group">
+                        @Html.TextBoxFor(model => model.Pro_Nombre, new { @class = "form-control", data_rule_minlength = "2", @required = "required" })            
+                        <label for="Email1">NOMBRE</label>
+                    </div>
+
+                    <div class="form-group">
+                        @Html.TextAreaFor(model => model.Pro_Descripcion, new { @class = "form-control", data_rule_minlength = "2", @rows = "2" })
+                        <label for="Email1">DESCRIPCION</label>
+                    </div>
+
+                    <div class="form-group">
+                        <input type="file" class="form-control" name="image">
+                        <label for="Email1">IMAGE</label>
+                    </div>
+                
+
+                </div><!--end .card-body -->
+                <div class="card-actionbar">
+                    <div class="card-actionbar-row">
+                        <button type="submit" class="btn btn-flat btn-primary ink-reaction">Agregar</button>                   
+                    </div>
+                </div><!--end .card-actionbar -->
+                    @{ 
+                        if (ViewBag.message != null){
+                            <div class="alert alert-success">
+                                <strong>Aviso! </strong>@ViewBag.message
+                            </div>
+                        }
+
+                    }
+              
+            </div><!--end .card -->
+                        <div class="card-actionbar">
+                            <div class="card-actionbar-row">
+                                <a href="@Url.Action("ProductosList", "Comun")" class="btn btn-flat btn-primary ink-reaction"><i class="md md-undo"></i>Regresar a Lista</a>
+
+                            </div>
+                        </div><!--end .card-actionbar -->
+
+            <em class="text-caption">2016-Productos</em>
+        }
+    </div><!--end .col -->
+                </div>
+                </div>
+    </section>
+    </div>
+    </div>
+

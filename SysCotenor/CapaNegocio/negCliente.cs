@@ -18,10 +18,17 @@ namespace CapaNegocio{
 
         #region metodos 
 
-        public entCliente BuscaCliente(String telefono){
+        public entCliente BuscaCliente(String telefono,String dni){
             try
             {
-                return datCliente.Instancia.BuscaClienteVenta(telefono);
+                int i = 1;
+                entCliente c = new entCliente();
+                c = datCliente.Instancia.BuscaClienteVenta(telefono, dni,i);
+                if (c == null){
+                    i = 2;
+                    c = datCliente.Instancia.BuscaClienteVenta(telefono, dni, i);
+                }
+                return c;     
             }
             catch (Exception)
             {

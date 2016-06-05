@@ -1,0 +1,79 @@
+﻿@model IEnumerable<CapaEntidades.entArticulo>
+    @using CapaEntidades
+@{
+    ViewBag.Title = "NoticiasEtc";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+
+<div id="content">
+    <section>
+        <div class="section-header">
+            <ol class="breadcrumb">
+                <li class="active">Noticias</li>
+            </ol>
+        </div>
+        <div class="section-body" >
+            <div class="row">
+                <div class="col-lg-12">
+
+                    <!-- BEGIN BLOG MASONRY -->
+                    <div class="card card-type-blog-masonry style-default-bright">
+                        <div class="row">
+    @{
+        int algoritmo = 0;
+
+        foreach (entArticulo a in Model)
+        {
+            String persona = a.usuario.Persona.Per_Nombres + " " + a.usuario.Persona.Per_Apellidos;
+            if (algoritmo == 0)
+            {
+                <div class="col-md-3">
+                    <article>
+                        <div class="card-body blog-text">
+                            <div class="opacity-50">@Convert.ToDateTime(a.Art_FechaPublicacion).ToShortDateString() by&nbsp;@persona | @a.usuario.TipoUsuario.TipUsu_Nombre <i class="fa fa-comment-o"></i></div>
+                            <h3><a class="link-default" href="@a.Art_Url">@a.Art_Titulo</a></h3>
+                            <p>@a.Art_Descripcion</p>
+
+                        </div>
+                        <div class="blog-image">
+                            <img class="img-responsive" src="~/assets/img/ArticulosImg/@a.Art_Image" alt="" />
+                        </div>
+                    </article><!-- end /article -->
+                </div><!--end .col -->
+                    algoritmo = 1;
+                }
+                else
+                {
+                    <div class="col-md-3">
+                        <article>
+                            <div class="blog-image">
+                                <img class="img-responsive" src="~/assets/img/ArticulosImg/@a.Art_Image" alt="" />
+                            </div>
+
+                            <div class="card-body blog-text">
+                                <div class="opacity-50">@Convert.ToDateTime(a.Art_FechaPublicacion).ToShortDateString() by&nbsp;@persona | @a.usuario.TipoUsuario.TipUsu_Nombre <i class="fa fa-comment-o"></i></div>
+                                <h3><a class="link-default" href="@a.Art_Url">@a.Art_Titulo</a></h3>
+                                <p>@a.Art_Descripcion</p>
+
+                            </div>
+                           
+                        </article><!-- end /article -->
+                  </div><!--end .col -->
+                algoritmo = 0;
+            }
+
+
+        }
+    }
+
+                        </div><!--end .row -->
+                    </div><!--end .card -->
+                    <!-- END BLOG MASONRY -->
+
+                </div><!--end .col -->
+            </div><!--end .row -->
+            <!-- BEGIN PAGINATION -->
+        </div><!--end .section-body -->
+    </section>
+</div><!--end #content-->
