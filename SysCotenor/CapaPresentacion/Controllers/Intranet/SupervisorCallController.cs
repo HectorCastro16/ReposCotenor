@@ -23,7 +23,6 @@ namespace CapaPresentacion.Controllers.Intranet
             return View(u);
         }
 
-
         public ActionResult lstUsuariosEstadoAsignacionLlamadas()
         {
             entUsuario u = (entUsuario)Session["usuario"];
@@ -31,7 +30,7 @@ namespace CapaPresentacion.Controllers.Intranet
             {
                 Int32 sucursalId = u.Sucursal.Suc_Id;
                 Int32 UsuarioId = u.Usu_Id;
-                List<entUsuario> lista = negUsuario.Instancia.ListaUsuarios(UsuarioId, sucursalId);
+                List<entUsuario> lista = negUsuario.Instancia.ListaUsuariosCall(UsuarioId, sucursalId);
                 RemoverSessiones();
                 return View(lista);
             } else
@@ -40,10 +39,14 @@ namespace CapaPresentacion.Controllers.Intranet
             }
         }
 
-        public ActionResult ExtraerDatosAsignar(String mensaje,Int32? iduser, String usuario) {
-            ViewBag.mensaje = mensaje;
-            if (iduser != null && Session["asignacion"] == null) {
-                 CrearTablaSessionAsig();
+        public ActionResult ExtraerDatosAsignar(String mensaje, Int32? iduser, String usuario) {
+
+            try
+            {
+                ViewBag.mensaje = mensaje;
+                if (iduser != null && Session["asignacion"] == null)
+                {
+                    CrearTablaSessionAsig();
                     DataTable dt = new DataTable();
                     dt = (DataTable)Session["asignacion"];
                     List<entAsigncionLlamadas> Lista = negAsLlamadas.Instancia.ListaLamadasAsig(Convert.ToInt32(iduser));
@@ -66,12 +69,16 @@ namespace CapaPresentacion.Controllers.Intranet
                             r["estadoAtencion"] = Lista[i].Asi_Estado;
                             dt.Rows.Add(r);
                         }
+                    }
+                    Session["id"] = iduser;
+                    Session["user"] = usuario;
                 }
-                Session["id"] = iduser;
-                Session["user"] = usuario;
             }
-            return View();
-        }
+            catch (Exception e){
+                return RedirectToAction("Error", "Error", new { mensaje = e.Message });
+            }
+                return View();
+            }
         
         public ActionResult BuscaFilaSession(String telef){
             if (Session["asignacion"] != null){
@@ -81,7 +88,7 @@ namespace CapaPresentacion.Controllers.Intranet
                         entAsigncionLlamadas ac = new entAsigncionLlamadas();
                         ac.Asi_NumTelf= dr["telefono"].ToString();
                         ac.Cliente = dr["cliente"].ToString();
-                        ac.Asi_F1 = Convert.ToDouble(dr["f1"].ToString());
+                        ac.Asi_F1 = Convert.ToDouble(dr["f1"]);
                         ac.Asi_F2 = Convert.ToDouble(dr["f2"]);
                         ac.Asi_F3 = Convert.ToDouble(dr["f3"]);
                         ac.Asi_SVA = dr["sva"].ToString();
@@ -189,6 +196,7 @@ namespace CapaPresentacion.Controllers.Intranet
             Session.Remove("user");
         }
 
+
         private void CrearTablaSessionAsig(){
             try{
                 DataTable dt = new DataTable();
@@ -209,34 +217,6 @@ namespace CapaPresentacion.Controllers.Intranet
                 throw;
             }
         }
-
-
-
-        //public ActionResult InsUsuario()
-        //{
-
-        //    entUsuario u = (entUsuario)Session["usuario"];
-        //    if (u != null)
-        //    {
-        //        List<entTipoUsuario> t = null;
-        //        if (u.TipoUsuario.TipUsu_Id == 3)
-        //        {
-        //            t = negTipoUsuario.Instancia.ListaTipoUsuarioxId(8);
-        //        }
-        //        if (u.TipoUsuario.TipUsu_Id == 6)
-        //        {
-        //            t = negTipoUsuario.Instancia.ListaTipoUsuarioxId(9);
-        //        }
-        //        var lsTipoUsuario = new SelectList(t, "TipUsu_Id", "TipUsu_Nombre");
-        //        ViewBag.ListaTipoUsuario = lsTipoUsuario;
-
-        //        return View();
-        //    }
-        //    else
-        //    {
-        //        return RedirectToAction("Index", "Inicio");
-        //    }
-        //}
 
     }
 }

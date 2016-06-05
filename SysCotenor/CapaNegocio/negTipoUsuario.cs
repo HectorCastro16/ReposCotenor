@@ -33,6 +33,15 @@ namespace CapaNegocio
             catch (Exception e) { throw e; }
         }
 
+        public List<entTipoUsuario> ListaTipoUsuarioSupervisores()
+        {
+            try
+            {
+                return datTipoUsuario.Instancia.ListaTipoUsuarioSupervisores();
+            }
+            catch (Exception e) { throw e; }
+        }
+
         #endregion Metodos
     }
 }

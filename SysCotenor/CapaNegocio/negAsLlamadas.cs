@@ -36,8 +36,8 @@ namespace CapaNegocio
                         cadxml += "telefono='" + dr["telefono"] + "' ";
                         cadxml += "cliente='" + dr["cliente"] + "' ";
                         cadxml += "f1='" + f1.Replace(",",".") + "' ";
-                        cadxml += "f2='" + f1.Replace(",", ".") + "' ";
-                        cadxml += "f3='" + f1.Replace(",", ".") + "' ";
+                        cadxml += "f2='" + f2.Replace(",", ".") + "' ";
+                        cadxml += "f3='" + f3.Replace(",", ".") + "' ";
                         cadxml += "sva='" + dr["sva"] + "' ";
                         cadxml += "fechainicio='" + dr["iniciovigencia"] + "' ";
                         cadxml += "tipoedicion='" + tipoedicion + "' ";

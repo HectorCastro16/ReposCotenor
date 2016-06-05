@@ -1,0 +1,257 @@
+﻿@{
+    ViewBag.Title = "Ajustes";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+<section>
+    <h1>Ajustes</h1>
+    <div class="col-md-12">
+        <div class="card tabs-left style-default-light">
+            <ul class="card-head nav nav-tabs" data-toggle="tabs">
+                <li class="active"><a href="#second5">Seguridad</a></li>
+                <li><a href="#third5">Estilos</a></li>
+            </ul>
+            <div class="card-body tab-content style-default-bright">
+               
+                <div class="tab-pane active" id="second5">
+                    <h1><i class="fa fa-fw md-security text-accent"></i> Seguridad</h1>                    
+                    <!--Contenido-->
+                    <form class="form" method="post" action="ActualizarPass" name="valida">
+                        <div class="row">
+                            <div class="form-group has-warning col-lg-offset-1">
+                                <input type="password" class="form-control" id="warning7" name="passactual">
+                                <label for="warning7">CONTRASEÑA ACTUAL</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group has-success col-lg-offset-1">
+                                <input type="password" class="form-control" name="pass1">
+                                <label for="success7">CONTRASEÑA NUEVA</label>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group has-success col-lg-offset-1">
+                                <input type="password" class="form-control" name="pass2">
+                                <label for="success7">REPETIR CONTRASEÑA NUEVA</label>
+                            </div>
+                        </div> 
+                        <div class="row">
+                            <div class="form-group has-success col-lg-offset-1">
+                                <button class="btn ink-reaction btn-raised btn-primary" type="submit" onclick="return validartext()">Actualizar Contraseña</button>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group has-success col-lg-offset-1" id="mensaje">
+                            </div>
+                            <div class="form-group has-success col-lg-offset-1">
+                                @{if (ViewBag.message != null)
+                                {
+                                    if (ViewBag.terror == 2)
+                                    {
+                                        <div class="alert alert-callout alert-danger">
+                                            <strong>¡Oh no!</strong>
+
+                                            @ViewBag.message
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div class="alert alert-callout alert-success">
+                                            <strong>¡Bien!</strong>
+                                            @ViewBag.message
+                                        </div>
+                                    }
+                                }}
+                            </div>
+                        </div>
+                        
+                            
+                        
+                    </form>                   
+                    <blockquote>
+                        <p>
+                            Es aconsejable cambiar las contraseñas de manera periódica, como también considerar que no debe llevar menos de 8
+                            caracteres y que estos se convinen entre letras mayusculas y minusculas, simbolos y números. Todo ello con el propósito
+                            de mantener a salvo la información que usted maneja.
+                        </p>
+                        <footer>Equipo de Tecnologías de la Información</footer>
+                    </blockquote>
+                    <!--Contenido: Fin-->
+                </div>
+                <div class="tab-pane" id="third5">
+                    <!--Contenido-->
+                    <h1><i class="fa fa-fw md-color-lens text-accent"></i> Temas</h1>
+                    <p>Usted cuenta con 6 combinaciones de colores. Pruebe haciendo clic en el esquema de color deseado.</p> 
+                    <div class="card-body">
+
+                        <div class="row theme-selector">
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <a href="theme-default" class="clearfix">
+                                        <div class="card card-tiles card-outlined style-default-dark">
+                                            <div class="row">
+                                                <div class="col-xs-8">
+                                                    <div class="card-body height-1" style="background-color:#0aa89e"></div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <div class="card-body height-1" style="background-color:#9C27B0"></div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body small-padding text-center">
+                                                <span class="text-default-dark">Normal</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a href="theme-1" class="clearfix">
+                                        <div class="card card-tiles ">
+                                            <div class="row">
+                                                <div class="col-xs-8">
+                                                    <div class="card-body height-1" style="background-color:#2196F3"></div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <div class="card-body height-1" style="background-color:#673AB7"></div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body small-padding text-center">
+                                                <span class="text-default-dark">Celeste</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a href="theme-2" class="clearfix">
+                                        <div class="card card-tiles ">
+                                            <div class="row">
+                                                <div class="col-xs-8">
+                                                    <div class="card-body height-1" style="background-color:#ff5722"></div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <div class="card-body height-1" style="background-color:#2196F3"></div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body small-padding text-center">
+                                                <span class="text-default-dark">Naranja</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-4">
+                                    <a href="theme-3" class="clearfix">
+                                        <div class="card card-tiles ">
+                                            <div class="row">
+                                                <div class="col-xs-8">
+                                                    <div class="card-body height-1" style="background-color:#3f51b5"></div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <div class="card-body height-1" style="background-color:#FFC107"></div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body small-padding text-center">
+                                                <span class="text-default-dark">Azul</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a href="theme-4" id="4" class="clearfix">
+                                        <div class="card card-tiles ">
+                                            <div class="row">
+                                                <div class="col-xs-8">
+                                                    <div class="card-body height-1" style="background-color:#8BC34A"></div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <div class="card-body height-1" style="background-color:#673AB7"></div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body small-padding text-center">
+                                                <span class="text-default-dark">Verde</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-sm-4">
+                                    <a href="theme-5" class="clearfix">
+                                        <div class="card card-tiles ">
+                                            <div class="row">
+                                                <div class="col-xs-8">
+                                                    <div class="card-body height-1" style="background-color:#EB0038"></div>
+                                                </div>
+                                                <div class="col-xs-4">
+                                                    <div class="card-body height-1" style="background-color:#607D8B"></div>
+                                                </div>
+                                            </div>
+                                            <div class="card-body small-padding text-center">
+                                                <span class="text-default-dark">Rojo</span>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <hr />
+                    <h1><i class="fa fa-fw md-web text-accent"></i> Estilo de menú</h1>
+                    <p>Cada combinación de colores tiene tanto un color oscuro, una barra de título y un menú ligero.</p>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="radio radio-styled">
+                                    <label>
+                                        <input type="radio" name="headerInversed" value="0" checked>
+                                        <span>Menú superior claro</span>
+                                    </label>
+                                </div>
+                                <div class="radio radio-styled">
+                                    <label>
+                                        <input type="radio" name="headerInversed" value="1">
+                                        <span>Menú superior oscuro</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="radio radio-styled">
+                                    <label>
+                                        <input type="radio" name="menubarInversed" value="0">
+                                        <span>Menú izquierdo claro</span>
+                                    </label>
+                                </div>
+                                <div class="radio radio-styled">
+                                    <label>
+                                        <input type="radio" name="menubarInversed" value="1" checked>
+                                        <span>Menú izquierdo oscuro</span>
+                                    </label>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                    <hr />
+                    <div class="col-lg-12">
+                        <div class="headerbar-right">
+                            <button type="button" class="btn btn-block ink-reaction btn-accent-dark">Guardar todo</button>
+                        </div>
+                    </div>
+                    <!--Contenido: Fin-->
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<script type="text/javascript">
+    function validartext() {
+        nuevapass = document.valida.pass1.value
+        confnuevapass = document.valida.pass2.value
+        if (nuevapass == confnuevapass)
+            return true
+        else
+            mensaje = '<div class="alert alert-callout alert-danger"><strong>¡Oh no!</strong> Las contraseñas no coinciden.</div>'
+        $("#mensaje").html(mensaje)
+        return false
+    }
+</script>

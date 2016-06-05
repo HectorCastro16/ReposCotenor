@@ -110,7 +110,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Controllers\Error\ErrorController.cs" />
-    <Compile Include="Controllers\Intranet\AdministradorController.cs" />
+    <Compile Include="Controllers\Intranet\AdministradorDataController.cs" />
+    <Compile Include="Controllers\Intranet\AdministradorSistemaController.cs" />
     <Compile Include="Controllers\Intranet\AsesorVentasCallController.cs" />
     <Compile Include="Controllers\Intranet\AsesorVentasCampoController.cs" />
     <Compile Include="Controllers\Intranet\ComunController.cs" />
@@ -130,6 +131,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Content Include="assets\css\Calendar\Jcalendar.css" />
     <Content Include="assets\css\fonts\fontawesome-webfont.svg" />
     <Content Include="assets\css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\css\fonts\LICENSE.txt" />
@@ -529,12 +531,17 @@
     <Content Include="assets\img\avatar7.jpg" />
     <Content Include="assets\img\avatar8.jpg" />
     <Content Include="assets\img\avatar9.jpg" />
+    <Content Include="assets\img\delete.png" />
+    <Content Include="assets\img\disk.png" />
     <Content Include="assets\img\Fotos\foto.png" />
     <Content Include="assets\img\img16.jpg" />
     <Content Include="assets\img\LICENSE.txt" />
     <Content Include="assets\img\log.png" />
+    <Content Include="assets\img\pencil.png" />
     <Content Include="assets\img\super.jpg" />
     <Content Include="assets\img\welcome.jpg" />
+    <Content Include="assets\JcalendarQuery\jQueryui.js" />
+    <Content Include="assets\JcalendarQuery\QueryJcalendar.js" />
     <Content Include="assets\js\core\demo\Demo.js" />
     <Content Include="assets\js\core\demo\DemoCalendar.js" />
     <Content Include="assets\js\core\demo\DemoCharts.js" />
@@ -1634,9 +1641,6 @@
     <Content Include="Views\MasterPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Views\Administrador\PrincipalAdministrador.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Include="Views\Gerente\PrincipalGerente.cshtml" />
   </ItemGroup>
   <ItemGroup>
@@ -1973,6 +1977,40 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\SupervisorCall\lstUsuariosEstadoAsignacionLlamadas.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Comun\UpdUsuario.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Inicio\PruebaUi.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Comun\Ajustes.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AsesorVentasCall\ListarMisLlamadas.cshtml" />
+    <Content Include="Views\AsesorVentasCall\Venta.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Gerente\ListaSupervisores.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Gerente\DetalleSupervisor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Gerente\InsSupervisor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Gerente\UpdSupervisor.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdministradorData\PrincipalAdministradorData.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdministradorSistema\PrincipalAdministradorSistema.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdministradorData\InsertarDataCliente.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

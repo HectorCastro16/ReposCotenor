@@ -26,6 +26,108 @@ namespace CapaAccesoDatos
 
         #region metodos
 
+        public List<entSecurity> UltimAcceso(int idUsuario){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+           List<entSecurity> sl = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListaLogeo", cn);
+                cmd.Parameters.AddWithValue("@iduser", idUsuario);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                sl = new List<entSecurity>();
+                while (dr.Read())
+                {
+                    entSecurity s = new entSecurity();
+                    s = new entSecurity();
+                    s.UsuarioSecurity = Convert.ToInt32(dr["UsuarioSecurity"]);
+                    s.UltimoAcceso = Convert.ToDateTime(dr["UltimoAcceso"].ToString());
+                    s.IPAcceso = dr["IPAcceso"].ToString();
+                    sl.Add(s);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { cmd.Connection.Close(); }return sl;
+        }
+
+        public List<entArticulo> ListaArticluos(){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entArticulo> Lista = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListArticulos", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entArticulo>();
+                while (dr.Read())
+                {
+                    entArticulo a = new entArticulo();
+                    a.Art_Id = Convert.ToInt32(dr["Art_Id"]);
+                    a.Art_FechaPublicacion = Convert.ToDateTime(dr["Art_FechaPublicacion"]);
+                    a.Art_Image = dr["Art_Image"].ToString();
+                    a.Art_Url = dr["Art_Url"].ToString();
+                    a.Art_Titulo = dr["Art_Titulo"].ToString();
+                    a.Art_Descripcion = dr["Art_Descripcion"].ToString();
+                    entUsuario u = new entUsuario();
+                    entTipoUsuario tu = new entTipoUsuario();
+                    tu.TipUsu_Nombre = dr["TipUsu_Nombre"].ToString();
+                    u.TipoUsuario = tu;
+                    entPersona p = new entPersona();
+                    p.Per_Nombres = dr["Per_Nombres"].ToString();
+                    p.Per_Apellidos = dr["Per_Apellidos"].ToString();
+                    u.Persona = p;
+                    a.usuario = u;
+                    Lista.Add(a);
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { cmd.Connection.Close(); }
+            return Lista;
+        }
+             
+
+
+        public int ActualizaPass(Int32 iduser,String newpass,String actualpass){
+            SqlCommand cmd = null;
+            int i = 0;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spActualizarPass", cn);
+                cmd.Parameters.AddWithValue("@idusuario", iduser);
+                cmd.Parameters.AddWithValue("@nuevapass", newpass);
+                cmd.Parameters.AddWithValue("@passactual", actualpass);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter p = new SqlParameter("@retorno", DbType.Int32);
+                p.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(p);
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                i  = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
+            }
+            catch (Exception){
+                throw;
+            }finally { cmd.Connection.Close();}
+            return i;
+        }
+
+
 
        public entUsuario VerificarAccesoIntranet(String prmstrLogin, String prmstrPassw)
         {
@@ -127,7 +229,6 @@ namespace CapaAccesoDatos
 
         public List<entUsuario> ListaUsuarios(Int32 UsuarioId,  Int32 SucursalId)
         {
-
             SqlCommand cmd = null;
             SqlDataReader dr = null;
             List<entUsuario> Lista = null;
@@ -163,7 +264,6 @@ namespace CapaAccesoDatos
                     u.Contador = 0;
                     Lista.Add(u);
                 }
-
             }
             catch (Exception e)
             {
@@ -318,6 +418,40 @@ namespace CapaAccesoDatos
 
         }
 
+        public int InsUpdDelBloActSuper(String cadXML)
+        {
+
+            SqlCommand cmd = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spIsnUpdDelBloActSupervisor", cn);
+                cmd.Parameters.AddWithValue("@prmstrCadXML", cadXML);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                //creamos el parametro de retorno
+                SqlParameter m = new SqlParameter("@retorno", DbType.Int32);
+                m.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(m);
+                //fin parametro
+                cn.Open();
+                cmd.ExecuteNonQuery();
+
+                int i = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
+
+                return i;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+        }
 
         public int ValidaDni(Int32 dni) {
             SqlCommand cmd = null;
@@ -338,7 +472,6 @@ namespace CapaAccesoDatos
                         i = val;
                     }
                 }
-                
                 return i;
             }
             catch (Exception e)

@@ -40,7 +40,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Conexion.cs" />
+    <Compile Include="datArbolUbigeo.cs" />
+    <Compile Include="datArbolVenta.cs" />
     <Compile Include="datAsLlamadas.cs" />
+    <Compile Include="datCliente.cs" />
+    <Compile Include="datGerente.cs" />
+    <Compile Include="datProducto.cs" />
+    <Compile Include="datSegmento.cs" />
     <Compile Include="datSucursal.cs" />
     <Compile Include="datTipoUsuario.cs" />
     <Compile Include="datUsuario.cs" />
