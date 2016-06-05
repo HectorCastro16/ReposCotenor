@@ -11,38 +11,37 @@
     <meta name="keywords" content="your,keywords">
     <meta name="description" content="Short explanation about this website">
     <!-- END META -->
-
     @{entUsuario u = null;
-        String nombreTema = "";
-        if (Session["usuario"] != null)
-        {
-            u = (entUsuario)Session["usuario"];
+    String nombreTema = "";
+    if (Session["usuario"] != null)
+    {
+        u = (entUsuario)Session["usuario"];
 
-            if (u.usu_Config_Color == "D")
-            {
-                nombreTema = "theme-default";
-            }
-            else if (u.usu_Config_Color == "C")
-            {
-                nombreTema = "theme-1";
-            }
-            else if (u.usu_Config_Color == "N")
-            {
-                nombreTema = "theme-2";
-            }
-            else if (u.usu_Config_Color == "A")
-            {
-                nombreTema = "theme-3";
-            }
-            else if (u.usu_Config_Color == "V")
-            {
-                nombreTema = "theme-4";
-            }
-            else if (u.usu_Config_Color == "R")
-            {
-                nombreTema = "theme-5";
-            }
+        if (u.usu_Config_Color == "D")
+        {
+            nombreTema = "theme-default";
         }
+        else if (u.usu_Config_Color == "C")
+        {
+            nombreTema = "theme-1";
+        }
+        else if (u.usu_Config_Color == "N")
+        {
+            nombreTema = "theme-2";
+        }
+        else if (u.usu_Config_Color == "A")
+        {
+            nombreTema = "theme-3";
+        }
+        else if (u.usu_Config_Color == "V")
+        {
+            nombreTema = "theme-4";
+        }
+        else if (u.usu_Config_Color == "R")
+        {
+            nombreTema = "theme-5";
+        }
+    }
     }
 
     <!-- BEGIN STYLESHEETS -->
@@ -69,7 +68,7 @@
     <script type="text/javascript" src="~/assets/js/libs/utils/html5shiv.js?1403934957"></script>
     <script type="text/javascript" src="~/assets/js/libs/utils/respond.min.js?1403934956"></script>
     <![endif]-->
-    
+
 </head>
 <body class="menubar-hoverable header-fixed menubar-pin ">
     <!-- BEGIN HEADER-->
@@ -179,139 +178,149 @@
                 <ul id="main-menu" class="gui-controls">
 
                     @{if (TipoUser == "Administrador Sistema")
-                        {
+                    {
 
 
-                        }
-                        else if (TipoUser == "Gerente")
-                        {
+                    }
+                    else if (TipoUser == "Gerente")
+                    {
 
                      <!-- BEGIN FORMS -->
-                            <li class="gui-folder">
-                                <a>
-                                    <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                                    <span class="title">Registro</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                    <li><a href="@Url.Action("ListaSupervisores", "Gerente")"><span class="title">Mantenedor Supervisor</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                                <span class="title">Registro</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("ListaSupervisores", "Gerente")"><span class="title">Mantenedor Supervisor</span></a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
                     <!-- END FORMS -->
                     <!-- BEGIN CHARTS -->
-                            <li class="gui-folder">
-                                <a>
-                                    <div class="gui-icon"><i class="md md-assessment"></i></div>
-                                    <span class="title">Reportes</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                    <li><a href="~/html/forms/basic.html"><span class="title">Reporte Ventas Supervisor</span></a></li>
-                                    <li><a href="~/html/forms/basic.html"><span class="title">Peporte Ventas Asesor</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><i class="md md-assessment"></i></div>
+                                <span class="title">Reportes</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="~/html/forms/basic.html"><span class="title">Reporte Ventas Supervisor</span></a></li>
+                                <li><a href="~/html/forms/basic.html"><span class="title">Peporte Ventas Asesor</span></a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
                     <!-- END CHARTS -->
-                            //
-                        }
-                        else if (TipoUser == "Supervisor Call")
-                        {
+                        //
+                    }
+                    else if (TipoUser == "Supervisor Call")
+                    {
 
                         <!-- BEGIN FORMS -->
-                            <li class="gui-folder">
-                                <a>
-                                    <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                                    <span class="title">Registro</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                    <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                                <span class="title">Registro</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
 
-                                    <li><a href="#"><span class="title">Mantenedor Clientes</span></a></li>
+                                <li><a href="#"><span class="title">Mantenedor Clientes</span></a></li>
 
-                                    <li><a href="@Url.Action("PruebaUi", "Inicio")"><span class="title">Prueba</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
+                                <li><a href="@Url.Action("PruebaUi", "Inicio")"><span class="title">Prueba</span></a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
                     <!-- END FORMS -->
                    <!-- BEGIN CHARTS -->
-                            <li class="gui-folder">
-                                <a>
-                                    <div class="gui-icon"><i class="glyphicon glyphicon-th-list"></i></div>
-                                    <span class="title">Ventas</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                    <li><a href="@Url.Action("lstUsuariosEstadoAsignacionLlamadas","SupervisorCall")"><span class="title">Asignar Clientes</span></a></li>
-                                    <li><a href=""><span class="title">Seguimiento Ventas</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><i class="glyphicon glyphicon-th-list"></i></div>
+                                <span class="title">Ventas</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("lstUsuariosEstadoAsignacionLlamadas","SupervisorCall")"><span class="title">Asignar Clientes</span></a></li>
+                                <li><a href=""><span class="title">Seguimiento Ventas</span></a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
                     <!-- END CHARTS -->
 
-                        }
-                        else if (TipoUser == "Supervisor Ventas")
-                        {
+                    }
+                    else if (TipoUser == "Supervisor Ventas")
+                    {
 
 
 
-                        }
-                        else if (TipoUser == "Supervisor Instalaciones")
-                        {
+                    }
+                    else if (TipoUser == "Supervisor Instalaciones")
+                    {
 
 
 
-                        }
-                        else if (TipoUser == "Supervisor Campo")
-                        {
-                            <li class="gui-folder">
-                                <a>
-                                    <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                                    <span class="title">Registro</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                    <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
-                                    <li><a href="@Url.Action("lstUsuariosEstadoAsignacionLlamadas","SupervisorCall")"><span class="title">Asignar Clientes</span></a></li>
+                    }
+                    else if (TipoUser == "Supervisor Campo")
+                    {
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                                <span class="title">Registro</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
+                                <li><a href="@Url.Action("lstUsuariosEstadoAsignacionLlamadas","SupervisorCall")"><span class="title">Asignar Clientes</span></a></li>
 
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
-
-
-                        }
-                        else if (TipoUser == "Supervisor Adsl")
-                        {
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
 
 
+                    }
+                    else if (TipoUser == "Supervisor Adsl")
+                    {
 
-                        }
-                        else if (TipoUser == "Asesor Ventas Call")
-                        {
+
+
+                    }
+                    else if (TipoUser == "Asesor Ventas Call")
+                    {
                         <!-- BEGIN FORMS -->
-                            <li class="gui-folder">
-                                <a>
-                                    <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                                    <span class="title">Registro</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                    <li><a href="@Url.Action("ListarMisLlamadas","AsesorVentasCall")"><span class="title">Registro Ventas</span></a></li>
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                                <span class="title">Registro</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("ListarMisLlamadas","AsesorVentasCall")"><span class="title">Registro Ventas</span></a></li>
 
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
                     <!-- END FORMS -->
 
-                        }
-                        else if (TipoUser == "Asesor Ventas Campo")
-                        {
+                    }
+                    else if (TipoUser == "Asesor Ventas Campo")
+                    {
 
 
 
-                        }
-                        else if (TipoUser == "Administrador Data")
-                        {
+                    }
+                    else if (TipoUser == "Administrador Data")
+                    {
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><i class="glyphicon glyphicon-th-list"></i></div>
+                                <span class="title">Administar Data</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("InsertarDataCliente", "AdministradorData")"><span class="title">Insertar Data Clientes</span></a></li>
+                                <li><a href="@Url.Action("AsignarDataCliente", "AdministradorData")"><span class="title">Asignar Cliente - Asesor</span></a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
 
 
+                    }
 
-                        }
-                        
 
                     }
                 </ul>
@@ -321,7 +330,7 @@
                     </small>
                 </div>
             </div>
-        </div>       
+        </div>
     </div>
 
     <script src="~/assets/js/libs/jquery/jquery-1.11.2.min.js"></script>
@@ -482,7 +491,7 @@
         }
     </script>
 
-  
+
 
 
     <script type="text/javascript">
@@ -500,18 +509,18 @@
     </script>
 
     @*<script type="text/javascript">
-        var dept = function () {
-            $.getJSON('@Url.Action("LlenarDeptJSON", "AsesorVentasCall")',
-         function (data) {
-            var opciones ='<option value="0"><<<<<-Seleccionar->>>>></option>';
-             $.each(data, function (i, item) {
-                
-                 opciones += '<option value="' + item.idDepa + '">' + item.departamento + '</option>'
-             });
-             $("#dept").html(opciones);
-         })
-        }
-    </script>*@
+            var dept = function () {
+                $.getJSON('@Url.Action("LlenarDeptJSON", "AsesorVentasCall")',
+             function (data) {
+                var opciones ='<option value="0"><<<<<-Seleccionar->>>>></option>';
+                 $.each(data, function (i, item) {
+
+                     opciones += '<option value="' + item.idDepa + '">' + item.departamento + '</option>'
+                 });
+                 $("#dept").html(opciones);
+             })
+            }
+        </script>*@
 
     <script type="text/javascript">
         $("#dept").change(function () {
@@ -554,7 +563,71 @@
         }
     </script>
 
-   
+    @*<script type="text/javascript">
+        function Add() {
+            $("#tblData tbody").append(
+                "<tr>" + "<td><input type='text'/></td>" +
+                "<td><input type='text'/></td>" +
+                "<td><input type='text'/></td>" +
+                "<td><img src='/assets/img/delete.png' class='btnDelete'/></td>" + "</tr>");
+            $(".btnSave").bind("click", Save);
+            $(".btnDelete").bind("click", Delete);
+        };
+    </script>
+
+    <script type="text/javascript">
+        function Save() {
+            var par = $(this).parent().parent();
+            var tdName = par.children("td:nth-child(1)");
+            var tdPhone = par.children("td:nth-child(2)");
+            var tdEmail = par.children("td:nth-child(3)");
+            var tdButtons = par.children("td:nth-child(4)");
+
+            tdName.html(tdName.children("input[type=text]").val());
+            tdPhone.html(tdPhone.children("input[type=text]").val());
+            tdEmail.html(tdEmail.children("input[type=text]").val());
+            tdButtons.html("<img src='/assets/img/delete.png' class='btnDelete'/>");
+
+            $(".btnEdit").bind("click", Edit);
+            $(".btnDelete").bind("click", Delete);
+        };
+
+
+    </script>
+
+    <script type="text/javascript">
+        function Edit() {
+            var par = $(this).parent().parent();
+            var tdName = par.children("td:nth-child(1)");
+            var tdPhone = par.children("td:nth-child(2)");
+            var tdEmail = par.children("td:nth-child(3)");
+            var tdButtons = par.children("td:nth-child(4)");
+
+            tdName.html("<input type='text' id='txtName' value='" + tdName.html() + "'/>");
+            tdPhone.html("<input type='text' id='txtPhone' value='" + tdPhone.html() + "'/>");
+            tdEmail.html("<input type='text' id='txtEmail' value='" + tdEmail.html() + "'/>");
+            tdButtons.html("");
+
+            $(".btnSave").bind("click", Save);
+            $(".btnEdit").bind("click", Edit);
+            $(".btnDelete").bind("click", Delete);
+        };
+    </script>
+
+    <script type="text/javascript">
+        function Delete() {
+            var par = $(this).parent().parent(); 
+            par.remove();
+        };
+    </script>
+
+    <script type="text/javascript">
+        $(function(){ //Add, Save, Edit and Delete functions code 
+            $(".btnEdit").bind("click", Edit);
+            $(".btnDelete").bind("click", Delete);
+            $("#btnAdd").bind("click", Add);
+        });
+    </script>*@
 
 </body>
 </html>

@@ -531,10 +531,13 @@
     <Content Include="assets\img\avatar7.jpg" />
     <Content Include="assets\img\avatar8.jpg" />
     <Content Include="assets\img\avatar9.jpg" />
+    <Content Include="assets\img\delete.png" />
+    <Content Include="assets\img\disk.png" />
     <Content Include="assets\img\Fotos\foto.png" />
     <Content Include="assets\img\img16.jpg" />
     <Content Include="assets\img\LICENSE.txt" />
     <Content Include="assets\img\log.png" />
+    <Content Include="assets\img\pencil.png" />
     <Content Include="assets\img\super.jpg" />
     <Content Include="assets\img\welcome.jpg" />
     <Content Include="assets\JcalendarQuery\jQueryui.js" />
@@ -2005,6 +2008,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\AdministradorSistema\PrincipalAdministradorSistema.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\AdministradorData\InsertarDataCliente.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

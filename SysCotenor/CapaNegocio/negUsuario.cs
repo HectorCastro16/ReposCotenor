@@ -74,7 +74,6 @@ namespace CapaNegocio
                 throw e;
             }
         }
-
         public List<entUsuario> ListaUsuarios(Int32 UsuarioId, Int32 SucursalId)
         {
             try
