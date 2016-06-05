@@ -44,6 +44,7 @@
     <Compile Include="negAsLlamadas.cs" />
     <Compile Include="negCliente.cs" />
     <Compile Include="negGerente.cs" />
+    <Compile Include="negPedido.cs" />
     <Compile Include="negProducto.cs" />
     <Compile Include="negSegmento.cs" />
     <Compile Include="negSucursal.cs" />
