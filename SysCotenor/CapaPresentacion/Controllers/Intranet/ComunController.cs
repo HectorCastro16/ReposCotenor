@@ -56,7 +56,7 @@ namespace CapaPresentacion.Controllers.Intranet
             {
                 entProducto p = new entProducto();
                 if (idprod != null){
-                     p = negProducto.Instancia.BuscaProd(Convert.ToInt32(idprod));
+                    p = negProducto.Instancia.BuscaProd(Convert.ToInt32(idprod));
                 }
 
                 List<entCategoria> cat = negProducto.Instancia.ListCatego();
@@ -94,7 +94,7 @@ namespace CapaPresentacion.Controllers.Intranet
                     pr.Pro_Imagen = Path.GetFileName(image.FileName);
                 }
                 else { pr.Pro_Imagen = "defaultimg.jpg"; }
-                int i = negProducto.Instancia.InsUpdProducto(pr, tipoEdit, usuario);
+                int i = 0; negProducto.Instancia.InsUpdProducto(pr, tipoEdit, usuario);
                 if (i > 0){
                     if (image != null && image.ContentLength > 0){
                         var nombrearchivo = Path.GetFileName(image.FileName);

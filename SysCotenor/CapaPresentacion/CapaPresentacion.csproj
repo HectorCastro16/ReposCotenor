@@ -2012,6 +2012,12 @@
   <ItemGroup>
     <Content Include="Views\AdministradorData\InsertarDataCliente.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Comun\NoticiasEtc.cshtml" />
+    <Content Include="Views\Comun\NuewUpdateProducto.cshtml" />
+    <Content Include="Views\Comun\Perfil.cshtml" />
+    <Content Include="Views\Comun\ProductosList.cshtml" />
+  </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

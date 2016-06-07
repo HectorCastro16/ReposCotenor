@@ -134,7 +134,7 @@
                         </a>
                         <ul class="dropdown-menu animation-dock">
                             @*<li class="dropdown-header">Config</li>*@
-                            <li><a href="~/html/pages/profile.html">Perfil</a></li>
+                            <li><a href="@Url.Action("perfil","Comun")">Perfil</a></li>
                             <li><a href="@Url.Action("Ajustes", "Comun")">Ajustes</a></li>
                             <li class="divider"></li>
                             @*<li><a href="~/html/pages/locked.html"><i class="fa fa-fw fa-lock"></i> Lock</a></li>*@
@@ -209,6 +209,19 @@
                                 <li><a href="~/html/forms/basic.html"><span class="title">Peporte Ventas Asesor</span></a></li>
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
+
+                            <li class="gui-folder">
+                                <a>
+                                    <div class="gui-icon"><i class="md md-assessment"></i></div>
+                                    <span class="title">Novedades</span>
+                                </a>
+                                <!--start submenu -->
+                                <ul>
+                                    <li><a href="@Url.Action("NoticiasEtc","Comun")"><span class="title">Actuales</span></a></li>
+
+                                </ul><!--end /submenu -->
+                            </li><!--end /menu-li -->
+
                     <!-- END CHARTS -->
                         //
                     }
@@ -227,7 +240,7 @@
 
                                 <li><a href="#"><span class="title">Mantenedor Clientes</span></a></li>
 
-                                <li><a href="@Url.Action("PruebaUi", "Inicio")"><span class="title">Prueba</span></a></li>
+                                <li><a href="@Url.Action("ProductosList", "Comun")"><span class="title">Productos</span></a></li>
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
                     <!-- END FORMS -->
@@ -243,23 +256,58 @@
                                 <li><a href=""><span class="title">Seguimiento Ventas</span></a></li>
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
+
+                            <li class="gui-folder">
+                                <a>
+                                    <div class="gui-icon"><i class="md md-assessment"></i></div>
+                                    <span class="title">Novedades</span>
+                                </a>
+                                <!--start submenu -->
+                                <ul>
+                                    <li><a href="@Url.Action("NoticiasEtc","Comun")"><span class="title">Actuales</span></a></li>
+
+                                </ul><!--end /submenu -->
+                            </li><!--end /menu-li -->
+
                     <!-- END CHARTS -->
 
-                    }
-                    else if (TipoUser == "Supervisor Ventas")
-                    {
+                        }
+                        else if (TipoUser == "Supervisor Ventas")
+                        {
+
+                            <li class="gui-folder">
+                                <a>
+                                    <div class="gui-icon"><i class="md md-assessment"></i></div>
+                                    <span class="title">Novedades</span>
+                                </a>
+                                <!--start submenu -->
+                                <ul>
+                                    <li><a href="@Url.Action("NoticiasEtc","Comun")"><span class="title">Actuales</span></a></li>
+
+                                </ul><!--end /submenu -->
+                            </li><!--end /menu-li -->
 
 
+                        }
+                        else if (TipoUser == "Supervisor Instalaciones")
+                        {
 
-                    }
-                    else if (TipoUser == "Supervisor Instalaciones")
-                    {
+                            <li class="gui-folder">
+                                <a>
+                                    <div class="gui-icon"><i class="md md-assessment"></i></div>
+                                    <span class="title">Novedades</span>
+                                </a>
+                                <!--start submenu -->
+                                <ul>
+                                    <li><a href="@Url.Action("NoticiasEtc","Comun")"><span class="title">Actuales</span></a></li>
+
+                                </ul><!--end /submenu -->
+                            </li><!--end /menu-li -->
 
 
-
-                    }
-                    else if (TipoUser == "Supervisor Campo")
-                    {
+                        }
+                        else if (TipoUser == "Supervisor Campo")
+                        {
                         <li class="gui-folder">
                             <a>
                                 <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
@@ -273,16 +321,38 @@
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
 
+                            <li class="gui-folder">
+                                <a>
+                                    <div class="gui-icon"><i class="md md-assessment"></i></div>
+                                    <span class="title">Novedades</span>
+                                </a>
+                                <!--start submenu -->
+                                <ul>
+                                    <li><a href="@Url.Action("NoticiasEtc","Comun")"><span class="title">Actuales</span></a></li>
 
-                    }
-                    else if (TipoUser == "Supervisor Adsl")
-                    {
+                                </ul><!--end /submenu -->
+                            </li><!--end /menu-li -->
 
 
+                        }
+                        else if (TipoUser == "Supervisor Adsl")
+                        {
+                            <li class="gui-folder">
+                                <a>
+                                    <div class="gui-icon"><i class="md md-assessment"></i></div>
+                                    <span class="title">Novedades</span>
+                                </a>
+                                <!--start submenu -->
+                                <ul>
+                                    <li><a href="@Url.Action("NoticiasEtc","Comun")"><span class="title">Actuales</span></a></li>
 
-                    }
-                    else if (TipoUser == "Asesor Ventas Call")
-                    {
+                                </ul><!--end /submenu -->
+                            </li><!--end /menu-li -->
+
+
+                        }
+                        else if (TipoUser == "Asesor Ventas Call")
+                        {
                         <!-- BEGIN FORMS -->
                         <li class="gui-folder">
                             <a>
@@ -294,18 +364,43 @@
                                 <li><a href="@Url.Action("ListarMisLlamadas","AsesorVentasCall")"><span class="title">Registro Ventas</span></a></li>
 
                             </ul><!--end /submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("ProductosList", "Comun")"><span class="title">Productos</span></a></li>
+                            </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
+
+                            <li class="gui-folder">
+                                <a>
+                                    <div class="gui-icon"><i class="md md-assessment"></i></div>
+                                    <span class="title">Novedades</span>
+                                </a>
+                                <!--start submenu -->
+                                <ul>
+                                    <li><a href="@Url.Action("NoticiasEtc","Comun")"><span class="title">Actuales</span></a></li>
+
+                                </ul><!--end /submenu -->
+                            </li><!--end /menu-li -->
                     <!-- END FORMS -->
 
-                    }
-                    else if (TipoUser == "Asesor Ventas Campo")
-                    {
+                        }
+                        else if (TipoUser == "Asesor Ventas Campo")
+                        {
+                            <li class="gui-folder">
+                                <a>
+                                    <div class="gui-icon"><i class="md md-assessment"></i></div>
+                                    <span class="title">Novedades</span>
+                                </a>
+                                <!--start submenu -->
+                                <ul>
+                                    <li><a href="@Url.Action("NoticiasEtc","Comun")"><span class="title">Actuales</span></a></li>
+
+                                </ul><!--end /submenu -->
+                            </li><!--end /menu-li -->
 
 
-
-                    }
-                    else if (TipoUser == "Administrador Data")
-                    {
+                        }
+                        else if (TipoUser == "Administrador Data")
+                        {
                         <li class="gui-folder">
                             <a>
                                 <div class="gui-icon"><i class="glyphicon glyphicon-th-list"></i></div>
@@ -317,9 +412,19 @@
                                 <li><a href="@Url.Action("AsignarDataCliente", "AdministradorData")"><span class="title">Asignar Cliente - Asesor</span></a></li>
                             </ul><!--end /submenu -->
                         </li><!--end /menu-li -->
+                            <li class="gui-folder">
+                                <a>
+                                    <div class="gui-icon"><i class="md md-assessment"></i></div>
+                                    <span class="title">Novedades</span>
+                                </a>
+                                <!--start submenu -->
+                                <ul>
+                                    <li><a href="@Url.Action("NoticiasEtc","Comun")"><span class="title">Actuales</span></a></li>
 
+                                </ul><!--end /submenu -->
+                            </li><!--end /menu-li -->
 
-                    }
+                        }
 
 
                     }

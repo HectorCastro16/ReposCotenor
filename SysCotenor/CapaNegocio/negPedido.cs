@@ -67,7 +67,7 @@ namespace CapaNegocio
                 cadxml += "</pedido>";
 
                 cadxml = "<root>" + cadxml + "</root>";
-                int i = datPedido.Instancia.RegistroPedido(cadxml);
+                int i =0;//datPedido.Instancia.RegistroPedido(cadxml);
             }
             catch (Exception){
 
