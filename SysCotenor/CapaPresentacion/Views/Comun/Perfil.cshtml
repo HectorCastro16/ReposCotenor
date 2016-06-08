@@ -33,26 +33,34 @@
                     <div class="row">
                         <div class="col-md-8">
                             <h2>Compartir!</h2>
-
+                        @{
+                            if (ViewBag.sms != null){
+                                <div class="alert alert-success">@ViewBag.sms</div>
+                            }
+                        }
                             <!-- BEGIN ENTER MESSAGE -->
-                            <form class="form">
+                            <form class="form" method="post" action="PublicaArt" enctype="multipart/form-data">
                                 <div class="card no-margin">
                                     <div class="card-body">
                                         <div class="form-group floating-label">
-                                            <input type="text" name=""  class="form-control autosize"/>
+                                            <input type="text" name="titulo"  class="form-control autosize"/>
                                             <label for="status">Título</label>
                                         </div>
                                         <div class="form-group floating-label">
-                                            <textarea name="status" id="status" class="form-control autosize" rows="3"></textarea>
+                                            <input type="text" name="url" class="form-control autosize" placeholder="Url"/>
+                                          
+                                        </div>
+                                        <div class="form-group floating-label">
+                                            <textarea name="cuerpo" id="status" class="form-control autosize" rows="3"></textarea>
                                             <label for="status">Artículo</label>
                                         </div>
                                     </div><!--end .card-body -->
                                     <div class="card-actionbar">
                                         <div class="card-actionbar-row">
                                             <div class="pull-left">
-                                                <input type="file" name="" />                                                         
+                                                <input type="file" name="imagen"  accept="image/*"/>                                                         
                                             </div>
-                                        <input type="submit" name="" value="Publicar" class="btn btn-flat btn-accent ink-reaction"/>
+                                        <input type="submit" name="publicar" value="Publicar" class="btn btn-flat btn-accent ink-reaction"/>
                                            
                                         </div><!--end .card-actionbar-row -->
                                     </div><!--end .card-actionbar -->
@@ -86,7 +94,7 @@
                                                                case "Wednesday": diasemana = "Miercoles"; break;
                                                                case "Thursday": diasemana = "Jueves"; break;
                                                                case "Friday": diasemana = "Viernes"; break;
-                                                               case "Saturdar": diasemana = "Sabado"; break;
+                                                               case "Saturday": diasemana = "Sabado"; break;
                                                                case "Sunday": diasemana = "Domingo"; break;
                                                            }
                                                            String mes = ""; switch (s.UltimoAcceso.Month)
