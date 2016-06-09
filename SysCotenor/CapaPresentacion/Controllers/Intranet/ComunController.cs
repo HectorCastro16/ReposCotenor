@@ -20,7 +20,40 @@ namespace CapaPresentacion.Controllers.Intranet
             return View();
         }
 
-        public ActionResult Perfil(){
+
+        public ActionResult PublicaArt(FormCollection frm, HttpPostedFileBase imagen){
+            try
+            {
+                entUsuario u = null;
+                if (Session["usuario"] != null) { u = (entUsuario)Session["usuario"]; }
+                entArticulo a = new entArticulo();
+                a.usuario = u;
+                a.Art_Url = frm["url"];
+                a.Art_Titulo = frm["titulo"];
+                a.Art_Descripcion = frm["cuerpo"];
+                if (imagen != null && imagen.ContentLength > 0)
+                {
+                    a.Art_Image = Path.GetFileName(imagen.FileName);
+
+                }
+                else { a.Art_Image = "sin imagen"; }
+                int i = negUsuario.Instancia.PubArticulo(a);
+                if (i > 0){
+                    if (imagen != null && imagen.ContentLength > 0){
+                        var name = Path.GetFileName(imagen.FileName);
+                        var ruta = Path.Combine(Server.MapPath("~/assets/img/ArticulosImg"), name);
+                        imagen.SaveAs(ruta);
+                    }
+                }
+
+                return RedirectToAction("Perfil",new {mensaje="Publicado.!" });
+            }
+            catch (Exception err)
+            {
+                return RedirectToAction("Error", "Error", new { mensaje = err.Message });
+            }
+        }
+        public ActionResult Perfil(String mensaje){
             try {
                 entUsuario u = null;
                 if (Session["usuario"] != null) {
@@ -28,6 +61,7 @@ namespace CapaPresentacion.Controllers.Intranet
                List<entSecurity> s = null;
                 s = negUsuario.Instancia.ReturUltimoLogeo(u.Usu_Id);
                 ViewBag.security = s;
+                ViewBag.sms = mensaje;
                 return View();
 
             }

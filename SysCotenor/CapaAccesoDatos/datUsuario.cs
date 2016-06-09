@@ -26,6 +26,39 @@ namespace CapaAccesoDatos
 
         #region metodos
 
+        public int PublicaArticulo(entArticulo a){
+            SqlCommand cmd = null;
+            int i = 0;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spPubArticulo", cn);
+                cmd.Parameters.AddWithValue("@iduser", a.usuario.Usu_Id);
+                cmd.Parameters.AddWithValue("@image", a.Art_Image);
+                cmd.Parameters.AddWithValue("@url", a.Art_Url);
+                cmd.Parameters.AddWithValue("@titulo", a.Art_Titulo);
+                cmd.Parameters.AddWithValue("@descripcion", a.Art_Descripcion);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter p = new SqlParameter("@retorno", DbType.Int32);
+                p.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(p);
+                cn.Open();
+                cmd.ExecuteNonQuery();
+               i  = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
+
+               
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally { cmd.Connection.Close(); }
+            return i;
+        }
+
+
+
         public List<entSecurity> UltimAcceso(int idUsuario){
             SqlCommand cmd = null;
             SqlDataReader dr = null;

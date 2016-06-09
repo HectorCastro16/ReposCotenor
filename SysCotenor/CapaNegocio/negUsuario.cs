@@ -22,7 +22,17 @@ namespace CapaNegocio
         #endregion Singleton
 
         #region metodos
-
+        public int PubArticulo(entArticulo a)
+        {
+            try
+            {
+                return datUsuario.Instancia.PublicaArticulo(a);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
         public List<entSecurity> ReturUltimoLogeo(int iduser){
             try
             {

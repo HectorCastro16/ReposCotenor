@@ -23,6 +23,8 @@ namespace CapaNegocio
 
         #region metodos
 
+    
+
         public List<entSegmento> ListaSegmento()
         {
             try
