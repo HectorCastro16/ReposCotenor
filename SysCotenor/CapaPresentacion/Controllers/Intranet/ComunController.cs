@@ -19,8 +19,6 @@ namespace CapaPresentacion.Controllers.Intranet
         {
             return View();
         }
-
-
         public ActionResult PublicaArt(FormCollection frm, HttpPostedFileBase imagen){
             try
             {
