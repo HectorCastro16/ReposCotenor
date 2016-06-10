@@ -8,3 +8,4 @@ function mostrarListaDetalle(id) {
         fila.style.display = ""; //mostrar fila 
     }
 }
+
