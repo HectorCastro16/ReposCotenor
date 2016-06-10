@@ -85,6 +85,7 @@ namespace CapaAccesoDatos
                     p.Categoria = c;
                     entPrecio pr = new entPrecio();
                     pr.Pre_ID = Convert.ToInt32(dr["Pre_ID"]);
+                    pr.Pre_producto = Convert.ToDouble(dr["Pre_producto"]);
                     p.Precio = pr;
 
                 }

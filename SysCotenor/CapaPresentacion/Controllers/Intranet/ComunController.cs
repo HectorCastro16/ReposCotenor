@@ -15,12 +15,16 @@ namespace CapaPresentacion.Controllers.Intranet
         //
         // GET: /Comun/
 
+          private static class Precio{
+            public static int idprecio { get; set; }
+            public static Double precio { get; set; }
+
+        }
+
         public ActionResult Index()
         {
             return View();
         }
-
-
         public ActionResult PublicaArt(FormCollection frm, HttpPostedFileBase imagen){
             try
             {
@@ -91,14 +95,13 @@ namespace CapaPresentacion.Controllers.Intranet
                 entProducto p = new entProducto();
                 if (idprod != null){
                     p = negProducto.Instancia.BuscaProd(Convert.ToInt32(idprod));
+                    Precio.idprecio = p.Precio.Pre_ID;
+                    Precio.precio = p.Precio.Pre_producto;
                 }
 
-                List<entCategoria> cat = negProducto.Instancia.ListCatego();
-                List<entPrecio> prec = negProducto.Instancia.ListPrec();
-                var categoria = new SelectList(cat, "Cat_Id", "Cat_Nombre");
-                var precio = new SelectList(prec, "Pre_ID", "Pre_producto");
-                ViewBag.c = categoria;
-                ViewBag.prec = precio;
+                List<entCategoria> cat = negProducto.Instancia.ListCatego();         
+                var categoria = new SelectList(cat, "Cat_Id", "Cat_Nombre");    
+                ViewBag.c = categoria; 
                 ViewBag.message = mensaje;
                 return View(p);
             }
@@ -113,12 +116,16 @@ namespace CapaPresentacion.Controllers.Intranet
         {
             try {
                 String usuario = "";
-                int tipoEdit = 0;
-                if (p.Pro_ID != 0)
-                {
+                int tipoEdit = 0, teprecio=0;
+                if (p.Pro_ID != 0){
                     tipoEdit = 2;
+                    if (p.Precio.Pre_producto != Precio.precio) {
+                        teprecio = 1;
+                    }else {
+                        p.Precio.Pre_ID = Precio.idprecio;
+                    }
                 }
-                else { tipoEdit = 1; }
+                else { tipoEdit = 1; teprecio = 1; }
                 if (Session["usuario"] != null) {
                     entUsuario u = (entUsuario)Session["usuario"]; usuario = u.Usu_Login; }
                
@@ -128,7 +135,7 @@ namespace CapaPresentacion.Controllers.Intranet
                     pr.Pro_Imagen = Path.GetFileName(image.FileName);
                 }
                 else { pr.Pro_Imagen = "defaultimg.jpg"; }
-                int i = 0; negProducto.Instancia.InsUpdProducto(pr, tipoEdit, usuario);
+                int i = 0; negProducto.Instancia.InsUpdProducto(pr, tipoEdit, usuario,teprecio);
                 if (i > 0){
                     if (image != null && image.ContentLength > 0){
                         var nombrearchivo = Path.GetFileName(image.FileName);

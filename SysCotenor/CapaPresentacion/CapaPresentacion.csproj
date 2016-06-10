@@ -136,6 +136,7 @@
     <Content Include="assets\css\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="assets\css\fonts\LICENSE.txt" />
     <Content Include="assets\css\fonts\Material-Design-Iconic-Font.svg" />
+    <Content Include="assets\css\Propio\propio.css" />
     <Content Include="assets\css\theme-1\bootstrap.css" />
     <Content Include="assets\css\theme-1\font-awesome.css" />
     <Content Include="assets\css\theme-1\font-awesome.min.css" />
@@ -991,6 +992,7 @@
     <Content Include="assets\js\libs\DataTables\extensions\KeyTable\js\dataTables.keyTable.js" />
     <Content Include="assets\js\libs\DataTables\extensions\KeyTable\js\dataTables.keyTable.min.js" />
     <Content Include="assets\js\libs\DataTables\extensions\KeyTable\Readme.txt" />
+    <Content Include="assets\js\libs\DataTables\extensions\PropioTable\detalleLista.js" />
     <Content Include="assets\js\libs\DataTables\extensions\Responsive\css\dataTables.responsive.css" />
     <Content Include="assets\js\libs\DataTables\extensions\Responsive\examples\child-rows\column-control.html" />
     <Content Include="assets\js\libs\DataTables\extensions\Responsive\examples\child-rows\custom-renderer.html" />
@@ -1523,6 +1525,7 @@
     <Content Include="assets\js\libs\nanoscroller\jquery.nanoscroller.min.js" />
     <Content Include="assets\js\libs\nanoscroller\overthrow.min.js" />
     <Content Include="assets\js\libs\nestable\jquery.nestable.js" />
+    <Content Include="assets\js\libs\Propio\propiojs.js" />
     <Content Include="assets\js\libs\raphael\raphael-min.js" />
     <Content Include="assets\js\libs\rickshaw\rickshaw.js" />
     <Content Include="assets\js\libs\rickshaw\rickshaw.min.js" />

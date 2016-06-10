@@ -38,7 +38,7 @@ namespace CapaNegocio
             }
         }
 
-        public int InsUpdProducto(entProducto p, int tipedic, String userRM)
+        public int InsUpdProducto(entProducto p, int tipedic, String userRM,int tepprecio )
         {
             try
             {
@@ -46,11 +46,13 @@ namespace CapaNegocio
                 cadxml += "<producto ";
                 cadxml += "id='" + p.Pro_ID + "' ";
                 cadxml += "categoria='" + p.Categoria.Cat_Id + "' ";
+                cadxml += "valprecio='" + p.Precio.Pre_producto + "' ";
                 cadxml += "precio='" + p.Precio.Pre_ID + "' ";
                 cadxml += "nombre='" + p.Pro_Nombre + "' ";
                 cadxml += "descripcion='" + p.Pro_Descripcion + "' ";
                 cadxml += "imagen='" + p.Pro_Imagen + "' ";
                 cadxml += "tipoedicion='" + tipedic + "' ";
+                cadxml += "teprecio='" + tepprecio + "' ";
                 cadxml += "userRM='" + userRM + "'/>";
 
                 cadxml = "<root>" + cadxml + "</root>";
