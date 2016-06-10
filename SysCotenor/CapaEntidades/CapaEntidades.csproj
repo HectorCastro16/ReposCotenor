@@ -48,6 +48,7 @@
     <Compile Include="entAsigncionUsuarios.cs" />
     <Compile Include="entCategoria.cs" />
     <Compile Include="entCliente.cs" />
+    <Compile Include="entCliente_Telefono.cs" />
     <Compile Include="entDepartamento.cs" />
     <Compile Include="entDetAcc_GruCom.cs" />
     <Compile Include="entDetalleAccionComercial.cs" />
@@ -58,7 +59,6 @@
     <Compile Include="entGrupoComercial.cs" />
     <Compile Include="entPedido.cs" />
     <Compile Include="entPersona.cs" />
-    <Compile Include="entPersona_Telefono.cs" />
     <Compile Include="entPlazoAtencion.cs" />
     <Compile Include="entPrecio.cs" />
     <Compile Include="entProducto.cs" />

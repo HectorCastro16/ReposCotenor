@@ -53,15 +53,15 @@ namespace CapaNegocio
             }
         }
 
-        public List<entAsigncionLlamadas> ListaLamadasAsig(Int32 idusuario){
-            try {
-                return datAsLlamadas.Instancia.ListaAsignacionesHoy(idusuario);
-            }
-            catch (Exception e){
-                throw e;
-            }
+        //public List<entAsigncionLlamadas> ListaLamadasAsig(Int32 idusuario){
+        //    try {
+        //        return datAsLlamadas.Instancia.ListaAsignacionesHoy(idusuario);
+        //    }
+        //    catch (Exception e){
+        //        throw e;
+        //    }
 
-        }
+        //}
 
 
 

@@ -231,14 +231,6 @@ namespace CapaAccesoDatos
             finally { cmd.Connection.Close(); }
             return Lista;
         }
-
-
-
-
-
-
-
-
         #endregion metodos
     }
 }
