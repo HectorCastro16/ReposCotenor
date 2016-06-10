@@ -48,6 +48,7 @@
                                     <table id="datatable1" class="table table-striped table-hover">
                                         <thead>
                                             <tr>
+                                                <th> </th>
                                                 <th>Nº</th>
                                                 <th class="sort-alpha">Nombres y Apellidos</th>
                                                 <th class="sort-numeric">DNI</th>
@@ -62,11 +63,15 @@
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @{ int i = 0; }
+                                            @{ int i = 0, e = 0; }
                                             @foreach (var item in Model)
-                                            {
+                                            {                                               
+                                                
                                                 i++;
                                                 <tr>
+                                                    <td id="@item.Persona.Per_Codigo" onclick="mostrarListaDetalle(@i)">
+                                                        <i class="md md-menu" id="plus"></i>
+                                                    </td>
                                                     <td>
                                                         @i
                                                     </td>
@@ -124,17 +129,71 @@
 
                                                     </td>
                                                 </tr>
+                                                <tr id="@i" onclick="mostrarListaDetalle(@i)" style="display:none">                                                    
+                                                    <td colspan="8"><!--'Coldspan' permite que las columnas se junten en una sola y '8' es la cantidad de columnas de la tabla-->
+                                                            <div class="card-body no-padding">
+                                                                <ul class="list">
+                                                                    <li class="tile">
+                                                                        <a class="tile-content ink-reaction">
+                                                                            <div class="tile-icon">
+                                                                                <i class="fa fa-phone"></i>
+                                                                            </div>
+                                                                            <div class="tile-text">
+                                                                                (650) 555-1234
+                                                                                <small>Mobile</small>
+                                                                            </div>
+                                                                        </a>
+                                                                        <a class="btn btn-flat btn-primary ink-reaction">
+                                                                            <i class="fa fa-comment"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li class="tile">
+                                                                        <a class="tile-content ink-reaction">
+                                                                            <div class="tile-icon">
+                                                                            </div>
+                                                                            <div class="tile-text">
+                                                                                (323) 555-6789
+                                                                                <small>Work</small>
+                                                                            </div>
+                                                                        </a>
+                                                                        <a class="btn btn-flat ink-reaction">
+                                                                            <i class="fa fa-comment"></i>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li class="divider-inset"></li>
+                                                                    <li class="tile">
+                                                                        <a class="tile-content ink-reaction">
+                                                                            <div class="tile-icon">
+                                                                                <i class="fa fa-envelope"></i>
+                                                                            </div>
+                                                                            <div class="tile-text">
+                                                                                aliconners@example.com
+                                                                                <small>Personal</small>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                    <li class="tile">
+                                                                        <a class="tile-content ink-reaction">
+                                                                            <div class="tile-icon"></div>
+                                                                            <div class="tile-text">
+                                                                                ali_conners@example.com
+                                                                                <small>Work</small>
+                                                                            </div>
+                                                                        </a>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                    </td>
+                                                    
+                                                </tr>                                                
                                             }
-
                                         </tbody>
                                     </table>
                                 </div><!--end .table-responsive -->
                             </div><!--end .col -->
                         </div><!--end .row -->
-                        <!-- END DATATABLE 1 -->
-
+                        <!-- END DATATABLE 1 -->                       
                         <hr class="ruler-xxl" />
-
                     </section>
 
                 </div><!--end .card-body -->
