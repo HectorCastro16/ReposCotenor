@@ -16,7 +16,7 @@
        <div class="section-body contain-lg">
          <div class="form">
             <div class="form-group">
-                <a href="@Url.Action("NuewUpdateProducto", "Comun")" Comun")" class="btn ink-reaction btn-primary"><i class="md md-add"></i>Nuevo</a>
+                <a href="@Url.Action("NuewUpdateProducto", "Comun")"  class="btn ink-reaction btn-primary"><i class="md md-add"></i>Nuevo</a>
             </div>
           </div>
         </div>
@@ -58,8 +58,7 @@
                                             @Html.DisplayFor(modelItem => item.Precio.Pre_producto)
                                         </td>
                                         <td>
-                                            <img src="~/assets/img/Producto/@Html.DisplayFor(modelItem => item.Pro_Imagen)" width="60" ondblclick="javascript: this.height = 60;this.width=60"
-                                                onclick="javascript: this.height = 250; this.width = 250" />
+                                            <a data-toggle="lightbox" data-title="@Html.DisplayFor(modelItem => item.Pro_Nombre)" data-footer="A custom footer text" href="~/assets/img/Producto/@Html.DisplayFor(modelItem => item.Pro_Imagen)"><img class="img-responsive" src="~/assets/img/Producto/@Html.DisplayFor(modelItem => item.Pro_Imagen)" style="width: 60px; height: 40px" /></a>
                                         </td>
                                         <td>
                                             @{

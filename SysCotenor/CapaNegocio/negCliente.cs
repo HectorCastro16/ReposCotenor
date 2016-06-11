@@ -18,24 +18,24 @@ namespace CapaNegocio{
 
         #region metodos 
 
-        public entCliente BuscaCliente(String telefono,String dni){
-            try
-            {
-                int i = 1;
-                entCliente c = new entCliente();
-                c = datCliente.Instancia.BuscaClienteVenta(telefono, dni,i);
-                if (c == null){
-                    i = 2;
-                    c = datCliente.Instancia.BuscaClienteVenta(telefono, dni, i);
-                }
-                return c;     
-            }
-            catch (Exception)
-            {
-                throw;
-            }
+        ////public entCliente BuscaCliente(String telefono,String dni){
+        ////    try
+        ////    {
+        ////        int i = 1;
+        ////        entCliente c = new entCliente();
+        ////        c = datCliente.Instancia.BuscaClienteVenta(telefono, dni,i);
+        ////        if (c == null){
+        ////            i = 2;
+        ////            c = datCliente.Instancia.BuscaClienteVenta(telefono, dni, i);
+        ////        }
+        ////        return c;     
+        ////    }
+        ////    catch (Exception)
+        ////    {
+        ////        throw;
+        ////    }
 
-        }
+        ////}
 
         #endregion metodos
 

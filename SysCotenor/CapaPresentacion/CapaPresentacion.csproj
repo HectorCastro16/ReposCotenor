@@ -1603,6 +1603,8 @@
     <Content Include="assets\js\libs\wizard\jquery.bootstrap.wizard.js" />
     <Content Include="assets\js\libs\wizard\jquery.bootstrap.wizard.min.js" />
     <Content Include="assets\js\libs\wizard\MIT-LICENSE.txt" />
+    <Content Include="assets\js\lightbox\ekko-lightbox.min.css" />
+    <Content Include="assets\js\lightbox\ekko-lightbox.min.js" />
     <Content Include="assets\less\libs\bootstrap-colorpicker\modified-log.txt" />
     <Content Include="assets\less\libs\DataTables\license.txt" />
     <Content Include="assets\less\libs\fullcalendar\license.txt" />
