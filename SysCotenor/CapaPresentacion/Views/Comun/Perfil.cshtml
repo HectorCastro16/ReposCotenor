@@ -6,8 +6,10 @@
 @{ 
     entUsuario u = null;
     List<entSecurity> sl = null;
+    String correo = "";
     if (Session["usuario"] != null) {
         u = (entUsuario)Session["usuario"];
+        correo = u.Persona.Per_Correo;
     }
     if (ViewBag.security != null) {
         sl = (List<entSecurity>)ViewBag.security;
@@ -29,7 +31,7 @@
 
 
             <section>
-                <div class="section-body no-margin">
+             <div class="section-body no-margin">
                     <div class="row">
                         <div class="col-md-8">
                             <h2>Compartir!</h2>
@@ -207,11 +209,19 @@
                             </div><!--end .card -->
                         </div><!--end .col -->
                         <!-- END PROFILE MENUBAR -->
-
                     </div><!--end .row -->
-                </div><!--end .section-body -->
+               </div>
             </section>
         </div><!--end #content-->
 
     }
+
+
+
+
+
+
+
+
+
 

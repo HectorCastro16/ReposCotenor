@@ -26,6 +26,49 @@ namespace CapaAccesoDatos
 
         #region metodos
 
+        public entArticulo BuscaArticulo(String titulo){
+
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            entArticulo a = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spBuscaArticulo", cn);
+                cmd.Parameters.AddWithValue("@desc", titulo);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                if (dr.Read())
+                {
+                    a = new entArticulo();
+                    a.Art_Id = Convert.ToInt32(dr["Art_Id"]);
+                    a.Art_FechaPublicacion = Convert.ToDateTime(dr["Art_FechaPublicacion"]);
+                    a.Art_Image = dr["Art_Image"].ToString();
+                    a.Art_Url = dr["Art_Url"].ToString();
+                    a.Art_Titulo = dr["Art_Titulo"].ToString();
+                    a.Art_Descripcion = dr["Art_Descripcion"].ToString();
+                    entUsuario u = new entUsuario();
+                    entTipoUsuario tu = new entTipoUsuario();
+                    tu.TipUsu_Nombre = dr["TipUsu_Nombre"].ToString();
+                    u.TipoUsuario = tu;
+                    entPersona p = new entPersona();
+                    p.Per_Nombres = dr["Per_Nombres"].ToString();
+                    p.Per_Apellidos = dr["Per_Apellidos"].ToString();
+                    u.Persona = p;
+                    a.usuario = u;
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { cmd.Connection.Close(); }
+            return a;
+        }
+
+
         public int PublicaArticulo(entArticulo a){
             SqlCommand cmd = null;
             int i = 0;

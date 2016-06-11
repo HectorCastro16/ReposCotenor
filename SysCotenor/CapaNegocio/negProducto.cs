@@ -25,6 +25,8 @@ namespace CapaNegocio
         #region metodos
 
 
+       
+
         public entProducto BuscaProd(int idpro)
         {
             try
@@ -46,7 +48,7 @@ namespace CapaNegocio
                 cadxml += "<producto ";
                 cadxml += "id='" + p.Pro_ID + "' ";
                 cadxml += "categoria='" + p.Categoria.Cat_Id + "' ";
-                cadxml += "valprecio='" + p.Precio.Pre_producto + "' ";
+                cadxml += "valprecio='" + p.Precio.Pre_producto.ToString().Replace(",",".") + "' ";
                 cadxml += "precio='" + p.Precio.Pre_ID + "' ";
                 cadxml += "nombre='" + p.Pro_Nombre + "' ";
                 cadxml += "descripcion='" + p.Pro_Descripcion + "' ";

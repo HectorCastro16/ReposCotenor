@@ -77,12 +77,22 @@ namespace CapaPresentacion.Controllers.Intranet
             }
         }
 
-        public ActionResult NoticiasEtc(){
+        public ActionResult NoticiasEtc(String search)
+        {
             try
             {
-                List<entArticulo> Lista = null;
-                Lista = negUsuario.Instancia.ListaArt();
-                return View(Lista);
+                if (search != null)
+                {
+                    entArticulo a = negUsuario.Instancia.BuscaArt(search);
+                    ViewBag.art = a;
+                    return View();
+                }
+                else
+                {
+                    List<entArticulo> Lista = null;
+                    Lista = negUsuario.Instancia.ListaArt();
+                    return View(Lista);
+                }
             }
             catch (Exception ex)
             {
@@ -143,7 +153,7 @@ namespace CapaPresentacion.Controllers.Intranet
                 if (Session["usuario"] != null) {
                     entUsuario u = (entUsuario)Session["usuario"]; usuario = u.Usu_Login; }
                
-
+              
                 int i = 0; negProducto.Instancia.InsUpdProducto(pr, tipoEdit, usuario,teprecio);
                 if (i > 0){
                     if (image != null && image.ContentLength > 0){

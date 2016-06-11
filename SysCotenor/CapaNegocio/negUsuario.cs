@@ -22,6 +22,19 @@ namespace CapaNegocio
         #endregion Singleton
 
         #region metodos
+        public entArticulo BuscaArt(String titulo)
+        {
+            try
+            {
+                return datUsuario.Instancia.BuscaArticulo(titulo);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public int PubArticulo(entArticulo a)
         {
             try
