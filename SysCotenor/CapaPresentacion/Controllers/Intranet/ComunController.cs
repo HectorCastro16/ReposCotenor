@@ -15,11 +15,13 @@ namespace CapaPresentacion.Controllers.Intranet
         //
         // GET: /Comun/
 
-          private static class Precio{
+        #region class_precio + imagen para editar---------------------------------------------------------------------
+        private static class PrecioImage{
             public static int idprecio { get; set; }
             public static Double precio { get; set; }
-
+            public static String image { get; set; }         
         }
+        #endregion class_precio
 
         public ActionResult Index()
         {
@@ -94,8 +96,9 @@ namespace CapaPresentacion.Controllers.Intranet
                 entProducto p = new entProducto();
                 if (idprod != null){
                     p = negProducto.Instancia.BuscaProd(Convert.ToInt32(idprod));
-                    Precio.idprecio = p.Precio.Pre_ID;
-                    Precio.precio = p.Precio.Pre_producto;
+                    PrecioImage.idprecio = p.Precio.Pre_ID;
+                    PrecioImage.precio = p.Precio.Pre_producto;
+                    PrecioImage.image = p.Pro_Imagen;
                 }
 
                 List<entCategoria> cat = negProducto.Instancia.ListCatego();         
@@ -114,26 +117,33 @@ namespace CapaPresentacion.Controllers.Intranet
         public ActionResult NuewUpdateProducto(entProducto p,HttpPostedFileBase image)
         {
             try {
+                
+                entProducto pr = p;
                 String usuario = "";
                 int tipoEdit = 0, teprecio=0;
-                if (p.Pro_ID != 0){
+                if (p.Pro_ID != 0){     
                     tipoEdit = 2;
-                    if (p.Precio.Pre_producto != Precio.precio) {
+                     // si no se cambio la imagen se mantiene con la que tenia ya en bd / si no, se le asigna nueva imagen
+                    if (image == null) pr.Pro_Imagen = PrecioImage.image;
+                    else pr.Pro_Imagen = Path.GetFileName(image.FileName);
+                    // si analiza si precio se edito/ si se edito entonces se hace la insercion de el nuevo precio en bd- si no se mantiene con el mismo(id + precio)
+                    if (p.Precio.Pre_producto != PrecioImage.precio) {
                         teprecio = 1;
                     }else {
-                        p.Precio.Pre_ID = Precio.idprecio;
+                        p.Precio.Pre_ID = PrecioImage.idprecio;
                     }
+                } // desde aqui aplica para para productos nuevos.
+                else { tipoEdit = 1; teprecio = 1;
+                    if (image != null && image.ContentLength > 0)
+                    {
+                        pr.Pro_Imagen = Path.GetFileName(image.FileName);
+                    }
+                    else { pr.Pro_Imagen = "defaultimg.jpg"; }
                 }
-                else { tipoEdit = 1; teprecio = 1; }
                 if (Session["usuario"] != null) {
                     entUsuario u = (entUsuario)Session["usuario"]; usuario = u.Usu_Login; }
                
-                entProducto pr = p;
-                if (image != null && image.ContentLength > 0)
-                {
-                    pr.Pro_Imagen = Path.GetFileName(image.FileName);
-                }
-                else { pr.Pro_Imagen = "defaultimg.jpg"; }
+
                 int i = 0; negProducto.Instancia.InsUpdProducto(pr, tipoEdit, usuario,teprecio);
                 if (i > 0){
                     if (image != null && image.ContentLength > 0){
