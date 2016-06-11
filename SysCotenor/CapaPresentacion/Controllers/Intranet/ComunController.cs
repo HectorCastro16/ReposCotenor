@@ -88,7 +88,6 @@ namespace CapaPresentacion.Controllers.Intranet
                 return RedirectToAction("Error", "Error", new { mensaje = ex.Message });
             }
         }
-
         public ActionResult NuewUpdateProducto(int? idprod,String mensaje){
             try
             {
