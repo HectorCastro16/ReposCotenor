@@ -1,4 +1,11 @@
 ﻿
+
+
+    function cambiar(tecla){
+        tecla.value = tecla.value.replace(".", ",");
+    }
+
+
         function valida(e) {
             tecla = (document.all) ? e.keyCode : e.which;
 

@@ -5,6 +5,11 @@
     Layout = "~/Views/MasterPage.cshtml";
 }
 
+<script type="text/javascript">
+    function cambiar(tecla){
+        tecla.value = tecla.value.replace(".", ",");
+    }
+    </script>
 
     <div class="base">
     <div class="content">
@@ -41,11 +46,11 @@
                         <label for="Name1">CATEGORIA</label>
                     </div>
                     <div class="form-group">
-                        <div class="form-group">
-                            @Html.TextBoxFor(model => model.Precio.Pre_producto, new { @class = "form-control", data_rule_minlength = "2", @required = "required" })
+                        <div class="form-group">                
+                            @Html.TextBoxFor(model => model.Precio.Pre_producto, new { @class = "form-control", data_rule_minlength = "2", @required = "required" , @onkeypress = "cambiar(this)" })
                          <label for="Name1">PRECIO</label>
                         </div>                    
-                    </div>
+                    </div> m
 
                     <div class="form-group">
                         @Html.TextBoxFor(model => model.Pro_Nombre, new { @class = "form-control", data_rule_minlength = "2", @required = "required" })            

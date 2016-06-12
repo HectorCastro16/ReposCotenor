@@ -6,8 +6,10 @@
 @{ 
     entUsuario u = null;
     List<entSecurity> sl = null;
+    String correo = "";
     if (Session["usuario"] != null) {
         u = (entUsuario)Session["usuario"];
+        correo = u.Persona.Per_Correo;
     }
     if (ViewBag.security != null) {
         sl = (List<entSecurity>)ViewBag.security;
@@ -29,7 +31,7 @@
 
 
             <section>
-                <div class="section-body no-margin">
+             <div class="section-body no-margin">
                     <div class="row">
                         <div class="col-md-8">
                             <h2>Compartir!</h2>
@@ -141,7 +143,7 @@
                         </div><!--end .col -->
                         <!-- END MESSAGE ACTIVITY -->
                         <!-- BEGIN PROFILE MENUBAR -->
-                        <div class="col-lg-offset-1 col-lg-3 col-md-4">   
+                        <div class=" col-lg-4 col-md-5">   
                             <div class="card card-underline style-default-dark">
                                 <div class="card-head">
                                     <header class="opacity-75"><small>Informacion Personal</small></header>
@@ -186,8 +188,8 @@
                                        
                                         <li class="tile">
                                             <a class="tile-content ink-reaction">
-                                                <div class="tile-icon"></div>
-                                                <div class="tile-text">
+                                                <div class="tile-icon"><i class="md md-email"></i></div>
+                                                <div class="embed-responsive tile-text">
                                                     @u.Persona.Per_Correo
                                                     <small>Correo</small>
                                                 </div>
@@ -195,7 +197,7 @@
                                         </li>
                                         <li class="tile">
                                             <a class="tile-content ink-reaction">
-                                                <div class="tile-icon"></div>
+                                                <div class="tile-icon"><i class="md md-account-box"></i></div>
                                                 <div class="tile-text">
                                                     @u.TipoUsuario.TipUsu_Nombre
                                                     <small>Perfil</small>
@@ -207,11 +209,19 @@
                             </div><!--end .card -->
                         </div><!--end .col -->
                         <!-- END PROFILE MENUBAR -->
-
                     </div><!--end .row -->
-                </div><!--end .section-body -->
+               </div>
             </section>
         </div><!--end #content-->
 
     }
+
+
+
+
+
+
+
+
+
 
