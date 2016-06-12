@@ -14,7 +14,7 @@ namespace CapaEntidades
         public String Cli_Nombre { get; set; }
         public String Cli_RazonSocial { get; set; }
         public entSegmento Segmento { get; set; }
-        public String Cli_Numero_Documento { get; set; }
+        public String Cli_Numero_Documento { get; set; } 
         public DateTime Cli_FechaNacimiento { get; set; }
         public String Cli_LugarNacimiento { get; set; }
         public String Cli_Correo { get; set; }

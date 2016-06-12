@@ -48,6 +48,7 @@
     <Compile Include="datProducto.cs" />
     <Compile Include="datSegmento.cs" />
     <Compile Include="datSucursal.cs" />
+    <Compile Include="datTipDoc.cs" />
     <Compile Include="datTipoUsuario.cs" />
     <Compile Include="datUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

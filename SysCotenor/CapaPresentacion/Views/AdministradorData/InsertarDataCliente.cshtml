@@ -15,7 +15,6 @@
 
         <section>
             <h2>Insertar Data Cliente</h2>
-            <h4>Datos Integrales de Cliente</h4>
             @if (@ViewBag.mensaje != null)
             {
                 if (@ViewBag.identificador == 1)
@@ -37,97 +36,184 @@
                     </div>
                 }
             }
-            <form class="form" method="post" action="InsertarDataCliente">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-body no-padding">
-                                <div class="table-responsive no-margin">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel-group" id="accordion7">
+                        <div class="card panel">
+                            <div class="card-head collapsed" data-toggle="collapse" data-parent="#accordion7" data-target="#accordion7-1">
+                                <header>Cliente Residencial</header>
+                                <div class="tools">
+                                    <a class="btn btn-icon-toggle"><i class="fa fa-chevron-down"></i></a>
+                                </div>
+                            </div>
+                            <div id="accordion7-1" class="collapse">
+                                <div class="card-body">
+                                    <h4>Datos Integrales de Cliente</h4>
+                                    <form class="form" method="post" action="InsertarDataCliente">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="card">
+                                                    <div class="card-body no-padding">
+                                                        <div class="table-responsive no-margin">
 
 
-                                    <table class="table table-striped no-margin">
-                                        <thead>
-                                            <tr class="info">
-                                                <th>DNI/RUC</th>
-                                                <th>Nombre/Razon Social</th>
-                                                <th>Telefono</th>
-                                                <th>Producto</th>
-                                                <th>Direccion</th>
-                                                <th>Fecha Alta</th>
-                                                <th>F1</th>
-                                                <th>F2</th>
-                                                <th>F3</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            <tr>
-                                                <td><input type="text" class="form-control" id="txt_Dni_Ruc" data-rule-minlength="8" maxlength="11" data-rule-number="true" onkeypress="return valida(event)" required></td>
-                                                <td><input type="text" class="form-control" id="txt_Nom_Rs" data-rule-minlength="2" required></td>
-                                                <td><input type="text" class="form-control" id="txt_Telefono" data-rule-number="true" onkeypress="return valida(event)" required></td>
-                                                <td><input type="text" class="form-control" id="txt_Producto" data-rule-minlength="2" required></td>
-                                                <td><input type="text" class="form-control" id="txt_Direccion" data-rule-minlength="2" required></td>
-                                                <td><input type="text" class="form-control" id="txt_Fecha_Alta" data-inputmask="'alias': 'date'" required></td>
-                                                <td><input type="text" class="form-control dollar-mask" id="txt_F1" required></td>
-                                                <td><input type="text" class="form-control dollar-mask" id="txt_F2" required></td>
-                                                <td><input type="text" class="form-control dollar-mask" id="txt_F3" required></td>
-                                            </tr>
-                                        </tbody>
-                                    </table>
+                                                            <table class="table table-striped no-margin">
+                                                                <thead>
+                                                                    <tr class="info">
+                                                                        <th>Tipo Documneto</th>
+                                                                        <th>Nombres y Apellidos</th>
+                                                                        <th>Telefono</th>
+                                                                        <th>Producto</th>
+                                                                        <th>Direccion</th>
+                                                                        <th>Fecha Alta</th>
+                                                                        <th>F1</th>
+                                                                        <th>F2</th>
+                                                                        <th>F3</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><input type="text" class="form-control" id="txt_Dni_Ruc" data-rule-minlength="8" maxlength="11" data-rule-number="true" onkeypress="return valida(event)" required></td>
+                                                                        <td><input type="text" class="form-control" id="txt_Nom_Rs" data-rule-minlength="2" required></td>
+                                                                        <td><input type="text" class="form-control" id="txt_Telefono" data-rule-number="true" onkeypress="return valida(event)" required></td>
+                                                                        <td><input type="text" class="form-control" id="txt_Producto" data-rule-minlength="2" required></td>
+                                                                        <td><input type="text" class="form-control" id="txt_Direccion" data-rule-minlength="2" required></td>
+                                                                        <td><input type="text" class="form-control" id="txt_Fecha_Alta" data-inputmask="'alias': 'date'" required></td>
+                                                                        <td><input type="text" class="form-control dollar-mask" id="txt_F1" required></td>
+                                                                        <td><input type="text" class="form-control dollar-mask" id="txt_F2" required></td>
+                                                                        <td><input type="text" class="form-control dollar-mask" id="txt_F3" required></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
 
-                                </div><!--end .table-responsive -->
-                            </div><!--end .card-body -->
-                        </div><!--end .card -->
-                    </div><!--end .col -->
-                </div>
+                                                        </div><!--end .table-responsive -->
+                                                    </div><!--end .card-body -->
+                                                </div><!--end .card -->
+                                            </div><!--end .col -->
+                                        </div>
 
-                <div class="row">
-                    <div class="col-lg-6">
-                        <h4>Servicios de Valor Agregado Contratados (SVA)</h4>
-                                              
-                    <div class="form-group">
-                        @*@Html.DropDownListFor(m => m.Item1.Pro_ID, (SelectList)ViewBag.ListaProductosSVA, "", new { @class = "form-control select2-list", required = "required", multiple = "multiple" })*@
+                                        <div class="row">
+                                            <h4>Servicios de Valor Agregado Contratados (SVA)</h4>
+                                            <div class="col-lg-6">                                                
+                                                <div class="form-group">
+                                                    @*@Html.DropDownListFor(m => m.Item1.Pro_ID, (SelectList)ViewBag.ListaProductosSVA, "", new { @class = "form-control select2-list", required = "required", multiple = "multiple" })*@
 
 
-                            <select name="txt_svas" class="form-control select2-list" data-placeholder="Select an item" multiple>
-                                @{
-                                    List<entProducto> lista = ViewBag.ListaProductosSVA;
-                                    foreach (entProducto item in lista)
-                                    {
-                                <option value="@item.Pro_ID">@item.Pro_Nombre</option>
-                                    }
-                                }
-                            </select>
-                        </div>
-                        @*<button id=" btnadd">
-                    New</button>
-                    <table id="tblData">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Phone</th>
-                                <th>Email</th>
-                                <th></th>
-                            </tr>
-                        </thead>
-                        <tbody></tbody>
-                    </table>*@
-                        
-                    </div><!--end .col -->
-                    <div class="col-lg-6">
-                        <h4>Segmento Cliente</h4>
-                        
-                        <div class="form-group">
-                            @Html.DropDownListFor(m => m.Item2.Seg_Id, (SelectList)ViewBag.ListaSegmento, "", new { @class = "form-control", required = "required" ,Name="txt_Segmento"})
-                            
-                        </div>
-                    </div>
-                </div>
+                                                    <select name="txt_svas" class="form-control select2-list" data-placeholder="Select an item" multiple>
+                                                        @{
+                                                            List<entProducto> lista1 = ViewBag.ListaProductosSVA;
+                                                            foreach (entProducto item in lista1)
+                                                            {
+                                                                <option value="@item.Pro_ID">@item.Pro_Nombre</option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </div>
 
-                <div class="row">
-                    <input type="submit" class="btn btn-success" value="Registrar" />
-                </div>
-            </form>
-        </section>
+                                            </div><!--end .col -->
+                                            <div class="col-lg-6">
+                                                <div class="form-group" >
+                                                    <input type="submit" class="btn btn-success btn-block" value="Registrar" />
+                                                </div>
+                                            </div>
+                                        </div>
+                                     
+                                    </form>
+                                </div>
+                            </div>
+                        </div><!--end .panel -->
+                        <div class="card panel">
+                            <div class="card-head collapsed" data-toggle="collapse" data-parent="#accordion7" data-target="#accordion7-2">
+                                <header>Cliente Comercial - Negocios</header>
+                                <div class="tools">
+                                    <a class="btn btn-icon-toggle"><i class="fa fa-chevron-down"></i></a>
+                                </div>
+                            </div>
+                            <div id="accordion7-2" class="collapse">
+                                <div class="card-body">
+                                    <h4>Datos Integrales de Cliente</h4>
+                                    <form class="form" method="post" action="InsertarDataCliente">
+                                        <div class="row">
+                                            <div class="col-lg-12">
+                                                <div class="card">
+                                                    <div class="card-body no-padding">
+                                                        <div class="table-responsive no-margin">
+
+
+                                                            <table class="table table-striped no-margin">
+                                                                <thead>
+                                                                    <tr class="info">
+                                                                        <th>RUC</th>
+                                                                        <th>Razon Social</th>
+                                                                        <th>Telefono</th>
+                                                                        <th>Producto</th>
+                                                                        <th>Direccion</th>
+                                                                        <th>Fecha Alta</th>
+                                                                        <th>F1</th>
+                                                                        <th>F2</th>
+                                                                        <th>F3</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td><input type="text" class="form-control" id="txt_Ruc" data-rule-minlength="11" maxlength="11" data-rule-number="true" onkeypress="return valida(event)" required></td>
+                                                                        <td><input type="text" class="form-control" id="txt_Rs" data-rule-minlength="2" required></td>
+                                                                        <td><input type="text" class="form-control" id="txt_Telefono" data-rule-number="true" onkeypress="return valida(event)" required></td>
+                                                                        <td><input type="text" class="form-control" id="txt_Producto" data-rule-minlength="2" required></td>
+                                                                        <td><input type="text" class="form-control" id="txt_Direccion" data-rule-minlength="2" required></td>
+                                                                        <td><input type="text" class="form-control" id="txt_Fecha_Alta" data-inputmask="'alias': 'date'" required></td>
+                                                                        <td><input type="text" class="form-control dollar-mask" id="txt_F1" required></td>
+                                                                        <td><input type="text" class="form-control dollar-mask" id="txt_F2" required></td>
+                                                                        <td><input type="text" class="form-control dollar-mask" id="txt_F3" required></td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+
+                                                        </div><!--end .table-responsive -->
+                                                    </div><!--end .card-body -->
+                                                </div><!--end .card -->
+                                            </div><!--end .col -->
+                                        </div>
+
+                                        <div class="row">
+                                            <h4>Servicios de Valor Agregado Contratados (SVA)</h4>
+                                            <div class="col-lg-6">
+                                                
+
+                                                <div class="form-group">
+                                                    @*@Html.DropDownListFor(m => m.Item1.Pro_ID, (SelectList)ViewBag.ListaProductosSVA, "", new { @class = "form-control select2-list", required = "required", multiple = "multiple" })*@
+
+
+                                                    <select name="txt_svas" class="form-control select2-list" data-placeholder="Select an item" multiple>
+                                                        @{
+                                                            List<entProducto> lista2 = ViewBag.ListaProductosSVA;
+                                                            foreach (entProducto item in lista2)
+                                                            {
+                                                                <option value="@item.Pro_ID">@item.Pro_Nombre</option>
+                                                            }
+                                                        }
+                                                    </select>
+                                                </div>
+   
+                                            </div><!--end .col -->
+                                            <div class="col-lg-6">
+                                                <div class="form-group" >
+                                                    <input type="submit" class="btn btn-success btn-block" value="Registrar" />
+                                                </div>
+                                            </div>
+                                            </div>
+
+                                        
+                                    </form>
+                                </div>
+                            </div>
+                        </div><!--end .panel -->
+
+                    </div><!--end .panel-group -->
+                </div><!--end .col -->
+            </div>
+            
+</section>
 
     </div>
 </section>
