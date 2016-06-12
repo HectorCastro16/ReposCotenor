@@ -9,12 +9,12 @@ namespace CapaEntidades
     public class entCliente
     {
         public int Cli_Id { get; set; }
+        public entTipDoc TipDoc { get; set; }
         public String Cli_Codigo { get; set; }
         public String Cli_Nombre { get; set; }
         public String Cli_RazonSocial { get; set; }
         public entSegmento Segmento { get; set; }
-        public String Cli_DNI { get; set; }
-        public String Cli_Ruc { get; set; }
+        public String Cli_Numero_Documento { get; set; }
         public DateTime Cli_FechaNacimiento { get; set; }
         public String Cli_LugarNacimiento { get; set; }
         public String Cli_Correo { get; set; }
