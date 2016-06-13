@@ -25,8 +25,7 @@ namespace CapaAccesoDatos
         {
             SqlConnection cn = new SqlConnection();
             //cn.ConnectionString = "Data Source=.; Initial Catalog=BDCotenor;User ID=sa; Password=123456"; 
-            //cn.ConnectionString = "Data Source=BDCotenor.mssql.somee.com; Initial Catalog=BDCotenor;User ID=Cotenor_SQLLogin_1; Password=shodwaudo5";
-            cn.ConnectionString = "Data Source=SQL5027.Smarterasp.net;Initial Catalog=DB_A052FB_BDCotenor;User Id=DB_A052FB_BDCotenor_admin;Password=bdcotenor123";
+            cn.ConnectionString = "Data Source=BDCotenor.mssql.somee.com; Initial Catalog=BDCotenor;User ID=Cotenor_SQLLogin_1; Password=shodwaudo5";
             return cn;
 
         }
