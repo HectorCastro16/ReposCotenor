@@ -9,51 +9,53 @@ using CapaEntidades;
 
 namespace CapaAccesoDatos
 {
-    public class datTipDoc
+    public class datTelefono
     {
         #region Singleton
 
-        private static readonly datTipDoc _Instancia = new datTipDoc();
-        public static datTipDoc Instancia
+        private static readonly datTelefono _Instancia = new datTelefono();
+        public static datTelefono Instancia
         {
             get
             {
-                return datTipDoc._Instancia;
+                return datTelefono._Instancia;
             }
         }
 
         #endregion Singleton
-
         #region metodos
 
-        public List<entTipDoc> ListaTipDoc()
+        public int ValidaTelefono(String telefono)
         {
             SqlCommand cmd = null;
             SqlDataReader dr = null;
-            List<entTipDoc> Lista = null;
+            int i = 0;
             try
             {
                 SqlConnection cn = Conexion.Instancia.Conectar();
-                cmd = new SqlCommand("spListaTipDoc", cn);
+                cmd = new SqlCommand("spValidaTelefono", cn);
                 cmd.CommandType = CommandType.StoredProcedure;
+                cmd.Parameters.AddWithValue("@prmtIntTelefono", telefono);
                 cn.Open();
                 dr = cmd.ExecuteReader();
-                Lista = new List<entTipDoc>();
-
-                while (dr.Read())
+                if (dr.Read())
                 {
-                    entTipDoc td = new entTipDoc();
-                    td.td_id = Convert.ToInt32(dr["td_id"]);
-                    td.td_nombre = dr["td_nombre"].ToString();
-                    td.td_Descripcion = dr["td_Descripcion"].ToString();
-                    Lista.Add(td);
+                    Int32 val = Convert.ToInt32(dr["Resultado"]);
+                    if (val > 0)
+                    {
+                        i = val;
+                    }
                 }
+                return i;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
-            return Lista;
+            finally
+            {
+                cmd.Connection.Close();
+            }
         }
 
         #endregion metodos
