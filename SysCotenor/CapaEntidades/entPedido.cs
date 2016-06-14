@@ -23,6 +23,7 @@ namespace CapaEntidades
         public int Ped_Cantidad { get; set; }
         public Double Ped_Total { get; set; }
         public String Ped_Cod_Experto { get; set; }
+        public String Ped_Observaciones { get; set; }
         public DateTime Ped_FechaRegistro { get; set; }
         public String Ped_UsuarioRegistro { get; set; }
         public DateTime Ped_FechaModificacion { get; set; }

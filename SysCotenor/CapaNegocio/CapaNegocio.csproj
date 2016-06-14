@@ -48,6 +48,7 @@
     <Compile Include="negProducto.cs" />
     <Compile Include="negSegmento.cs" />
     <Compile Include="negSucursal.cs" />
+    <Compile Include="negTipDoc.cs" />
     <Compile Include="negTipoUsuario.cs" />
     <Compile Include="negUsuario.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

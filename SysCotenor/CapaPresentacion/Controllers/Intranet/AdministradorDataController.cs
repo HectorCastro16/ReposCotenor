@@ -31,12 +31,13 @@ namespace CapaPresentacion.Controllers.Intranet
                 if (u != null)
                 {
                     List<entProducto> lsSVA = negProducto.Instancia.ListaProductoSVA();
-                    //var lsProductosSVA = new SelectList(lsSVA, "Pro_ID", "Pro_Nombre");
-                    ViewBag.ListaProductosSVA = lsSVA;
+                    var lsProductosSVA = new SelectList(lsSVA, "Pro_ID", "Pro_Nombre");
+                    ViewBag.ListaProductosSVA = lsProductosSVA;
 
-                    List<entSegmento> lsSeg = negSegmento.Instancia.ListaSegmento();
-                    var lssegmento = new SelectList(lsSeg, "Seg_Id", "Seg_Nombre");
-                    ViewBag.ListaSegmento = lssegmento;
+                    List<entTipDoc> lsTd = negTipDoc.Instancia.ListaTipDoc();
+                    var lsTipDoc = new SelectList(lsTd, "td_id", "td_nombre");
+                    ViewBag.ListaTipDoc = lsTipDoc;
+
                     return View();
                 }
                 else
@@ -69,12 +70,49 @@ namespace CapaPresentacion.Controllers.Intranet
 
             try
             {
-                String selectSVA = form["txt_svas"];
-                String seg = form["txt_Segmento"];
-                List<Int32> SVAS = DividirCadenaRetornaListInt32(selectSVA);
-                //Int32 avalor = Convert.ToInt32(selectSVA);
 
-                return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje ="Se Guardo Satisfactoriamente", identificador = 3 });
+                entSegmento s = new entSegmento();
+                s.Seg_Id = Convert.ToInt32(form["txt_Segmento"]);
+
+                entTipDoc td = new entTipDoc();
+                td.td_id = Convert.ToInt32(form["txt_TipDoc"]);
+
+                entCliente c = new entCliente();
+                c.Segmento = s;
+                c.TipDoc = td;
+                c.Cli_Nombre = form["txt_Nom"].ToString();
+                c.Cli_RazonSocial = form["txt_Rs"].ToString();
+                c.Cli_Numero_Documento = form["txt_NumDocumento"].ToString();
+                //String FechNac = form["txt_FecNac"].ToString();
+                c.Cli_FechaNacimiento = Convert.ToDateTime(form["txt_FecNac"].ToString());
+                c.Cli_LugarNacimiento = form["txt_LugNac"].ToString();
+                c.Cli_Correo = form["txt_CliCorreo"].ToString();
+                c.Cli_Telefono_Referencia = form["txt_TelRef"].ToString();
+
+                entTelefono t = new entTelefono();
+                t.Tel_Numero = form["txt_Telefono"].ToString();
+                t.Tel_Producto = form["txt_Producto"].ToString();
+                t.Tel_Direccion = form["txt_Direccion"].ToString();
+                t.Tel_FechaAlta = Convert.ToDateTime(form["txt_Fecha_Alta"]);
+                //String pru = form["txt_F1"].ToString();
+                t.Tel_F1 = Convert.ToDouble(form["txt_F1"]);
+                t.Tel_F2 = Convert.ToDouble(form["txt_F2"]);
+                t.Tel_F3 = Convert.ToDouble(form["txt_F3"]);
+
+                List < Int32 > SVAS = null;
+                String selectSVA = form["txt_svas"];
+                SVAS = (selectSVA != null) ? DividirCadenaRetornaListInt32(selectSVA) : null;
+
+                entCliente_Telefono ct = new entCliente_Telefono();
+                ct.Cliente = c;
+                ct.Telefono = t;
+
+                Session["ClienteTelefono"] = ct;
+                Session["ClienteTelefono"] = SVAS;
+
+
+
+                return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = "Se Guardo Satisfactoriamente", identificador = 3 });
             }
             catch (Exception e)
             {

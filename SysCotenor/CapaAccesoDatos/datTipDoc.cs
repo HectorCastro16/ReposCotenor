@@ -26,7 +26,35 @@ namespace CapaAccesoDatos
 
         #region metodos
 
+        public List<entTipDoc> ListaTipDoc()
+        {
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entTipDoc> Lista = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListaTipDoc", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entTipDoc>();
 
+                while (dr.Read())
+                {
+                    entTipDoc td = new entTipDoc();
+                    td.td_id = Convert.ToInt32(dr["td_id"]);
+                    td.td_nombre = dr["td_nombre"].ToString();
+                    td.td_Descripcion = dr["td_Descripcion"].ToString();
+                    Lista.Add(td);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            return Lista;
+        }
 
         #endregion metodos
     }
