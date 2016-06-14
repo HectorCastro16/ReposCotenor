@@ -16,10 +16,11 @@ namespace CapaPresentacion.Controllers.Intranet
         // GET: /Comun/
 
         #region class_precio + imagen para editar---------------------------------------------------------------------
-        private static class PrecioImage{
+        private static class PrecioImage
+        {
             public static int idprecio { get; set; }
             public static Double precio { get; set; }
-            public static String image { get; set; }         
+            public static String image { get; set; }
         }
         #endregion class_precio
 
@@ -27,7 +28,51 @@ namespace CapaPresentacion.Controllers.Intranet
         {
             return View();
         }
-        public ActionResult PublicaArt(FormCollection frm, HttpPostedFileBase imagen){
+        
+        public ActionResult BuscaCliente(String sms,int? identificador,String checkStatus)
+        {
+            try
+            {
+                var documento = negCliente.Instancia.ListaDoc();
+                ViewBag.doc = documento;
+                ViewBag.sms = sms;
+                ViewBag.check = checkStatus;
+                if (Session["ObjLista"] != null){
+                    ViewBag.ObjLista = Session["ObjLista"];
+                    Session.Remove("ObjLista");
+                }
+                return View();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        [HttpPost]
+        public ActionResult BuscaCliente(FormCollection frm,String chkotro)
+        { int idtipdoc = 0;
+            try
+            {
+                List<entCliente_Telefono> Lista = null;
+                String check = "";
+                String telef = frm["txttelfB"];
+                if (chkotro != null) { idtipdoc = Convert.ToInt32(frm["select1"]);  check = "checked"; } else idtipdoc = 0;
+                String numdoc = frm["txtnumdoc"];
+                Lista = negCliente.Instancia.BuscaCliente(telef, idtipdoc, numdoc);
+                Session["ObjLista"] = Lista;
+                return RedirectToAction("BuscaCliente",new {checkStatus= check });
+            }catch (ApplicationException a){
+                return RedirectToAction("BuscaCliente", new { sms = a.Message, identificador = 1 });
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("BuscaCliente", new { sms = e.Message, identificador = 2 });
+            }
+        }
+
+        public ActionResult PublicaArt(FormCollection frm, HttpPostedFileBase imagen)
+        {
             try
             {
                 entUsuario u = null;
@@ -44,27 +89,33 @@ namespace CapaPresentacion.Controllers.Intranet
                 }
                 else { a.Art_Image = "sin imagen"; }
                 int i = negUsuario.Instancia.PubArticulo(a);
-                if (i > 0){
-                    if (imagen != null && imagen.ContentLength > 0){
+                if (i > 0)
+                {
+                    if (imagen != null && imagen.ContentLength > 0)
+                    {
                         var name = Path.GetFileName(imagen.FileName);
                         var ruta = Path.Combine(Server.MapPath("~/assets/img/ArticulosImg"), name);
                         imagen.SaveAs(ruta);
                     }
                 }
 
-                return RedirectToAction("Perfil",new {mensaje="Publicado.!" });
+                return RedirectToAction("Perfil", new { mensaje = "Publicado.!" });
             }
             catch (Exception err)
             {
                 return RedirectToAction("Error", "Error", new { mensaje = err.Message });
             }
         }
-        public ActionResult Perfil(String mensaje){
-            try {
+        public ActionResult Perfil(String mensaje)
+        {
+            try
+            {
                 entUsuario u = null;
-                if (Session["usuario"] != null) {
-                     u = (entUsuario)Session["usuario"]; }
-               List<entSecurity> s = null;
+                if (Session["usuario"] != null)
+                {
+                    u = (entUsuario)Session["usuario"];
+                }
+                List<entSecurity> s = null;
                 s = negUsuario.Instancia.ReturUltimoLogeo(u.Usu_Id);
                 ViewBag.security = s;
                 ViewBag.sms = mensaje;
@@ -100,20 +151,22 @@ namespace CapaPresentacion.Controllers.Intranet
                 return RedirectToAction("Error", "Error", new { mensaje = ex.Message });
             }
         }
-        public ActionResult NuewUpdateProducto(int? idprod,String mensaje){
+        public ActionResult NuewUpdateProducto(int? idprod, String mensaje)
+        {
             try
             {
                 entProducto p = new entProducto();
-                if (idprod != null){
+                if (idprod != null)
+                {
                     p = negProducto.Instancia.BuscaProd(Convert.ToInt32(idprod));
                     PrecioImage.idprecio = p.Precio.Pre_ID;
                     PrecioImage.precio = p.Precio.Pre_producto;
                     PrecioImage.image = p.Pro_Imagen;
                 }
 
-                List<entCategoria> cat = negProducto.Instancia.ListCatego();         
-                var categoria = new SelectList(cat, "Cat_Id", "Cat_Nombre");    
-                ViewBag.c = categoria; 
+                List<entCategoria> cat = negProducto.Instancia.ListCatego();
+                var categoria = new SelectList(cat, "Cat_Id", "Cat_Nombre");
+                ViewBag.c = categoria;
                 ViewBag.message = mensaje;
                 return View(p);
             }
@@ -121,42 +174,53 @@ namespace CapaPresentacion.Controllers.Intranet
             {
                 return RedirectToAction("Error", "Error", new { mensaje = error.Message });
             }
-          
+
         }
         [HttpPost]
-        public ActionResult NuewUpdateProducto(entProducto p,HttpPostedFileBase image)
+        public ActionResult NuewUpdateProducto(entProducto p, HttpPostedFileBase image)
         {
-            try {
-                
+            try
+            {
+
                 entProducto pr = p;
                 String usuario = "";
-                int tipoEdit = 0, teprecio=0;
-                if (p.Pro_ID != 0){     
+                int tipoEdit = 0, teprecio = 0;
+                if (p.Pro_ID != 0)
+                {
                     tipoEdit = 2;
-                     // si no se cambio la imagen se mantiene con la que tenia ya en bd / si no, se le asigna nueva imagen
+                    // si no se cambio la imagen se mantiene con la que tenia ya en bd / si no, se le asigna nueva imagen
                     if (image == null) pr.Pro_Imagen = PrecioImage.image;
                     else pr.Pro_Imagen = Path.GetFileName(image.FileName);
                     // si analiza si precio se edito/ si se edito entonces se hace la insercion de el nuevo precio en bd- si no se mantiene con el mismo(id + precio)
-                    if (p.Precio.Pre_producto != PrecioImage.precio) {
+                    if (p.Precio.Pre_producto != PrecioImage.precio)
+                    {
                         teprecio = 1;
-                    }else {
+                    }
+                    else
+                    {
                         p.Precio.Pre_ID = PrecioImage.idprecio;
                     }
                 } // desde aqui aplica para para productos nuevos.
-                else { tipoEdit = 1; teprecio = 1;
+                else
+                {
+                    tipoEdit = 1; teprecio = 1;
                     if (image != null && image.ContentLength > 0)
                     {
                         pr.Pro_Imagen = Path.GetFileName(image.FileName);
                     }
                     else { pr.Pro_Imagen = "defaultimg.jpg"; }
                 }
-                if (Session["usuario"] != null) {
-                    entUsuario u = (entUsuario)Session["usuario"]; usuario = u.Usu_Login; }
-               
-              
-                int i = 0; negProducto.Instancia.InsUpdProducto(pr, tipoEdit, usuario,teprecio);
-                if (i > 0){
-                    if (image != null && image.ContentLength > 0){
+                if (Session["usuario"] != null)
+                {
+                    entUsuario u = (entUsuario)Session["usuario"]; usuario = u.Usu_Login;
+                }
+
+
+                int i = 0; negProducto.Instancia.InsUpdProducto(pr, tipoEdit, usuario, teprecio);
+                if (i > 0)
+                {
+                    if (image != null && image.ContentLength > 0)
+                    {
                         var nombrearchivo = Path.GetFileName(image.FileName);
                         var ruta = Path.Combine(Server.MapPath("~/assets/img/Producto"), nombrearchivo);
                         image.SaveAs(ruta);
@@ -164,8 +228,8 @@ namespace CapaPresentacion.Controllers.Intranet
                     }
                 }
                 String mensajet = ""; if (tipoEdit == 2) mensajet = "Se Edito de Manera Correcta";
-                else if (tipoEdit == 1) mensajet = "Se Inserto de Manera Correcta"; 
-                return RedirectToAction("NuewUpdateProducto",new {mensaje= mensajet });
+                else if (tipoEdit == 1) mensajet = "Se Inserto de Manera Correcta";
+                return RedirectToAction("NuewUpdateProducto", new { mensaje = mensajet });
             }
             catch (Exception error)
             {
@@ -173,19 +237,24 @@ namespace CapaPresentacion.Controllers.Intranet
             }
         }
 
-        
-        public ActionResult ProductosList(){
-            try{
 
-                List<entProducto> ListaP= null;
+        public ActionResult ProductosList()
+        {
+            try
+            {
+
+                List<entProducto> ListaP = null;
                 ListaP = negProducto.Instancia.ListProd();
                 return View(ListaP);
-            }catch (Exception error){
+            }
+            catch (Exception error)
+            {
                 return RedirectToAction("Error", "Error", new { mensaje = error.Message });
             }
 
-        }      
-        public ActionResult ActualizarPass(FormCollection valida){
+        }
+        public ActionResult ActualizarPass(FormCollection valida)
+        {
             try
             {
                 Int32 iduser = 0;
@@ -201,8 +270,9 @@ namespace CapaPresentacion.Controllers.Intranet
                 return RedirectToAction("Ajustes", new { mensaje = "Su contraseña se actualizao de manera correcta" });
 
             }
-            catch (ArithmeticException ex){
-                return RedirectToAction("Ajustes", new { mensaje = ex.Message,tiperror=2});
+            catch (ArithmeticException ex)
+            {
+                return RedirectToAction("Ajustes", new { mensaje = ex.Message, tiperror = 2 });
             }
             catch (Exception e)
             {
@@ -210,7 +280,7 @@ namespace CapaPresentacion.Controllers.Intranet
             }
         }
 
-        public ActionResult Ajustes(String mensaje,int? tiperror)
+        public ActionResult Ajustes(String mensaje, int? tiperror)
         {
             if (mensaje != null)
             {
@@ -593,6 +663,6 @@ namespace CapaPresentacion.Controllers.Intranet
                 return RedirectToAction("ListaUsuarios", "Comun", new { mensaje = e.Message, identificador = 2 });
             }
         }
-        
+
     }
 }

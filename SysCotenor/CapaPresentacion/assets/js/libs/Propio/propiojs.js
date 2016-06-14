@@ -108,7 +108,7 @@ var Products = function () {
  })
 }
 
-    $("#MostrarForm").hide(true);
+$("#MostrarForm").hide(true);
 $("#Result").change(function () {
     if ($("#Result").val() == "1") {
         //  var result = '<div class="col-md-4 col-sm-6"><div class="card"><div class="card-body"><div class="form-group floating-label"><label for="regular2">Cliente</label><input type="text" class="form-control" id="regular2" name="cliente"></div><div class="form-group floating-label"><label for="regular2">RUC</label><input type="text" class="form-control" id="regular2" name="ruc"></div><div class="form-group floating-label"><label for="regular2">Empresa</label><input type="text" class="form-control" id="regular2" name="empresa"></div><div class="form-group floating-label"><label for="regular2">Direccion</label><input type="text" class="form-control" id="regular2" name="direccion"></div><div class="form-group"><label for="regular1">Accion</label><select id="dept" name="depto" class="form-control"><option value="0"><<<<<-Seleccionar->>>>></option></select></div><div class="form-group"><label for="regular1">Detalle</label><select id="prov" name="provin" class="form-control"><option value="0"><<<<<-Seleccionar->>>>></option></select></div><div class="form-group"><label for="regular1">Grupo</label><select id="dist" name="distrit" class="form-control"><option value="0"><<<<<-Seleccionar->>>>></option></select></div><div class="form-group floating-label"><label for="regular2">Fecha Nacimiento</label><input type="text" class="form-control" id="regular2" name="fnacim"></div><div class="form-group floating-label"><label for="regular2">Lugar Nacimiento</label><input type="text" class="form-control" id="regular2" name="lugnacimi"></div><div class="form-group floating-label"><label for="regular2">Correo</label><input type="text" class="form-control" id="regular2" name="correo"></div><div class="form-group floating-label"><label for="regular2">Telefono Ref</label><input type="text" class="form-control" id="regular2" name="telefref"></div></div></div></div>'
@@ -119,6 +119,26 @@ $("#Result").change(function () {
         $("#MostrarForm").hide(true);
     }
 });
+
+$("#check").change(function () {
+    if ($("#check").prop("checked")) {
+        $("#MostrarTable").show();
+        $("#ocultarForm").hide(true);
+    }
+    else {
+        $("#MostrarTable").hide(true);
+        $("#ocultarForm").show();
+    }
+})
+//Verifica si se consulto con algun tipo de documento y muestra la tabla / oculta formulario - 
+//y si no esconde la tabla y queda el formulario(visible)
+if ($("#ch").val() == "checked") {
+    $("#MostrarTable").show();
+    $("#ocultarForm").hide(true);
+} else {
+    $("#MostrarTable").hide(true)
+}
+  
 
 /*<script type="text/javascript">
         var dept = function () {
@@ -234,6 +254,8 @@ var dist = function () {
         $("#btnAdd").bind("click", Add);
     });
 </script>*/
+
+
 
 $(document).ready(function ($) {
     // delegate calls to data-toggle="lightbox"

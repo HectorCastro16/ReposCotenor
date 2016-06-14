@@ -46,12 +46,13 @@
                         <label for="Name1">CATEGORIA</label>
                     </div>
                     <div class="form-group">
+                        
                         <div class="form-group">                
-                            @Html.TextBoxFor(model => model.Precio.Pre_producto, new { @class = "form-control", data_rule_minlength = "2", @required = "required" , @onkeypress = "cambiar(this)" })
+                            @Html.TextBoxFor(model => model.Precio.Pre_producto, new { @class = "form-control", data_rule_minlength = "2", @required = "required" , @onkeyup = "cambiar(this)" })
                          <label for="Name1">PRECIO</label>
                         </div>                    
-                    </div> m
-
+                    </div> 
+                
                     <div class="form-group">
                         @Html.TextBoxFor(model => model.Pro_Nombre, new { @class = "form-control", data_rule_minlength = "2", @required = "required" })            
                         <label for="Email1">NOMBRE</label>
