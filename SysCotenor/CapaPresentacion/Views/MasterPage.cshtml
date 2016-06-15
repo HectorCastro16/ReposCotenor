@@ -241,7 +241,13 @@
                             <ul>
                                 <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
 
-                                <li><a href="#"><span class="title">Mantenedor Clientes</span></a></li>
+                                <li class="gui-folder"><a href="javascript:void(0);"><span class="title">Clientes</span></a>
+                                    <ul>
+                                        <li><a href="@Url.Action("BuscaCliente","Comun")"><span class="title">Buscar</span></a></li>
+                                        <li><a href="#"><span class="title">Historial</span></a></li>
+                                    </ul>
+                                </li>
+                           
 
                                 <li><a href="@Url.Action("ProductosList", "Comun")"><span class="title">Productos</span></a></li>
                             </ul><!--end /submenu -->

@@ -3,218 +3,221 @@
     ViewBag.Title = "Perfil";
     Layout = "~/Views/MasterPage.cshtml";
 }
-@{ 
+@{
     entUsuario u = null;
     List<entSecurity> sl = null;
     String correo = "";
-    if (Session["usuario"] != null) {
+    if (Session["usuario"] != null)
+    {
         u = (entUsuario)Session["usuario"];
         correo = u.Persona.Per_Correo;
     }
-    if (ViewBag.security != null) {
+    if (ViewBag.security != null)
+    {
         sl = (List<entSecurity>)ViewBag.security;
     }
-        <div id="content">
-            <section class="full-bleed">
-                <div class="section-body style-default-dark force-padding text-shadow">
-                    <div class="img-backdrop" style="background-image: url('../../assets/img/img16.jpg')"></div>
-                    <div class="overlay overlay-shade-top stick-top-left height-3"></div>
-                    <div class="row">
-                        <div class="col-md-3 col-xs-5">
-                            <img class="img-circle border-white border-xl img-responsive auto-width" src="~/assets/img/Fotos/@u.Persona.Per_Foto" alt="">
-                            <h3>@u.Persona.NombreCompleto<br><small>@u.TipoUsuario.TipUsu_Nombre</small></h3>
-                        </div><!--end .col -->
-                       
-                    </div><!--end .row --> 
-                </div><!--end .section-body -->
-            </section>
+    <div id="content">
+        <section class="full-bleed">
+            <div class="section-body style-default-dark force-padding text-shadow">
+                <div class="img-backdrop" style="background-image: url('../../assets/img/img16.jpg')"></div>
+                <div class="overlay overlay-shade-top stick-top-left height-3"></div>
+                <div class="row">
+                    <div class="col-md-3 col-xs-5">
+                        <img class="img-circle border-white border-xl img-responsive auto-width" src="~/assets/img/Fotos/@u.Persona.Per_Foto" alt="">
+                        <h3>@u.Persona.NombreCompleto<br><small>@u.TipoUsuario.TipUsu_Nombre</small></h3>
+                    </div><!--end .col -->
+
+                </div><!--end .row -->
+            </div><!--end .section-body -->
+        </section>
 
 
-            <section>
-             <div class="section-body no-margin">
-                    <div class="row">
-                        <div class="col-md-8">
-                            <h2>Compartir!</h2>
+        <section>
+            <div class="section-body no-margin">
+                <div class="row">
+                    <div class="col-md-8">
+                        <h2>Compartir!</h2>
                         @{
-                            if (ViewBag.sms != null){
+                            if (ViewBag.sms != null)
+                            {
                                 <div class="alert alert-success">@ViewBag.sms</div>
                             }
                         }
-                            <!-- BEGIN ENTER MESSAGE -->
-                            <form class="form" method="post" action="PublicaArt" enctype="multipart/form-data">
-                                <div class="card no-margin">
-                                    <div class="card-body">
-                                        <div class="form-group floating-label">
-                                            <input type="text" name="titulo"  class="form-control autosize" required="required"/>
-                                            <label for="status">Título</label>
-                                        </div>
-                                        <div class="form-group floating-label">
-                                            <input type="text" name="url" class="form-control autosize" placeholder="Url"/>
-                                          
-                                        </div>
-                                        <div class="form-group floating-label">
-                                            <textarea name="cuerpo" id="status" class="form-control autosize" rows="3" required="required"></textarea>
-                                            <label for="status">Artículo</label>
-                                        </div>
-                                    </div><!--end .card-body -->
-                                    <div class="card-actionbar">
-                                        <div class="card-actionbar-row">
-                                            <div class="pull-left">
-                                                <input type="file" name="imagen"  accept="image/*"/>                                                         
-                                            </div>
-                                        <input type="submit" name="publicar" value="Publicar" class="btn btn-flat btn-accent ink-reaction"/>
-                                           
-                                        </div><!--end .card-actionbar-row -->
-                                    </div><!--end .card-actionbar -->
-                                </div><!--end .card -->
-                            </form>
+                        <!-- BEGIN ENTER MESSAGE -->
+                        <form class="form" method="post" action="PublicaArt" enctype="multipart/form-data">
+                            <div class="card no-margin">
+                                <div class="card-body">
+                                    <div class="form-group floating-label">
+                                        <input type="text" name="titulo" class="form-control autosize" required="required" />
+                                        <label for="status">Título</label>
+                                    </div>
+                                    <div class="form-group floating-label">
+                                        <input type="text" name="url" class="form-control autosize" placeholder="Url" />
 
-                            <!-- BEGIN ENTER MESSAGE -->
-                            <!-- BEGIN MESSAGE ACTIVITY -->
-                            @{ int i = 4;
-                                foreach (var s in sl)
-                                {
-                                    i--;
-                            <div class="tab-pane" id="activity">
-                                <ul class="timeline collapse-lg timeline-hairline">
-                                    
-                                    <li>
-                                        <div class="timeline-circ circ-xl style-primary-dark"><i class="md md-access-time"></i></div>
-                                        <div class="timeline-entry">
-                                            <div class="card style-default-light">
-                                                <div class="card-body small-padding">
-                                                    <p>
-                                                       @{
-                                                           int hora = Convert.ToDateTime(s.UltimoAcceso).Hour;
-                                                           int min = Convert.ToDateTime(s.UltimoAcceso).Minute;
-                                                           int segundos = Convert.ToDateTime(s.UltimoAcceso).Second;
-                                                           String hms = hora + ":" + min + ":" + segundos;
-                                                           String diasemana = ""; switch (s.UltimoAcceso.DayOfWeek.ToString())
-                                                           {
-                                                               case "Monday": diasemana = "Lunes"; break;
-                                                               case "Tuesday": diasemana = "Martes"; break;
-                                                               case "Wednesday": diasemana = "Miercoles"; break;
-                                                               case "Thursday": diasemana = "Jueves"; break;
-                                                               case "Friday": diasemana = "Viernes"; break;
-                                                               case "Saturday": diasemana = "Sabado"; break;
-                                                               case "Sunday": diasemana = "Domingo"; break;
-                                                           }
-                                                           String mes = ""; switch (s.UltimoAcceso.Month)
-                                                           {
-                                                               case 1: mes = "Enero"; break;
-                                                               case 2: mes = "Febrero"; break;
-                                                               case 3: mes = "Marzo"; break;
-                                                               case 4: mes = "Abril"; break;
-                                                               case 5: mes = "Mayo"; break;
-                                                               case 6: mes = "Junio"; break;
-                                                               case 7: mes = "Julio"; break;
-                                                               case 8: mes = "Agosto"; break;
-                                                               case 9: mes = "Septiembre"; break;
-                                                               case 10: mes = "Octubre"; break;
-                                                               case 11: mes = "Noviembre"; break;
-                                                               case 12: mes = "Diciembre"; break;
-
-                                                           }
-                                                           String anio = s.UltimoAcceso.Year.ToString();
-                                                           String nrodia = s.UltimoAcceso.Day.ToString();
-
-                                                           String ultimo = "";
-                                                           String iu = "";
-                                                           if(i == 3) { ultimo = "Ultimo";iu = ""; }
-                                                           if (i <= 2) { iu= i.ToString();}
-                                                          // else {iu= ""; }
-                                                        <span class="text-medium">@ultimo Acceso @iu: <span class="text-primary">@hms</span></span><br />
-                                                        <span class="opacity-50">
-                                                            @diasemana, @mes @nrodia, @anio
-                                                        </span>
-                                                           }
-                                                    </p>
-                                                  <span>IP: @s.IPAcceso</span>
-                                                </div>
-                                            </div>
-                                        </div><!--end .timeline-entry -->
-                                    </li>
-                                   
-                                </ul>
-                            </div><!--end #activity -->
-                                }
-                            
-                            }
-                        </div><!--end .col -->
-                        <!-- END MESSAGE ACTIVITY -->
-                        <!-- BEGIN PROFILE MENUBAR -->
-                        <div class=" col-lg-4 col-md-5">   
-                            <div class="card card-underline style-default-dark">
-                                <div class="card-head">
-                                    <header class="opacity-75"><small>Informacion Personal</small></header>
-                                    <div class="tools">
-                                        <a class="btn btn-icon-toggle ink-reaction"><i class="md md-edit"></i></a>
-                                    </div><!--end .tools -->
-                                </div><!--end .card-head -->
-                                <div class="card-body no-padding">
-                                    <ul class="list">
-                                        <li class="tile">
-                                            <a class="tile-content ink-reaction">
-                                                <div class="tile-icon">
-                                                    <i class="md md-location-on"></i>
-                                                </div>
-                                                <div class="tile-text">
-                                                   @u.Persona.Per_Direccion
-                                                    <small>Direccion</small>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="tile">
-                                            <a class="tile-content ink-reaction">
-                                                <div class="tile-icon"></div>
-                                                <div class="tile-text">
-                                                    @u.Sucursal.Suc_Nombre
-                                                    <small>Sucursal</small>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        
-                                        <li class="tile">
-                                            <a class="tile-content ink-reaction">
-                                                <div class="tile-icon">
-                                                    <i class="fa fa-phone"></i>
-                                                </div>
-                                                <div class="tile-text">
-                                                    @u.Persona.Per_Celular
-                                                    <small>Movil</small>
-                                                </div>
-                                            </a>
-                                        </li>
-                                       
-                                        <li class="tile">
-                                            <a class="tile-content ink-reaction">
-                                                <div class="tile-icon"><i class="md md-email"></i></div>
-                                                <div class="embed-responsive tile-text">
-                                                    @u.Persona.Per_Correo
-                                                    <small>Correo</small>
-                                                </div>
-                                            </a>
-                                        </li>
-                                        <li class="tile">
-                                            <a class="tile-content ink-reaction">
-                                                <div class="tile-icon"><i class="md md-account-box"></i></div>
-                                                <div class="tile-text">
-                                                    @u.TipoUsuario.TipUsu_Nombre
-                                                    <small>Perfil</small>
-                                                </div>
-                                            </a>
-                                        </li>
-                                    </ul>
+                                    </div>
+                                    <div class="form-group floating-label">
+                                        <textarea name="cuerpo" id="status" class="form-control autosize" rows="3" required="required"></textarea>
+                                        <label for="status">Artículo</label>
+                                    </div>
                                 </div><!--end .card-body -->
-                            </div><!--end .card -->
-                        </div><!--end .col -->
-                        <!-- END PROFILE MENUBAR -->
-                    </div><!--end .row -->
-               </div>
-            </section>
-        </div><!--end #content-->
+                                <div class="card-actionbar">
+                                    <div class="card-actionbar-row">
+                                        <div class="pull-left">
+                                            <input type="file" name="imagen" accept="image/*" />
+                                        </div>
+                                        <input type="submit" name="publicar" value="Publicar" class="btn btn-flat btn-accent ink-reaction" />
 
-    }
+                                    </div><!--end .card-actionbar-row -->
+                                </div><!--end .card-actionbar -->
+                            </div><!--end .card -->
+                        </form>
+
+                        <!-- BEGIN ENTER MESSAGE -->
+                        <!-- BEGIN MESSAGE ACTIVITY -->
+                        @{ int i = 4;
+                            foreach (var s in sl)
+                            {
+                                i--;
+                                <div class="tab-pane" id="activity">
+                                    <ul class="timeline collapse-lg timeline-hairline">
+
+                                        <li>
+                                            <div class="timeline-circ circ-xl style-primary-dark"><i class="md md-access-time"></i></div>
+                                            <div class="timeline-entry">
+                                                <div class="card style-default-light">
+                                                    <div class="card-body small-padding">
+                                                        <p>
+                                                            @{
+                                                                int hora = Convert.ToDateTime(s.UltimoAcceso).Hour;
+                                                                int min = Convert.ToDateTime(s.UltimoAcceso).Minute;
+                                                                int segundos = Convert.ToDateTime(s.UltimoAcceso).Second;
+                                                                String hms = hora + ":" + min + ":" + segundos;
+                                                                String diasemana = ""; switch (s.UltimoAcceso.DayOfWeek.ToString())
+                                                                {
+                                                                    case "Monday": diasemana = "Lunes"; break;
+                                                                    case "Tuesday": diasemana = "Martes"; break;
+                                                                    case "Wednesday": diasemana = "Miercoles"; break;
+                                                                    case "Thursday": diasemana = "Jueves"; break;
+                                                                    case "Friday": diasemana = "Viernes"; break;
+                                                                    case "Saturday": diasemana = "Sabado"; break;
+                                                                    case "Sunday": diasemana = "Domingo"; break;
+                                                                }
+                                                                String mes = ""; switch (s.UltimoAcceso.Month)
+                                                                {
+                                                                    case 1: mes = "Enero"; break;
+                                                                    case 2: mes = "Febrero"; break;
+                                                                    case 3: mes = "Marzo"; break;
+                                                                    case 4: mes = "Abril"; break;
+                                                                    case 5: mes = "Mayo"; break;
+                                                                    case 6: mes = "Junio"; break;
+                                                                    case 7: mes = "Julio"; break;
+                                                                    case 8: mes = "Agosto"; break;
+                                                                    case 9: mes = "Septiembre"; break;
+                                                                    case 10: mes = "Octubre"; break;
+                                                                    case 11: mes = "Noviembre"; break;
+                                                                    case 12: mes = "Diciembre"; break;
+
+                                                                }
+                                                                String anio = s.UltimoAcceso.Year.ToString();
+                                                                String nrodia = s.UltimoAcceso.Day.ToString();
+
+                                                                String ultimo = "";
+                                                                String iu = "";
+                                                                if (i == 3) { ultimo = "Ultimo"; iu = ""; }
+                                                                if (i <= 2) { iu = i.ToString(); }
+                                                                // else {iu= ""; }
+                                                                <span class="text-medium">@ultimo Acceso @iu: <span class="text-primary">@hms</span></span><br />
+                                                                <span class="opacity-50">
+                                                                    @diasemana, @mes @nrodia, @anio
+                                                                </span>
+                                                            }
+                                                        </p>
+                                                        <span>IP: @s.IPAcceso</span>
+                                                    </div>
+                                                </div>
+                                            </div><!--end .timeline-entry -->
+                                        </li>
+
+                                    </ul>
+                                </div><!--end #activity -->
+                                                                }
+
+                        }
+                    </div><!--end .col -->
+                    <!-- END MESSAGE ACTIVITY -->
+                    <!-- BEGIN PROFILE MENUBAR -->
+                    <div class=" col-lg-4 col-md-5">
+                        <div class="card card-underline style-default-dark">
+                            <div class="card-head">
+                                <header class="opacity-75"><small>Informacion Personal</small></header>
+                                <div class="tools">
+                                    <a class="btn btn-icon-toggle ink-reaction"><i class="md md-edit"></i></a>
+                                </div><!--end .tools -->
+                            </div><!--end .card-head -->
+                            <div class="card-body no-padding">
+                                <ul class="list">
+                                    <li class="tile">
+                                        <a class="tile-content ink-reaction">
+                                            <div class="tile-icon">
+                                                <i class="md md-location-on"></i>
+                                            </div>
+                                            <div class="tile-text">
+                                                @u.Persona.Per_Direccion
+                                                <small>Direccion</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="tile">
+                                        <a class="tile-content ink-reaction">
+                                            <div class="tile-icon"></div>
+                                            <div class="tile-text">
+                                                @u.Sucursal.Suc_Nombre
+                                                <small>Sucursal</small>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="tile">
+                                        <a class="tile-content ink-reaction">
+                                            <div class="tile-icon">
+                                                <i class="fa fa-phone"></i>
+                                            </div>
+                                            <div class="tile-text">
+                                                @u.Persona.Per_Celular
+                                                <small>Movil</small>
+                                            </div>
+                                        </a>
+                                    </li>
+
+                                    <li class="tile">
+                                        <a class="tile-content ink-reaction">
+                                            <div class="tile-icon"><i class="md md-email"></i></div>
+                                            <div class="embed-responsive tile-text">
+                                                @u.Persona.Per_Correo
+                                                <small>Correo</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="tile">
+                                        <a class="tile-content ink-reaction">
+                                            <div class="tile-icon"><i class="md md-account-box"></i></div>
+                                            <div class="tile-text">
+                                                @u.TipoUsuario.TipUsu_Nombre
+                                                <small>Perfil</small>
+                                            </div>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div><!--end .card-body -->
+                        </div><!--end .card -->
+                    </div><!--end .col -->
+                    <!-- END PROFILE MENUBAR -->
+                </div><!--end .row -->
+            </div>
+        </section>
+    </div><!--end #content-->
+
+}
 
 
 

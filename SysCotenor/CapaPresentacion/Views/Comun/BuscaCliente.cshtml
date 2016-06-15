@@ -1,0 +1,326 @@
+﻿@using CapaEntidades
+@{
+    ViewBag.Title = "BuscaCliente";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<script type="text/javascript">
+    function formReset() {
+        document.getElementById("myForm").reset();
+    }</script>
+<script type="text/javascript">
+    function habilitar(value) {
+        if (value == true) {
+            // habilitamos
+            document.frmcliente.txttelfB.disabled = true;
+            document.getElementById("txttelfB").value = "";
+            document.getElementById("select1").disabled = false;
+            document.frmcliente.txtnumdoc.disabled = false;
+
+        } else if (value == false) {
+            // deshabilitamos
+            document.frmcliente.txttelfB.disabled = false;
+            document.getElementById("select1").disabled = true;
+            document.getElementById("select1").value = 0;
+            document.frmcliente.txtnumdoc.disabled = true;
+            document.getElementById("txtnumdoc").value = "";
+        }
+    }
+</script>
+
+
+<div id="content">
+    <section>
+        <div class="section-body contain-lg">
+            <div class="row">
+                <form id="myForm" name="frmcliente" class="form" method="post">
+                    <div class="card card-bordered style-image">
+                        <div class="card-body">
+                            <input type="submit" name="btnBuscar" value="Buscar"><input type="button" onclick="formReset()" value="Limpiar">
+                            @{
+                                if (ViewBag.sms != null)
+                                {
+                                    <div class="alert-info">@ViewBag.sms</div>
+                                }
+
+                            }
+                            <div class="card card-bordered style-default">
+                                <div class="card-body">
+                                    <br>
+                                    <input type="text" id="txttelfB" name="txttelfB" placeholder="Teléfono" />
+                                    <br>
+                                    <input type="hidden" name="ch" id="ch" value="@ViewBag.check">
+                                    <label class="checkbox-inline checkbox-styled checkbox-primary">
+                                        <input type="checkbox" name="chkotro" id="check"  onclick="habilitar(this.checked);"><span>Otro</span>
+                                    </label> &nbsp;&nbsp;&nbsp;&nbsp;
+                                    @{List<entTipDoc> d = (List<entTipDoc>)ViewBag.doc; }
+                                    <select id="select1" name="select1" disabled>
+                                        <option value="0">&nbsp;</option>
+                                        @foreach (var i in d)
+                                        {
+                                            <option value="@i.td_id">@i.td_Descripcion</option>
+                                        }
+                                    </select>&nbsp; &nbsp; &nbsp; &nbsp;<input type="text" id="txtnumdoc" name="txtnumdoc" placeholder="Nro Documento" disabled="disabled" />
+
+                                    <br>
+                                    <br>
+                                </div>
+                            </div>
+
+                        @{ 
+                            String Cli_Codigo="", Cli_Nombre="", Cli_RazonSocial="", Cli_Numero_Documento="", Cli_FechaNacimiento="", Cli_LugarNacimiento="", Cli_Correo="", Cli_Telefono_Referencia="", Cli_Estado="", Cli_FechaRegistro="", Cli_FechaModificacion="",
+                                td_Descripcion="", Seg_Nombre="", Tel_Numero="", Tel_Producto="", Tel_Direccion="", Tel_FechaAlta="", Tel_F1="", Tel_F2="", Tel_F3="";
+                            int Cli_Id=0;                       
+                            if (ViewBag.ObjLista != null){
+                                List<entCliente_Telefono> Lista = (List<entCliente_Telefono>)ViewBag.ObjLista;
+                                if (Lista.Count() == 1){
+                                    
+                                    foreach (var ls in Lista){
+                                        Cli_Id = ls.Cliente.Cli_Id;
+                                        Cli_Codigo = ls.Cliente.Cli_Codigo;
+                                        Cli_Nombre = ls.Cliente.Cli_Nombre;
+                                        Cli_RazonSocial = ls.Cliente.Cli_RazonSocial;
+                                        Cli_Numero_Documento = ls.Cliente.Cli_Numero_Documento;
+                                        Cli_FechaNacimiento = Convert.ToDateTime(ls.Cliente.Cli_FechaNacimiento).ToShortDateString();
+                                        Cli_LugarNacimiento = ls.Cliente.Cli_LugarNacimiento;
+                                        Cli_Correo = ls.Cliente.Cli_Correo;
+                                        Cli_Telefono_Referencia = ls.Cliente.Cli_Telefono_Referencia;
+                                        Cli_Estado = ls.Cliente.Cli_Estado;
+                                        Cli_FechaRegistro = Convert.ToDateTime(ls.Cliente.Cli_FechaRegistro).ToShortDateString();
+                                        Cli_FechaModificacion = Convert.ToDateTime(ls.Cliente.Cli_FechaModificacion).ToShortDateString();
+                                        td_Descripcion = ls.Cliente.TipDoc.td_Descripcion;
+                                        Seg_Nombre = ls.Cliente.Segmento.Seg_Nombre;
+                                        Tel_Numero = ls.Telefono.Tel_Numero;
+                                        Tel_Producto = ls.Telefono.Tel_Producto;
+                                        Tel_Direccion = ls.Telefono.Tel_Direccion;
+                                        Tel_FechaAlta =Convert.ToDateTime(ls.Telefono.Tel_FechaAlta).ToShortDateString();
+                                        Tel_F1 = ls.Telefono.Tel_F1.ToString();
+                                        Tel_F2 = ls.Telefono.Tel_F2.ToString();
+                                        Tel_F3 = ls.Telefono.Tel_F3.ToString();
+                                    }
+                                }
+                            }
+
+                        }
+                                <div id="MostrarTable">
+                                <div class="card card-bordered style-default">
+                                    <div class="card-body">
+                                        <div class="table-responsive">
+                                            <table class="table no-margin">
+                                                <thead>
+                                                    <tr class="gradeA odd selected" role="row">
+                                                        <th>#</th>
+                                                        <th>Codigo</th>
+                                                        <th>Nombre</th>
+                                                        <th>Segmento</th>
+                                                        <th>Documento</th>     
+                                                        <th>Estado</th>
+                                                        <th>Producto/Servicio</th>
+                                                        <th>Teléfono</th>
+                                                                         
+                                                        <th></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @{ int cont = 0;
+                                                        if (ViewBag.ObjLista != null){
+                                                            List<entCliente_Telefono> Lista =(List<entCliente_Telefono>)ViewBag.ObjLista;
+                                                            foreach (var item in Lista){
+                                                                cont++;
+                                                                <tr>
+                                                                    <td>@cont</td>
+                                                                    <td>@item.Cliente.Cli_Codigo</td>
+                                                                    <td>@item.Cliente.Cli_Nombre</td>
+                                                                    <td>@item.Cliente.Segmento.Seg_Nombre</td>
+                                                                    <td>@item.Cliente.Cli_Numero_Documento</td>
+                                                                    <td>@item.Cliente.Cli_Estado</td>
+                                                                    <td>@item.Telefono.Tel_Producto</td>
+                                                                    <td>@item.Telefono.Tel_Numero</td>
+                                                                    <td></td>
+
+                                                                </tr>
+                                                            }
+                                                        }
+                                                    }
+
+                                                </tbody>
+                                            </table>
+                                        </div><!--end .table-responsive -->
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="ocultarForm">
+                                <label>Datos Línea</label>
+                                <div class="card card-bordered style-default">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txttelf" value="@Tel_Numero">
+                                                    <label for="dgdsg" class="control-label">Teléfono</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txtdireccion" value="@Tel_Direccion">
+                                                    <label for="dgdsg" class="control-label">Dirección</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txtservicio" value="@Tel_Producto">
+                                                    <label for="dgdsg" class="control-label">Servicio</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txtfalta" value="@Tel_FechaAlta">
+                                                    <label for="dgdsg" class="control-label">Fecha Alta</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txtsva" value="">
+                                                    <label for="dgdsg" class="control-label">SVA</label>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <label>Facturación</label>
+                                <div class="card card-bordered style-default">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txtf1" value="@Tel_F1">
+                                                    <label for="dgdsg" class="control-label">Factura 1</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txtf2" value="@Tel_F2">
+                                                    <label for="dgdsg" class="control-label">Factura 2</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txtf3" value="@Tel_F3">
+                                                    <label for="dgdsg" class="control-label">Factura 3</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <label>Datos Cliente</label>
+                                <div class="card card-bordered style-default">
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txtcodigo" value="@Cli_Codigo">
+                                                    <label for="dgdsg" class="control-label">Codigo</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" txttipdoc value="@td_Descripcion">
+                                                    <label for="dgdsg" class="control-label">Tipo Documento</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txtnrodoc" value="@Cli_Numero_Documento">
+                                                    <label for="dgdsg" class="control-label">Nro Documento</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txtcliente" value="@Cli_Nombre">
+                                                    <label for="dgdsg" class="control-label">Cliente</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txtrazsocial" value="@Cli_RazonSocial">
+                                                    <label for="dgdsg" class="control-label">Razón Social</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txtsegmento" value="@Seg_Nombre">
+                                                    <label for="dgdsg" class="control-label">Segmento</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txtfnaci" value="@Cli_FechaNacimiento">
+                                                    <label for="dgdsg" class="control-label">F.Nacimiento</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="lnacimiento" value="@Cli_LugarNacimiento">
+                                                    <label for="dgdsg" class="control-label">Lugar Nacimiento</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txtcorreo" value="@Cli_Correo">
+                                                    <label for="dgdsg" class="control-label">Correo</label>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="txttelfref" value="@Cli_Telefono_Referencia">
+                                                    <label for="dgdsg" class="control-label">Telf Referencia</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="estado" value="@Cli_Estado">
+                                                    <label for="dgdsg" class="control-label">Estado</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="ultupdate" value="@Cli_FechaModificacion">
+                                                    <label for="dgdsg" class="control-label">Ultima Actualizacion</label>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                            </div><!--end .card-body -->
+                    </div><!--end .card -->
+                </form>
+                <em class="text-caption">2016- V1.0</em>
+
+
+            </div>
+        </div>
+    </section>
+</div>
