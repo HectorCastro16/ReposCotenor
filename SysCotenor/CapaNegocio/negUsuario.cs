@@ -83,7 +83,6 @@ namespace CapaNegocio
             }
           }
 
-
         public entUsuario VerificarAccesoIntranet(String prmstrLogin, String prmstrPassw)
         {
             try

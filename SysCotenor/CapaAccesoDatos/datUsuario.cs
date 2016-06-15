@@ -557,8 +557,7 @@ namespace CapaAccesoDatos
             finally
             {
                 cmd.Connection.Close();
-            }
-        
+            }        
         }
 
         #endregion metodos

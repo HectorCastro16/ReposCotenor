@@ -25,5 +25,8 @@ namespace CapaEntidades
         public DateTime Cli_FechaModificacion { get; set; }
         public String Cli_UsuarioModificacion { get; set; }
 
+        public List<entProducto> SVAS { get; set; }
+        //es una lista porque son muchos SVAS
+
     }
 }

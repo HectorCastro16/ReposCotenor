@@ -47,7 +47,7 @@
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="txt_Telefono" id="id_Telefono" data-rule-number="true" onkeypress="return valida(event)" required>
+                                            <input type="text" class="form-control" name="txt_Telefono" id="id_Telefono" data-rule-minlength = "8" maxlength = "8" data-rule-number="true" onkeypress="return valida(event)" required>
                                             <label for="dgdsg" class="control-label">Telefono</label>
                                         </div>
                                     </div>
@@ -60,24 +60,18 @@
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             @Html.DropDownListFor(m => m.Item3.td_id, (SelectList)ViewBag.ListaTipDoc, "", new { Class = "form-control", required = "required", Name = "txt_TipDoc" })
-                                            <label for="dgdsg" class="control-label">Tip. Doc.</label>
+                                            <label for="dgdsg" class="control-label">Tipo Documento</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <input type="text" class="form-control" name="txt_NumDocumento" id="id_NumDocumento" data-rule-minlength="8" maxlength="15" required>
-                                            <label for="dgdsg" class="control-label"># Documento</label>
+                                            <label for="dgdsg" class="control-label">Numero Documento</label>
                                         </div>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="txt_Producto" id="id_Producto" data-rule-minlength="2" required>
-                                            <label for="dgdsg" class="control-label">Producto</label>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-6">
                                         <div class="form-group">
                                             <input type="text" class="form-control" name="txt_Direccion" id="id_Direccion" data-rule-minlength="2" required>
                                             <label for="dgdsg" class="control-label">Direccion</label>
@@ -85,29 +79,54 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
+                                            <input type="text" class="form-control" name="txt_Producto" id="id_Producto" data-rule-minlength="2" required>
+                                            <label for="dgdsg" class="control-label">Producto</label>
+                                        </div>
+                                    </div>                                    
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
                                             <input type="text" class="form-control" name="txt_Fecha_Alta" id="id_Fecha_Alta" data-inputmask="'alias': 'date'" required>
                                             <label for="dgdsg" class="control-label">Fecha Alta</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control dollar-mask" name="txt_F1" id="id_F1" required>
-                                            <label for="dgdsg" class="control-label">Factura 1</label>
-                                        </div>
-                                    </div>
+                                    
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-2">
                                         <div class="form-group">
-                                            <input type="text" class="form-control dollar-mask" name="txt_F2" id="id_F2" required>
-                                            <label for="dgdsg" class="control-label">Factura 2</label>
-                                        </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><b>S/.</b></span>
+                                                <div class="input-group-content">
+                                                    <input type="text" class="form-control" id="id_F1" name="txt_F1" style="text-align:right" required>
+                                                    <label for="dollars9" class="control-label">Factura_1</label>
+                                                </div>
+                                                <span class="input-group-addon">.00</span>
+                                            </div>
+                                        </div><!--end .form-group -->
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-2">
                                         <div class="form-group">
-                                            <input type="text" class="form-control dollar-mask" name="txt_F3" id="id_F3" required>
-                                            <label for="dgdsg" class="control-label">Factura 3</label>
-                                        </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><b>S/.</b></span>
+                                                <div class="input-group-content">
+                                                    <input type="text" class="form-control" name="txt_F2" id="id_F2" style="text-align:right" required>
+                                                    <label for="dollars9">Factura_2</label>
+                                                </div>
+                                                <span class="input-group-addon">.00</span>
+                                            </div>
+                                        </div><!--end .form-group -->
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><b>S/.</b></span>
+                                                <div class="input-group-content">
+                                                    <input type="text" class="form-control"name="txt_F3" id="id_F3" style="text-align:right" required>
+                                                    <label for="dollars9">Factura_3</label>
+                                                </div>
+                                                <span class="input-group-addon">.00</span>
+                                            </div>
+                                        </div><!--end .form-group -->
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
@@ -117,11 +136,13 @@
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <input type="hidden" class="form-control" name="txt_Rs" id="id_Rs" data-rule-minlength="2" value="">
-                                    <input type="hidden" name="txt_FecNac" value="01/01/0001" />
+                                    <input type="hidden" class="form-control" name="txt_Rs" id="id_Rs" value="">
+                                    <input type="hidden" name="txt_Segmento" value="1" />
+                                    @*<input type="hidden" name="txt_FecNac" value="01/01/0001" />
                                     <input type="hidden" name="txt_LugNac" value="" />
                                     <input type="hidden" name="txt_CliCorreo" value="" />
                                     <input type="hidden" name="txt_TelRef" value="" />
+                                    <input type="hidden" name="txt_Estado" value="Activo" />*@
                                     <div class="col-lg-3">
                                         <div class="form-group">
 
@@ -157,12 +178,12 @@
                     <div id="accordion7-2" class="collapse">
                         <div class="card-body">
                             <h4>Datos Integrales de Cliente</h4>
-                            <form class="form" method="post" action="InsertarDataCliente">
+                            <form class="form form-validate basic-label" method="post" action="InsertarDataCliente">
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="txt_NumDocumento" id="id_NumDocumento" data-rule-minlength="11" maxlength="11" data-rule-number="true" onkeypress="return valida(event)" required>
-                                            <label for="dgdsg" class="control-label">RUC</label>
+                                            <input type="text" class="form-control" name="txt_Telefono" id="id_Telefono" data-rule-minlength = "8" maxlength = "8" data-rule-number="true" onkeypress="return valida(event)" required>
+                                            <label for="dgdsg" class="control-label">Telefono</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
@@ -173,22 +194,22 @@
                                     </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="txt_Telefono" id="id_Telefono" data-rule-number="true" onkeypress="return valida(event)" required>
-                                            <label for="dgdsg" class="control-label">Telefono</label>
+                                            <input type="text" class="form-control" name="txt_NumDocumento" id="id_NumDocumento" data-rule-minlength="11" maxlength="11" data-rule-number="true" onkeypress="return valida(event)" required>
+                                            <label for="dgdsg" class="control-label">RUC</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control" name="txt_Producto" id="id_Producto" data-rule-minlength="2" required>
-                                            <label for="dgdsg" class="control-label">Producto</label>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <input type="text" class="form-control" name="txt_Direccion" id="id_Direccion" data-rule-minlength="2" required>
                                             <label for="dgdsg" class="control-label">Direccion</label>
+                                        </div>
+                                    </div>                                    
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" name="txt_Producto" id="id_Producto" data-rule-minlength="2" required>
+                                            <label for="dgdsg" class="control-label">Producto</label>
                                         </div>
                                     </div>
                                     <div class="col-lg-3">
@@ -197,26 +218,44 @@
                                             <label for="dgdsg" class="control-label">Fecha Alta</label>
                                         </div>
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-2">
                                         <div class="form-group">
-                                            <input type="text" class="form-control dollar-mask" name="txt_F1" id="id_F1" required>
-                                            <label for="dgdsg" class="control-label">Factura 1</label>
-                                        </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><b>S/.</b></span>
+                                                <div class="input-group-content">
+                                                    <input type="text" class="form-control" id="id_F1" name="txt_F1" style="text-align:right" required>
+                                                    <label for="dollars9" class="control-label">Factura_1</label>
+                                                </div>
+                                                <span class="input-group-addon">.00</span>
+                                            </div>
+                                        </div><!--end .form-group -->
                                     </div>
-                                    <div class="col-lg-3">
+                                    <div class="col-lg-2">
                                         <div class="form-group">
-                                            <input type="text" class="form-control dollar-mask" name="txt_F2" id="id_F2" required>
-                                            <label for="dgdsg" class="control-label">Factura 2</label>
-                                        </div>
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><b>S/.</b></span>
+                                                <div class="input-group-content">
+                                                    <input type="text" class="form-control" name="txt_F2" id="id_F2" style="text-align:right" required>
+                                                    <label for="dollars9">Factura_2</label>
+                                                </div>
+                                                <span class="input-group-addon">.00</span>
+                                            </div>
+                                        </div><!--end .form-group -->
+                                    </div>
+                                    <div class="col-lg-2">
+                                        <div class="form-group">
+                                            <div class="input-group">
+                                                <span class="input-group-addon"><b>S/.</b></span>
+                                                <div class="input-group-content">
+                                                    <input type="text" class="form-control" name="txt_F3" id="id_F3" style="text-align:right" required>
+                                                    <label for="dollars9">Factura_3</label>
+                                                </div>
+                                                <span class="input-group-addon">.00</span>
+                                            </div>
+                                        </div><!--end .form-group -->
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-lg-3">
-                                        <div class="form-group">
-                                            <input type="text" class="form-control dollar-mask" name="txt_F3" id="id_F3" required>
-                                            <label for="dgdsg" class="control-label">Factura 3</label>
-                                        </div>
-                                    </div>
                                     <div class="col-lg-6">
                                         <div class="form-group">
                                             @Html.DropDownListFor(m => m.Item1.Pro_ID, (SelectList)ViewBag.ListaProductosSVA, "", new { Name = "txt_svas", @class = "form-control select2-list", multiple = "multiple" })
@@ -228,14 +267,21 @@
 
                                         </div>
                                     </div>
+                                    <div class="col-lg-3">
+                                        <div class="form-group">
+
+                                        </div>
+                                    </div>
                                 </div>
                                 <div class="row">
+                                    <input type="hidden" name="txt_Segmento" value="2" />
                                     <input type="hidden" name="txt_TipDoc" value="2" />
-                                    <input type="hidden" name="txt_FecNac" value="" />
+                                    @*<input type="hidden" name="txt_FecNac" value="" />
                                     <input type="hidden" name="txt_LugNac" value="" />
                                     <input type="hidden" name="txt_CliCorreo" value="" />
                                     <input type="hidden" name="txt_TelRef" value="" />
-                                    <div class="col-lg-3">
+                                    <input type="hidden" name="txt_Estado" value="Activo" />
+                                    <div class="col-lg-3">*@
                                         <div class="form-group">
 
                                         </div>
@@ -266,9 +312,3 @@
     </div>
 
 </section>
-
-
-
-
-
-
