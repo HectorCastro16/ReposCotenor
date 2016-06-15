@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Helpers;
 using CapaEntidades;
 using CapaNegocio;
 
@@ -21,6 +22,7 @@ namespace CapaPresentacion.Controllers.Intranet
         {
             return View();
         }
+        [ValidateInput(false)]
         public ActionResult InsertarDataCliente(String mensaje, Int16? identificador)
         {
             try
@@ -66,12 +68,14 @@ namespace CapaPresentacion.Controllers.Intranet
             return SVAS;
         }
 
+        [ValidateInput(false)]
         [HttpPost]
         public ActionResult InsertarDataCliente(FormCollection form)
         {
 
             try
             {
+                //FormCollection form = new FormCollection(Request.Unvalidated.Form);
 
                 entSegmento s = new entSegmento();
                 s.Seg_Id = Convert.ToInt32(form["txt_Segmento"]);

@@ -33,7 +33,7 @@ namespace CapaAccesoDatos
             try
             {
                 SqlConnection cn = Conexion.Instancia.Conectar();
-                cmd = new SqlCommand("InsUpdDelBloActCliente", cn);
+                cmd = new SqlCommand("spInsUpdDelBloActCliente", cn);
                 cmd.Parameters.AddWithValue("@prmstrCadXML", cadXML);
                 cmd.CommandType = CommandType.StoredProcedure;
 

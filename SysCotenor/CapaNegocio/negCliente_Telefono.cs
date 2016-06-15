@@ -50,7 +50,7 @@ namespace CapaNegocio
                     if (TieneSVA != 0) {
                         foreach (entProducto p in ct.Cliente.SVAS) {
                             cadXml += "<ProCon ";
-                        cadXml += "ProCon_Pro_Id='" + p.Pro_ID + "'";
+                        cadXml += "ProCon_Pro_Id='" + p.Pro_ID + "' ";
                         cadXml += "ProCon_UsuarioRegistro='" + ct.CliTel_UsuarioRegistro + "'/>"; 
                         }                    
                     }                      
