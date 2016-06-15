@@ -13,21 +13,21 @@
     {
         if (@ViewBag.identificador == 1)
         {
-        <div class="alert alert-callout alert-warning" role="alert">
-            <strong>Atención!</strong> @ViewBag.mensaje
-        </div>
+            <div class="alert alert-callout alert-warning" role="alert">
+                <strong>Atención!</strong> @ViewBag.mensaje
+            </div>
         }
         else if (@ViewBag.identificador == 2)
         {
-        <div class="alert alert-callout alert-danger" role="alert">
-            <strong>Ooops!</strong> @ViewBag.mensaje
-        </div>
+            <div class="alert alert-callout alert-danger" role="alert">
+                <strong>Ooops!</strong> @ViewBag.mensaje
+            </div>
         }
         else if (@ViewBag.identificador == 3)
         {
-        <div class="alert alert-callout alert-success" role="alert">
-            <strong>Atención!</strong> @ViewBag.mensaje
-        </div>
+            <div class="alert alert-callout alert-success" role="alert">
+                <strong>Atención!</strong> @ViewBag.mensaje
+            </div>
         }
     }
     <div class="row">
@@ -47,7 +47,7 @@
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="txt_Telefono" id="id_Telefono" data-rule-minlength = "8" maxlength = "8" data-rule-number="true" onkeypress="return valida(event)" required>
+                                            <input type="text" class="form-control" name="txt_Telefono" id="id_Telefono" data-rule-minlength="8" maxlength="8" data-rule-number="true" onkeypress="return valida(event)" required>
                                             <label for="dgdsg" class="control-label">Telefono</label>
                                         </div>
                                     </div>
@@ -82,22 +82,28 @@
                                             <input type="text" class="form-control" name="txt_Producto" id="id_Producto" data-rule-minlength="2" required>
                                             <label for="dgdsg" class="control-label">Producto</label>
                                         </div>
-                                    </div>                                    
+                                    </div>
                                     <div class="col-lg-3">
                                         <div class="form-group">
                                             <input type="text" class="form-control" name="txt_Fecha_Alta" id="id_Fecha_Alta" data-inputmask="'alias': 'date'" required>
                                             <label for="dgdsg" class="control-label">Fecha Alta</label>
                                         </div>
                                     </div>
-                                    
+
                                 </div>
                                 <div class="row">
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            @Html.DropDownListFor(m => m.Item1.Pro_ID, (SelectList)ViewBag.ListaProductosSVA, "", new { Name = "txt_svas", @class = "form-control select2-list", multiple = "multiple" })
+                                            <label for="dgdsg" class="control-label">Servicios de Valor Agregado Contratados (SVA)</label>
+                                        </div>
+                                    </div>
                                     <div class="col-lg-2">
                                         <div class="form-group">
                                             <div class="input-group">
                                                 <span class="input-group-addon"><b>S/.</b></span>
                                                 <div class="input-group-content">
-                                                    <input type="text" class="form-control" id="id_F1" name="txt_F1" style="text-align:right" required>
+                                                    <input type="text" class="form-control" id="id_F1" name="txt_F1" data-rule-number="true" onkeypress="return valida(event)" style="text-align:right" required>
                                                     <label for="dollars9" class="control-label">Factura_1</label>
                                                 </div>
                                                 <span class="input-group-addon">.00</span>
@@ -109,7 +115,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><b>S/.</b></span>
                                                 <div class="input-group-content">
-                                                    <input type="text" class="form-control" name="txt_F2" id="id_F2" style="text-align:right" required>
+                                                    <input type="text" class="form-control" name="txt_F2" id="id_F2" data-rule-number="true" onkeypress="return valida(event)" style="text-align:right" required>
                                                     <label for="dollars9">Factura_2</label>
                                                 </div>
                                                 <span class="input-group-addon">.00</span>
@@ -121,28 +127,22 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><b>S/.</b></span>
                                                 <div class="input-group-content">
-                                                    <input type="text" class="form-control"name="txt_F3" id="id_F3" style="text-align:right" required>
+                                                    <input type="text" class="form-control" name="txt_F3" id="id_F3" data-rule-number="true" onkeypress="return valida(event)" style="text-align:right" required>
                                                     <label for="dollars9">Factura_3</label>
                                                 </div>
                                                 <span class="input-group-addon">.00</span>
                                             </div>
                                         </div><!--end .form-group -->
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="form-group">
-                                            @Html.DropDownListFor(m => m.Item1.Pro_ID, (SelectList)ViewBag.ListaProductosSVA, "", new { Name = "txt_svas", @class = "form-control select2-list", multiple = "multiple" })
-                                            <label for="dgdsg" class="control-label">Servicios de Valor Agregado Contratados (SVA)</label>
-                                        </div>
-                                    </div>
+                                    </div>                                    
                                 </div>
                                 <div class="row">
                                     <input type="hidden" class="form-control" name="txt_Rs" id="id_Rs" value="">
                                     <input type="hidden" name="txt_Segmento" value="1" />
                                     @*<input type="hidden" name="txt_FecNac" value="01/01/0001" />
-                                    <input type="hidden" name="txt_LugNac" value="" />
-                                    <input type="hidden" name="txt_CliCorreo" value="" />
-                                    <input type="hidden" name="txt_TelRef" value="" />
-                                    <input type="hidden" name="txt_Estado" value="Activo" />*@
+                                        <input type="hidden" name="txt_LugNac" value="" />
+                                        <input type="hidden" name="txt_CliCorreo" value="" />
+                                        <input type="hidden" name="txt_TelRef" value="" />
+                                        <input type="hidden" name="txt_Estado" value="Activo" />*@
                                     <div class="col-lg-3">
                                         <div class="form-group">
 
@@ -182,7 +182,7 @@
                                 <div class="row">
                                     <div class="col-lg-3">
                                         <div class="form-group">
-                                            <input type="text" class="form-control" name="txt_Telefono" id="id_Telefono" data-rule-minlength = "8" maxlength = "8" data-rule-number="true" onkeypress="return valida(event)" required>
+                                            <input type="text" class="form-control" name="txt_Telefono" id="id_Telefono" data-rule-minlength="8" maxlength="8" data-rule-number="true" onkeypress="return valida(event)" required>
                                             <label for="dgdsg" class="control-label">Telefono</label>
                                         </div>
                                     </div>
@@ -203,7 +203,7 @@
                                             <input type="text" class="form-control" name="txt_Direccion" id="id_Direccion" data-rule-minlength="2" required>
                                             <label for="dgdsg" class="control-label">Direccion</label>
                                         </div>
-                                    </div>                                    
+                                    </div>
                                 </div>
                                 <div class="row">
                                     <div class="col-lg-3">
@@ -223,7 +223,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><b>S/.</b></span>
                                                 <div class="input-group-content">
-                                                    <input type="text" class="form-control" id="id_F1" name="txt_F1" style="text-align:right" required>
+                                                    <input type="text" class="form-control" id="id_F1" name="txt_F1" data-rule-number="true" onkeypress="return valida(event)" style="text-align:right" required>
                                                     <label for="dollars9" class="control-label">Factura_1</label>
                                                 </div>
                                                 <span class="input-group-addon">.00</span>
@@ -235,7 +235,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><b>S/.</b></span>
                                                 <div class="input-group-content">
-                                                    <input type="text" class="form-control" name="txt_F2" id="id_F2" style="text-align:right" required>
+                                                    <input type="text" class="form-control" name="txt_F2" id="id_F2" data-rule-number="true" onkeypress="return valida(event)" style="text-align:right" required>
                                                     <label for="dollars9">Factura_2</label>
                                                 </div>
                                                 <span class="input-group-addon">.00</span>
@@ -247,7 +247,7 @@
                                             <div class="input-group">
                                                 <span class="input-group-addon"><b>S/.</b></span>
                                                 <div class="input-group-content">
-                                                    <input type="text" class="form-control" name="txt_F3" id="id_F3" style="text-align:right" required>
+                                                    <input type="text" class="form-control" name="txt_F3" id="id_F3" data-rule-number="true" onkeypress="return valida(event)" style="text-align:right" required>
                                                     <label for="dollars9">Factura_3</label>
                                                 </div>
                                                 <span class="input-group-addon">.00</span>
@@ -276,12 +276,14 @@
                                 <div class="row">
                                     <input type="hidden" name="txt_Segmento" value="2" />
                                     <input type="hidden" name="txt_TipDoc" value="2" />
+                                    <input type="hidden" name="txt_Nom" value="" />
                                     @*<input type="hidden" name="txt_FecNac" value="" />
-                                    <input type="hidden" name="txt_LugNac" value="" />
-                                    <input type="hidden" name="txt_CliCorreo" value="" />
-                                    <input type="hidden" name="txt_TelRef" value="" />
-                                    <input type="hidden" name="txt_Estado" value="Activo" />
-                                    <div class="col-lg-3">*@
+                                        <input type="hidden" name="txt_LugNac" value="" />
+                                        <input type="hidden" name="txt_CliCorreo" value="" />
+                                        <input type="hidden" name="txt_TelRef" value="" />
+                                        <input type="hidden" name="txt_Estado" value="Activo" />
+                                        <div class="col-lg-3">*@
+                                    <div class="col-lg-3">
                                         <div class="form-group">
 
                                         </div>
@@ -304,11 +306,12 @@
                                 </div>
                             </form>
                         </div>
-                    </div>
-                </div><!--end .panel -->
 
-            </div><!--end .panel-group -->
-        </div><!--end .col -->
-    </div>
+                    </div>
+                </div>
+            </div><!--end .panel -->
+
+        </div><!--end .panel-group -->
+    </div><!--end .col -->
 
 </section>
