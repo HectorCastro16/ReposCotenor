@@ -7,8 +7,8 @@
 <script type="text/javascript">
     function formReset() {
         document.getElementById("myForm").reset();
-    }</script>
-<script type="text/javascript">
+    }
+
     function habilitar(value) {
         if (value == true) {
             // habilitamos
@@ -51,7 +51,7 @@
                                     <br>
                                     <input type="hidden" name="ch" id="ch" value="@ViewBag.check">
                                     <label class="checkbox-inline checkbox-styled checkbox-primary">
-                                        <input type="checkbox" name="chkotro" id="check"  onclick="habilitar(this.checked);"><span>Otro</span>
+                                        <input type="checkbox" name="chkotro" id="check" onclick="habilitar(this.checked);"><span>Otro</span>
                                     </label> &nbsp;&nbsp;&nbsp;&nbsp;
                                     @{List<entTipDoc> d = (List<entTipDoc>)ViewBag.doc; }
                                     <select id="select1" name="select1" disabled>
@@ -67,42 +67,56 @@
                                 </div>
                             </div>
 
-                        @{ 
-                            String Cli_Codigo="", Cli_Nombre="", Cli_RazonSocial="", Cli_Numero_Documento="", Cli_FechaNacimiento="", Cli_LugarNacimiento="", Cli_Correo="", Cli_Telefono_Referencia="", Cli_Estado="", Cli_FechaRegistro="", Cli_FechaModificacion="",
-                                td_Descripcion="", Seg_Nombre="", Tel_Numero="", Tel_Producto="", Tel_Direccion="", Tel_FechaAlta="", Tel_F1="", Tel_F2="", Tel_F3="";
-                            int Cli_Id=0;                       
-                            if (ViewBag.ObjLista != null){
-                                List<entCliente_Telefono> Lista = (List<entCliente_Telefono>)ViewBag.ObjLista;
-                                if (Lista.Count() == 1){
-                                    
-                                    foreach (var ls in Lista){
-                                        Cli_Id = ls.Cliente.Cli_Id;
-                                        Cli_Codigo = ls.Cliente.Cli_Codigo;
-                                        Cli_Nombre = ls.Cliente.Cli_Nombre;
-                                        Cli_RazonSocial = ls.Cliente.Cli_RazonSocial;
-                                        Cli_Numero_Documento = ls.Cliente.Cli_Numero_Documento;
-                                        Cli_FechaNacimiento = Convert.ToDateTime(ls.Cliente.Cli_FechaNacimiento).ToShortDateString();
-                                        Cli_LugarNacimiento = ls.Cliente.Cli_LugarNacimiento;
-                                        Cli_Correo = ls.Cliente.Cli_Correo;
-                                        Cli_Telefono_Referencia = ls.Cliente.Cli_Telefono_Referencia;
-                                        Cli_Estado = ls.Cliente.Cli_Estado;
-                                        Cli_FechaRegistro = Convert.ToDateTime(ls.Cliente.Cli_FechaRegistro).ToShortDateString();
-                                        Cli_FechaModificacion = Convert.ToDateTime(ls.Cliente.Cli_FechaModificacion).ToShortDateString();
-                                        td_Descripcion = ls.Cliente.TipDoc.td_Descripcion;
-                                        Seg_Nombre = ls.Cliente.Segmento.Seg_Nombre;
-                                        Tel_Numero = ls.Telefono.Tel_Numero;
-                                        Tel_Producto = ls.Telefono.Tel_Producto;
-                                        Tel_Direccion = ls.Telefono.Tel_Direccion;
-                                        Tel_FechaAlta =Convert.ToDateTime(ls.Telefono.Tel_FechaAlta).ToShortDateString();
-                                        Tel_F1 = ls.Telefono.Tel_F1.ToString();
-                                        Tel_F2 = ls.Telefono.Tel_F2.ToString();
-                                        Tel_F3 = ls.Telefono.Tel_F3.ToString();
+                            @{
+                                String Cli_Codigo = "", Cli_Nombre = "", Cli_RazonSocial = "", Cli_Numero_Documento = "", Cli_FechaNacimiento = "", Cli_LugarNacimiento = "", Cli_Correo = "", Cli_Telefono_Referencia = "", Cli_Estado = "", Cli_FechaRegistro = "", Cli_FechaModificacion = "",
+                                    td_Descripcion = "", Seg_Nombre = "", Tel_Numero = "", Tel_Producto = "", Tel_Direccion = "", Tel_FechaAlta = "", Tel_F1 = "", Tel_F2 = "", Tel_F3 = "",
+                                    desde = "";
+                                int Cli_Id = 0, month = 0, year = 0; ; double day;
+                                TimeSpan dias;
+                                DateTime fechaHoy = DateTime.Now;
+
+                                if (ViewBag.ObjLista != null)
+                                {
+                                    List<entCliente_Telefono> Lista = (List<entCliente_Telefono>)ViewBag.ObjLista;
+                                    if (Lista.Count() == 1)
+                                    {
+
+                                        foreach (var ls in Lista)
+                                        {
+                                            Cli_Id = ls.Cliente.Cli_Id;
+                                            Cli_Codigo = ls.Cliente.Cli_Codigo;
+                                            Cli_Nombre = ls.Cliente.Cli_Nombre;
+                                            Cli_RazonSocial = ls.Cliente.Cli_RazonSocial;
+                                            Cli_Numero_Documento = ls.Cliente.Cli_Numero_Documento;
+                                            Cli_FechaNacimiento = Convert.ToDateTime(ls.Cliente.Cli_FechaNacimiento).ToShortDateString();
+                                            Cli_LugarNacimiento = ls.Cliente.Cli_LugarNacimiento;
+                                            Cli_Correo = ls.Cliente.Cli_Correo;
+                                            Cli_Telefono_Referencia = ls.Cliente.Cli_Telefono_Referencia;
+                                            Cli_Estado = ls.Cliente.Cli_Estado;
+                                            Cli_FechaRegistro = Convert.ToDateTime(ls.Cliente.Cli_FechaRegistro).ToShortDateString();
+                                            Cli_FechaModificacion = Convert.ToDateTime(ls.Cliente.Cli_FechaModificacion).ToShortDateString();
+                                            td_Descripcion = ls.Cliente.TipDoc.td_Descripcion;
+                                            Seg_Nombre = ls.Cliente.Segmento.Seg_Nombre;
+                                            Tel_Numero = ls.Telefono.Tel_Numero;
+                                            Tel_Producto = ls.Telefono.Tel_Producto;
+                                            Tel_Direccion = ls.Telefono.Tel_Direccion;
+                                            Tel_FechaAlta = Convert.ToDateTime(ls.Telefono.Tel_FechaAlta).ToShortDateString();
+                                            Tel_F1 = String.Format("{0:0.00}", ls.Telefono.Tel_F1);
+                                            Tel_F2 = String.Format("{0:0.00}", ls.Telefono.Tel_F1);
+                                            Tel_F3 = String.Format("{0:0.00}", ls.Telefono.Tel_F1);
+                                            dias =(fechaHoy - Convert.ToDateTime(ls.Cliente.Cli_FechaModificacion));
+                                            day = dias.TotalDays;
+                                            month = (int)(day / 30.436875);
+                                            year = (int)(day / 365.2425);
+                                            if (day <= 31) { desde = String.Format("{0:0}",day) + ": Dias"; }
+                                            else if (day > 31 && day < 365) { desde = month.ToString() + ": Meses"; }
+                                            else { desde = year + ": Años"; }
+                                        }
                                     }
                                 }
-                            }
 
-                        }
-                                <div id="MostrarTable">
+                            }
+                            <div id="MostrarTable">
                                 <div class="card card-bordered style-default">
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -113,19 +127,21 @@
                                                         <th>Codigo</th>
                                                         <th>Nombre</th>
                                                         <th>Segmento</th>
-                                                        <th>Documento</th>     
+                                                        <th>Documento</th>
                                                         <th>Estado</th>
                                                         <th>Producto/Servicio</th>
                                                         <th>Teléfono</th>
-                                                                         
+
                                                         <th></th>
                                                     </tr>
                                                 </thead>
                                                 <tbody>
                                                     @{ int cont = 0;
-                                                        if (ViewBag.ObjLista != null){
-                                                            List<entCliente_Telefono> Lista =(List<entCliente_Telefono>)ViewBag.ObjLista;
-                                                            foreach (var item in Lista){
+                                                        if (ViewBag.ObjLista != null)
+                                                        {
+                                                            List<entCliente_Telefono> Lista = (List<entCliente_Telefono>)ViewBag.ObjLista;
+                                                            foreach (var item in Lista)
+                                                            {
                                                                 cont++;
                                                                 <tr>
                                                                     <td>@cont</td>
@@ -136,7 +152,10 @@
                                                                     <td>@item.Cliente.Cli_Estado</td>
                                                                     <td>@item.Telefono.Tel_Producto</td>
                                                                     <td>@item.Telefono.Tel_Numero</td>
-                                                                    <td></td>
+                                                                    <td>
+                                                                        <a href="@Url.Action("BuscaCliente", "Comun", new { num_Tel = item.Telefono.Tel_Numero})" class="btn btn-flat btn-primary ink-reaction"><i class="md md-search"></i></a>
+
+                                                                    </td>
 
                                                                 </tr>
                                                             }
@@ -182,8 +201,8 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="txtsva" value="">
-                                                    <label for="dgdsg" class="control-label">SVA</label>
+                                                    <a href="@Url.Action("#", "#", new { }) "class="btn ink-reaction btn-accent"><i class="md md-search"></i>P/S.Con</a>
+
                                                 </div>
                                             </div>
                                         </div>
@@ -196,19 +215,19 @@
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" name="txtf1" value="@Tel_F1">
-                                                    <label for="dgdsg" class="control-label">Factura 1</label>
+                                                    <label for="dgdsg" class="control-label">Factura 1 S/ 000.00</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" name="txtf2" value="@Tel_F2">
-                                                    <label for="dgdsg" class="control-label">Factura 2</label>
+                                                    <label for="dgdsg" class="control-label">Factura 2 S/ 000.00</label>
                                                 </div>
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
                                                     <input type="text" class="form-control" name="txtf3" value="@Tel_F3">
-                                                    <label for="dgdsg" class="control-label">Factura 3</label>
+                                                    <label for="dgdsg" class="control-label">Factura 3 S/ 000.00</label>
                                                 </div>
                                             </div>
                                         </div>
@@ -305,8 +324,8 @@
                                             </div>
                                             <div class="col-lg-4">
                                                 <div class="form-group">
-                                                    <input type="text" class="form-control" name="ultupdate" value="@Cli_FechaModificacion">
-                                                    <label for="dgdsg" class="control-label">Ultima Actualizacion</label>
+                                                    <input type="text" class="form-control" name="ultupdate" value="@Cli_FechaModificacion | @desde">
+                                                    <label for="dgdsg" class="control-label">Ultima Actualizacion </label>
                                                 </div>
                                             </div>
                                         </div>
@@ -314,7 +333,7 @@
                                     </div>
                                 </div>
                             </div>
-                            </div><!--end .card-body -->
+                        </div><!--end .card-body -->
                     </div><!--end .card -->
                 </form>
                 <em class="text-caption">2016- V1.0</em>

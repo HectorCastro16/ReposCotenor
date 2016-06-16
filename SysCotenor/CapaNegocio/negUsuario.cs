@@ -137,23 +137,8 @@ namespace CapaNegocio
             try
             {
 
-                List<entUsuario> Lista = datUsuario.Instancia.ListarUusariosConAsignacionCalls(UsuarioId);
-                List<entUsuario> ListaTotal = datUsuario.Instancia.ListaUsuarios(UsuarioId, SucursalId);
-                List<entUsuario> ReturnF = new List<entUsuario>();
-                for (int j = 0; j < ListaTotal.Count; j++)
-                {
-                    ReturnF.Add(ListaTotal[j]);
-                    for (int i = 0; i < Lista.Count; i++)
-                    {
-                        if (ListaTotal[j].Usu_Id == Lista[i].Usu_Id)
-                        {
-                            ReturnF.Remove(ListaTotal[j]);
-                            ReturnF.Add(Lista[i]);
-                        }
-                    }
-
-                }
-                return ReturnF;
+               return  datUsuario.Instancia.ListarUusariosConAsignacionCalls(UsuarioId);
+              
             }
             catch (Exception e)
             {

@@ -29,10 +29,18 @@ namespace CapaPresentacion.Controllers.Intranet
             return View();
         }
         
-        public ActionResult BuscaCliente(String sms,int? identificador,String checkStatus)
+        public ActionResult BuscaCliente(String sms,int? identificador,String checkStatus,String num_Tel)
         {
             try
             {
+                if (num_Tel !=null){
+                    List<entCliente_Telefono> Lista = null;
+                   int idtipdoc = 0;
+                    String numdoc = "";
+                    Lista = negCliente.Instancia.BuscaCliente(num_Tel, idtipdoc, numdoc);
+                    Session["ObjLista"] = Lista;
+                }
+
                 var documento = negCliente.Instancia.ListaDoc();
                 ViewBag.doc = documento;
                 ViewBag.sms = sms;
@@ -43,9 +51,9 @@ namespace CapaPresentacion.Controllers.Intranet
                 }
                 return View();
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                return RedirectToAction("BuscaCliente", new { mensaje = e.Message, identificador=2 });
             }
         }
 
