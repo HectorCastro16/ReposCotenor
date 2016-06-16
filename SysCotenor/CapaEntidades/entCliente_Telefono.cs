@@ -19,5 +19,9 @@ namespace CapaEntidades
         public String CliTel_UsuarioRegistro { get; set; }
         public DateTime CliTel_FechaModificacion { get; set; }
         public String CliTel_UsuarioModificacion { get; set; }
-            }
+
+        // Para la Asignacion
+        public bool IsSelected { get; set; }
+
+    }
 }

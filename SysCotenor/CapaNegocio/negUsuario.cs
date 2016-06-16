@@ -444,6 +444,18 @@ namespace CapaNegocio
             }
         }
 
+        public List<entUsuario> ListaSupersCall(Int32 SucursalId) {
+            try
+            {
+                return datUsuario.Instancia.ListaSupersCall(SucursalId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         #endregion metodos
     }
 }

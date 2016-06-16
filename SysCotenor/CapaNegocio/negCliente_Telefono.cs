@@ -107,6 +107,21 @@ namespace CapaNegocio
                 throw e;
             }
         }
+
+        public List<entCliente_Telefono> ListaClientesParaAsignar() {
+
+            try
+            {
+                return datCliente_Telefono.Instancia.ListaClientesParaAsignar();
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
             #endregion metodos
     }
 }

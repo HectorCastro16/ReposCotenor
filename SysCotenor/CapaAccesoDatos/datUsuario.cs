@@ -560,6 +560,42 @@ namespace CapaAccesoDatos
             }        
         }
 
+        public List<entUsuario> ListaSupersCall(Int32 SucursalId) {
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entUsuario> Lista = null;
+            try
+            {                
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListaSupervisoresCall", cn);
+                cmd.Parameters.AddWithValue("@prmtIntSucId", SucursalId);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entUsuario>();
+
+                while (dr.Read())
+                {
+                    entUsuario u = new entUsuario();
+                    u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
+                    entPersona p = new entPersona();
+                    p.Per_Nombres = dr["Per_Nombres"].ToString();
+                    p.Per_Apellidos = dr["Per_Apellidos"].ToString();
+                    u.Persona = p;
+                    Lista.Add(u);
+                }
+               }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+            return Lista;
+        }
+
         #endregion metodos
     }
 }
