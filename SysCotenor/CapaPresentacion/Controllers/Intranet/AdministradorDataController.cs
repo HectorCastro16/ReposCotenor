@@ -172,12 +172,27 @@ namespace CapaPresentacion.Controllers.Intranet
                 return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = e.Message, identificador = 2 });
             }
 
-        }
+        }        
 
         [HttpPost]
         public ActionResult AsignaClienteUsuario(entCliente_TelefonoView model)
         {
-            return View(model);
+            List<entCliente_Telefono> Lista = model.Cliente_Telefono;
+            Int32 cantselect = 0;
+            foreach (entCliente_Telefono item in Lista) {
+                if (item.IsSelected == true) {
+                    cantselect++;
+                }
+            }
+            if (cantselect != 0)
+            {
+                return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = "PRUEBA!!!! - Se Asigno Data Satisfactoriamente", identificador = 3 });
+            }
+            else {
+                return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = "PRUEBA!!!!! -Debe Seleccionar por lo menos un Cliente", identificador = 2 });
+            }
+            
+            //return View(model);
         }
     }
 }
