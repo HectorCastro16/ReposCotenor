@@ -49,6 +49,7 @@
     <Compile Include="entCategoria.cs" />
     <Compile Include="entCliente.cs" />
     <Compile Include="entCliente_Telefono.cs" />
+    <Compile Include="entCliente_TelefonoView.cs" />
     <Compile Include="entDepartamento.cs" />
     <Compile Include="entDetAcc_GruCom.cs" />
     <Compile Include="entDetalleAccionComercial.cs" />

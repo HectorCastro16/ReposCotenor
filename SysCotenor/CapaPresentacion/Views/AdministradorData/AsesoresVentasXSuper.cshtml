@@ -1,0 +1,14 @@
+﻿@using System.Data;
+@using CapaEntidades;
+
+<div class="form-group">
+    @{List<entUsuario> ListaAseXSup = ViewBag.ListaAseXSup;}
+    <select id="cboAseVen" name="txt_aseven" class="form-control" required>
+        <option value="">&nbsp;</option>
+        @foreach (entUsuario av in ListaAseXSup)
+        {
+            <option value="@av.Usu_Id">@av.Persona.NombreCompleto</option>
+        }
+    </select>
+    <label>Asesor de Ventas</label>
+</div>

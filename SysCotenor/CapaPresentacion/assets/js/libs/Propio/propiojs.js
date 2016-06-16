@@ -275,3 +275,11 @@ $(document).ready(function ($) {
         });
     });
 });
+
+$("#cboSupCall").change(function () {    
+    $("#AsesoresContent").load('AsesoresVentasXSuper', {
+        IDSupCall: $('#cboSupCall').val()
+    })
+});
+
+
