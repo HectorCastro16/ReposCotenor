@@ -40,5 +40,9 @@ namespace CapaEntidades
 
         public int Contador { get; set; }
 
+        //es una lista porque son muchos ClientesAsignados
+        public List<entAsigncionLlamadas> lsAsiLla { get; set; }
+        
+
     }
 }

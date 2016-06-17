@@ -137,23 +137,8 @@ namespace CapaNegocio
             try
             {
 
-                List<entUsuario> Lista = datUsuario.Instancia.ListarUusariosConAsignacionCalls(UsuarioId);
-                List<entUsuario> ListaTotal = datUsuario.Instancia.ListaUsuarios(UsuarioId, SucursalId);
-                List<entUsuario> ReturnF = new List<entUsuario>();
-                for (int j = 0; j < ListaTotal.Count; j++)
-                {
-                    ReturnF.Add(ListaTotal[j]);
-                    for (int i = 0; i < Lista.Count; i++)
-                    {
-                        if (ListaTotal[j].Usu_Id == Lista[i].Usu_Id)
-                        {
-                            ReturnF.Remove(ListaTotal[j]);
-                            ReturnF.Add(Lista[i]);
-                        }
-                    }
-
-                }
-                return ReturnF;
+               return  datUsuario.Instancia.ListarUusariosConAsignacionCalls(UsuarioId);
+              
             }
             catch (Exception e)
             {
@@ -444,6 +429,59 @@ namespace CapaNegocio
                     if (i <= 0)
                     {
                         throw new ApplicationException("No se Pudo Activar a el trabajador");
+                    }
+                }
+                return i;
+            }
+            catch (ApplicationException ae)
+            {
+                throw ae;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
+        public List<entUsuario> ListaSupersCall(Int32 SucursalId) {
+            try
+            {
+                return datUsuario.Instancia.ListaSupersCall(SucursalId);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int InsUpdDelBloActAsignacionUsuario(entUsuario usu, Int16 TipoEdicion) {
+
+            try
+            {
+                List<entAsigncionLlamadas> ListAsiLla = new List<entAsigncionLlamadas>();
+                ListAsiLla = usu.lsAsiLla;
+
+                String cadXml = "";
+                cadXml += "<AsignaLlamada ";
+                cadXml += "TipoEdicion='" + TipoEdicion + "'>";
+                foreach (entAsigncionLlamadas al in ListAsiLla) {
+                    cadXml += "<AsiLla ";
+                    cadXml += "Asi_Usu_Id='" + al.Usuario.Usu_Id + "' ";
+                    cadXml += "Asi_CliTel_Id='" + al.ClienteTelefono.CliTel_Id + "' ";
+                    cadXml += "Asi_UsuarioRegistro='" + al.Asi_UsuarioRegistro + "' ";
+                    cadXml += "TipoEdicion='" + TipoEdicion + "'/>";
+                }
+                cadXml += "</AsignaLlamada>";
+                cadXml = "<root>" + cadXml + "</root>";
+
+                int i = datUsuario.Instancia.InsUpdDelBloActAsignacionUsuario(cadXml);
+                if (TipoEdicion == 1)
+                {
+                    if (i <= 0)
+                    {
+                        throw new ApplicationException("No se Pudo Asignar Data de Cliente");
                     }
                 }
                 return i;

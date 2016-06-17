@@ -10,7 +10,7 @@ namespace CapaEntidades
     {
 
         public int Asi_Id { get; set; }
-        public entUsuario Asi_Usu_Id { get; set; }
+        public entUsuario Usuario { get; set; }
         public entCliente_Telefono ClienteTelefono{ get; set; }
         public Boolean Asi_Estado { get; set; }
         public DateTime Asi_FechaRegistro { get; set; }

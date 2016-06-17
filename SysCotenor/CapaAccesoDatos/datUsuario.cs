@@ -281,10 +281,10 @@ namespace CapaAccesoDatos
                 cmd.CommandType = CommandType.StoredProcedure;
                 cn.Open();
                 dr = cmd.ExecuteReader();
-                Lista = new List<entUsuario>();
+               Lista = new List<entUsuario>();
                 while (dr.Read()){
                     entUsuario u = new entUsuario();
-                    u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
+                    u.Usu_Id = Convert.ToInt32(dr["AsiUsu_Usu_Trabajador_Id"]);
                     u.Usu_Codigo = dr["Usu_Codigo"].ToString();
                     
                     entPersona p = new entPersona();
@@ -558,6 +558,77 @@ namespace CapaAccesoDatos
             {
                 cmd.Connection.Close();
             }        
+        }
+
+        public List<entUsuario> ListaSupersCall(Int32 SucursalId) {
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entUsuario> Lista = null;
+            try
+            {                
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListaSupervisoresCall", cn);
+                cmd.Parameters.AddWithValue("@prmtIntSucId", SucursalId);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entUsuario>();
+
+                while (dr.Read())
+                {
+                    entUsuario u = new entUsuario();
+                    u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
+                    entPersona p = new entPersona();
+                    p.Per_Nombres = dr["Per_Nombres"].ToString();
+                    p.Per_Apellidos = dr["Per_Apellidos"].ToString();
+                    u.Persona = p;
+                    Lista.Add(u);
+                }
+               }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+            return Lista;
+        }
+
+        public int InsUpdDelBloActAsignacionUsuario(String cadXML)
+        {
+
+            SqlCommand cmd = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spInsUpdDelBloActAsignacionUsuario", cn);
+                cmd.Parameters.AddWithValue("@prmstrCadXML", cadXML);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                //creamos el parametro de retorno
+                SqlParameter m = new SqlParameter("@retorno", DbType.Int32);
+                m.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(m);
+                //fin parametro
+                cn.Open();
+                cmd.ExecuteNonQuery();
+
+                int i = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
+
+                return i;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
         }
 
         #endregion metodos
