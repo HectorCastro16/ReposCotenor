@@ -471,6 +471,47 @@ namespace CapaNegocio
             }
         }
 
+        public int InsUpdDelBloActAsignacionUsuario(entUsuario usu, Int16 TipoEdicion) {
+
+            try
+            {
+                List<entAsigncionLlamadas> ListAsiLla = new List<entAsigncionLlamadas>();
+                ListAsiLla = usu.lsAsiLla;
+
+                String cadXml = "";
+                cadXml += "<AsignaLlamada ";
+                cadXml += "TipoEdicion='" + TipoEdicion + "'>";
+                foreach (entAsigncionLlamadas al in ListAsiLla) {
+                    cadXml += "<AsiLla ";
+                    cadXml += "Asi_Usu_Id='" + al.Usuario.Usu_Id + "' ";
+                    cadXml += "Asi_CliTel_Id='" + al.ClienteTelefono.CliTel_Id + "' ";
+                    cadXml += "Asi_UsuarioRegistro='" + al.Asi_UsuarioRegistro + "' ";
+                    cadXml += "TipoEdicion='" + TipoEdicion + "'/>";
+                }
+                cadXml += "</AsignaLlamada>";
+                cadXml = "<root>" + cadXml + "</root>";
+
+                int i = datUsuario.Instancia.InsUpdDelBloActAsignacionUsuario(cadXml);
+                if (TipoEdicion == 1)
+                {
+                    if (i <= 0)
+                    {
+                        throw new ApplicationException("No se Pudo Asignar Data de Cliente");
+                    }
+                }
+                return i;
+            }
+            catch (ApplicationException ae)
+            {
+                throw ae;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
         #endregion metodos
     }
 }

@@ -55,8 +55,14 @@ namespace CapaPresentacion.Controllers.Intranet
                     return RedirectToAction("Index", "Inicio");
                 }
             }
+            catch (ApplicationException x)
+            {
+                ViewBag.mensaje = x.Message;
+                return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = x.Message, identificador = 1 });
+            }
             catch (Exception e)
             {
+
                 return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = e.Message, identificador = 2 });
             }
         }
@@ -142,12 +148,16 @@ namespace CapaPresentacion.Controllers.Intranet
                     return RedirectToAction("Index", "Inicio");
                 }
             }
+            catch (ApplicationException x)
+            {
+                ViewBag.mensaje = x.Message;
+                return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = x.Message, identificador = 1 });
+            }
             catch (Exception e)
             {
-                return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = e, identificador = 2 });
+
+                return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = e.Message, identificador = 2 });
             }
-
-
         }
 
         public ActionResult AsesoresVentasXSuper(Int32 IDSupCall)
@@ -158,7 +168,7 @@ namespace CapaPresentacion.Controllers.Intranet
                 if (us != null)
                 {
                     Int32 idSupCall = Convert.ToInt32(IDSupCall);
-                    List<entUsuario> lsAsexSup = negUsuario.Instancia.ListaUsuarios(idSupCall,us.Sucursal.Suc_Id);
+                    List<entUsuario> lsAsexSup = negUsuario.Instancia.ListaUsuarios(idSupCall, us.Sucursal.Suc_Id);
                     ViewBag.ListaAseXSup = lsAsexSup;
                     return PartialView();
                 }
@@ -172,26 +182,83 @@ namespace CapaPresentacion.Controllers.Intranet
                 return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = e.Message, identificador = 2 });
             }
 
-        }        
+        }
 
         [HttpPost]
-        public ActionResult AsignaClienteUsuario(entCliente_TelefonoView model)
+        public ActionResult AsignaClienteUsuario(entCliente_TelefonoView model,FormCollection form)
         {
-            List<entCliente_Telefono> Lista = model.Cliente_Telefono;
-            Int32 cantselect = 0;
-            foreach (entCliente_Telefono item in Lista) {
-                if (item.IsSelected == true) {
-                    cantselect++;
+            try
+            {
+                entUsuario us = (entUsuario)Session["usuario"];
+                if (us != null)
+                {                    
+                    List<entCliente_Telefono> Lista = model.Cliente_Telefono;
+                    Int32 cantselect = 0;
+                    foreach (entCliente_Telefono item in Lista)
+                    {
+                        if (item.IsSelected == true)
+                        {
+                            cantselect++;
+                        }
+                    }
+                    if (cantselect != 0)
+                    {
+                        //para capturar el usuario en sesion////////////
+                        entUsuario user = (entUsuario)Session["usuario"];
+                        String userRegistro = user.Persona.NombreCompleto;
+                        ///////////////////////////////////////////
+                        Int32 idAsesor = Convert.ToInt32(form["txt_aseven"]);
+                        entUsuario cu = new entUsuario();
+                        cu.Usu_Id = idAsesor;
+                        List<entAsigncionLlamadas> lsAsiLlaCli = new List<entAsigncionLlamadas>();
+                        foreach (entCliente_Telefono item in Lista)
+                        {
+                            if (item.IsSelected == true)
+                            {
+                                entAsigncionLlamadas asi = new entAsigncionLlamadas();
+                                entCliente_Telefono ct = new entCliente_Telefono();
+                                ct.CliTel_Id= item.CliTel_Id;
+                                asi.ClienteTelefono = ct; 
+                                entUsuario u = new entUsuario();
+                                u.Usu_Id = idAsesor;
+                                asi.Usuario = u;
+                                asi.Asi_UsuarioRegistro = userRegistro;
+                                lsAsiLlaCli.Add(asi);
+                            }                               
+                        }
+                        cu.lsAsiLla = lsAsiLlaCli;
+
+                        int i = negUsuario.Instancia.InsUpdDelBloActAsignacionUsuario(cu, 1);
+                        if (i > 0)
+                        {
+                            return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = "Se Asigno Data Satisfactoriamente", identificador = 3 });
+                        }
+                        else {
+                            return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = "Problemas al Insertar", identificador = 2 });
+                        }                                                   
+                    }
+                    else
+                    {
+                        return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = "Debe Seleccionar por lo menos un Cliente", identificador = 2 });
+                    }
+                }
+                else
+                {
+                    return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = "Problemas al Insertar", identificador = 2 });
                 }
             }
-            if (cantselect != 0)
+            catch (ApplicationException x)
             {
-                return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = "PRUEBA!!!! - Se Asigno Data Satisfactoriamente", identificador = 3 });
+                ViewBag.mensaje = x.Message;
+                return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = x.Message, identificador = 1 });
             }
-            else {
-                return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = "PRUEBA!!!!! -Debe Seleccionar por lo menos un Cliente", identificador = 2 });
+            catch (Exception e)
+            {
+
+                return RedirectToAction("InsertarDataCliente", "AdministradorData", new { mensaje = e.Message, identificador = 2 });
             }
-            
+
+
             //return View(model);
         }
     }
