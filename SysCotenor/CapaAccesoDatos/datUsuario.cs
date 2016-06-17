@@ -281,10 +281,10 @@ namespace CapaAccesoDatos
                 cmd.CommandType = CommandType.StoredProcedure;
                 cn.Open();
                 dr = cmd.ExecuteReader();
-                Lista = new List<entUsuario>();
+               Lista = new List<entUsuario>();
                 while (dr.Read()){
                     entUsuario u = new entUsuario();
-                    u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
+                    u.Usu_Id = Convert.ToInt32(dr["AsiUsu_Usu_Trabajador_Id"]);
                     u.Usu_Codigo = dr["Usu_Codigo"].ToString();
                     
                     entPersona p = new entPersona();

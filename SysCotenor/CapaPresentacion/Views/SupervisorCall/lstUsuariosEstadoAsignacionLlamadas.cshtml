@@ -6,12 +6,13 @@
 }
 <section>
     <div class="section-body contain-lg">
-        <h2>Lista Supervisores</h2>
-        <div class="form">
-            <div class="form-group">
-                <a href="#" class="btn ink-reaction btn-primary"><i class="md md-add"></i> Nuevo</a>
-            </div>
+        <h2>Asesores</h2>
+        @if (ViewBag.sms != null)
+        {
+        <div class="alert alert-warning">
+            @ViewBag.sms;
         </div>
+        }
     </div>
     <div class="section-body contain-lg">
         <div class="row">
@@ -33,13 +34,17 @@
                                     </tr>
                                 </thead>
 
-                                @foreach (var item in Model)
-                                {
-                                    String color = "";
-                                    if (item.Contador > 0)
+                                @{
+                                    if (Model != null)
                                     {
-                                        color = "aquamarine";
-                                    }
+                                        foreach (var item in Model)
+                                        {
+
+                                            String color = "";
+                                            if (item.Contador > 0)
+                                            {
+                                                color = "aquamarine";
+                                            }
                                     <tr style="background-color:@color">
 
                                         <td> @Html.DisplayFor(modelItem => item.Usu_Codigo)</td>
@@ -47,8 +52,9 @@
                                         <td>@Html.DisplayFor(modelItem => item.Contador)</td>
                                         <td><a href="@Url.Action("ExtraerDatosAsignar", "SupervisorCall", new { iduser = item.Usu_Id, usuario = item.Persona.NombreCompleto })" class="btn ink-reaction btn-info"><i class="md md-undo"></i> Asignar</a></td>
                                     </tr>
-                                }
-
+                                            }
+                                        }
+                                    }
                             </table>
                         </div>
                     </div>
