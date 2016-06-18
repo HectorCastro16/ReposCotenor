@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="negArbolUbigeo.cs" />
     <Compile Include="negArbolVenta.cs" />
+    <Compile Include="negAsigncionLlamadas.cs" />
     <Compile Include="negAsLlamadas.cs" />
     <Compile Include="negCliente.cs" />
     <Compile Include="negCliente_Telefono.cs" />

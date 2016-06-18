@@ -103,7 +103,7 @@
 		});
 		$('#toast-success').on('click', function (e) {
 			o._toastrStateConfig();
-			toastr.success('Added to catalog', '');
+			toastr.success('Procesando...', '');
 		});
 	};
 

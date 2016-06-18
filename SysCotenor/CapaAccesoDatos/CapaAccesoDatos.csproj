@@ -42,6 +42,7 @@
     <Compile Include="Conexion.cs" />
     <Compile Include="datArbolUbigeo.cs" />
     <Compile Include="datArbolVenta.cs" />
+    <Compile Include="datAsigncionLlamadas.cs" />
     <Compile Include="datAsLlamadas.cs" />
     <Compile Include="datCliente.cs" />
     <Compile Include="datCliente_Telefono.cs" />

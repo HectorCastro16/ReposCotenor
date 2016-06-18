@@ -537,6 +537,7 @@
     <Content Include="assets\img\Fotos\foto.png" />
     <Content Include="assets\img\img16.jpg" />
     <Content Include="assets\img\LICENSE.txt" />
+    <Content Include="assets\img\llamar.png" />
     <Content Include="assets\img\log.png" />
     <Content Include="assets\img\pencil.png" />
     <Content Include="assets\img\super.jpg" />
@@ -2027,6 +2028,8 @@
     <None Include="Properties\PublishProfiles\PresentacionCotenor.pubxml" />
     <Content Include="Views\Comun\BuscaCliente.cshtml" />
     <Content Include="Views\AdministradorData\AsesoresVentasXSuper.cshtml" />
+    <Content Include="Views\AsesorVentasCall\ListaClientesAsignados.cshtml" />
+    <Content Include="Views\AsesorVentasCall\RegistroVenta.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

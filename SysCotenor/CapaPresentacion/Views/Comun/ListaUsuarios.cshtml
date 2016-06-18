@@ -23,7 +23,7 @@
         }
         <div class="form">
             <div class="form-group">
-                <a href="@Url.Action("InsUsuario", "Comun")" class="btn ink-reaction btn-primary"><i class="md md-add"></i> Nuevo</a>
+                <a href="@Url.Action("InsUsuario", "Comun")" class="btn btn-raised ink-reaction btn-primary"><i class="md md-add"></i> Nuevo</a>
             </div>
         </div>
     </div>
@@ -107,7 +107,7 @@
                                                         {
 
                                                             <span data-toggle="modal" data-target="#myModalBloquear" data-id="@Html.DisplayFor(modelItem => item.Usu_Id)">
-                                                                <a class="btn ink-reaction btn-warning" role='button' data-toggle="tooltip" data-placement="top" title="Bloquear">.</a>
+                                                                <a class="btn ink-reaction btn-raised btn-warning" role='button' data-toggle="tooltip" data-placement="top" title="Bloquear">.</a>
                                                             </span>
 
                                                         }
@@ -115,15 +115,15 @@
                                                         {
 
                                                             <span data-toggle="modal" data-target="#myModalActivar" data-id="@Html.DisplayFor(modelItem => item.Usu_Id)">
-                                                                <a class="btn ink-reaction btn-success" role='button' data-toggle="tooltip" data-placement="top" title="Activar">.</a>
+                                                                <a class="btn ink-reaction btn-raised btn-success" role='button' data-toggle="tooltip" data-placement="top" title="Activar">.</a>
                                                             </span>
 
                                                         }
-                                                        @Html.ActionLink(".", "UpdUsuario", "Comun", new { UsuarioId = item.Usu_Id }, htmlAttributes: new { @class = "btn ink-reaction btn-danger", data_toggle = "tooltip", data_placement = "top", data_original_title = "Editar" })
-                                                        @Html.ActionLink(".", "DetalleUsuario", "Comun", new { UsuarioId = item.Usu_Id }, htmlAttributes: new { @class = "btn ink-reaction btn-info", data_toggle = "tooltip", data_placement = "top", data_original_title = "Detalle" })
+                                                        @Html.ActionLink(".", "UpdUsuario", "Comun", new { UsuarioId = item.Usu_Id }, htmlAttributes: new { @class = "btn ink-reaction btn-raised btn-danger", data_toggle = "tooltip", data_placement = "top", data_original_title = "Editar" })
+                                                        @Html.ActionLink(".", "DetalleUsuario", "Comun", new { UsuarioId = item.Usu_Id }, htmlAttributes: new { @class = "btn ink-reaction btn-raised btn-info", data_toggle = "tooltip", data_placement = "top", data_original_title = "Detalle" })
 
                                                         <span data-toggle="modal" data-target="#myModalEliminar" data-id="@Html.DisplayFor(modelItem => item.Usu_Id)">
-                                                            <a class="btn ink-reaction  btn-primary-dark" role='button' data-toggle="tooltip" data-placement="top" title="Eliminar">.</a>
+                                                            <a class="btn ink-reaction btn-raised btn-primary-dark" role='button' data-toggle="tooltip" data-placement="top" title="Eliminar">.</a>
                                                         </span>
 
                                                     </td>
@@ -159,8 +159,8 @@
                     <input type="hidden" name="txtUserId" id="Id" value="" />
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-warning">Bloquear</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-raised btn-warning">Bloquear</button>
+                    <button type="button" class="btn btn-raised btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
         </div>
@@ -179,8 +179,8 @@
                     <input type="hidden" name="txtUserId" id="Id" value="" />
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-success">Activar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-raised btn-success">Activar</button>
+                    <button type="button" class="btn btn-raised btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
         </div>
@@ -199,8 +199,8 @@
                     <p>Esta seguro de que desea eliminar permanentemente el usuario ?</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="submit" class="btn btn-danger">Eliminar</button>
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-raised btn-danger">Eliminar</button>
+                    <button type="button" class="btn btn-raised btn-default" data-dismiss="modal">Cancelar</button>
                 </div>
             </form>
         </div>

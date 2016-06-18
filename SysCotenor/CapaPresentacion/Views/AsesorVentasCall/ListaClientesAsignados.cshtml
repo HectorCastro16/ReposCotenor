@@ -1,0 +1,112 @@
+﻿@model IEnumerable<CapaEntidades.entAsigncionLlamadas>
+
+@{
+    ViewBag.Title = "ListaClientesAsignados";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<section>
+    <div class="section-body contain-lg">
+        <h2>Lista Clientes Asignados</h2>
+    </div>
+    <div class="section-body">
+        <div class="card">
+            <div class="card-body">
+                @if (@ViewBag.mensaje != null)
+                {
+                    if (@ViewBag.identificador == 1)
+                    {
+                        <div class="alert alert-callout alert-warning" role="alert">
+                            <strong>Atención!</strong> @ViewBag.mensaje
+                        </div>
+                    }
+                    else if (@ViewBag.identificador == 2)
+                    {
+                        <div class="alert alert-callout alert-danger" role="alert">
+                            <strong>Ooops!</strong> @ViewBag.mensaje
+                        </div>
+                    }
+                    else if (@ViewBag.identificador == 3)
+                    {
+                        <div class="alert alert-callout alert-success" role="alert">
+                            <strong>Atención!</strong> @ViewBag.mensaje
+                        </div>
+                    }
+                }
+                <section class="style-default-bright">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="table-responsive">
+                                <table id="datatable1" class="table table-striped table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>
+                                                #
+                                            </th>
+                                            <th>
+                                                Telefono
+                                            </th>
+                                            <th>
+                                                Cliente
+                                            </th>
+                                            <th>
+                                                Producto
+                                            </th>
+                                            <th>
+                                                Segmento
+                                            </th>
+                                            <th>
+                                                Fecha Registro
+                                            </th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @{Int32 i = 0; }
+                                        @foreach (var item in Model)
+                                        {
+                                            i++;
+                                            <tr>
+                                                <td>
+                                                    @i
+                                                    @Html.HiddenFor(modelItem => item.Asi_Id)
+                                                </td>
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.ClienteTelefono.Telefono.Tel_Numero)
+                                                </td>
+
+                                                @if (item.ClienteTelefono.Cliente.Segmento.Seg_Id == 1)
+                                                {
+                                                    <td>@Html.DisplayFor(modelItem => item.ClienteTelefono.Cliente.Cli_Nombre)</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>@Html.DisplayFor(modelItem => item.ClienteTelefono.Cliente.Cli_RazonSocial)</td>
+                                                }
+                                                <td>
+                                                    @Html.DisplayFor(modelItem => item.ClienteTelefono.Telefono.Tel_Producto)
+                                                </td>
+                                                @if (item.ClienteTelefono.Cliente.Segmento.Seg_Id == 1)
+                                                {
+                                                    <td>Residencial</td>
+                                                }
+                                                else
+                                                {
+                                                    <td>Comercial</td>
+                                                }
+                                                <td>@Html.DisplayFor(modelItem => item.ClienteTelefono.Cliente.Cli_FechaRegistro)</td>
+                                                <td>
+                                                    @Html.ActionLink(".", "RegistroVenta", "AsesorVentasCall", new { UsuarioId = item.Asi_Id }, htmlAttributes: new { @class = "btn-lla btn-raised ink-reaction-lla btn-info-lla", data_toggle = "tooltip", data_placement = "top", data_original_title = "LLAMAR" })
+                                                </td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>                         
+                        </div>
+                    </div>
+                </section>
+            </div><!--end .card-body -->
+        </div>
+    </div>
+</section>
