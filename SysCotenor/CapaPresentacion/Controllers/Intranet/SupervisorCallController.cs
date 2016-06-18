@@ -24,8 +24,17 @@ namespace CapaPresentacion.Controllers.Intranet
         }
 
 
-        public ActionResult Estadisticas(){
-            return View();
+        public ActionResult Estadisticas(int? iduser,String usuario){
+            ViewBag.iduser = iduser;
+            ViewBag.usuario = usuario;
+            try{
+                List<entTemporal> t = negUsuario.Instancia.Asig_Total_Espera((int)iduser);
+                ViewBag.tae = t;
+                return View();
+            }
+            catch (Exception e){
+                return RedirectToAction("lstUsuariosEstadoAsignacionLlamadas", new { mensaje = e.Message });
+            }
         }
 
         public ActionResult lstUsuariosEstadoAsignacionLlamadas(String mensaje){
@@ -38,7 +47,7 @@ namespace CapaPresentacion.Controllers.Intranet
                     Int32 UsuarioId = u.Usu_Id;
                     List<entUsuario> Lista = negUsuario.Instancia.ListaUsuariosCall(UsuarioId, sucursalId);
                     //RemoverSessiones();
-                    return View();
+                    return View(Lista);
                 }
                 else
                 {

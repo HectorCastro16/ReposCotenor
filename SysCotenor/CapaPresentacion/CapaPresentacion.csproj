@@ -2027,6 +2027,7 @@
     <None Include="Properties\PublishProfiles\PresentacionCotenor.pubxml" />
     <Content Include="Views\Comun\BuscaCliente.cshtml" />
     <Content Include="Views\AdministradorData\AsesoresVentasXSuper.cshtml" />
+    <Content Include="Views\SupervisorCall\Estadisticas.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

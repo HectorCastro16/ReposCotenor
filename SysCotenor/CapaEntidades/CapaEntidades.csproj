@@ -69,6 +69,7 @@
     <Compile Include="entSegmento.cs" />
     <Compile Include="entSucursal.cs" />
     <Compile Include="entTelefono.cs" />
+    <Compile Include="entTemporal.cs" />
     <Compile Include="entTipDoc.cs" />
     <Compile Include="entTipoUsuario.cs" />
     <Compile Include="entUsuario.cs" />
