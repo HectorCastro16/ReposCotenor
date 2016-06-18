@@ -89,27 +89,27 @@
                             String teelfref = "";
                             int idcliente = 0;
                             int idpersona = 0;
-                            if (ViewBag.cliente != null)
+                            if (ViewBag.cliente == null)
                             {
-                                entCliente c = (entCliente)ViewBag.cliente;
-                                idcliente = c.Cli_Id;
-                                cliente = c.Persona_telef.persona.Per_Nombres +" "+ c.Persona_telef.persona.Per_Apellidos;
-                                ruc = c.Cli_Ruc;
-                                empresa = c.Cli_Empresa;
-                                dni = c.Persona_telef.persona.Per_DNI;
-                                direccion = c.Persona_telef.persona.Per_Direccion;
-                                iddepa = c.Cli_Depardamento.idDepa;
-                                departamento = c.Cli_Depardamento.departamento;
-                                idprov = c.Cli_Provincia.idProv;
-                                provincia = c.Cli_Provincia.provincia;
-                                iddistr = c.Cli_Distrito.idDist;
-                                distrito = c.Cli_Distrito.distrito;
-                                direccion = c.Persona_telef.persona.Per_Direccion;
-                                fechanacimiento = c.Persona_telef.persona.Per_FechaNacimiento.ToString();
-                                lugnacimiento = c.Persona_telef.persona.Per_LugarNacimiento;
-                                correo = c.Persona_telef.persona.Per_Correo;
-                                teelfref = c.Persona_telef.persona.Per_Celular;
-                                idpersona = c.Persona_telef.persona.Per_Id;
+                                //entCliente c = (entCliente)ViewBag.cliente;
+                                //idcliente = c.Cli_Id;
+                                //cliente = c.Persona_telef.persona.Per_Nombres +" "+ c.Persona_telef.persona.Per_Apellidos;
+                                //ruc = c.Cli_Ruc;
+                                //empresa = c.Cli_Empresa;
+                                //dni = c.Persona_telef.persona.Per_DNI;
+                                //direccion = c.Persona_telef.persona.Per_Direccion;
+                                //iddepa = c.Cli_Depardamento.idDepa;
+                                //departamento = c.Cli_Depardamento.departamento;
+                                //idprov = c.Cli_Provincia.idProv;
+                                //provincia = c.Cli_Provincia.provincia;
+                                //iddistr = c.Cli_Distrito.idDist;
+                                //distrito = c.Cli_Distrito.distrito;
+                                //direccion = c.Persona_telef.persona.Per_Direccion;
+                                //fechanacimiento = c.Persona_telef.persona.Per_FechaNacimiento.ToString();
+                                //lugnacimiento = c.Persona_telef.persona.Per_LugarNacimiento;
+                                //correo = c.Persona_telef.persona.Per_Correo;
+                                //teelfref = c.Persona_telef.persona.Per_Celular;
+                                //idpersona = c.Persona_telef.persona.Per_Id;
                             }
                         }
 
@@ -156,7 +156,8 @@
                                                     }
 
                                                 </select>
-                                            </div><div class="form-group">
+                                            </div>
+                                            <div class="form-group">
 
                                                 <label for="regular1">Provincia</label>
                                                 <select id="prov" name="provin" class="form-control">
@@ -170,7 +171,8 @@
                                                    }
 
                                                 </select>
-                                            </div><div class="form-group">
+                                            </div>
+                                            <div class="form-group">
                                                 <label for="regular1">Distrito</label>
                                                 <select id="dist" name="distrit" class="form-control">
                                                    @if (iddistr != 0)
@@ -183,7 +185,9 @@
                                                    }
 
                                                 </select>
-                                            </div><div class="form-group floating-label">
+                                            </div>
+                                            
+                                            <div class="form-group floating-label">
                                                 <label for="regular2">Fecha Nacimiento</label>
                                                 <input type="text" class="form-control" id="regular2" value="@fechanacimiento" name="fnacim">
                                             </div>

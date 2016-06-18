@@ -1,0 +1,61 @@
+﻿@model IEnumerable<CapaEntidades.entAsigncionLlamadas>
+
+@{
+    ViewBag.Title = "ListaClientesAsignados";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<!-- BEGIN TABLE HOVER -->
+<section class="style-default-bright">
+    <div class="section-body">
+        <br />
+        <h2 class="text-primary">Lista Clientes Asignados</h2>
+        <p>
+            <code>Listado completo de todos los clientes asignados a el usuario para ofrecer productos.</code> 
+        </p>
+        <table id="datatable1" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Telefono</th>
+                    <th>Segmento</th>
+                    <th>Producto</th>
+                    <th>Cliente</th>
+                    <th>Fecha Registro</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+            @foreach (var item in Model)
+            {
+                <tbody>
+                    <tr>
+                        <td><img class="img-circle width-1" src="~/assets/img/cliente.png" alt="" />@Html.HiddenFor(modelItem => item.Asi_Id)</td>
+                        <td>@Html.DisplayFor(modelItem => item.ClienteTelefono.Telefono.Tel_Numero)</td>
+                        @if (item.ClienteTelefono.Cliente.Segmento.Seg_Id == 1)
+                        {
+                            <td>Residencial</td>
+                        }
+                        else
+                        {
+                            <td>Comercial</td>
+                        }
+                        <td> @Html.DisplayFor(modelItem => item.ClienteTelefono.Telefono.Tel_Producto)</td>
+                        @if (item.ClienteTelefono.Cliente.Segmento.Seg_Id == 1)
+                        {
+                            <td>@Html.DisplayFor(modelItem => item.ClienteTelefono.Cliente.Cli_Nombre)</td>
+                        }
+                        else
+                        {
+                            <td>@Html.DisplayFor(modelItem => item.ClienteTelefono.Cliente.Cli_RazonSocial)</td>
+                        }
+                        <td>@Html.DisplayFor(modelItem => item.ClienteTelefono.Cliente.Cli_FechaRegistro)</td>
+                        <td class="text-right">
+                            @Html.ActionLink(".", "RegistroLlamada", "AsesorVentasCall", new { AsiLlaId = item.Asi_Id }, htmlAttributes: new { @class = "btn-lla btn-raised ink-reaction-lla btn-info-lla", data_toggle = "tooltip", data_placement = "top", data_original_title = "LLamar" })
+                        </td>
+                    </tr>
+                </tbody>
+            }
+        </table>
+    </div><!--end .section-body -->
+</section>
+<!-- END TABLE HOVER -->

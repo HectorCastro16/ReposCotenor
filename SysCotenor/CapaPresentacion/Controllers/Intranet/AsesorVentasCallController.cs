@@ -22,6 +22,66 @@ namespace CapaPresentacion.Controllers.Intranet
             return View();
         }
 
+        public ActionResult ListaClientesAsignados(String mensaje, Int16? identificador)
+        {
+            try
+            {
+                ViewBag.mensaje = mensaje;
+                ViewBag.identificador = identificador;
+                entUsuario u = (entUsuario)Session["usuario"];
+                if (u != null)
+                {
+                    Int32 UsuarioId = u.Usu_Id;
+                    List<entAsigncionLlamadas> lista = negAsigncionLlamadas.Instancia.ListaClientesAsignadosXUsuario(UsuarioId);
+                    return View(lista);
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Inicio");
+                }
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("ListaClientesAsignados", "AsesorVentasCall", new { mensaje = e.Message, identificador = 2 });
+            }
+
+        }
+
+        public ActionResult RegistroLlamada(Int32 AsiLlaId, String mensaje, Int16? identificador)
+        {
+            try
+            {
+                ViewBag.mensaje = mensaje;
+                ViewBag.identificador = identificador;
+                entUsuario u = (entUsuario)Session["usuario"];
+                if (u != null)
+                {
+                    //para capturar el usuario en sesion////////////
+                    entUsuario user = (entUsuario)Session["usuario"];
+                    Int32 idUser = user.Usu_Id;
+                    ////////////////////////////////////////////////////////
+                    entAsigncionLlamadas asilla = negAsigncionLlamadas.Instancia.BuscaAsiLla(idUser, AsiLlaId);
+                    ViewBag.AsiLla = asilla;
+                    return View();
+                }
+                else
+                {
+                    return RedirectToAction("Index", "Inicio");
+                }
+            }
+            catch (ApplicationException x)
+            {
+                ViewBag.mensaje = x.Message;
+                return RedirectToAction("ListaClientesAsignados", "AsesorVentasCall", new { mensaje = x.Message, identificador = 1 });
+            }
+            catch (Exception e)
+            {
+
+                return RedirectToAction("ListaClientesAsignados", "AsesorVentasCall", new { mensaje = e.Message, identificador = 2 });
+            }
+            
+        }
+
         //public ActionResult ListarMisLlamadas(){
         //    try
         //    {
@@ -34,19 +94,22 @@ namespace CapaPresentacion.Controllers.Intranet
         //    }
         //}
 
-        //public ActionResult Venta(String telef){
-        //    try{
-        //        ViewBag.tel = telef;
-        //        String dni = "55555555";
-        //        entCliente c = negCliente.Instancia.BuscaCliente(telef,dni);
-        //        var cliente = c;
-        //        ViewBag.cliente = cliente;
-        //        return View();
-        //    }
-        //    catch (Exception e){
-        //        return RedirectToAction("Error", "Error", new { mensaje = e.Message });
-        //    }
-        //}
+        public ActionResult Venta(String telef)
+        {
+            try
+            {
+                ViewBag.tel = telef;
+                String dni = "55555555";
+             //   entCliente c = negCliente.Instancia.BuscaCliente(telef, dni);
+                var cliente = new entCliente();
+                ViewBag.cliente = cliente;
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Error", "Error", new { mensaje = e.Message });
+            }
+        }
         //[HttpPost]
         //public ActionResult Venta(FormCollection frm){
         //    int tipedicion = 0;
@@ -131,7 +194,7 @@ namespace CapaPresentacion.Controllers.Intranet
         //    }
         //    catch (Exception e){
         //        return RedirectToAction("Error","Error",new { mensaje=e.Message});
-                
+
         //    }
         //  }
 
@@ -172,7 +235,8 @@ namespace CapaPresentacion.Controllers.Intranet
             return JsonLista;
         }
 
-        public ActionResult LlenarGrup_ComJSON(int id_detaCC_Com){
+        public ActionResult LlenarGrup_ComJSON(int id_detaCC_Com)
+        {
             var lista = negArbolVenta.Instancia.ListaGrupComCbo(Convert.ToInt32(id_detaCC_Com));
             var JsonLista = Json(lista.ToList(), JsonRequestBehavior.AllowGet);
             return JsonLista;

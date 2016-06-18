@@ -17,3 +17,62 @@
     cursor: inherit;
     display: block;
 }
+.ink-reaction-lla {
+    position: relative;
+    overflow: hidden;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.btn-lla {
+    font-size: 14px;
+    text-transform: uppercase;
+}
+.btn-info-lla {
+    color: #ffffff;
+    background-color:  Highlight;
+    border-color: #2196f3;
+    border-top-color: rgb(33, 150, 243);
+    border-right-color: rgb(33, 150, 243);
+    border-bottom-color: rgb(33, 150, 243);
+    border-left-color: rgb(33, 150, 243);
+}
+.btn-lla {
+    display: inline-block;
+    margin-bottom: 0;
+    font-weight: normal;
+    text-align: center;
+    vertical-align: middle;
+    touch-action: manipulation;
+    cursor: pointer;
+    background-image: url('../../img/llamar.png');
+    border: 1px solid transparent;
+    border-top-style: solid;
+    border-top-width: 1px;
+    border-right-style: solid;
+    border-right-width: 1px;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-left-style: solid;
+    border-left-width: 1px;
+    border-image-source: initial;
+    border-image-slice: initial;
+    border-image-width: initial;
+    border-image-outset: initial;
+    border-image-repeat: initial;
+    white-space: nowrap;
+    padding: 4.5px 14px;
+    padding-top: 4.5px;
+    padding-right: 14px;
+    padding-bottom: 4.5px;
+    padding-left: 14px;
+    line-height: 1.846153846;
+    border-radius: 2px;
+    border-top-left-radius: 2px;
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-bottom-left-radius: 2px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+}
