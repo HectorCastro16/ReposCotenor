@@ -45,8 +45,6 @@ $("#Acccom").change(function () {
     $("#grupCom").html(opciones)
     $("#Cate").html(opciones)
     $("#Products").html(opciones)
-
-
 })
 
 var detAccCom = function () {
@@ -158,7 +156,7 @@ $("#dept").change(function () {
     prov();
     var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
     $("#prov").html(opciones)
-
+    $("#dist").html(opciones)
 })
 
 var prov = function () {
@@ -294,6 +292,6 @@ function CambioOnChange(sel) {
         $("#m2").hide();
     }else {        
         $("#m1").show();
-        $("#m2").hide();
+        $("#m2").hide();        
     }
 }
