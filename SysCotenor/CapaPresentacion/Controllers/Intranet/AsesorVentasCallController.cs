@@ -47,7 +47,7 @@ namespace CapaPresentacion.Controllers.Intranet
 
         }
 
-        public ActionResult RegistroVenta(String mensaje, Int16? identificador)
+        public ActionResult RegistroLlamada(Int32 AsiLlaId, String mensaje, Int16? identificador)
         {
             try
             {
@@ -56,6 +56,12 @@ namespace CapaPresentacion.Controllers.Intranet
                 entUsuario u = (entUsuario)Session["usuario"];
                 if (u != null)
                 {
+                    //para capturar el usuario en sesion////////////
+                    entUsuario user = (entUsuario)Session["usuario"];
+                    Int32 idUser = user.Usu_Id;
+                    ////////////////////////////////////////////////////////
+                    entAsigncionLlamadas asilla = negAsigncionLlamadas.Instancia.BuscaAsiLla(idUser, AsiLlaId);
+                    ViewBag.AsiLla = asilla;
                     return View();
                 }
                 else
@@ -88,19 +94,22 @@ namespace CapaPresentacion.Controllers.Intranet
         //    }
         //}
 
-        //public ActionResult Venta(String telef){
-        //    try{
-        //        ViewBag.tel = telef;
-        //        String dni = "55555555";
-        //        entCliente c = negCliente.Instancia.BuscaCliente(telef,dni);
-        //        var cliente = c;
-        //        ViewBag.cliente = cliente;
-        //        return View();
-        //    }
-        //    catch (Exception e){
-        //        return RedirectToAction("Error", "Error", new { mensaje = e.Message });
-        //    }
-        //}
+        public ActionResult Venta(String telef)
+        {
+            try
+            {
+                ViewBag.tel = telef;
+                String dni = "55555555";
+             //   entCliente c = negCliente.Instancia.BuscaCliente(telef, dni);
+                var cliente = new entCliente();
+                ViewBag.cliente = cliente;
+                return View();
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("Error", "Error", new { mensaje = e.Message });
+            }
+        }
         //[HttpPost]
         //public ActionResult Venta(FormCollection frm){
         //    int tipedicion = 0;

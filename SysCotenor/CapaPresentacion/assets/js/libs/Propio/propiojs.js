@@ -50,7 +50,7 @@
     })
 
 var detAccCom = function () {
-    $.getJSON('@Url.Action("LlenarDetAccComJSON", "AsesorVentasCall")', { idAccCom: $('#Acccom').val() },
+    $.getJSON('LlenarDetAccComJSON', { idAccCom: $('#Acccom').val() },
         function (data) {
             var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
             $.each(data, function (i, item) {
@@ -67,7 +67,7 @@ var detAccCom = function () {
     })
 
 var grupCom = function () {
-    $.getJSON('@Url.Action("LlenarGrup_ComJSON", "AsesorVentasCall")', { id_detaCC_Com: $('#detAccCom').val() },
+    $.getJSON('LlenarGrup_ComJSON', { id_detaCC_Com: $('#detAccCom').val() },
     function (data) {
         var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
         $.each(data, function (i, item) {
@@ -83,7 +83,7 @@ var grupCom = function () {
     })
 
 var Cate = function () {
-    $.getJSON('@Url.Action("LlenarCatJSON", "AsesorVentasCall")', { id_Grup: $('#grupCom').val() },
+    $.getJSON('LlenarCatJSON', { id_Grup: $('#grupCom').val() },
  function (data) {
      var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
      $.each(data, function (i, item) {
@@ -98,7 +98,7 @@ var Cate = function () {
     })
 
 var Products = function () {
-    $.getJSON('@Url.Action("LlenarProdJSON", "AsesorVentasCall")', { id_Cat: $('#Cate').val() },
+    $.getJSON('LlenarProdJSON', { id_Cat: $('#Cate').val() },
  function (data) {
      var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
      $.each(data, function (i, item) {
@@ -162,7 +162,7 @@ if ($("#ch").val() == "checked") {
     })
 
 var prov = function () {
-    $.getJSON('@Url.Action("LlenarProvJSON", "AsesorVentasCall")', { iddepat: $('#dept').val() },
+    $.getJSON('LlenarProvJSON', { iddepat: $('#dept').val() },
  function (data) {
      var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
      $.each(data, function (i, item) {
@@ -179,7 +179,7 @@ var prov = function () {
     })
 
 var dist = function () {
-    $.getJSON('@Url.Action("LlenarDistJSON", "AsesorVentasCall")', { idprov: $('#prov').val() },
+    $.getJSON('LlenarDistJSON', { idprov: $('#prov').val() },
  function (data) {
      var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
      $.each(data, function (i, item) {

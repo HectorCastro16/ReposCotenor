@@ -34,6 +34,28 @@ namespace CapaNegocio
             }
         }
 
+        public entAsigncionLlamadas BuscaAsiLla(Int32 UsuarioId, Int32 AsiLlaId)
+        {
+            try
+            {
+                entAsigncionLlamadas al = datAsigncionLlamadas.Instancia.BuscaAsiLla(UsuarioId, AsiLlaId);
+                if (al == null)
+                {
+                    throw new ApplicationException("Problemas");
+                }
+                return al;
+            }
+            catch (ApplicationException ae)
+            {
+                throw ae;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
         #endregion metodos
     }
 }

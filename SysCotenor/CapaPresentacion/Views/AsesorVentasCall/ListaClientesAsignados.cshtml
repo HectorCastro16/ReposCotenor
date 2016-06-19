@@ -50,7 +50,7 @@
                         }
                         <td>@Html.DisplayFor(modelItem => item.ClienteTelefono.Cliente.Cli_FechaRegistro)</td>
                         <td class="text-right">
-                            @Html.ActionLink(".", "RegistroVenta", "AsesorVentasCall", new { AsiLlaId = item.Asi_Id }, htmlAttributes: new { @class = "btn-lla btn-raised ink-reaction-lla btn-info-lla", data_toggle = "tooltip", data_placement = "top", data_original_title = "LLamar" })
+                            @Html.ActionLink(".", "RegistroLlamada", "AsesorVentasCall", new { AsiLlaId = item.Asi_Id }, htmlAttributes: new { @class = "btn-lla btn-raised ink-reaction-lla btn-info-lla", data_toggle = "tooltip", data_placement = "top", data_original_title = "LLamar" })
                         </td>
                     </tr>
                 </tbody>
