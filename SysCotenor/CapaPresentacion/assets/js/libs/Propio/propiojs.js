@@ -1,53 +1,53 @@
 ﻿
 
 
-    function cambiar(tecla){
-        tecla.value = tecla.value.replace(".", ",");
+function cambiar(tecla) {
+    tecla.value = tecla.value.replace(".", ",");
+}
+
+
+function valida(e) {
+    tecla = (document.all) ? e.keyCode : e.which;
+
+    //Tecla de retroceso para borrar, siempre la permite
+    if (tecla == 8) {
+        return true;
     }
 
+    // Patron de entrada, en este caso solo acepta numeros
+    patron = /[0-9]/;
+    tecla_final = String.fromCharCode(tecla);
+    return patron.test(tecla_final);
+}
 
-        function valida(e) {
-            tecla = (document.all) ? e.keyCode : e.which;
-
-            //Tecla de retroceso para borrar, siempre la permite
-            if (tecla == 8) {
-                return true;
-            }
-
-            // Patron de entrada, en este caso solo acepta numeros
-            patron = /[0-9]/;
-            tecla_final = String.fromCharCode(tecla);
-            return patron.test(tecla_final);
-        }
-
-        jQuery(function ($) {
-            $('#myModalEliminar').on('show.bs.modal', function (e) {
-                var id = $(e.relatedTarget).data().id;
-                $(e.currentTarget).find('#Id').val(id);
-            });
-        });
-    jQuery(function ($) {
-        $('#myModalBloquear').on('show.bs.modal', function (e) {
-            var id = $(e.relatedTarget).data().id;
-            $(e.currentTarget).find('#Id').val(id);
-        });
+jQuery(function ($) {
+    $('#myModalEliminar').on('show.bs.modal', function (e) {
+        var id = $(e.relatedTarget).data().id;
+        $(e.currentTarget).find('#Id').val(id);
     });
-    jQuery(function ($) {
-        $('#myModalActivar').on('show.bs.modal', function (e) {
-            var id = $(e.relatedTarget).data().id;
-            $(e.currentTarget).find('#Id').val(id);
-        });
+});
+jQuery(function ($) {
+    $('#myModalBloquear').on('show.bs.modal', function (e) {
+        var id = $(e.relatedTarget).data().id;
+        $(e.currentTarget).find('#Id').val(id);
     });
+});
+jQuery(function ($) {
+    $('#myModalActivar').on('show.bs.modal', function (e) {
+        var id = $(e.relatedTarget).data().id;
+        $(e.currentTarget).find('#Id').val(id);
+    });
+});
 
-    $("#Acccom").change(function () {
-        detAccCom()
-        var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
-        $("#grupCom").html(opciones)
-        $("#Cate").html(opciones)
-        $("#Products").html(opciones)
+$("#Acccom").change(function () {
+    detAccCom()
+    var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+    $("#grupCom").html(opciones)
+    $("#Cate").html(opciones)
+    $("#Products").html(opciones)
 
 
-    })
+})
 
 var detAccCom = function () {
     $.getJSON('LlenarDetAccComJSON', { idAccCom: $('#Acccom').val() },
@@ -59,12 +59,12 @@ var detAccCom = function () {
             $("#detAccCom").html(opciones);
         })
 }
-    $("#detAccCom").change(function () {
-        grupCom()
-        var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
-        $("#Cate").html(opciones)
-        $("#Products").html(opciones)
-    })
+$("#detAccCom").change(function () {
+    grupCom()
+    var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+    $("#Cate").html(opciones)
+    $("#Products").html(opciones)
+})
 
 var grupCom = function () {
     $.getJSON('LlenarGrup_ComJSON', { id_detaCC_Com: $('#detAccCom').val() },
@@ -76,11 +76,11 @@ var grupCom = function () {
         $("#grupCom").html(opciones);
     })
 }
-    $("#grupCom").change(function () {
-        Cate()
-        var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
-        $("#Products").html(opciones)
-    })
+$("#grupCom").change(function () {
+    Cate()
+    var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+    $("#Products").html(opciones)
+})
 
 var Cate = function () {
     $.getJSON('LlenarCatJSON', { id_Grup: $('#grupCom').val() },
@@ -92,10 +92,10 @@ var Cate = function () {
      $("#Cate").html(opciones);
  })
 }
-    $("#Cate").change(function () {
-        Products();
+$("#Cate").change(function () {
+    Products();
 
-    })
+})
 
 var Products = function () {
     $.getJSON('LlenarProdJSON', { id_Cat: $('#Cate').val() },
@@ -138,7 +138,7 @@ if ($("#ch").val() == "checked") {
 } else {
     $("#MostrarTable").hide(true)
 }
-  
+
 
 /*<script type="text/javascript">
         var dept = function () {
@@ -154,12 +154,12 @@ if ($("#ch").val() == "checked") {
         }
     </script>*/
 
-    $("#dept").change(function () {
-        prov();
-        var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
-        $("#prov").html(opciones)
+$("#dept").change(function () {
+    prov();
+    var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+    $("#prov").html(opciones)
 
-    })
+})
 
 var prov = function () {
     $.getJSON('LlenarProvJSON', { iddepat: $('#dept').val() },
@@ -172,11 +172,11 @@ var prov = function () {
  })
 }
 
-    $("#prov").change(function () {
-        dist();
-        var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
-        $("#dist").html(opciones)
-    })
+$("#prov").change(function () {
+    dist();
+    var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+    $("#dist").html(opciones)
+})
 
 var dist = function () {
     $.getJSON('LlenarDistJSON', { idprov: $('#prov').val() },
@@ -276,11 +276,24 @@ $(document).ready(function ($) {
     });
 });
 
-$("#cboSupCall").change(function () {    
+$("#cboSupCall").change(function () {
     $("#AsesoresContent").load('AsesoresVentasXSuper', {
         IDSupCall: $('#cboSupCall').val()
     })
 });
 
-
-
+function CambioOnChange(sel) {
+    if (sel.value == "0") {
+        $("#m1").show();
+        $("#m2").hide();
+    }else if (sel.value == "1") {
+        $("#m2").show();
+        $("#m1").hide();
+    }else if (sel.value == "2") {
+        $("#m1").show();
+        $("#m2").hide();
+    }else {        
+        $("#m1").show();
+        $("#m2").hide();
+    }
+}
