@@ -26,6 +26,42 @@ namespace CapaAccesoDatos
 
         #region metodos
 
+
+        public List<entTemporal> Total_Atend_Espera(int asesor){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entTemporal> Lista = null;
+            try
+            {
+
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spStatusCalls", cn);
+                cmd.Parameters.AddWithValue("@ID_USER", asesor);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entTemporal>();
+                while (dr.Read())
+                {
+                    entTemporal t = new entTemporal();
+                    t.CantxEstado = Convert.ToInt32(dr["CantxEstado"]);
+                    t.Asi_Estado = Convert.ToInt32(dr["Asi_Estado"]);
+                    Lista.Add(t);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { cmd.Connection.Close(); }
+            return Lista;
+        } 
+
+
+
+
+
         public entArticulo BuscaArticulo(String titulo){
 
             SqlCommand cmd = null;

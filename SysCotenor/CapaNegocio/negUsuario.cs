@@ -22,6 +22,16 @@ namespace CapaNegocio
         #endregion Singleton
 
         #region metodos
+
+        public List<entTemporal> Asig_Total_Espera(int idUser){
+            try{
+            return datUsuario.Instancia.Total_Atend_Espera(idUser);
+            }catch (Exception){
+                throw;
+            }
+        }
+
+
         public entArticulo BuscaArt(String titulo)
         {
             try
@@ -136,9 +146,19 @@ namespace CapaNegocio
         {
             try
             {
-
-               return  datUsuario.Instancia.ListarUusariosConAsignacionCalls(UsuarioId);
-              
+                List<entUsuario> lstTotal = datUsuario.Instancia.ListaUsuarios(UsuarioId, SucursalId);
+               List<entUsuario> ListaPrevia=  datUsuario.Instancia.ListarUusariosConAsignacionCalls(UsuarioId);
+                List<entUsuario> Returlst = new List<entUsuario>();
+                for (int i = 0; i < lstTotal.Count; i++){
+                    Returlst.Add(lstTotal[i]);
+                    for (int j = 0; j < ListaPrevia.Count; j++){
+                        if (lstTotal[i].Usu_Id == ListaPrevia[j].Usu_Id){
+                            Returlst.Remove(lstTotal[i]);
+                            Returlst.Add(ListaPrevia[j]);
+                        }
+                     }
+                }
+                return Returlst;
             }
             catch (Exception e)
             {

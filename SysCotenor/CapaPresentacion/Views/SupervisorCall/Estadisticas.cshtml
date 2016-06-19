@@ -1,0 +1,106 @@
+﻿@using CapaEntidades
+@{
+    ViewBag.Title = "Estadisticas";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+
+@{ 
+
+    int atendidos = 0, espera = 0,total=0;
+    String format = "00000000",format2="000",F1="",F2="",F3="";
+    if (ViewBag.tae != null){
+        List<entTemporal> tls = (List<entTemporal>)ViewBag.tae;
+        for (int i = 0; i < tls.Count; i++){
+            total += tls[i].CantxEstado;
+            if (tls[i].Asi_Estado == 0)
+            {
+                espera = i;
+            }
+            else { atendidos = tls[i].CantxEstado; }
+        }
+        F1 = total.ToString(format);
+        F2 = espera.ToString(format2);
+        F3 = atendidos.ToString(format);
+    }
+
+}
+   
+             <section>
+                <div class="section-body"> 
+                    <div class="row">
+                        <!-- BEGIN ALERT - VISITS -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="card">
+                                <div class="card-body no-padding">
+                                    <div class="alert alert-callout alert-warning no-margin">
+                                        <strong class="text-xl">@F1</strong><br />
+                                        <span class="opacity-50">Total Asignadas</span>
+                                        <div class="stick-bottom-right">
+                                            <div class="height-1 sparkline-visits" data-bar-color="#e5e6e6"></div>
+                                        </div>
+                                    </div>
+                                </div><!--end .card-body -->
+                            </div><!--end .card -->
+                        </div><!--end .col -->
+                        <!-- END ALERT - VISITS -->
+                        <!-- BEGIN ALERT - TIME ON SITE -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="card">
+                                <div class="card-body no-padding">
+                                    <div class="alert alert-callout alert-success no-margin">
+                                        <strong class="text-xl">@F3</strong><br />
+                                        <span class="opacity-50">Atendidas</span>
+                                    </div>
+                                </div><!--end .card-body -->
+                            </div><!--end .card -->
+                        </div><!--end .col -->
+                        <!-- END ALERT - TIME ON SITE -->
+                        <!-- BEGIN ALERT - BOUNCE RATES -->
+                        <div class="col-md-3 col-sm-6">
+                            <div class="card">
+                                <div class="card-body no-padding">
+                                    <div class="alert alert-callout alert-danger no-margin">
+                                        <h1 class="pull-right text-danger"><i class="md md-timer"></i></h1>
+                                        <strong class="text-xl">@F2</strong><br />
+                                        <span class="opacity-50">Por atender</span>                                     
+                                    </div>
+                                </div><!--end .card-body -->
+                            </div><!--end .card -->
+                        </div><!--end .col -->
+                        <!-- END ALERT - BOUNCE RATES -->
+                    </div><!--end .row -->                
+                    <div class="row">
+                        <!-- BEGIN SITE ACTIVITY -->
+                        <div class="col-md-9">
+                            <div class="card ">
+                                <div class="row">
+                                 <div class="card-head">
+                                        <header>Asesor: @ViewBag.usuario </header>
+                                    </div><!--end .card-head -->
+                                    <div class="card-body height-6">
+                                        <strong>00</strong> EFECTIVAS
+                                        <span class="pull-right text-success text-sm">0,18% </i></span>
+                                        <div class="progress progress-hairline">
+                                            <div class="progress-bar progress-bar-success" style="width:10%; height:30px;"></div>
+                                        </div>
+                                        <strong>00</strong> AGENDADAS
+                                        <span class="pull-right text-success text-sm">0,68% </i></span>
+                                        <div class="progress progress-hairline">
+
+                                            <div class="progress-bar progress-bar-warning" style="width:20%"></div>
+                                        </div>
+                                        <strong>00</strong> RECHAZADAS
+                                        <span class="pull-right text-danger text-sm">21,08% </i></span>
+                                        <div class="progress progress-hairline">
+                                            <div class="progress-bar progress-bar-danger" style="width:93%"></div>
+                                        </div>
+                                    </div><!--end .card-body -->                    
+                                </div><!--end .row -->
+                            </div><!--end .card -->
+                        </div><!--end .col -->
+                        <!-- END SITE ACTIVITY -->
+                    </div>
+                </div><!--end .section-body -->
+            </section>
+  
