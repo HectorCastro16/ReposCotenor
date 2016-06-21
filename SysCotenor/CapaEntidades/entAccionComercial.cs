@@ -16,6 +16,6 @@ namespace CapaEntidades
         public String Acc_UsuarioRegistro { get; set; }
         public DateTime Acc_FechaModificacion { get; set; }
         public String Acc_UsuarioModificacion { get; set; }
-
+        public entComision comision { get; set; }
     }
 }

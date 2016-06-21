@@ -22,8 +22,6 @@ namespace CapaPresentacion.Controllers.Intranet
         {
             return View(u);
         }
-
-
         public ActionResult Estadisticas(int? iduser,String usuario){
             ViewBag.iduser = iduser;
             ViewBag.usuario = usuario;
@@ -31,10 +29,35 @@ namespace CapaPresentacion.Controllers.Intranet
                 List<entTemporal> t = negUsuario.Instancia.Asig_Total_Espera((int)iduser);
                 ViewBag.tae = t;
                 ViewBag.conteo = negUsuario.Instancia.CountVentEfectivasXase((int)iduser);
+                ViewBag.estados = negPedido.Instancia.ListEstados(); 
                 return View();
             }
             catch (Exception e){
                 return RedirectToAction("lstUsuariosEstadoAsignacionLlamadas", new { mensaje = e.Message });
+            }
+        }
+        [HttpPost]
+        public ActionResult Estadisticas(FormCollection frm){
+            try
+            {
+
+
+                int idestado = 0,idasesor=0;
+                String desde = "",hasta="",asesor="";
+                idestado =Convert.ToInt32(frm["select1"]);
+                idasesor = Convert.ToInt32(frm["hideIdasesor"]);
+                asesor = frm["hideAsesor"];
+                desde = frm["txtFehcaDesde"];
+                hasta = frm["txtFecHasta"];
+                if (Session["ListaComs"] != null) Session.Remove("ListaComs"); 
+                Session["ListaComs"] = negPedido.Instancia.ListaComisiones(idasesor, desde, hasta, idestado);
+                return RedirectToAction("Estadisticas", new { iduser = idasesor, usuario = asesor });
+
+            }
+            catch (Exception)
+            {
+
+                throw;
             }
         }
 

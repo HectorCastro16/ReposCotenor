@@ -20,5 +20,7 @@ namespace CapaEntidades
         public DateTime Pro_FechaModificacion { get; set; }
         public String Pro_UsuarioModificacion { get; set; }
 
+        public entComision comision { get; set; }
+
     }
 }

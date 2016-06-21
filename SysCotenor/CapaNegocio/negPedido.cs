@@ -18,6 +18,30 @@ namespace CapaNegocio
 
 
         #region metodos
+        public List<entEstado> ListEstados(){
+            try {
+                return datPedido.Instancia.ListaEstados();
+            }catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+        public List<entPedido> ListaComisiones(int idasesor,String desde,String hasta,int idestado){
+            try
+            {
+                return datPedido.Instancia.ListpedidoComision(idasesor, desde, hasta,idestado);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
 
         public int InsUpdPedido(entPedido p, Int32 TipoEdicion) {
             try

@@ -18,8 +18,84 @@ namespace CapaAccesoDatos
         }
         #endregion singleton
 
-        #region metodos
 
+        public List<entEstado> ListaEstados(){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List <entEstado> Lista= null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListaEstados", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entEstado>();
+                while (dr.Read()){
+                    entEstado e = new entEstado();
+                    e.Est_Id = Convert.ToInt32(dr["Est_Id"]);
+                    e.Est_Nombre = dr["Est_Nombre"].ToString();
+                    Lista.Add(e);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }finally { cmd.Connection.Close(); }
+            return Lista;
+        }
+
+        public List<entPedido> ListpedidoComision(int idasesor, String desde, String hasta,int idestado){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entPedido> Lista = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spVistaComisiones", cn);
+                cmd.Parameters.AddWithValue("@ID_USUARIO", idasesor);
+                cmd.Parameters.AddWithValue("@DESDE", desde);
+                cmd.Parameters.AddWithValue("@HASTA", hasta);
+                cmd.Parameters.AddWithValue("@ID_ESTADO", idestado);
+
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entPedido>();
+                while (dr.Read())
+                {
+                    entPedido p = new entPedido();
+                    p.Ped_Codigo = dr["Ped_Codigo"].ToString();
+                    p.Ped_FechaRegistro = Convert.ToDateTime(dr["Ped_FechaRegistro"]);
+                    entAccionComercial ac = new entAccionComercial();
+                    ac.Acc_Nombre = dr["Acc_Nombre"].ToString();
+                    entProducto pr = new entProducto();
+                    pr.Pro_Nombre = dr["Pro_Nombre"].ToString();
+                    entComision c = new entComision();
+                    c.detC_ValorUnidades = Convert.ToInt32(dr["detC_ValorUnidades"]);
+                    c.detC_ValorSoles = Convert.ToDouble(dr["detC_ValorSoles"]);
+                    entEstado e = new entEstado();
+                    e.Est_Nombre = dr["Est_Nombre"].ToString();
+                    p.Estado = e;
+                    pr.comision = c;
+                    p.Producto = pr;
+                    p.AccionComercial = ac;
+                    Lista.Add(p);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            finally { cmd.Connection.Close(); }
+            return Lista;
+        }
+
+
+
+
+
+        #region metodos
         public int InsUpdDelBloActPedido(String cadXML)
         {
             SqlCommand cmd = null;

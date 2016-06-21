@@ -5,16 +5,18 @@
 }
 
 
-@{ 
+@{
 
-    int atendidos = 0, espera = 0,total=0;
+    int atendidos = 0, espera = 0, total = 0;
     String format = "00000000", format2 = "000", F1 = "", F2 = "", F3 = "";
-    String efecStr="", agendStr="", rechazStr="",e="",a="",r="";
-    double efec=0.0, agend=0.0, rechaz=0.0;
-    int[] conteo=null;
-    if (ViewBag.tae != null){
+    String efecStr = "", agendStr = "", rechazStr = "", e = "", a = "", r = "";
+    double efec = 0.0, agend = 0.0, rechaz = 0.0;
+    int[] conteo = null;
+    if (ViewBag.tae != null)
+    {
         List<entTemporal> tls = (List<entTemporal>)ViewBag.tae;
-        for (int i = 0; i < tls.Count; i++){
+        for (int i = 0; i < tls.Count; i++)
+        {
             total += tls[i].CantxEstado;
             if (tls[i].Asi_Estado == 0)
             {
@@ -26,99 +28,236 @@
         F2 = espera.ToString(format2);
         F3 = atendidos.ToString(format);
     }
-    if (ViewBag.conteo != null){
+    if (ViewBag.conteo != null)
+    {
         conteo = (int[])ViewBag.conteo;
     }
 
     // crear regla 3 para aplicar %
     efec = (conteo[0] * 100) / total;
     efecStr = efec.ToString("#.##");
-    e = (efecStr + "%").Replace(",",".");
+    e = (efecStr + "%").Replace(",", ".");
     agend = (conteo[1] * 100) / total;
-    agendStr=agend.ToString("#.##");
+    agendStr = agend.ToString("#.##");
     a = (agendStr + "").Replace(",", ".");
     if (agendStr == "") { agendStr = "0.0"; }
     rechaz = (conteo[2] * 100) / total;
-    rechazStr=rechaz.ToString("#.##");
+    rechazStr = rechaz.ToString("#.##");
     r = (rechazStr + "%").Replace(",", ".");
     if (rechazStr == "") { rechazStr = "0.0"; }
 }
 
-             <section>
-                <div class="section-body"> 
-                    <div class="row">
-                        <!-- BEGIN ALERT - VISITS -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="card">
-                                <div class="card-body no-padding">
-                                    <div class="alert alert-callout alert-warning no-margin">
-                                        <strong class="text-xl">@F1</strong><br />
-                                        <span class="opacity-50">Total Asignadas</span>
-                                        <div class="stick-bottom-right">
-                                            <div class="height-1 sparkline-visits" data-bar-color="#e5e6e6"></div>
-                                        </div>
-                                    </div>
-                                </div><!--end .card-body -->
-                            </div><!--end .card -->
-                        </div><!--end .col -->
-                        <!-- END ALERT - VISITS -->
-                        <!-- BEGIN ALERT - TIME ON SITE -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="card">
-                                <div class="card-body no-padding">
-                                    <div class="alert alert-callout alert-success no-margin">
-                                        <strong class="text-xl">@F3</strong><br />
-                                        <span class="opacity-50">Atendidas</span>
-                                    </div>
-                                </div><!--end .card-body -->
-                            </div><!--end .card -->
-                        </div><!--end .col -->
-                        <!-- END ALERT - TIME ON SITE -->
-                        <!-- BEGIN ALERT - BOUNCE RATES -->
-                        <div class="col-md-3 col-sm-6">
-                            <div class="card">
-                                <div class="card-body no-padding">
-                                    <div class="alert alert-callout alert-danger no-margin">
-                                        <h1 class="pull-right text-danger"><i class="md md-timer"></i></h1>
-                                        <strong class="text-xl">@F2</strong><br />
-                                        <span class="opacity-50">Por atender</span>                                     
-                                    </div>
-                                </div><!--end .card-body -->
-                            </div><!--end .card -->
-                        </div><!--end .col -->
-                        <!-- END ALERT - BOUNCE RATES -->
-                    </div><!--end .row -->                
-                    <div class="row">
-                        <!-- BEGIN SITE ACTIVITY -->
-                        <div class="col-md-9">
-                            <div class="card ">
-                                <div class="row">
-                                 <div class="card-head">
-                                        <header>Asesor: @ViewBag.usuario </header>
-                                    </div><!--end .card-head -->
-                                    <div class="card-body height-6">
-                                        <strong>@conteo[0]</strong> EFECTIVAS
-                                        <span class="pull-right text-success text-sm"><i>@efecStr %</i></span>
-                                        <div class="progress progress-hairline">
-                                            <div class="progress-bar progress-bar-success" style="width:@e"></div>
-                                        </div>
-                                        <strong>@conteo[1] </strong> AGENDADAS
-                                        <span class="pull-right text-success text-sm"><i>@agendStr %</i></span>
-                                        <div class="progress progress-hairline">
+<section>
+    <div class="section-body">
+        <div class="row">
+            <!-- BEGIN ALERT - VISITS -->
+            <div class="col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body no-padding">
+                        <div class="alert alert-callout alert-warning no-margin">
+                            <strong class="text-xl">@F1</strong><br />
+                            <span class="opacity-50">Total Asignadas</span>
+                            <div class="stick-bottom-right">
+                                <div class="height-1 sparkline-visits" data-bar-color="#e5e6e6"></div>
+                            </div>
+                        </div>
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+            </div><!--end .col -->
+            <!-- END ALERT - VISITS -->
+            <!-- BEGIN ALERT - TIME ON SITE -->
+            <div class="col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body no-padding">
+                        <div class="alert alert-callout alert-success no-margin">
+                            <strong class="text-xl">@F3</strong><br />
+                            <span class="opacity-50">Atendidas</span>
+                        </div>
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+            </div><!--end .col -->
+            <!-- END ALERT - TIME ON SITE -->
+            <!-- BEGIN ALERT - BOUNCE RATES -->
+            <div class="col-md-4 col-sm-6">
+                <div class="card">
+                    <div class="card-body no-padding">
+                        <div class="alert alert-callout alert-danger no-margin">
+                            <h1 class="pull-right text-danger"><i class="md md-timer"></i></h1>
+                            <strong class="text-xl">@F2</strong><br />
+                            <span class="opacity-50">Por atender</span>
+                        </div>
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+            </div><!--end .col -->
+            <!-- END ALERT - BOUNCE RATES -->
+        </div><!--end .row -->
+        <div class="row">
+            <!-- BEGIN SITE ACTIVITY -->
+            <div class="col-md-12">
+                <div class="card ">
+                    <div class="card-head">
+                        <header>Asesor: @ViewBag.usuario </header>
+                    </div><!--end .card-head -->
+                    <div class="card-body height-6">
+                        <strong>@conteo[0]</strong> EFECTIVAS
+                        <span class="pull-right text-success text-sm"><i>@efecStr %</i></span>
+                        <div class="progress progress-hairline">
+                            <div class="progress-bar progress-bar-success" style="width:@e"></div>
+                        </div>
+                        <strong>@conteo[1] </strong> AGENDADAS
+                        <span class="pull-right text-success text-sm"><i>@agendStr %</i></span>
+                        <div class="progress progress-hairline">
 
-                                            <div class="progress-bar progress-bar-warning" style="width:@a"></div>
+                            <div class="progress-bar progress-bar-warning" style="width:@a"></div>
+                        </div>
+                        <strong>@conteo[2]</strong> RECHAZADAS
+                        <span class="pull-right text-danger text-sm"><i>@rechazStr %</i></span>
+                        <div class="progress progress-hairline">
+                            <div class="progress-bar progress-bar-danger" style="width:@r"></div>
+                        </div>
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
+            </div><!--end .col -->
+            <!-- END SITE ACTIVITY -->
+        </div>
+        <form class="form form-validate basic-label" method="post" action="Estadisticas" role="form" novalidate="novalidate">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <input type="hidden" name="hideAsesor" value="@ViewBag.usuario">
+                        <input type="hidden" name="hideIdasesor" value="@ViewBag.iduser">
+                        <div class="card-head"><header>TABLA COMISIONES</header></div>
+                        <div class="card-body">
+                            <div class="card card-outlined style-primary">
+                                <div class="card-head"></div>
+                                <div class="col-lg-3">
+                                    <div class="form-group control-width-normal">
+                                        <div class="input-group date" id="demo-date-format">
+                                            <div class="input-group-content">
+                                                <input type="text" name="txtFehcaDesde" class="form-control" required="" aria-required="true">
+                                                <label>Desde</label>
+                                                <p class="help-block">yyyy/mm/dd</p>
+                                            </div>
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                         </div>
-                                        <strong>@conteo[2]</strong> RECHAZADAS
-                                        <span class="pull-right text-danger text-sm"><i>@rechazStr %</i></span>
-                                        <div class="progress progress-hairline">
-                                            <div class="progress-bar progress-bar-danger" style="width:@r"></div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group control-width-normal">
+                                        <div class="input-group date" id="demo-date">
+                                            <div class="input-group-content">
+                                                <input type="text" name="txtFecHasta" class="form-control" required="" aria-required="true">
+                                                <label>Hasta</label>
+                                                <p class="help-block">dd/mm/yyy</p>
+                                            </div>
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
                                         </div>
-                                    </div><!--end .card-body -->                    
-                                </div><!--end .row -->
-                            </div><!--end .card -->
-                        </div><!--end .col -->
-                        <!-- END SITE ACTIVITY -->
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <select id="select1" name="select1" class="form-control dirty">
+                                            <option value="0">&nbsp;</option>
+                                            @{ if (ViewBag.estados != null)
+                                                {
+                                                    List<entEstado> Lista = (List<entEstado>)ViewBag.estados;
+                                                    foreach (var i in Lista)
+                                                    {
+                                                        <option value="@i.Est_Id">@i.Est_Nombre</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                        <label for="select1">Estado</label>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3">
+                                    <div style="text-align:right">
+                                        <input type="submit" value="Buscar" name="btnBuscar" class="btn btn-raised btn-success">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="table-responsive">
+                                    <div id="datatable1_wrapper" class="dataTables_wrapper no-footer">
+                                        <div id="datatable1_filter" class="dataTables_filter">
+                                        </div>
+                                        <table class="table table-striped table-hover dataTable no-footer" role="grid" aria-describedby="datatable1_info">
+                                            <thead>
+                                                <tr>
+                                                    <th>Cod-pedido</th>
+                                                    <th>Producto</th>
+                                                    <th>Accion Comercial</th>
+                                                    <th>Estado</th>
+                                                    <th>Fecha Registro</th>
+                                                    <th>Val.unid</th>
+                                                    <th>val.Soles</th>
+                                                    <th>Accion</th>
+
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                @{ Double valor = 0.0;
+                                                    int unid = 0;
+                                                    if (Session["ListaComs"] != null)
+                                                    {
+                                                        List<entPedido> Lista = (List<entPedido>)Session["ListaComs"];
+                                                        foreach (var item in Lista)
+                                                        {
+                                                            valor += item.Producto.comision.detC_ValorSoles;
+                                                            unid += item.Producto.comision.detC_ValorUnidades;
+                                                            String coloR = "";
+                                                            if (item.Estado.Est_Nombre == "TERMINADO") { coloR = "lightgreen"; }
+                                                            <tr style="background-color:@coloR">
+                                                                <td>@item.Ped_Codigo</td>
+                                                                <td>@item.Producto.Pro_Nombre</td>
+                                                                <td>@item.AccionComercial.Acc_Nombre</td>
+                                                                <td>@item.Estado.Est_Nombre</td>
+                                                                <td>@item.Ped_FechaRegistro</td>
+                                                                <td>@item.Producto.comision.detC_ValorUnidades</td>
+                                                                <td>@item.Producto.comision.detC_ValorSoles</td>
+                                                                @if (item.Estado.Est_Nombre == "TERMINADO")
+                                                                {
+                                                                <td>Comisiona</td>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <td>No Comisiona</td>
+                                                                }
+                                                            </tr>
+                                                        }
+                                                    }
+                                                }
+                                            </tbody>
+
+                                        </table>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div><!--end .section-body -->
-            </section>
-  
+                </div>
+                <div class="col-lg-9">
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="alert-info">Valor s/: @valor</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="alert-info">Unidades: @unid</div>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="card">
+                            <div class="alert-info">Comision: 0</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </form>
+    </div><!--end .section-body -->
+</section>
