@@ -23,6 +23,18 @@ namespace CapaNegocio
 
         #region metodos
 
+        public int[] CountVentEfectivasXase(int idasesor){
+            try
+            {
+                return datUsuario.Instancia.ConteoEfectivasXAsesor(idasesor);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<entTemporal> Asig_Total_Espera(int idUser){
             try{
             return datUsuario.Instancia.Total_Atend_Espera(idUser);

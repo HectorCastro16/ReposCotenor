@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
 using CapaEntidades;
@@ -25,6 +22,39 @@ namespace CapaAccesoDatos
         #endregion Singleton
 
         #region metodos
+
+        public int[] ConteoEfectivasXAsesor(int iduser){
+            SqlCommand cmd = null;
+            int Efec = 0;
+            int Agend = 0;
+            int Rechaz = 0;
+
+            int[] Array;
+            SqlDataReader dr = null;
+            try{
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spEfe_Agen_Rechaz", cn);
+                cmd.Parameters.AddWithValue("@ID_USUARIO", iduser);
+                cmd.CommandType = CommandType.StoredProcedure;
+                
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                if (dr.Read()){
+                    Efec = Convert.ToInt32(dr["Efec"]);
+                    Agend = Convert.ToInt32(dr["agend"]);
+                    Rechaz = Convert.ToInt32(dr["rechaz"]);
+                }
+
+                return Array = new int[] {Efec,Agend,Rechaz};
+
+               }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
 
 
         public List<entTemporal> Total_Atend_Espera(int asesor){
@@ -57,11 +87,7 @@ namespace CapaAccesoDatos
             finally { cmd.Connection.Close(); }
             return Lista;
         } 
-
-
-
-
-
+        
         public entArticulo BuscaArticulo(String titulo){
 
             SqlCommand cmd = null;

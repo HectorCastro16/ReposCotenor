@@ -30,6 +30,7 @@ namespace CapaPresentacion.Controllers.Intranet
             try{
                 List<entTemporal> t = negUsuario.Instancia.Asig_Total_Espera((int)iduser);
                 ViewBag.tae = t;
+                ViewBag.conteo = negUsuario.Instancia.CountVentEfectivasXase((int)iduser);
                 return View();
             }
             catch (Exception e){
