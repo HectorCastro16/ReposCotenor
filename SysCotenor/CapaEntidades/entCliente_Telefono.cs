@@ -23,5 +23,8 @@ namespace CapaEntidades
         // Para la Asignacion
         public bool IsSelected { get; set; }
 
+        // numero asignado
+        public int AsiUsu { get; set; }
+
     }
 }

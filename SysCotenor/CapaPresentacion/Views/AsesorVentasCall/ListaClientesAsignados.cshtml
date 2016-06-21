@@ -13,6 +13,27 @@
         <p>
             <code>Listado completo de todos los clientes asignados a el usuario para ofrecer productos.</code> 
         </p>
+        @if (@ViewBag.mensaje != null)
+        {
+            if (@ViewBag.identificador == 1)
+            {
+                <div class="alert alert-callout alert-warning" role="alert">
+                    <strong>Atención!</strong> @ViewBag.mensaje
+                </div>
+            }
+            else if (@ViewBag.identificador == 2)
+            {
+                <div class="alert alert-callout alert-danger" role="alert">
+                    <strong>Ooops!</strong> @ViewBag.mensaje
+                </div>
+            }
+            else if (@ViewBag.identificador == 3)
+            {
+                <div class="alert alert-callout alert-success" role="alert">
+                    <strong>Atención!</strong> @ViewBag.mensaje
+                </div>
+            }
+        }
         <table id="datatable1" class="table table-hover">
             <thead>
                 <tr>

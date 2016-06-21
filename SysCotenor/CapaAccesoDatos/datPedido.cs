@@ -20,30 +20,39 @@ namespace CapaAccesoDatos
 
         #region metodos
 
-        public int RegistroPedido(String cadxml){
+        public int InsUpdDelBloActPedido(String cadXML)
+        {
             SqlCommand cmd = null;
             try
             {
                 SqlConnection cn = Conexion.Instancia.Conectar();
-                cmd = new SqlCommand("spRegistroPedido", cn);
-                cmd.Parameters.AddWithValue("@cadXML", cadxml);
+                cmd = new SqlCommand("spInsUpdDelBloActPedido", cn);
+                cmd.Parameters.AddWithValue("@prmstrCadXML", cadXML);
                 cmd.CommandType = CommandType.StoredProcedure;
+
+                //creamos el parametro de retorno
+                SqlParameter m = new SqlParameter("@retorno", DbType.Int32);
+                m.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(m);
+                //fin parametro
                 cn.Open();
-
-                SqlParameter pr = new SqlParameter("@retorno", DbType.Int32);
-                pr.Direction = ParameterDirection.ReturnValue;
-                cmd.Parameters.Add(pr);
-                
                 cmd.ExecuteNonQuery();
-                Int32 i = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
-                return i;
-            }
-            catch (Exception) {
-                throw;
-            } finally { cmd.Connection.Close(); }
-           
-        }
 
+                int i = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
+
+                return i;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+        }
 
 
         #endregion metodos
