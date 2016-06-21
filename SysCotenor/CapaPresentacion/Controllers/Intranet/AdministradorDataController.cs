@@ -130,9 +130,6 @@ namespace CapaPresentacion.Controllers.Intranet
                     ct.Telefono = t;
                     ct.CliTel_UsuarioRegistro = userRegistro;
 
-                    //Session["ClienteTelefono"] = ct;
-                    //Session["sva"] = SVAS;
-
                     int i = negCliente_Telefono.Instancia.InsUpdCliente(ct, 1);
                     if (i > 0)
                     {

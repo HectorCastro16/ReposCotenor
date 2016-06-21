@@ -3,266 +3,379 @@
     ViewBag.Title = "RegistroLlamada";
     Layout = "~/Views/MasterPage.cshtml";
 }
+@if (@ViewBag.mensaje != null)
+{
+    if (@ViewBag.identificador == 1)
+    {
+        <div class="alert alert-callout alert-warning" role="alert">
+            <strong>Atención!</strong> @ViewBag.mensaje
+        </div>
+    }
+    else if (@ViewBag.identificador == 2)
+    {
+        <div class="alert alert-callout alert-danger" role="alert">
+            <strong>Ooops!</strong> @ViewBag.mensaje
+        </div>
+    }
+    else if (@ViewBag.identificador == 3)
+    {
+        <div class="alert alert-callout alert-success" role="alert">
+            <strong>Atención!</strong> @ViewBag.mensaje
+        </div>
+    }
+}
+<form class="form form-validate basic-label" method="post" action="RegistroLlamada">
+    <div class="col-lg-12">
+        <div>
+            <div class="card">
+                <div class="card-head style-primary">
+                    <header>Datos Cliente</header>
+                </div>
 
-<div class="col-lg-12">
-    <form class="form-horizontal">
-        <div class="card">
-            <div class="card-head style-primary">
-                <header>Datos Cliente</header>
-            </div>
-
-        @{ entAsigncionLlamadas al = ViewBag.AsiLla;  }
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label for="Firstname5" class="col-sm-4 control-label">TELEFONO</label>
-                            <div class="col-sm-8">
+                @{ entAsigncionLlamadas al = ViewBag.AsiLla;  }
+                <div class="card-body">
+                    <div class="row">
+                        <input type="hidden" name="txtAsiU" value="@al.Asi_Id"/>
+                        <div class="col-lg-3">
+                            <div class="form-group">
                                 <input type="text" value="@al.ClienteTelefono.Telefono.Tel_Numero" class="form-control" id="readonly5" readonly>
+                                <label for="dgdsg" class="control-label">TELEFONO</label>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="Lastname5" class="col-sm-1 control-label">CLIENTE</label>
-                            <div class="col-sm-11"> @{String espace ="     "; }
-                                <input type="text" value="@espace@al.ClienteTelefono.Cliente.Cli_Nombre" class="form-control" id="readonly5" readonly>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <input type="text" value="@al.ClienteTelefono.Cliente.Cli_Nombre" class="form-control" id="readonly5" readonly>
+                                <label for="dgdsg" class="control-label">CLIENTE</label>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="form-group">                            
-                            <label for="Lastname5" class="col-sm-4 control-label">@al.ClienteTelefono.Cliente.TipDoc.td_nombre</label>                            
-                            <div class="col-sm-8">
+                        <div class="col-lg-3">
+                            <div class="form-group">
                                 <input type="text" value="@al.ClienteTelefono.Cliente.Cli_Numero_Documento" class="form-control" id="readonly5" readonly>
+                                <label class="control-label">@al.ClienteTelefono.Cliente.TipDoc.td_nombre</label>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="Firstname5" class="col-sm-2 control-label">DIRECCION</label>
-                            <div class="col-sm-10">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
                                 <input type="text" value="@al.ClienteTelefono.Telefono.Tel_Direccion" class="form-control" id="readonly5" readonly>
+                                <label class="control-label">DIRECCION</label>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-6">
-                        <div class="form-group">
-                            <label for="Firstname5" class="col-sm-2 control-label">PRODUCTO</label>
-                            <div class="col-sm-10">
+                        <div class="col-lg-6">
+                            <div class="form-group">
                                 <input type="text" value="@al.ClienteTelefono.Telefono.Tel_Producto" class="form-control" id="readonly5" readonly>
+                                <label>PRODUCTO</label>
                             </div>
                         </div>
                     </div>
-                </div>
-                <div class="row">
-                    <div class="col-lg-2">
-                        <div class="form-group">
-                            <label for="Firstname5" class="col-sm-4 control-label">Factura_1</label>
-                            <div class="col-sm-8">
-                                <input style="text-align:right" type="text" value="@al.ClienteTelefono.Telefono.Tel_F1" class="form-control" id="readonly5" readonly>
+                    <div class="row">
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="Firstname5" class="col-sm-4 control-label">Factura_1</label>
+                                <div class="col-sm-8">
+                                    <input style="text-align:right" type="text" value="@al.ClienteTelefono.Telefono.Tel_F1" class="form-control" id="readonly5" readonly>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="form-group">
-                            <label for="Firstname5" class="col-sm-4 control-label">Factura_2</label>
-                            <div class="col-sm-8">
-                                <input type="text" style="text-align:right" value="@al.ClienteTelefono.Telefono.Tel_F2" class="form-control" id="readonly5" readonly>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="Firstname5" class="col-sm-4 control-label">Factura_2</label>
+                                <div class="col-sm-8">
+                                    <input type="text" style="text-align:right" value="@al.ClienteTelefono.Telefono.Tel_F2" class="form-control" id="readonly5" readonly>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-2">
-                        <div class="form-group">
-                            <label for="Firstname5" class="col-sm-4 control-label">Factura_3</label>
-                            <div class="col-sm-8">
-                                <input type="text" style="text-align:right" value="@al.ClienteTelefono.Telefono.Tel_F3" class="form-control" id="readonly5" readonly>
+                        <div class="col-lg-2">
+                            <div class="form-group">
+                                <label for="Firstname5" class="col-sm-4 control-label">Factura_3</label>
+                                <div class="col-sm-8">
+                                    <input type="text" style="text-align:right" value="@al.ClienteTelefono.Telefono.Tel_F3" class="form-control" id="readonly5" readonly>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label for="Lastname5" class="col-sm-4 control-label">F. ALTA</label>
-                            <div class="col-sm-8">
+                        <div class="col-lg-2">
+                            <div class="form-group">
                                 <input type="text" value="@Convert.ToDateTime(al.ClienteTelefono.Telefono.Tel_FechaAlta).ToShortDateString()" class="form-control" id="readonly5" readonly>
+                                <label>FECHA ALTA</label>
                             </div>
                         </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="form-group">
-                            <label for="Lastname5" class="col-sm-4 control-label">SEGMENTO</label>
-                            <div class="col-sm-8">
+                        <div class="col-lg-2">
+                            <div class="form-group">
                                 <input type="text" value="@al.ClienteTelefono.Cliente.Segmento.Seg_Nombre" class="form-control" id="readonly5" readonly>
+                                <label>SEGMENTO</label>
                             </div>
                         </div>
                     </div>
-                </div>
-            </div><!--end .card-body -->
-        </div><!--end .card -->
-    </form>
-</div>
+                </div><!--end .card-body -->
+            </div><!--end .card -->
+        </div>
+    </div>
 
-<div class="col-lg-4">
-    <form class="form-horizontal">
+    <div class="col-lg-4">
+
         <div class="card">
             <div class="card-head style-primary">
                 <header>Accion Comercial - Arbol</header>
             </div>
             <div class="card-body">
-               
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="regular1">Accion</label>
-                                @{// List<entAccionComercial> Lista1 = negArbolVenta.Instancia.ListaAcCbo();
-                                <select id="Acccom" name="idAccCom" class="form-control">
-                                    <option value="0"><<<<<-Seleccionar->>>>></option>
-                                    @foreach (CapaEntidades.entAccionComercial ac
-                                        in CapaNegocio.negArbolVenta.Instancia.ListaAcCbo())
-                                    {
-                                        <option value="@ac.Acc_Id">@ac.Acc_Nombre</option>
-                                    }
-                                </select>
+
+                <div class="card">
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label for="regular1">Accion</label>
+                            @{// List<entAccionComercial> Lista1 = negArbolVenta.Instancia.ListaAcCbo();
+                            <select id="Acccom" name="idAccCom" class="form-control" required>
+                                <option value=""><<<<<-Seleccionar->>>>></option>
+                                @foreach (CapaEntidades.entAccionComercial ac in CapaNegocio.negArbolVenta.Instancia.ListaAcCbo())
+                                {
+                                    <option value="@ac.Acc_Id">@ac.Acc_Nombre</option>
                                 }
-                            </div>
+                            </select>
+                            }
+                        </div>
+                        <div class="form-group">
+                            <label for="regular1">Detalle</label>
+                            <select id="detAccCom" name="DetaAccCom" class="form-control" required>
+                                <option value=""><<<<<-Seleccionar->>>>></option>
+                            </select>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="regular1">Detalle</label>
-                                <select id="detAccCom" name="DetaAccCom" class="form-control">
-                                    <option value="0"><<<<<-Seleccionar->>>>></option>
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="regular1">Grupo</label>
+                            <select id="grupCom" name="GrupCom" class="form-control" required>
+                                <option value=""><<<<<-Seleccionar->>>>></option>
+                            </select>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="regular1">Grupo</label>
-                                <select id="grupCom" name="GrupCom" class="form-control">
-                                    <option value="0"><<<<<-Seleccionar->>>>></option>
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="regular1">Categoria</label>
+                            <select id="Cate" name="Categ" class="form-control" required>
+                                <option value=""><<<<<-Seleccionar->>>>></option>
+                            </select>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="regular1">Categoria</label>
-                                <select id="Cate" name="GrupCom" class="form-control">
-                                    <option value="0"><<<<<-Seleccionar->>>>></option>
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="regular1">Producto</label>
+                            <select id="Products" name="Prod" class="form-control" required>
+                                <option value=""><<<<<-Seleccionar->>>>></option>
+                            </select>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="regular1">Producto</label>
-                                <select id="Products" name="Prod" class="form-control">
-                                    <option value="0"><<<<<-Seleccionar->>>>></option>
-                                </select>
-                            </div>
+                        <div class="form-group">
+                            <label for="regular1">Resultado</label>
+                            <select id="Result" name="resultado" onclick="CambioOnChange(this)" class="form-control" required>
+                                <option value=""><<<<<-Seleccionar->>>>></option>
+                                <option value="1">Acepto</option>
+                                <option value="2">Rechazo</option>
+                                <option value="3">Pendiente</option>
+                            </select>
+                        </div>
 
-                            <div class="form-group">
-                                <label for="regular1">Resultado</label>
-                                <select id="Result" name="GrupCom" onchange="CambioOnChange(this)" class="form-control">
-                                    <option value="0"><<<<<-Seleccionar->>>>></option>
-                                    <option value="1">Acepto</option>
-                                    <option value="2">Rechazo</option>
-                                    <option value="3">Pendiente</option>
-                                </select>
-                            </div>
+                        <div id="p1" style="display:none" class="form-group">
+                            <label for="textarea1">Descripcion</label>
+                            <textarea name="Desc" id="textarea1" class="form-control" rows="2"></textarea>
+                        </div>
+                        <div id="r1" style="display:none" class="form-group">
+                            <input type="submit" class="btn btn-raised btn-success" value="Registrar" />
+                        </div>
 
-                            <div class="form-group">
-                                <label for="textarea1">Descripcion</label>
-                                <textarea name="Desc" id="textarea1" class="form-control" rows="2"></textarea>
-                            </div>
-
-                        </div><!--end .card-body -->
-                    </div><!--end .card -->
-                    <em class="text-caption">ITN|CIBERTEC</em>
-                
+                    </div><!--end .card-body -->
+                </div><!--end .card -->
             </div><!--end .card-body -->
         </div><!--end .card -->
-    </form>
-</div>
 
-<div id="m1" style="display:;" class="col-lg-8">
-    <form class="form-horizontal">
+    </div>
+
+    <div id="m1" class="col-lg-8">
+        <div class="card">
+            <div class="card-head style-primary">
+                <header>Resultado</header>
+            </div>
+            <div class="card-body">
+                <center>
+                    <img src="~/assets/img/venta.png" class="img-responsive" />
+                </center>
+            </div><!--end .card-body -->
+        </div><!--end .card -->
+    </div>
+
+    <div id="m2" style="display:none" class="col-lg-8">
         <div class="card">
             <div class="card-head style-primary">
                 <header>Registro Venta</header>
             </div>
             <div class="card-body">
-
-
-                <div class="form-group">
-                    <label for="regular1">PROBANDO CAMBIO DE DIV</label>
-
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="txt_Telefono" id="id_Telefono" data-rule-minlength="8" maxlength="9" data-rule-number="true" onkeypress="return valida(event)" required>
+                            <label for="dgdsg" class="control-label">Telefono</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="txt_NomCli" id="id_Nom" data-rule-minlength="2" required>
+                            <label for="dgdsg" class="control-label">Titular</label>
+                        </div>
+                    </div>
                 </div>
+                <div class="row">
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            @{ List<entSegmento> ListaSegmento = ViewBag.ListaSegmento;}
+                            <select id="selectSeg" name="txt_Seg" class="form-control" required>
+                                <option value="">&nbsp;</option>
+                                @foreach (entSegmento td in ListaSegmento)
+                                {
+                                    <option value="@td.Seg_Id">@td.Seg_Nombre</option>
+                                }
+                            </select>
+                            <label for="dgdsg" class="control-label">Segmento</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            @*@Html.DropDownListFor(m => m.Item3.td_id, (SelectList)ViewBag.ListaTipDoc, "", new { Class = "form-control", required = "required", Name = "txt_TipDoc" })*@
+                            @{ List<entTipDoc> ListaTipDoc = ViewBag.ListaTipDoc;}
+                            <select id="selectTipDoc" name="txt_TipDoc" class="form-control" required>
+                                <option value="">&nbsp;</option>
+                                @foreach (entTipDoc td in ListaTipDoc)
+                                {
+                                    <option value="@td.td_id">@td.td_nombre</option>
+                                }
+                            </select>
+                            <label for="dgdsg" class="control-label">Tipo Documento</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="txt_NumDocumento" id="id_NumDocumento" data-rule-minlength="8" maxlength="15" required>
+                            <label for="dgdsg" class="control-label">Numero Documento</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-3">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="txt_CodExperto" id="id_CodExp" maxlength="10" required>
+                            <label for="dgdsg" class="control-label">Codigo Experto</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <input type="text" name="txtFecNac" class="form-control" data-inputmask="'alias': 'date'" required>
+                            <label>Fecha de Nacimiento</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="txt_LugNac" id="id_Nom" data-rule-minlength="2" required>
+                            <label for="dgdsg" class="control-label">Lugar Nacimiento</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="txt_TelRef" id="id_telref" data-rule-minlength="9" maxlength="9" data-rule-number="true" onkeypress="return valida(event)" required>
+                            <label for="dgdsg" class="control-label">Tel. Referencia</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="txt_Direccion" id="id_Direccion" data-rule-minlength="2" required>
+                            <label for="dgdsg" class="control-label">Direccion</label>
+                        </div>
+                    </div>
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <input type="text" class="form-control" name="txt_Cor" id="id_Nom" data-rule-minlength="2" required>
+                            <label for="dgdsg" class="control-label">Correo</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="regular1">Departamento</label>
+                            <select id="dept" name="depto" class="form-control" required>
+                                @{int iddepa = 0;
+                                    String departamento = "";
+                                    int idprov = 0;
+                                    String provincia = "";
+                                    int iddistr = 0;
+                                    String distrito = "";}
+                                @if (iddepa != 0)
+                                {
+                                    <option value="@iddepa">@departamento</option>
+                                }
+                                else
+                                {
+                                    <option value=""><<<<<-Seleccionar->>>>></option>
+                                }@foreach (CapaEntidades.entDepartamento d in CapaNegocio.negArbolUbigeo.Instancia.ListarDept())
+                                {
+                                    <option value="@d.idDepa">@d.departamento</option>
+                                }
 
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+
+                            <label for="regular1">Provincia</label>
+                            <select id="prov" name="provin" class="form-control" required>
+                                @if (idprov != 0)
+                                {
+                                    <option value="@idprov">@provincia</option>
+                                }
+                                else
+                                {
+                                    <option value=""><<<<<-Seleccionar->>>>></option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-4">
+                        <div class="form-group">
+                            <label for="regular1">Distrito</label>
+                            <select id="dist" name="distrit" class="form-control" required>
+                                @if (iddistr != 0)
+                                {
+                                    <option value="@iddistr">@distrito</option>
+                                }
+                                else
+                                {
+                                    <option value=""><<<<<-Seleccionar->>>>></option>
+                                }
+
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label for="textarea1">Observaciones</label>
+                            <textarea name="txtobserva" id="textarea1" class="form-control" rows="2"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-8">
+
+                    </div>
+                    <div class="col-lg-4">
+                        <div style="text-align:center">
+                            <input type="submit" class="btn btn-raised btn-success" value="Registrar" />
+                        </div>
+                    </div>
+                </div>
             </div><!--end .card-body -->
         </div><!--end .card -->
-    </form>
-</div>
-
-<div id="m2" style="display:none" class="col-lg-8">
-    <form class="form-horizontal">
-        <div class="card">
-            <div class="card-head style-primary">
-                <header>Registro Venta</header>
-            </div>
-            <div class="card-body">
-                <div class="form-group">
-                    <label for="regular1">Departamento</label>
-                    <select id="dept" name="depto" class="form-control">
-                        @{int iddepa = 0;
-                        String departamento = "";
-                        int idprov = 0;
-                        String provincia = "";
-                        int iddistr = 0;
-                        String distrito = "";}
-                        @if (iddepa != 0)
-                        {
-                            <option value="@iddepa">@departamento</option>
-                        }
-                        else
-                        {
-                            <option value="0"><<<<<-Seleccionar->>>>></option>
-                        }@foreach (CapaEntidades.entDepartamento d in CapaNegocio.negArbolUbigeo.Instancia.ListarDept())
-                        {
-                            <option value="@d.idDepa">@d.departamento</option>
-                        }
-
-                    </select>
-                </div>
-                <div class="form-group">
-
-                    <label for="regular1">Provincia</label>
-                    <select id="prov" name="provin" class="form-control">
-                        @if (idprov != 0)
-                        {
-                            <option value="@idprov">@provincia</option>
-                        }
-                        else
-                        {
-                            <option value="0"><<<<<-Seleccionar->>>>></option>
-                        }
-
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="regular1">Distrito</label>
-                    <select id="dist" name="distrit" class="form-control">
-                        @if (iddistr != 0)
-                        {
-                            <option value="@iddistr">@distrito</option>
-                        }
-                        else
-                        {
-                            <option value="0"><<<<<-Seleccionar->>>>></option>
-                        }
-
-                    </select>
-                </div>
-
-            </div><!--end .card-body -->
-        </div><!--end .card -->
-    </form>
-</div>
-
-
-
+    </div>
+</form>

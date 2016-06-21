@@ -19,6 +19,83 @@ namespace CapaNegocio
 
         #region metodos
 
+        public int InsUpdPedido(entPedido p, Int32 TipoEdicion, Int32 TipoAccCom, Int32 TipoCli) {
+            try
+            {
+                String cadXml = "";
+                cadXml += "<Ped ";
+                cadXml += "Ped_Usu_Id='"+p.Usuario.Usu_Id + "' ";
+                cadXml += "Ped_Acc_Id='" + p.AccionComercial.Acc_Id + "' ";
+                cadXml += "Ped_Pro_Id='" + p.Producto.Pro_ID + "' ";
+                cadXml += "Ped_Distrito_Id='" + p.Distrito.idDist + "' ";
+                cadXml += "Ped_Provincia_Id='" + p.Provincia.idProv + "' ";
+                cadXml += "Ped_Depardamento_Id='" + p.Departamento.idDepa + "' ";
+                cadXml += "Ped_Dir_Inst='" + p.Ped_Dir_Inst + "' ";
+                cadXml += "Ped_Cod_Experto='" + p.Ped_Cod_Experto + "' ";
+                cadXml += "Ped_Observaciones='" + p.Ped_Observaciones + "' ";
+                cadXml += "Ped_UsuarioRegistro='" + p.Ped_UsuarioRegistro + "' ";
+                cadXml += "TipoEdicion='" + TipoEdicion + "'>";
+                
+                    cadXml += "<CliTel ";
+                    cadXml += "CliTel_UsuarioRegistro='" + p.Ped_UsuarioRegistro + "' ";
+                    cadXml += "TipoEdicion='" + TipoEdicion + "'>";
+
+                        cadXml += "<Cli ";
+                        cadXml += "Cli_TipDoc_Id='" + p.ClienteTelefono.Cliente.TipDoc.td_id + "' ";
+                        cadXml += "Cli_Nombre='" + p.ClienteTelefono.Cliente.Cli_Nombre + "' ";
+                        cadXml += "Cli_RazonSocial='" + p.ClienteTelefono.Cliente.Cli_RazonSocial + "' ";
+                        cadXml += "Cli_Seg_Id='" + p.ClienteTelefono.Cliente.Segmento.Seg_Id + "' ";
+                        cadXml += "Cli_Numero_Documento='" + p.ClienteTelefono.Cliente.Cli_Numero_Documento + "' ";
+                        cadXml += "Cli_FechaNacimiento='" + p.ClienteTelefono.Cliente.Cli_FechaNacimiento.ToString("yyyy/MM/dd") + "' ";
+                        cadXml += "Cli_LugarNacimiento='" + p.ClienteTelefono.Cliente.Cli_LugarNacimiento + "' ";
+                        cadXml += "Cli_Correo='" + p.ClienteTelefono.Cliente.Cli_Correo + "' ";
+                        cadXml += "Cli_Telefono_Referencia='" + p.ClienteTelefono.Cliente.Cli_Telefono_Referencia + "' ";                
+                        cadXml += "Cli_UsuarioRegistro='" + p.ClienteTelefono.Cliente.Cli_UsuarioRegistro + "' ";
+                        cadXml += "TipoEdicion='" + TipoEdicion + "'/>";
+
+                        cadXml += "<Tel ";
+                        cadXml += "Tel_Numero='" + p.ClienteTelefono.Telefono.Tel_Numero + "' ";
+                        //cadXml += "Tel_Producto='" + p.ClienteTelefono.Telefono.Tel_Producto + "' ";
+                        cadXml += "Tel_Direccion='" + p.ClienteTelefono.Telefono.Tel_Direccion + "' ";
+                        cadXml += "TipoEdicion='" + TipoEdicion + "'/>";
+
+                    cadXml += "</CliTel>";
+
+                cadXml += "</Ped>";
+                cadXml = "<root>" + cadXml + "</root>";
+
+                int i = datPedido.Instancia.InsUpdDelBloActPedido(cadXml);
+
+                if (TipoEdicion == 1)
+                {
+                    if (i <= 0)
+                    {
+                        throw new ApplicationException("No se Pudo Insertar el Pedido");
+                    }
+                }
+                if (TipoEdicion == 2)
+                {
+                    if (i <= 0)
+                    {
+                        throw new ApplicationException("No se Pudo Editar el Pedido");
+                    }
+                }
+                return i;
+            }
+            catch (ApplicationException ae)
+            {
+                throw ae;
+            }
+            catch (Exception e)
+            {
+
+                throw e;
+            }
+        }
+
+
+
+
         //public int RegistroPedido(entPedido p,int idprod,Int32 tipedicion,Int32 tipedper){
 
         //    try {
@@ -61,7 +138,7 @@ namespace CapaNegocio
         //        cadxml += "<telefono ";
         //        cadxml += "telefono='" + p.Cliente.Persona_telef.telefono.Tel_Numero + "' ";
         //        cadxml += "tipoedicion='" + tipedicion + "'/>";
-                
+
         //        cadxml += "</pertelef>";
         //        cadxml += "</cliente>";             
         //        cadxml += "</pedido>";

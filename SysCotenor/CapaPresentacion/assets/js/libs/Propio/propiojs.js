@@ -41,7 +41,7 @@ jQuery(function ($) {
 
 $("#Acccom").change(function () {
     detAccCom()
-    var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+    var opciones = '<option value=""><<<<<-Seleccionar->>>>></option>';
     $("#grupCom").html(opciones)
     $("#Cate").html(opciones)
     $("#Products").html(opciones)
@@ -50,7 +50,7 @@ $("#Acccom").change(function () {
 var detAccCom = function () {
     $.getJSON('LlenarDetAccComJSON', { idAccCom: $('#Acccom').val() },
         function (data) {
-            var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+            var opciones = '<option value=""><<<<<-Seleccionar->>>>></option>';
             $.each(data, function (i, item) {
                 opciones += '<option value="' + item.DetAcc_ID + '">' + item.DetAcc_Nombre + '</option>'
             });
@@ -59,7 +59,7 @@ var detAccCom = function () {
 }
 $("#detAccCom").change(function () {
     grupCom()
-    var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+    var opciones = '<option value=""><<<<<-Seleccionar->>>>></option>';
     $("#Cate").html(opciones)
     $("#Products").html(opciones)
 })
@@ -67,7 +67,7 @@ $("#detAccCom").change(function () {
 var grupCom = function () {
     $.getJSON('LlenarGrup_ComJSON', { id_detaCC_Com: $('#detAccCom').val() },
     function (data) {
-        var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+        var opciones = '<option value=""><<<<<-Seleccionar->>>>></option>';
         $.each(data, function (i, item) {
             opciones += '<option value="' + item.Gru_ID + '">' + item.Gru_Nombre + '</option>'
         });
@@ -76,14 +76,14 @@ var grupCom = function () {
 }
 $("#grupCom").change(function () {
     Cate()
-    var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+    var opciones = '<option value=""><<<<<-Seleccionar->>>>></option>';
     $("#Products").html(opciones)
 })
 
 var Cate = function () {
     $.getJSON('LlenarCatJSON', { id_Grup: $('#grupCom').val() },
  function (data) {
-     var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+     var opciones = '<option value=""><<<<<-Seleccionar->>>>></option>';
      $.each(data, function (i, item) {
          opciones += '<option value="' + item.Cat_Id + '">' + item.Cat_Nombre + '</option>'
      });
@@ -98,7 +98,7 @@ $("#Cate").change(function () {
 var Products = function () {
     $.getJSON('LlenarProdJSON', { id_Cat: $('#Cate').val() },
  function (data) {
-     var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+     var opciones = '<option value=""><<<<<-Seleccionar->>>>></option>';
      $.each(data, function (i, item) {
          opciones += '<option value="' + item.Pro_ID + '">' + item.Pro_Nombre + '</option>'
      });
@@ -109,7 +109,7 @@ var Products = function () {
 $("#MostrarForm").hide(true);
 $("#Result").change(function () {
     if ($("#Result").val() == "1") {
-        //  var result = '<div class="col-md-4 col-sm-6"><div class="card"><div class="card-body"><div class="form-group floating-label"><label for="regular2">Cliente</label><input type="text" class="form-control" id="regular2" name="cliente"></div><div class="form-group floating-label"><label for="regular2">RUC</label><input type="text" class="form-control" id="regular2" name="ruc"></div><div class="form-group floating-label"><label for="regular2">Empresa</label><input type="text" class="form-control" id="regular2" name="empresa"></div><div class="form-group floating-label"><label for="regular2">Direccion</label><input type="text" class="form-control" id="regular2" name="direccion"></div><div class="form-group"><label for="regular1">Accion</label><select id="dept" name="depto" class="form-control"><option value="0"><<<<<-Seleccionar->>>>></option></select></div><div class="form-group"><label for="regular1">Detalle</label><select id="prov" name="provin" class="form-control"><option value="0"><<<<<-Seleccionar->>>>></option></select></div><div class="form-group"><label for="regular1">Grupo</label><select id="dist" name="distrit" class="form-control"><option value="0"><<<<<-Seleccionar->>>>></option></select></div><div class="form-group floating-label"><label for="regular2">Fecha Nacimiento</label><input type="text" class="form-control" id="regular2" name="fnacim"></div><div class="form-group floating-label"><label for="regular2">Lugar Nacimiento</label><input type="text" class="form-control" id="regular2" name="lugnacimi"></div><div class="form-group floating-label"><label for="regular2">Correo</label><input type="text" class="form-control" id="regular2" name="correo"></div><div class="form-group floating-label"><label for="regular2">Telefono Ref</label><input type="text" class="form-control" id="regular2" name="telefref"></div></div></div></div>'
+        //  var result = '<div class="col-md-4 col-sm-6"><div class="card"><div class="card-body"><div class="form-group floating-label"><label for="regular2">Cliente</label><input type="text" class="form-control" id="regular2" name="cliente"></div><div class="form-group floating-label"><label for="regular2">RUC</label><input type="text" class="form-control" id="regular2" name="ruc"></div><div class="form-group floating-label"><label for="regular2">Empresa</label><input type="text" class="form-control" id="regular2" name="empresa"></div><div class="form-group floating-label"><label for="regular2">Direccion</label><input type="text" class="form-control" id="regular2" name="direccion"></div><div class="form-group"><label for="regular1">Accion</label><select id="dept" name="depto" class="form-control"><option value=""><<<<<-Seleccionar->>>>></option></select></div><div class="form-group"><label for="regular1">Detalle</label><select id="prov" name="provin" class="form-control"><option value=""><<<<<-Seleccionar->>>>></option></select></div><div class="form-group"><label for="regular1">Grupo</label><select id="dist" name="distrit" class="form-control"><option value=""><<<<<-Seleccionar->>>>></option></select></div><div class="form-group floating-label"><label for="regular2">Fecha Nacimiento</label><input type="text" class="form-control" id="regular2" name="fnacim"></div><div class="form-group floating-label"><label for="regular2">Lugar Nacimiento</label><input type="text" class="form-control" id="regular2" name="lugnacimi"></div><div class="form-group floating-label"><label for="regular2">Correo</label><input type="text" class="form-control" id="regular2" name="correo"></div><div class="form-group floating-label"><label for="regular2">Telefono Ref</label><input type="text" class="form-control" id="regular2" name="telefref"></div></div></div></div>'
         $("#MostrarForm").show();
         //dept();
     } else {
@@ -142,7 +142,7 @@ if ($("#ch").val() == "checked") {
         var dept = function () {
             $.getJSON('@Url.Action("LlenarDeptJSON", "AsesorVentasCall")',
          function (data) {
-             var opciones ='<option value="0"><<<<<-Seleccionar->>>>></option>';
+             var opciones ='<option value=""><<<<<-Seleccionar->>>>></option>';
              $.each(data, function (i, item) {
 
                  opciones += '<option value="' + item.idDepa + '">' + item.departamento + '</option>'
@@ -154,7 +154,7 @@ if ($("#ch").val() == "checked") {
 
 $("#dept").change(function () {
     prov();
-    var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+    var opciones = '<option value=""><<<<<-Seleccionar->>>>></option>';
     $("#prov").html(opciones)
     $("#dist").html(opciones)
 })
@@ -162,7 +162,7 @@ $("#dept").change(function () {
 var prov = function () {
     $.getJSON('LlenarProvJSON', { iddepat: $('#dept').val() },
  function (data) {
-     var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+     var opciones = '<option value=""><<<<<-Seleccionar->>>>></option>';
      $.each(data, function (i, item) {
          opciones += '<option value="' + item.idProv + '">' + item.provincia + '</option>'
      });
@@ -172,14 +172,14 @@ var prov = function () {
 
 $("#prov").change(function () {
     dist();
-    var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+    var opciones = '<option value=""><<<<<-Seleccionar->>>>></option>';
     $("#dist").html(opciones)
 })
 
 var dist = function () {
     $.getJSON('LlenarDistJSON', { idprov: $('#prov').val() },
  function (data) {
-     var opciones = '<option value="0"><<<<<-Seleccionar->>>>></option>';
+     var opciones = '<option value=""><<<<<-Seleccionar->>>>></option>';
      $.each(data, function (i, item) {
          opciones += '<option value="' + item.idDist + '">' + item.distrito + '</option>'
      });
@@ -253,8 +253,6 @@ var dist = function () {
     });
 </script>*/
 
-
-
 $(document).ready(function ($) {
     // delegate calls to data-toggle="lightbox"
     $(document).delegate('*[data-toggle="lightbox"]:not([data-gallery="navigateTo"])', 'click', function (event) {
@@ -281,17 +279,27 @@ $("#cboSupCall").change(function () {
 });
 
 function CambioOnChange(sel) {
-    if (sel.value == "0") {
+    if (sel.value == "") {
         $("#m1").show();
         $("#m2").hide();
+        $("#p1").hide();
+        $("#r1").hide();
     }else if (sel.value == "1") {
         $("#m2").show();
         $("#m1").hide();
+        $("#p1").hide();
+        $("#r1").hide();
     }else if (sel.value == "2") {
         $("#m1").show();
         $("#m2").hide();
+        $("#p1").show();
+        $("#r1").show();
     }else {        
         $("#m1").show();
-        $("#m2").hide();        
+        $("#m2").hide();
+        $("#p1").show();
+        $("#r1").show();
     }
 }
+
+

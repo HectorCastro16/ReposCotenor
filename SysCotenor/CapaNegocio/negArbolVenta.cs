@@ -24,9 +24,9 @@ namespace CapaNegocio
             {
                 return datArbolVenta.Instancia.ListarProdcts(id_Cat);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
 
@@ -36,33 +36,39 @@ namespace CapaNegocio
             {
                 return datArbolVenta.Instancia.ListarCatGorias(id_Grupo);
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                throw;
+                throw e;
             }
         }
 
         public List<entGrupoComercial> ListaGrupComCbo(Int32 id_accCom_Det){
             try{
                 return datArbolVenta.Instancia.ListarGrup_Com(id_accCom_Det);
-            }catch (Exception){
-                throw;
-            }   
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
         }
 
         public List<entDetalleAccionComercial> ListaDetAccCbo(Int32 id_accCom){
             try{
                 return datArbolVenta.Instancia.ListarDetAcc_Com(id_accCom);
-            }catch (Exception) {
-                throw;
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
 
         public List<entAccionComercial> ListaAcCbo(){
             try{
                 return datArbolVenta.Instancia.ListarCboAcc_Com();
-            }catch (Exception){
-                throw;
+            }
+            catch (Exception e)
+            {
+                throw e;
             }
         }
 
