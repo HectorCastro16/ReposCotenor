@@ -36,6 +36,7 @@
                 <div class="card-body">
                     <div class="row">
                         <input type="hidden" name="txtAsiU" value="@al.Asi_Id"/>
+                        <input type="hidden" name="txtIdC" value="@al.ClienteTelefono.Cliente.Cli_Id" />
                         <div class="col-lg-3">
                             <div class="form-group">
                                 <input type="text" value="@al.ClienteTelefono.Telefono.Tel_Numero" class="form-control" id="readonly5" readonly>
@@ -366,16 +367,40 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col-lg-8">
+                    <div class="col-lg-4">
 
-                    </div>
+                    </div>                    
                     <div class="col-lg-4">
                         <div style="text-align:center">
-                            <input type="submit" class="btn btn-raised btn-success" value="Registrar" />
+                            <input type="submit" class="btn btn-block btn-raised btn-success" value="Registrar" />
                         </div>
-                    </div>
+                    </div> 
+                    <div class="col-lg-4">
+                        <span data-toggle="modal" data-target="#myModalConfirm">
+                            <a class="btn btn-block ink-reaction btn-raised btn-warning" role='button'>Terminar</a>
+                        </span>
+                    </div>                   
                 </div>
             </div><!--end .card-body -->
         </div><!--end .card -->
     </div>
 </form>
+
+<div class="modal fade" id="myModalConfirm" data-backdrop="static" tabindex="-1" role="dialog" aria-labelledby="simpleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" role="form" action="ListaClientesAsignados">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="myModalLabel">ATENCION</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Esta seguro de que desea abandonar proceso de registro?</p>                    
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-raised btn-warning">Aceptar</button>
+                    <button type="button" class="btn btn-raised btn-default" data-dismiss="modal">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

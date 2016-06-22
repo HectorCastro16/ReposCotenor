@@ -19,7 +19,7 @@ namespace CapaNegocio
 
         #region metodos
 
-        public int InsUpdPedido(entPedido p, Int32 TipoEdicion, Int32 TipoAccCom, Int32 TipoCli) {
+        public int InsUpdPedido(entPedido p, Int32 TipoEdicion) {
             try
             {
                 String cadXml = "";
@@ -38,9 +38,11 @@ namespace CapaNegocio
                 
                     cadXml += "<CliTel ";
                     cadXml += "CliTel_UsuarioRegistro='" + p.Ped_UsuarioRegistro + "' ";
+                    cadXml += "AsiUsu='" + p.ClienteTelefono.AsiUsu + "' ";
                     cadXml += "TipoEdicion='" + TipoEdicion + "'>";
 
                         cadXml += "<Cli ";
+                        cadXml += "Cli_Id='" + p.ClienteTelefono.Cliente.Cli_Id+ "' ";
                         cadXml += "Cli_TipDoc_Id='" + p.ClienteTelefono.Cliente.TipDoc.td_id + "' ";
                         cadXml += "Cli_Nombre='" + p.ClienteTelefono.Cliente.Cli_Nombre + "' ";
                         cadXml += "Cli_RazonSocial='" + p.ClienteTelefono.Cliente.Cli_RazonSocial + "' ";

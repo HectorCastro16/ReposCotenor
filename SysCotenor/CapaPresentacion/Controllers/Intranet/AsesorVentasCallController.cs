@@ -115,6 +115,7 @@ namespace CapaPresentacion.Controllers.Intranet
                     ///////////////////////////////////////////                   
 
                     entCliente c = new entCliente();
+                    c.Cli_Id = Convert.ToInt32(form["txtIdC"]);
                     c.Segmento = s;
                     c.TipDoc = td;
                     if (s.Seg_Id == 1) {
@@ -141,6 +142,7 @@ namespace CapaPresentacion.Controllers.Intranet
                     entCliente_Telefono ct = new entCliente_Telefono();                    
                     ct.Cliente = c;
                     ct.Telefono = t;
+                    ct.AsiUsu = AsiUsu;
                     ct.CliTel_UsuarioRegistro = userRegistro;
 
                     entPedido p = new entPedido();
@@ -177,7 +179,7 @@ namespace CapaPresentacion.Controllers.Intranet
 
                     
 
-                    int i = negPedido.Instancia.InsUpdPedido(p,1,ac.Acc_Id,1);
+                    int i = negPedido.Instancia.InsUpdPedido(p,1);
                     if (i > 0)
                     {
                         return RedirectToAction("RegistroLlamada", "AsesorVentasCall", new { mensaje = "Se Inserto Satisfactoriamente", identificador = 3, AsiLlaId= AsiUsu });
