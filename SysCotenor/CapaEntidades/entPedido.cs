@@ -28,6 +28,6 @@ namespace CapaEntidades
         public String Ped_UsuarioRegistro { get; set; }
         public DateTime Ped_FechaModificacion { get; set; }
         public String Ped_UsuarioModificacion { get; set; }
-
+        public String Ped_Obser_Estados { get; set; }
     }
 }

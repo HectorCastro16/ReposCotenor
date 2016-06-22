@@ -396,6 +396,13 @@ namespace CapaAccesoDatos
                  //   p.Per_Telefono = dr["Per_Telefono"].ToString();
                     u.Persona = p;
 
+                    entSucursal s = new entSucursal();
+                    s.Suc_Id = Convert.ToInt32(dr["Suc_Id"]);
+                    s.Suc_Nombre = dr["Suc_Nombre"].ToString();
+                    u.Sucursal = s;
+                    entTipoUsuario tu = new entTipoUsuario();
+                    tu.TipUsu_Nombre = dr["TipUsu_Nombre"].ToString();
+                    u.TipoUsuario = tu;
                     u.Usu_Telefono = dr["Usu_Telefono"].ToString();
                     u.Usu_Estado = dr["Usu_Estado"].ToString();
                     u.Usu_FechaHasta = Convert.ToDateTime(dr["Usu_FechaHasta"]);

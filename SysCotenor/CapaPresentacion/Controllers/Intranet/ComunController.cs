@@ -370,6 +370,10 @@ namespace CapaPresentacion.Controllers.Intranet
                     {
                         t = negTipoUsuario.Instancia.ListaTipoUsuarioxId(9);
                     }
+                    if (u.TipoUsuario.TipUsu_Id == 4)
+                    {
+                        t = negTipoUsuario.Instancia.ListaTipoUsuarioxId(4);
+                    }
                     var lsTipoUsuario = new SelectList(t, "TipUsu_Id", "TipUsu_Nombre");
                     ViewBag.ListaTipoUsuario = lsTipoUsuario;
 

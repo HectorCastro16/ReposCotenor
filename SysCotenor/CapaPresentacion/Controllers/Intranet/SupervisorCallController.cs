@@ -22,7 +22,7 @@ namespace CapaPresentacion.Controllers.Intranet
         {
             return View(u);
         }
-        public ActionResult Estadisticas(int? iduser,String usuario){
+        public ActionResult Estadisticas(String mensaje,Int16? identificador,int? iduser,String usuario){
             ViewBag.iduser = iduser;
             ViewBag.usuario = usuario;
             try{
@@ -40,8 +40,6 @@ namespace CapaPresentacion.Controllers.Intranet
         public ActionResult Estadisticas(FormCollection frm){
             try
             {
-
-
                 int idestado = 0,idasesor=0;
                 String desde = "",hasta="",asesor="";
                 idestado =Convert.ToInt32(frm["select1"]);
@@ -54,10 +52,10 @@ namespace CapaPresentacion.Controllers.Intranet
                 return RedirectToAction("Estadisticas", new { iduser = idasesor, usuario = asesor });
 
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
-                throw;
+                return RedirectToAction("Estadisticas", new { mensaje = ex.Message, identificador=1 });
             }
         }
 

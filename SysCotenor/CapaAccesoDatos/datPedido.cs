@@ -19,6 +19,35 @@ namespace CapaAccesoDatos
         #endregion singleton
 
 
+        public int updateEstadoPedido(int idpedido,int idestado,String desc){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            int result = 0;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spUpdateEstadoPed", cn);
+                cmd.Parameters.AddWithValue("@ID_PEDIDO", idpedido);
+                cmd.Parameters.AddWithValue("@ID_ESTADO", idestado);
+                cmd.Parameters.AddWithValue("@DESCRIPCION", desc);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                SqlParameter p = new SqlParameter("@retorno", DbType.Int32);
+                p.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(p);
+
+                cmd.ExecuteNonQuery();
+               return result = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
         public List<entEstado> ListaEstados(){
             SqlCommand cmd = null;
             SqlDataReader dr = null;
@@ -65,6 +94,7 @@ namespace CapaAccesoDatos
                 while (dr.Read())
                 {
                     entPedido p = new entPedido();
+                    p.Ped_Id = Convert.ToInt32(dr["Ped_Id"]);
                     p.Ped_Codigo = dr["Ped_Codigo"].ToString();
                     p.Ped_FechaRegistro = Convert.ToDateTime(dr["Ped_FechaRegistro"]);
                     entAccionComercial ac = new entAccionComercial();
@@ -90,11 +120,7 @@ namespace CapaAccesoDatos
             finally { cmd.Connection.Close(); }
             return Lista;
         }
-
-
-
-
-
+        
         #region metodos
         public int InsUpdDelBloActPedido(String cadXML)
         {

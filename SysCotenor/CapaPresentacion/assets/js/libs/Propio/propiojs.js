@@ -21,6 +21,14 @@ function valida(e) {
 }
 
 jQuery(function ($) {
+    $('#myModalActEstado').on('show.bs.modal', function (e) {
+        var id = $(e.relatedTarget).data().id;
+        $(e.currentTarget).find('#Id').val(id);
+    });
+});
+
+
+jQuery(function ($) {
     $('#myModalEliminar').on('show.bs.modal', function (e) {
         var id = $(e.relatedTarget).data().id;
         $(e.currentTarget).find('#Id').val(id);

@@ -12,39 +12,42 @@
     String efecStr = "", agendStr = "", rechazStr = "", e = "", a = "", r = "";
     double efec = 0.0, agend = 0.0, rechaz = 0.0;
     int[] conteo = null;
-    if (ViewBag.tae != null)
+    if (ViewBag.tae!=null)
     {
         List<entTemporal> tls = (List<entTemporal>)ViewBag.tae;
-        for (int i = 0; i < tls.Count; i++)
+        if (tls.Count > 0)
         {
-            total += tls[i].CantxEstado;
-            if (tls[i].Asi_Estado == 0)
+            for (int i = 0; i < tls.Count; i++)
             {
-                espera = tls[i].CantxEstado;
+                total += tls[i].CantxEstado;
+                if (tls[i].Asi_Estado == 0)
+                {
+                    espera = tls[i].CantxEstado;
+                }
+                else { atendidos = tls[i].CantxEstado; }
             }
-            else { atendidos = tls[i].CantxEstado; }
         }
         F1 = total.ToString(format);
         F2 = espera.ToString(format2);
         F3 = atendidos.ToString(format);
     }
-    if (ViewBag.conteo != null)
-    {
+    if (ViewBag.conteo != null){
         conteo = (int[])ViewBag.conteo;
-    }
 
-    // crear regla 3 para aplicar %
-    efec = (conteo[0] * 100) / total;
-    efecStr = efec.ToString("#.##");
-    e = (efecStr + "%").Replace(",", ".");
-    agend = (conteo[1] * 100) / total;
-    agendStr = agend.ToString("#.##");
-    a = (agendStr + "").Replace(",", ".");
-    if (agendStr == "") { agendStr = "0.0"; }
-    rechaz = (conteo[2] * 100) / total;
-    rechazStr = rechaz.ToString("#.##");
-    r = (rechazStr + "%").Replace(",", ".");
-    if (rechazStr == "") { rechazStr = "0.0"; }
+        // crear regla 3 para aplicar %
+        if (conteo[0] > 0) { efec = (conteo[0] * 100) / total; }
+        efecStr = efec.ToString("0.00");
+        if (efecStr == ""){ efecStr = "0.00"; }
+        e = (efecStr + "%").Replace(",", ".");
+        if (conteo[1] > 0) { agend = (conteo[1] * 100) / total; }
+        agendStr = agend.ToString("0.00");
+        a = (agendStr + "").Replace(",", ".");
+        if (agendStr == "") { agendStr = "0.0"; }
+        if (conteo[2] > 0) { rechaz = (conteo[2] * 100) / total; }
+        rechazStr = rechaz.ToString("0.00");
+        r = (rechazStr + "%").Replace(",", ".");
+        if (rechazStr == "") { rechazStr = "0.0"; }
+    }
 }
 
 <section>
@@ -179,84 +182,95 @@
                                 </div>
                             </div>
                             <div class="col-lg-12">
-                                <div class="table-responsive">
-                                    <div id="datatable1_wrapper" class="dataTables_wrapper no-footer">
-                                        <div id="datatable1_filter" class="dataTables_filter">
-                                        </div>
-                                        <table class="table table-striped table-hover dataTable no-footer" role="grid" aria-describedby="datatable1_info">
-                                            <thead>
-                                                <tr>
-                                                    <th>Cod-pedido</th>
-                                                    <th>Producto</th>
-                                                    <th>Accion Comercial</th>
-                                                    <th>Estado</th>
-                                                    <th>Fecha Registro</th>
-                                                    <th>Val.unid</th>
-                                                    <th>val.Soles</th>
-                                                    <th>Accion</th>
+                                <div class="table-responsive no-margin">
+                                    <table id="datatable1" class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Cod-pedido</th>
+                                                <th>Producto</th>
+                                                <th>Accion Comercial</th>
+                                                <th>Estado</th>
+                                                <th>Fecha Registro</th>
+                                                <th>Val.unid</th>
+                                                <th>val.Soles</th>
+                                                <th>Accion</th>
 
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                @{ Double valor = 0.0;
-                                                    int unid = 0;
-                                                    if (Session["ListaComs"] != null)
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{ Double valor = 0.0;
+                                                int unid = 0;
+                                                double comision = 0.0;
+                                                if (Session["ListaComs"] != null)
+                                                {
+                                                    List<entPedido> Lista = (List<entPedido>)Session["ListaComs"];
+                                                    foreach (var item in Lista)
                                                     {
-                                                        List<entPedido> Lista = (List<entPedido>)Session["ListaComs"];
-                                                        foreach (var item in Lista)
-                                                        {
-                                                            valor += item.Producto.comision.detC_ValorSoles;
-                                                            unid += item.Producto.comision.detC_ValorUnidades;
-                                                            String coloR = "";
-                                                            if (item.Estado.Est_Nombre == "TERMINADO") { coloR = "lightgreen"; }
-                                                            <tr style="background-color:@coloR">
-                                                                <td>@item.Ped_Codigo</td>
-                                                                <td>@item.Producto.Pro_Nombre</td>
-                                                                <td>@item.AccionComercial.Acc_Nombre</td>
-                                                                <td>@item.Estado.Est_Nombre</td>
-                                                                <td>@item.Ped_FechaRegistro</td>
-                                                                <td>@item.Producto.comision.detC_ValorUnidades</td>
-                                                                <td>@item.Producto.comision.detC_ValorSoles</td>
-                                                                @if (item.Estado.Est_Nombre == "TERMINADO")
-                                                                {
+
+                                                        String coloR = "";
+                                                        if (item.Estado.Est_Nombre == "TERMINADO") { coloR = "lightgreen"; }
+                                                        <tr style="background-color:@coloR">
+                                                            <td>@item.Ped_Codigo</td>
+                                                            <td>@item.Producto.Pro_Nombre</td>
+                                                            <td>@item.AccionComercial.Acc_Nombre</td>
+                                                            <td>@item.Estado.Est_Nombre</td>
+                                                            <td>@item.Ped_FechaRegistro</td>
+                                                            <td>@item.Producto.comision.detC_ValorUnidades</td>
+                                                            <td>@item.Producto.comision.detC_ValorSoles</td>
+                                                            @if (item.Estado.Est_Nombre == "TERMINADO")
+                                                            {
+                                                                valor += item.Producto.comision.detC_ValorSoles;
+                                                                unid += item.Producto.comision.detC_ValorUnidades;
                                                                 <td>Comisiona</td>
-                                                                }
-                                                                else
-                                                                {
-                                                                    <td>No Comisiona</td>
-                                                                }
-                                                            </tr>
-                                                        }
+                                                            }
+                                                            else
+                                                            {
+                                                                <td>No Comisiona</td>
+                                                            }
+                                                        </tr>
                                                     }
                                                 }
-                                            </tbody>
+                                                if (unid >= 13 && unid < 16) { comision = valor * 0; }
+                                                else if (unid >= 16 && unid <= 18) { comision = valor * 0.10; }
+                                                else if (unid >= 19 && unid <= 21) { comision = valor * 0.15; }
+                                                else if (unid >= 22 && unid <= 25) { comision = valor * 0.20; }
+                                                else if (unid >= 26 && unid <= 30) { comision = valor * 0.25; }
+                                                else if (unid > 30) { comision = valor * 0.30; }
+                                            }
+                                        </tbody>
+                                    </table>
 
-                                        </table>
-
-                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-9">
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <div class="alert-info">Valor s/: @valor</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <div class="alert-info">Unidades: @unid</div>
-                        </div>
-                    </div>
-                    <div class="col-lg-3">
-                        <div class="card">
-                            <div class="alert-info">Comision: 0</div>
+            </div>
+            <div class="row">
+                <div class="col-lg-2">
+                    <div class="card" style="text-align:center">
+                        <div class="card-head style-info"><h3 class="text-medium">Monto en S/</h3></div>
+                        <div class="card-body ">
+                            <h3 class="text-bold">@valor.ToString("0.00")</h3>
                         </div>
                     </div>
                 </div>
-
+                <div class="col-lg-2">
+                    <div class="card" style="text-align:center">
+                        <div class="card-head style-warning"><h3 class="text-medium">Val. en Unid</h3></div>
+                        <div class="card-body">
+                            <h3 class="text-bold"> @unid.ToString("00")</h3>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-2">
+                    <div class="card" style="text-align:center">
+                        <div class="card-head style-success"><h3 class="text-medium">Comisiona en S/</h3></div>
+                        <div class="card-body">
+                            <h3 class="text-bold"> @comision.ToString("0.00")</h3>
+                        </div>
+                    </div>
+                </div>
             </div>
         </form>
     </div><!--end .section-body -->

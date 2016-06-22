@@ -18,6 +18,24 @@ namespace CapaNegocio
 
 
         #region metodos
+
+        public int ActualizaEstadoPedido(int idpedid,int idestado,String desc){
+            try
+            {
+                int i = 0;
+                i= datPedido.Instancia.updateEstadoPedido(idpedid, idestado, desc);
+                if (i <= 0) {
+                    throw new ApplicationException("No se pudo Actualizar");
+                }
+                return i;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<entEstado> ListEstados(){
             try {
                 return datPedido.Instancia.ListaEstados();
