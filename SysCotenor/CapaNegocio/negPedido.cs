@@ -19,6 +19,65 @@ namespace CapaNegocio
 
         #region metodos
 
+
+        public List<entRegLamadas> ListaLamAgen(int idusuario){
+            try
+            {
+                return datPedido.Instancia.ListLlamAgen(idusuario);
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int EliminaRegLlamAgend(int idagLlamad){
+            try
+            {
+                int i = 0;
+                i = datPedido.Instancia.EliminaRegLlamAgend(idagLlamad);
+                if (i <= 0){
+                    throw new ApplicationException("no se pudo borrar cliente agendado");
+                }
+                return i;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int RegUpdaLlamadas(entRegLamadas rll,int tipoedicio) {
+            try {
+                String cadxml = "";
+                cadxml += "<regllamada ";
+                cadxml+= "rll_id='" + rll.rll_id +"' ";
+                cadxml += "rll_clitel_id='" + rll.cliente_telef.CliTel_Id + "' ";
+                cadxml += "rll_usuid='" + rll.usuario.Usu_Id + "' ";
+                cadxml += "rll_asllamid='" + rll.assllamadas.Asi_Id + "' ";
+                cadxml += "rll_resultado='"+rll.rll_resultado+"' ";
+                cadxml += "rll_accionCom_id='" + rll.accioncomercial.Acc_Id + "' ";
+                cadxml += "rll_prod_id='" + rll.producto.Pro_ID + "' "; 
+                cadxml += "rll_observaciones='" + rll.rll_observaciones + "' "; 
+                cadxml += "tipoedicion='" + tipoedicio+ "'/>";
+
+                cadxml = "<root>" + cadxml + "</root>";
+                int i = datPedido.Instancia.RegUpdateLlamada(cadxml);
+                if (i < 0) {
+                    throw new ApplicationException("No se pudo realizo la accion");
+                }
+                return i;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
         public int ActualizaEstadoPedido(int idpedid,int idestado,String desc){
             try
             {

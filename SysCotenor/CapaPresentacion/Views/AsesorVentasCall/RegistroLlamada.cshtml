@@ -31,10 +31,11 @@
                 <div class="card-head style-primary">
                     <header>Datos Cliente</header>
                 </div>
-
                 @{ entAsigncionLlamadas al = ViewBag.AsiLla;  }
                 <div class="card-body">
                     <div class="row">
+                        <input type="hidden" name="txtCli_telf_id" value="@al.ClienteTelefono.CliTel_Id" />
+                        <input type="hidden" name="txtIdRegLlam" value="@ViewBag.CliTelef"/>
                         <input type="hidden" name="txtAsiU" value="@al.Asi_Id"/>
                         <input type="hidden" name="txtIdC" value="@al.ClienteTelefono.Cliente.Cli_Id" />
                         <div class="col-lg-3">

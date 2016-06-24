@@ -2034,6 +2034,7 @@
     <Content Include="Views\AsesorVentasCall\RegistroLlamada.cshtml" />
     <Content Include="Views\SupervisorCall\Estadisticas.cshtml" />
     <Content Include="Views\SupervisorVentas\ActualizarEstadosVentas.cshtml" />
+    <Content Include="Views\AsesorVentasCall\ListaClientesAgendados.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

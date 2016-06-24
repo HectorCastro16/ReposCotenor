@@ -22,6 +22,23 @@ namespace CapaPresentacion.Controllers.Intranet
             return View();
         }
 
+        public ActionResult ListaClientesAgendados(){
+            try
+            {
+                if (Session["usuario"] != null) {
+                    entUsuario u = (entUsuario)Session["usuario"];
+                ViewBag.lsAgend = negPedido.Instancia.ListaLamAgen(u.Usu_Id);
+            }
+                return View();
+            }
+            catch (Exception e)
+            {
+                ViewBag.mensaje = e.Message;
+                return View();
+            }
+        }
+
+
         public ActionResult ListaClientesAsignados(String mensaje, Int16? identificador)
         {
             try
@@ -48,12 +65,13 @@ namespace CapaPresentacion.Controllers.Intranet
         }
 
         [ValidateInput(false)]
-        public ActionResult RegistroLlamada(Int32 AsiLlaId, String mensaje, Int16? identificador)
+        public ActionResult RegistroLlamada(Int32 AsiLlaId, String mensaje, Int16? identificador,Int32? rllid)
         {
             try
             {
                 ViewBag.mensaje = mensaje;
                 ViewBag.identificador = identificador;
+                if (rllid == null) ViewBag.CliTelef = 0; else ViewBag.CliTelef = rllid;
                 entUsuario u = (entUsuario)Session["usuario"];
                 if (u != null)
                 {
@@ -99,99 +117,142 @@ namespace CapaPresentacion.Controllers.Intranet
             Int32 AsiUsu = Convert.ToInt32(form["txtAsiU"]);
             try
             {
-                entUsuario us = (entUsuario)Session["usuario"];
-                if (us != null)
+                // registrando agendamiento o rechazo 
+                int accion = Convert.ToInt32(form["resultado"]);
+                int tipoedicion = 0;
+                if (accion != 1)
                 {
-
-                    entSegmento s = new entSegmento();
-                    s.Seg_Id = Convert.ToInt32(form["txt_Seg"]);
-
-                    entTipDoc td = new entTipDoc();
-                    td.td_id = Convert.ToInt32(form["txt_TipDoc"]);
-
-                    //para capturar el usuario en sesion////////////
-                    entUsuario user = (entUsuario)Session["usuario"];
-                    String userRegistro = user.Persona.NombreCompleto;
-                    ///////////////////////////////////////////                   
-
-                    entCliente c = new entCliente();
-                    c.Cli_Id = Convert.ToInt32(form["txtIdC"]);
-                    c.Segmento = s;
-                    c.TipDoc = td;
-                    if (s.Seg_Id == 1) {
-                        c.Cli_Nombre = form["txt_NomCli"].ToString();
-                        c.Cli_RazonSocial = "";
-                    }
-                    else {
-                        c.Cli_Nombre = "";
-                        c.Cli_RazonSocial = form["txt_NomCli"].ToString();
-                    }
-                    c.Cli_FechaNacimiento = Convert.ToDateTime(form["txtFecNac"]);
-                    c.Cli_LugarNacimiento = form["txt_LugNac"].ToString();
-                    c.Cli_Numero_Documento = form["txt_NumDocumento"].ToString();
-                    c.Cli_Telefono_Referencia = form["txt_TelRef"].ToString();
-                    c.Cli_Correo = form["txt_Cor"].ToString();                  
-                    c.Cli_UsuarioRegistro = userRegistro;
-                    
-
-                    entTelefono t = new entTelefono();
-                    t.Tel_Numero = form["txt_Telefono"].ToString();
-                    t.Tel_Direccion = form["txt_Direccion"].ToString();
-
-
-                    entCliente_Telefono ct = new entCliente_Telefono();                    
-                    ct.Cliente = c;
-                    ct.Telefono = t;
-                    ct.AsiUsu = AsiUsu;
-                    ct.CliTel_UsuarioRegistro = userRegistro;
-
-                    entPedido p = new entPedido();
-                    p.Ped_Cod_Experto = form["txt_CodExperto"].ToString();
-                    p.Ped_Dir_Inst= form["txt_Direccion"].ToString();                    
-                    p.Ped_Observaciones = form["txtobserva"].ToString();
-                    p.Ped_UsuarioRegistro = userRegistro;
-
-                    entUsuario ur = new entUsuario();
-                    ur.Usu_Id = user.Usu_Id;
-
+                    String acc = "";
+                    if (accion == 2) acc = "Rechazo"; else acc = "Pendiente";
+                    entRegLamadas rll = new entRegLamadas();
+                    rll.rll_id = Convert.ToInt32(form["txtIdRegLlam"]);
+                    rll.rll_resultado = acc;
+                    rll.rll_observaciones = form["Desc"];
+                    entAsigncionLlamadas all = new entAsigncionLlamadas();
+                    all.Asi_Id = AsiUsu;
+                    rll.assllamadas = all;
+                    entCliente_Telefono ct = new entCliente_Telefono();
+                    ct.CliTel_Id = Convert.ToInt32(form["txtCli_telf_id"]);
+                    rll.cliente_telef = ct;
+                    entUsuario u = new entUsuario();
+                   if(Session["usuario"]!=null) u = (entUsuario)Session["usuario"];
+                    rll.usuario = u;
                     entAccionComercial ac = new entAccionComercial();
                     ac.Acc_Id = Convert.ToInt32(form["idAccCom"]);
+                    rll.accioncomercial = ac;
+                    entProducto p = new entProducto();
+                    p.Pro_ID = Convert.ToInt32(form["Prod"]);
+                    rll.producto = p;
+                    if (rll.rll_id == 0) tipoedicion = 1; else tipoedicion = 2;
+                    int i = negPedido.Instancia.RegUpdaLlamadas(rll, tipoedicion);
+                    return RedirectToAction("RegistroLlamada", "AsesorVentasCall", new { mensaje = "Se Inserto Satisfactoriamente", identificador = 3, AsiLlaId = AsiUsu });
 
-                    entProducto pro = new entProducto();
-                    pro.Pro_ID = Convert.ToInt32(form["Prod"]);
-
-                    entDepartamento d = new entDepartamento();
-                    d.idDepa = Convert.ToInt32(form["depto"]);
-
-                    entProvincia prov = new entProvincia();
-                    prov.idProv = Convert.ToInt32(form["provin"]);
-
-                    entDistrito dis = new entDistrito();
-                    dis.idDist = Convert.ToInt32(form["distrit"]);
-
-                    p.Distrito = dis;
-                    p.Provincia = prov;
-                    p.Departamento = d;
-                    p.Producto = pro;
-                    p.AccionComercial = ac;
-                    p.Usuario = ur;
-                    p.ClienteTelefono = ct;
-
-                    
-
-                    int i = negPedido.Instancia.InsUpdPedido(p,1);
-                    if (i > 0)
-                    {
-                        return RedirectToAction("RegistroLlamada", "AsesorVentasCall", new { mensaje = "Se Inserto Satisfactoriamente", identificador = 3, AsiLlaId= AsiUsu });
-                    }
-                    else
-                    {
-                        return RedirectToAction("RegistroLlamada", "AsesorVentasCall", new { mensaje = "Problemas al Insertar", identificador = 2, AsiLlaId = AsiUsu });
-                    }
                 }
                 else
                 {
-                    return RedirectToAction("Index", "Inicio");
+                    // borra registro de llamada agendada de bd y pasa a ser un pedido
+                    if (form["txtIdRegLlam"].ToString() != "0") {
+                        entRegLamadas rll = new entRegLamadas();
+                        rll.rll_id = Convert.ToInt32(form["txtIdRegLlam"]);
+                        int i = negPedido.Instancia.EliminaRegLlamAgend(rll.rll_id);
+                    }
+                    
+                    entUsuario us = (entUsuario)Session["usuario"];
+                    if (us != null)
+                    {
+
+                        entSegmento s = new entSegmento();
+                        s.Seg_Id = Convert.ToInt32(form["txt_Seg"]);
+
+                        entTipDoc td = new entTipDoc();
+                        td.td_id = Convert.ToInt32(form["txt_TipDoc"]);
+
+                        //para capturar el usuario en sesion////////////
+                        entUsuario user = (entUsuario)Session["usuario"];
+                        String userRegistro = user.Persona.NombreCompleto;
+                        ///////////////////////////////////////////                   
+
+                        entCliente c = new entCliente();
+                        c.Cli_Id = Convert.ToInt32(form["txtIdC"]);
+                        c.Segmento = s;
+                        c.TipDoc = td;
+                        if (s.Seg_Id == 1)
+                        {
+                            c.Cli_Nombre = form["txt_NomCli"].ToString();
+                            c.Cli_RazonSocial = "";
+                        }
+                        else
+                        {
+                            c.Cli_Nombre = "";
+                            c.Cli_RazonSocial = form["txt_NomCli"].ToString();
+                        }
+                        c.Cli_FechaNacimiento = Convert.ToDateTime(form["txtFecNac"]);
+                        c.Cli_LugarNacimiento = form["txt_LugNac"].ToString();
+                        c.Cli_Numero_Documento = form["txt_NumDocumento"].ToString();
+                        c.Cli_Telefono_Referencia = form["txt_TelRef"].ToString();
+                        c.Cli_Correo = form["txt_Cor"].ToString();
+                        c.Cli_UsuarioRegistro = userRegistro;
+
+
+                        entTelefono t = new entTelefono();
+                        t.Tel_Numero = form["txt_Telefono"].ToString();
+                        t.Tel_Direccion = form["txt_Direccion"].ToString();
+
+
+                        entCliente_Telefono ct = new entCliente_Telefono();
+                        ct.Cliente = c;
+                        ct.Telefono = t;
+                        ct.AsiUsu = AsiUsu;
+                        ct.CliTel_UsuarioRegistro = userRegistro;
+
+                        entPedido p = new entPedido();
+                        p.Ped_Cod_Experto = form["txt_CodExperto"].ToString();
+                        p.Ped_Dir_Inst = form["txt_Direccion"].ToString();
+                        p.Ped_Observaciones = form["txtobserva"].ToString();
+                        p.Ped_UsuarioRegistro = userRegistro;
+
+                        entUsuario ur = new entUsuario();
+                        ur.Usu_Id = user.Usu_Id;
+
+                        entAccionComercial ac = new entAccionComercial();
+                        ac.Acc_Id = Convert.ToInt32(form["idAccCom"]);
+
+                        entProducto pro = new entProducto();
+                        pro.Pro_ID = Convert.ToInt32(form["Prod"]);
+
+                        entDepartamento d = new entDepartamento();
+                        d.idDepa = Convert.ToInt32(form["depto"]);
+
+                        entProvincia prov = new entProvincia();
+                        prov.idProv = Convert.ToInt32(form["provin"]);
+
+                        entDistrito dis = new entDistrito();
+                        dis.idDist = Convert.ToInt32(form["distrit"]);
+
+                        p.Distrito = dis;
+                        p.Provincia = prov;
+                        p.Departamento = d;
+                        p.Producto = pro;
+                        p.AccionComercial = ac;
+                        p.Usuario = ur;
+                        p.ClienteTelefono = ct;
+
+
+
+                        int i = negPedido.Instancia.InsUpdPedido(p, 1);
+                        if (i > 0)
+                        {
+                            return RedirectToAction("RegistroLlamada", "AsesorVentasCall", new { mensaje = "Se Inserto Satisfactoriamente", identificador = 3, AsiLlaId = AsiUsu });
+                        }
+                        else
+                        {
+                            return RedirectToAction("RegistroLlamada", "AsesorVentasCall", new { mensaje = "Problemas al Insertar", identificador = 2, AsiLlaId = AsiUsu });
+                        }
+                    }
+                    else
+                    {
+                        return RedirectToAction("Index", "Inicio");
+                    }
                 }
             }
             catch (ApplicationException x)
