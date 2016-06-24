@@ -76,3 +76,11 @@
     -moz-user-select: none;
     -ms-user-select: none;
 }
+
+.contenedor-Registro{
+    padding: 10px 50px;
+    text-align: left;
+    border: 0;
+    background: #fff;
+    margin-bottom: 20px;
+}
