@@ -25,11 +25,15 @@ namespace CapaPresentacion.Controllers.Intranet
         public ActionResult Estadisticas(String mensaje,Int16? identificador,int? iduser,String usuario){
             ViewBag.iduser = iduser;
             ViewBag.usuario = usuario;
+            ViewBag.mensaje = mensaje;
             try{
                 List<entTemporal> t = negUsuario.Instancia.Asig_Total_Espera((int)iduser);
                 ViewBag.tae = t;
                 ViewBag.conteo = negUsuario.Instancia.CountVentEfectivasXase((int)iduser);
-                ViewBag.estados = negPedido.Instancia.ListEstados(); 
+                ViewBag.estados = negPedido.Instancia.ListEstados();
+                if (identificador == 5){
+                    Session.Remove("ListaComs");
+                }
                 return View();
             }
             catch (Exception e){
@@ -38,30 +42,36 @@ namespace CapaPresentacion.Controllers.Intranet
         }
         [HttpPost]
         public ActionResult Estadisticas(FormCollection frm){
+            int idestado = 0, idasesor = 0;
+            String desde = "", hasta = "", asesor = "";
             try
             {
-                int idestado = 0,idasesor=0;
-                String desde = "",hasta="",asesor="";
-                idestado =Convert.ToInt32(frm["select1"]);
+
+                idestado = Convert.ToInt32(frm["select1"]);
                 idasesor = Convert.ToInt32(frm["hideIdasesor"]);
                 asesor = frm["hideAsesor"];
                 desde = frm["txtFehcaDesde"];
                 hasta = frm["txtFecHasta"];
-                if (Session["ListaComs"] != null) Session.Remove("ListaComs"); 
+                if (Session["ListaComs"] != null) Session.Remove("ListaComs");
                 Session["ListaComs"] = negPedido.Instancia.ListaComisiones(idasesor, desde, hasta, idestado);
                 return RedirectToAction("Estadisticas", new { iduser = idasesor, usuario = asesor });
+
+            }
+            catch(ApplicationException ae) {
+                return RedirectToAction("Estadisticas", new { mensaje = ae.Message, identificador = 1, iduser = idasesor, usuario = asesor });
 
             }
             catch (Exception ex)
             {
 
-                return RedirectToAction("Estadisticas", new { mensaje = ex.Message, identificador=1 });
+                return RedirectToAction("Estadisticas", new { mensaje = ex.Message, identificador = 1, iduser = idasesor, usuario = asesor });
             }
         }
 
         public ActionResult lstUsuariosEstadoAsignacionLlamadas(String mensaje){
             try
             {
+                ViewBag.mensaje = mensaje;
                 entUsuario u = (entUsuario)Session["usuario"];
                 if (u != null)
                 {

@@ -12,7 +12,7 @@
     String efecStr = "", agendStr = "", rechazStr = "", e = "", a = "", r = "";
     double efec = 0.0, agend = 0.0, rechaz = 0.0;
     int[] conteo = null;
-    if (ViewBag.tae!=null)
+    if (ViewBag.tae != null)
     {
         List<entTemporal> tls = (List<entTemporal>)ViewBag.tae;
         if (tls.Count > 0)
@@ -31,19 +31,20 @@
         F2 = espera.ToString(format2);
         F3 = atendidos.ToString(format);
     }
-    if (ViewBag.conteo != null){
+    if (ViewBag.conteo != null)
+    {
         conteo = (int[])ViewBag.conteo;
 
         // crear regla 3 para aplicar %
-        if (conteo[0] > 0) { efec = (conteo[0] * 100) / total; }
+        if (conteo[0] > 0) { efec = (conteo[0] * 100) / atendidos; }
         efecStr = efec.ToString("0.00");
-        if (efecStr == ""){ efecStr = "0.00"; }
+        if (efecStr == "") { efecStr = "0.00"; }
         e = (efecStr + "%").Replace(",", ".");
-        if (conteo[1] > 0) { agend = (conteo[1] * 100) / total; }
+        if (conteo[1] > 0) { agend = (conteo[1] * 100) / atendidos; }
         agendStr = agend.ToString("0.00");
         a = (agendStr + "").Replace(",", ".");
         if (agendStr == "") { agendStr = "0.0"; }
-        if (conteo[2] > 0) { rechaz = (conteo[2] * 100) / total; }
+        if (conteo[2] > 0) { rechaz = (conteo[2] * 100) / atendidos; }
         rechazStr = rechaz.ToString("0.00");
         r = (rechazStr + "%").Replace(",", ".");
         if (rechazStr == "") { rechazStr = "0.0"; }
@@ -51,6 +52,11 @@
 }
 
 <section>
+    @{ if (ViewBag.mensaje != null)
+        {
+            <div class="alert alert-warning">@ViewBag.mensaje</div>
+        }
+    }
     <div class="section-body">
         <div class="row">
             <!-- BEGIN ALERT - VISITS -->
@@ -102,18 +108,18 @@
                         <header>Asesor: @ViewBag.usuario </header>
                     </div><!--end .card-head -->
                     <div class="card-body height-6">
-                        <strong>@conteo[0]</strong> EFECTIVAS
+                        <strong>EFECTIVAS: </strong> @conteo[0]
                         <span class="pull-right text-success text-sm"><i>@efecStr %</i></span>
                         <div class="progress progress-hairline">
                             <div class="progress-bar progress-bar-success" style="width:@e"></div>
                         </div>
-                        <strong>@conteo[1] </strong> AGENDADAS
+                        <strong>AGENDADAS: </strong> @conteo[1]
                         <span class="pull-right text-success text-sm"><i>@agendStr %</i></span>
                         <div class="progress progress-hairline">
 
                             <div class="progress-bar progress-bar-warning" style="width:@a"></div>
                         </div>
-                        <strong>@conteo[2]</strong> RECHAZADAS
+                        <strong>RECHAZADAS: </strong> @conteo[2]
                         <span class="pull-right text-danger text-sm"><i>@rechazStr %</i></span>
                         <div class="progress progress-hairline">
                             <div class="progress-bar progress-bar-danger" style="width:@r"></div>
