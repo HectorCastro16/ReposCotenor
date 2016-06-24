@@ -52,13 +52,11 @@ namespace CapaPresentacion.Controllers.Intranet
             }
             catch (Exception ex)
             {
-                throw ex;
-                //ViewBag.mensaje = ex.Message;
-                //return View();
+                ViewBag.mensaje = ex.Message;
+                return View();
             }
 
         }
-
 
         [HttpPost]
         public ActionResult ActualizarEstadosVentas(FormCollection frm) {

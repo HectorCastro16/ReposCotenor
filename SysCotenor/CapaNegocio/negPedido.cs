@@ -50,7 +50,12 @@ namespace CapaNegocio
         public List<entPedido> ListaComisiones(int idasesor,String desde,String hasta,int idestado){
             try
             {
-                return datPedido.Instancia.ListpedidoComision(idasesor, desde, hasta,idestado);
+                List<entPedido> Lista = null;
+                Lista= datPedido.Instancia.ListpedidoComision(idasesor, desde, hasta,idestado);
+                if (Lista.Count == 0) {
+                    throw new ApplicationException("No se encontraron registros");
+                }
+                return Lista;
             }
             catch (Exception)
             {

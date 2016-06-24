@@ -7,10 +7,10 @@
 <section>
     <div class="section-body contain-lg">
         <h2>Asesores</h2>
-        @if (ViewBag.sms != null)
+        @if (ViewBag.mensaje != null)
         {
         <div class="alert alert-warning">
-            @ViewBag.sms;
+            @ViewBag.mensaje;
         </div>
         }
     </div>
@@ -50,7 +50,7 @@
                                         <td> @Html.DisplayFor(modelItem => item.Usu_Codigo)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Persona.NombreCompleto)</td>
                                         <td>@Html.DisplayFor(modelItem => item.Contador)</td>
-                                        <td><a href="@Url.Action("Estadisticas", "SupervisorCall", new { iduser = item.Usu_Id, usuario = item.Persona.NombreCompleto })" class="btn ink-reaction btn-info"><i class="md md-account-balance"></i>Desarrollo</a></td>
+                                        <td><a href="@Url.Action("Estadisticas", "SupervisorCall", new { iduser = item.Usu_Id, usuario = item.Persona.NombreCompleto,identificador = 5 })" class="btn ink-reaction btn-info"><i class="md md-account-balance"></i>Desarrollo</a></td>
                                     </tr>
                                             }
                                         }
