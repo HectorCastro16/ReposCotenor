@@ -1,0 +1,144 @@
+﻿@using CapaEntidades
+@{
+    ViewBag.Title = "PedidosAsesoresCampo";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+
+<section>
+    <h2>PedidosAsesoresCampo</h2>
+    @{
+        if (ViewBag.mensaje != null)
+        {<br>
+            <div class="alert-success">@ViewBag.mensaje</div>
+            <br>
+        }
+    }
+    <div class="section-body">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="card">
+                    <div class="card-head"><header>Estado de Ventas / Seguimiento/ Actualizacion </header></div>
+                    <div class="card-body">
+                        <form class="form form-validate basic-label" method="post">
+                            <div class="card card-outlined style-primary">
+                                <div class="card-head"></div>
+                                <div class="col-lg-2">
+                                    <div class="form-group control-width-normal">
+                                        <div class="input-group date" id="demo-date-format">
+                                            <div class="input-group-content">
+                                                <input type="text" name="txtFehcaDesde" id="txtdesde" class="form-control" required="" aria-required="true">
+                                                <label>Desde</label>
+                                                <p class="help-block">dd/MM/yyy</p>
+                                            </div>
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-2">
+                                    <div class="form-group control-width-normal">
+                                        <div class="input-group date" id="demo-date">
+                                            <div class="input-group-content">
+                                                <input type="text" name="txtFecHasta" id="txthasta" class="form-control" required="" aria-required="true">
+                                                <label>Hasta</label>
+                                                <p class="help-block">dd/MM/yyy</p>
+                                            </div>
+                                            <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <select id="selectes" name="select1" class="form-control dirty" required="" aria-required="true">
+                                            <option value="0">&nbsp;</option>
+                                            @{ if (ViewBag.estados != null)
+                                                {
+                                                    List<entEstado> Lista = (List<entEstado>)ViewBag.estados;
+                                                    foreach (var i in Lista)
+                                                    {
+                                                        <option value="@i.Est_Id">@i.Est_Nombre</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                        <label for="select1">Estado</label>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-3">
+                                    <div class="form-group">
+                                        <select id="selectus" name="select2" class="form-control" required>
+                                            <option value="">&nbsp;</option>
+                                            @{ if (ViewBag.usuarios != null)
+                                                {
+                                                    List<entUsuario> Lista = (List<entUsuario>)ViewBag.usuarios;
+                                                    foreach (var i in Lista)
+                                                    {
+                                                        <option value="@i.Usu_Id">@i.Persona.NombreCompleto (@i.TipoUsuario.TipUsu_Nombre)</option>
+                                                    }
+                                                }
+                                            }
+                                        </select>
+                                        <label for="select1">Asesores</label>
+                                    </div>
+
+                                </div>
+                                <div class="col-lg-2">
+
+                                    <div style="text-align:right">
+                                        <input type="button" value="Buscar" id="BuscaPedAC" name="btnBuscar" class="btn btn-raised btn-success">
+                                    </div>
+
+                                </div>
+                            </div>
+                        </form>
+                        <div id="muestraPed" class="col-lg-12">
+                            @*<div class="table-responsive no-margin">
+                                    <table id="datatable1" class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Cod-pedido</th>
+                                                <th>Producto</th>
+                                                <th>Accion Comercial</th>
+                                                <th>Estado</th>
+                                                <th>Fecha Registro</th>
+                                                <th>Observ.</th>
+                                                <td></td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+
+
+                                            @{ if (Session["ventas"] != null)
+                                                {
+                                                    List<entPedido> p = (List<entPedido>)Session["ventas"];
+                                                    foreach (var i in p)
+                                                    {
+                                                        <tr>
+                                                            <td>@i.Ped_Codigo</td>
+                                                            <td>@i.Producto.Pro_Nombre</td>
+                                                            <td>@i.AccionComercial.Acc_Nombre</td>
+                                                            <td>@i.Estado.Est_Nombre</td>
+                                                            <td>@i.Ped_FechaRegistro</td>
+                                                            <td>@i.Ped_Obser_Estados</td>
+                                                            <td>
+                                                                <span data-toggle="modal" data-target="#myModalActEstado" data-id="@i.Ped_Id">
+                                                                    <a class="btn ink-reaction btn-raised btn-primary" role='button' data-toggle="tooltip" data-placement="top" title="Actualizar"><i class="md-border-color"></i></a>
+                                                                </span>
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            }
+
+                                        </tbody>
+                                    </table>
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

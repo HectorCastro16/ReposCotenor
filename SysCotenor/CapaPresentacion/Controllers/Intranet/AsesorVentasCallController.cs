@@ -175,9 +175,7 @@ namespace CapaPresentacion.Controllers.Intranet
                     p.Producto = pro;
                     p.AccionComercial = ac;
                     p.Usuario = ur;
-                    p.ClienteTelefono = ct;
-
-                    
+                    p.ClienteTelefono = ct;                    
 
                     int i = negPedido.Instancia.InsUpdPedido(p,1);
                     if (i > 0)

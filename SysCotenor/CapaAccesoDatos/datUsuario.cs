@@ -421,6 +421,61 @@ namespace CapaAccesoDatos
             return Lista;
         }
 
+
+        public List<entUsuario> ListaUsuariosAC()
+        {
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entUsuario> Lista = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListaUsuariosAsesoresCampo", cn);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entUsuario>();
+
+                while (dr.Read())
+                {
+                    entUsuario u = new entUsuario();
+                    u.Usu_Id = Convert.ToInt32(dr["Usu_Id"]);
+                    u.Usu_Codigo = dr["Usu_Codigo"].ToString();
+
+                    entPersona p = new entPersona();
+                    p.Per_Nombres = dr["Per_Nombres"].ToString();
+                    p.Per_Apellidos = dr["Per_Apellidos"].ToString();
+                    p.Per_DNI = dr["Per_DNI"].ToString();
+                    p.Per_Correo = dr["Per_Correo"].ToString();
+                    p.Per_Celular = dr["Per_Celular"].ToString();
+                    //   p.Per_Telefono = dr["Per_Telefono"].ToString();
+                    u.Persona = p;
+
+                    entSucursal s = new entSucursal();
+                    s.Suc_Id = Convert.ToInt32(dr["Suc_Id"]);
+                    s.Suc_Nombre = dr["Suc_Nombre"].ToString();
+                    u.Sucursal = s;
+                    entTipoUsuario tu = new entTipoUsuario();
+                    tu.TipUsu_Nombre = dr["TipUsu_Nombre"].ToString();
+                    u.TipoUsuario = tu;
+                    u.Usu_Telefono = dr["Usu_Telefono"].ToString();
+                    u.Usu_Estado = dr["Usu_Estado"].ToString();
+                    u.Usu_FechaHasta = Convert.ToDateTime(dr["Usu_FechaHasta"]);
+                    u.Contador = 0;
+                    Lista.Add(u);
+                }
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+            return Lista;
+        }
+
         public entUsuario DetalleUsuario(Int32 UsuarioId, Int32 UsuarioIdSuper)
         {
 

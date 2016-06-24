@@ -154,6 +154,20 @@ namespace CapaNegocio
             }
         }
 
+
+        public List<entUsuario> ListaUsuariosAC()
+        {
+            try
+            {
+                return datUsuario.Instancia.ListaUsuariosAC();
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+        }
+
+
         public List<entUsuario> ListaUsuariosCall(Int32 UsuarioId, Int32 SucursalId)
         {
             try
