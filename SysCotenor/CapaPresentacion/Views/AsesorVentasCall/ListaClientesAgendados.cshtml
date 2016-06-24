@@ -1,0 +1,57 @@
+﻿@using CapaEntidades
+@{
+    ViewBag.Title = "ListaClientesAgendados";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+
+<h2>ListaClientesAgendados</h2>
+<section class="style-default-bright">
+    <div class="section-body">
+        <br />
+        <h2 class="text-primary">Lista Clientes Agendados</h2>
+        <p>
+            <code>Listado completo de todos los clientes agendados</code>
+        </p>
+        <table id="datatable1" class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Telefono</th>
+                    <th>Cliente</th>
+                    <th>Acc. Comercial</th>
+                    <th>Producto</th>
+                    <th>Fecha Registro</th>
+                    <th>Estado</th>
+                    <th>Observaciones</th>
+                    <th class="text-right">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @{ if (ViewBag.lsAgend != null)
+                                { List<entRegLamadas> ls = (List<entRegLamadas>)ViewBag.lsAgend;
+                                    foreach (var i in ls)
+                                    {
+
+                    <tr>
+                        <td><img class="img-circle width-1" src="~/assets/img/cliente.png" alt="" /> </td>
+                        <td>@i.cliente_telef.Telefono.Tel_Numero</td>
+                        <td>@i.cliente_telef.Cliente.Cli_Nombre</td>
+                        <td>@i.accioncomercial.Acc_Nombre</td>
+                        <td>@i.producto.Pro_Nombre</td>
+                        <td>@i.rll_fechahor_reg</td>    
+                        <td>@i.rll_resultado</td>
+                        <td>@i.rll_observaciones</td>
+
+                        <td class="text-right">
+                            @Html.ActionLink(".", "RegistroLlamada", "AsesorVentasCall", new { AsiLlaId = i.assllamadas.Asi_Id, rllid=i.rll_id }, htmlAttributes: new { @class = "btn-lla btn-raised ink-reaction-lla btn-info-lla", data_toggle = "tooltip", data_placement = "top", data_original_title = "LLamar" })
+                        </td>
+                    </tr>
+                            }
+                        }
+                    }
+            </tbody>
+
+            </table>
+        </div><!--end .section-body -->
+    </section>

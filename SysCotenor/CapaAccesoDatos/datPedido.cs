@@ -19,6 +19,113 @@ namespace CapaAccesoDatos
         #endregion singleton
 
 
+        public List<entRegLamadas> ListLlamAgen(int idusuario){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entRegLamadas> Lista = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spListaCliAgend", cn);
+                cmd.Parameters.AddWithValue("@IS_USUARIO", idusuario);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entRegLamadas>();
+                while (dr.Read()){
+                    entRegLamadas r = new entRegLamadas();
+                    r.rll_id = Convert.ToInt32(dr["rll_id"]);
+                    r.rll_resultado = dr["rll_resultado"].ToString();
+                    r.rll_fechahor_reg =Convert.ToDateTime(dr["rll_fechahor_reg"].ToString());
+                    r.rll_estado = dr["rll_estado"].ToString();
+                    r.rll_observaciones = dr["rll_observaciones"].ToString();
+                    entCliente_Telefono ct = new entCliente_Telefono();
+                    ct.CliTel_Id = Convert.ToInt32(dr["CliTel_Id"]);
+                    entCliente c = new entCliente();
+                    c.Cli_Id = Convert.ToInt32(dr["Cli_Id"]);
+                    c.Cli_Nombre = dr["Cli_Nombre"].ToString();
+                    ct.Cliente = c;
+                    entTelefono t = new entTelefono();
+                    t.Tel_Id = Convert.ToInt32(dr["Tel_Id"]);
+                    t.Tel_Numero = dr["Tel_Numero"].ToString();
+                    ct.Telefono = t;
+                    r.cliente_telef = ct;
+                    entAsigncionLlamadas al = new entAsigncionLlamadas();
+                    al.Asi_Id = Convert.ToInt32(dr["Asi_Id"]);
+                    r.assllamadas = al;
+                    entAccionComercial ac = new entAccionComercial();
+                    ac.Acc_Nombre = dr["Acc_Nombre"].ToString();
+                    entProducto p = new entProducto();
+                    p.Pro_Nombre = dr["Pro_Nombre"].ToString();
+                    r.accioncomercial = ac;
+                    r.producto = p;
+                    Lista.Add(r);
+
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { cmd.Connection.Close(); }
+            return Lista;
+        }
+
+
+        public int EliminaRegLlamAgend(int idagLlamad)
+        {
+            SqlCommand cmd = null;
+            int i = 0;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spEliminaRegLlamadaAgenda", cn);
+                cmd.Parameters.AddWithValue("@ID_REGLLAM", idagLlamad);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter p = new SqlParameter("@retorno", DbType.Int32);
+                p.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(p);
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                i = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
+                return i;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+        public int RegUpdateLlamada(String cadxml){
+            SqlCommand cmd = null;
+            int i = 0;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spRegLlamada", cn);
+                cmd.Parameters.AddWithValue("@cad_XML", cadxml);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                SqlParameter p = new SqlParameter("@retorno", DbType.Int32);
+                p.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(p);
+                cn.Open();
+                cmd.ExecuteNonQuery();
+                i = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
+                return i;
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
+
+
         public int updateEstadoPedido(int idpedido,int idestado,String desc){
             SqlCommand cmd = null;
             SqlDataReader dr = null;

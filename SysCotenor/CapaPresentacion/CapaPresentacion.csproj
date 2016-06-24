@@ -2038,9 +2038,7 @@
     <Content Include="Views\AsesorVentasCall\RegistroLlamada.cshtml" />
     <Content Include="Views\SupervisorCall\Estadisticas.cshtml" />
     <Content Include="Views\SupervisorVentas\ActualizarEstadosVentas.cshtml" />
-    <Content Include="Views\AsesorVentasCampo\RegistroVenta.cshtml" />
-    <Content Include="Views\SupervisorInstalaciones\PedidosAsesoresCampo.cshtml" />
-    <Content Include="Views\SupervisorInstalaciones\ListaPedidosAsesoresCampo.cshtml" />
+    <Content Include="Views\AsesorVentasCall\ListaClientesAgendados.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -66,6 +66,7 @@
     <Compile Include="entProducto.cs" />
     <Compile Include="entProductoContratado.cs" />
     <Compile Include="entProvincia.cs" />
+    <Compile Include="entRegLamadas.cs" />
     <Compile Include="entSecurity.cs" />
     <Compile Include="entSegmento.cs" />
     <Compile Include="entSucursal.cs" />

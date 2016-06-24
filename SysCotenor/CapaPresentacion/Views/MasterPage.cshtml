@@ -65,7 +65,7 @@
     <link type="text/css" rel="stylesheet" href="~/assets/css/@nombreTema/libs/toastr/toastr.css?1425466569" />
     <link type="text/css" rel="stylesheet" href="~/assets/css/@nombreTema/libs/dropzone/dropzone-theme.css?1424887864" />
     <link href="~/assets/css/Propio/propio.css" rel="stylesheet" />
-    @*lightbox*@
+    @*lightbox*@  
     <link href="~/assets/js/lightbox/ekko-lightbox.min.css" rel="stylesheet" />
 
     <!-- END STYLESHEETS -->
@@ -97,7 +97,7 @@
                                     <a href="#"><span class="text-lg text-bold text-primary">COTENOR E.I.R.L.</span></a>
                                 }
 
-                            }
+                            }                           
                         </div>
                     </li>
                     <li>
@@ -194,37 +194,37 @@
                 <ul id="main-menu" class="gui-controls">
 
                     @{if (TipoUser == "Administrador Sistema")
-                        {
+                    {
 
 
-                        }
-                        else if (TipoUser == "Gerente")
-                        {
+                    }
+                    else if (TipoUser == "Gerente")
+                    {
 
                      <!-- BEGIN FORMS -->
-                            <li class="gui-folder">
-                                <a>
-                                    <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                                    <span class="title">Registro</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                    <li><a href="@Url.Action("ListaSupervisores", "Gerente")"><span class="title">Mantenedor Supervisor</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                                <span class="title">Registro</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("ListaSupervisores", "Gerente")"><span class="title">Mantenedor Supervisor</span></a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
                     <!-- END FORMS -->
                     <!-- BEGIN CHARTS -->
-                            <li class="gui-folder">
-                                <a>
-                                    <div class="gui-icon"><i class="md md-assessment"></i></div>
-                                    <span class="title">Reportes</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                    <li><a href="~/html/forms/basic.html"><span class="title">Reporte Ventas Supervisor</span></a></li>
-                                    <li><a href="~/html/forms/basic.html"><span class="title">Peporte Ventas Asesor</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><i class="md md-assessment"></i></div>
+                                <span class="title">Reportes</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="~/html/forms/basic.html"><span class="title">Reporte Ventas Supervisor</span></a></li>
+                                <li><a href="~/html/forms/basic.html"><span class="title">Peporte Ventas Asesor</span></a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
 
                             <li class="gui-folder">
                                 <a>
@@ -239,46 +239,45 @@
                             </li><!--end /menu-li -->
 
                     <!-- END CHARTS -->
-                            //
-                        }
-                        else if (TipoUser == "Supervisor Call")
-                        {
+                        //
+                    }
+                    else if (TipoUser == "Supervisor Call")
+                    {
 
                         <!-- BEGIN FORMS -->
-                            <li class="gui-folder">
-                                <a>
-                                    <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                                    <span class="title">Registro</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                    <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                                <span class="title">Registro</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
 
-                                    <li class="gui-folder">
-                                        <a href="javascript:void(0);"><span class="title">Clientes</span></a>
-                                        <ul>
-                                            <li><a href="@Url.Action("BuscaCliente","Comun")"><span class="title">Buscar</span></a></li>
-                                            <li><a href="#"><span class="title">Historial</span></a></li>
-                                        </ul>
-                                    </li>
+                                <li class="gui-folder"><a href="javascript:void(0);"><span class="title">Clientes</span></a>
+                                    <ul>
+                                        <li><a href="@Url.Action("BuscaCliente","Comun")"><span class="title">Buscar</span></a></li>
+                                        <li><a href="#"><span class="title">Historial</span></a></li>
+                                    </ul>
+                                </li>
+                           
 
-
-                                    <li><a href="@Url.Action("ProductosList", "Comun")"><span class="title">Productos</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
+                                <li><a href="@Url.Action("ProductosList", "Comun")"><span class="title">Productos</span></a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
                     <!-- END FORMS -->
                    <!-- BEGIN CHARTS -->
-                            <li class="gui-folder">
-                                <a>
-                                    <div class="gui-icon"><i class="glyphicon glyphicon-th-list"></i></div>
-                                    <span class="title">Ventas</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                    <li><a href="@Url.Action("lstUsuariosEstadoAsignacionLlamadas","SupervisorCall")"><span class="title">Estado Asesor</span></a></li>
-                                    <li><a href=""><span class="title">Seguimiento Ventas</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><i class="glyphicon glyphicon-th-list"></i></div>
+                                <span class="title">Ventas</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("lstUsuariosEstadoAsignacionLlamadas","SupervisorCall")"><span class="title">Estado Asesor</span></a></li>
+                                <li><a href=""><span class="title">Seguimiento Ventas</span></a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
 
                             <li class="gui-folder">
                                 <a>
@@ -288,7 +287,7 @@
                                 <!--start submenu -->
                                 <ul>
                                     <li><a href="@Url.Action("NoticiasEtc","Comun")"><span class="title">Actuales</span></a></li>
-
+                                   
 
                                 </ul><!--end /submenu -->
                             </li><!--end /menu-li -->
@@ -341,16 +340,7 @@
                         }
                         else if (TipoUser == "Supervisor Instalaciones")
                         {
-                            <li class="gui-folder">
-                                <a>
-                                    <div class="gui-icon"><span class="md md-person"></span></div>
-                                    <span class="title">Ventas AC</span>
-                                </a>
-                                <ul>
-                                    <li><a href="@Url.Action("PedidosAsesoresCampo","SupervisorInstalaciones")"><span class="title">Actuales AC</span></a></li>
 
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
                             <li class="gui-folder">
                                 <a>
                                     <div class="gui-icon"><i class="md md-people-outline"></i></div>
@@ -367,18 +357,18 @@
                         }
                         else if (TipoUser == "Supervisor Campo")
                         {
-                            <li class="gui-folder">
-                                <a>
-                                    <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                                    <span class="title">Registro</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                    <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
-                                    <li><a href="@Url.Action("lstUsuariosEstadoAsignacionLlamadas","SupervisorCall")"><span class="title">Asignar Clientes</span></a></li>
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                                <span class="title">Registro</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("ListaUsuarios", "Comun")"><span class="title">Mantenedor Asesores</span></a></li>
+                                <li><a href="@Url.Action("lstUsuariosEstadoAsignacionLlamadas","SupervisorCall")"><span class="title">Asignar Clientes</span></a></li>
 
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
 
                             <li class="gui-folder">
                                 <a>
@@ -413,20 +403,22 @@
                         else if (TipoUser == "Asesor Ventas Call")
                         {
                         <!-- BEGIN FORMS -->
-                            <li class="gui-folder">
-                                <a>
-                                    <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                                    <span class="title">Registro</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                    <li><a href="@Url.Action("ListaClientesAsignados","AsesorVentasCall")"><span class="title">Clientes Asignados</span></a></li>
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
+                                <span class="title">Registro</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("ListaClientesAsignados","AsesorVentasCall")"><span class="title">Clientes Asignados</span></a></li>
+                                <li><a href="@Url.Action("ListaClientesAgendados","AsesorVentasCall")"><span class="title">Cli.Pendientes Llamar</span></a></li>
 
-                                </ul><!--end /submenu -->
-                                <ul>
-                                    <li><a href="@Url.Action("ProductosList", "Comun")"><span class="title">Productos</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
+
+                            </ul><!--end /submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("ProductosList", "Comun")"><span class="title">Productos</span></a></li>
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
 
                             <li class="gui-folder">
                                 <a>
@@ -448,21 +440,6 @@
                         {
                             <li class="gui-folder">
                                 <a>
-                                    <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
-                                    <span class="title">Registro</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                    <li><a href="@Url.Action("RegistroVenta","AsesorVentasCampo")"><span class="title">Nueva Venta</span></a></li>
-
-                                </ul><!--end /submenu -->
-                                <ul>
-                                    <li><a href="@Url.Action("ProductosList", "Comun")"><span class="title">Productos</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
-
-                            <li class="gui-folder">
-                                <a>
                                     <div class="gui-icon"><i class="md md-people-outline"></i></div>
                                     <span class="title">Novedades</span>
                                 </a>
@@ -477,16 +454,16 @@
                         }
                         else if (TipoUser == "Administrador Data")
                         {
-                            <li class="gui-folder">
-                                <a>
-                                    <div class="gui-icon"><i class="glyphicon glyphicon-th-list"></i></div>
-                                    <span class="title">Administar Data</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                    <li><a href="@Url.Action("InsertarDataCliente", "AdministradorData")"><span class="title">Insertar-Asignar Data </span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
+                        <li class="gui-folder">
+                            <a>
+                                <div class="gui-icon"><i class="glyphicon glyphicon-th-list"></i></div>
+                                <span class="title">Administar Data</span>
+                            </a>
+                            <!--start submenu -->
+                            <ul>
+                                <li><a href="@Url.Action("InsertarDataCliente", "AdministradorData")"><span class="title">Insertar-Asignar Data </span></a></li>                                
+                            </ul><!--end /submenu -->
+                        </li><!--end /menu-li -->
                             <li class="gui-folder">
                                 <a>
                                     <div class="gui-icon"><i class="md md-people-outline"></i></div>
@@ -551,8 +528,9 @@
     <!--lightbox  -->
     <script src="~/assets/js/lightbox/ekko-lightbox.min.js"></script>
     <!--Detalle en las tablas-->
-    <script src="~/assets/js/libs/DataTables/extensions/PropioTable/detalleLista.js"></script>
+    <script src="~/assets/js/libs/DataTables/extensions/PropioTable/detalleLista.js"></script>   
     <script src="~/assets/js/libs/Propio/propiojs.js"></script>
+    
 
 </body>
 </html>
