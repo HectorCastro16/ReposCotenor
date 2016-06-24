@@ -1,6 +1,4 @@
 ﻿
-
-
 function cambiar(tecla) {
     tecla.value = tecla.value.replace(".", ",");
 }
@@ -292,17 +290,17 @@ function CambioOnChange(sel) {
         $("#m2").hide();
         $("#p1").hide();
         $("#r1").hide();
-    }else if (sel.value == "1") {
+    } else if (sel.value == "1") {
         $("#m2").show();
         $("#m1").hide();
         $("#p1").hide();
         $("#r1").hide();
-    }else if (sel.value == "2") {
+    } else if (sel.value == "2") {
         $("#m1").show();
         $("#m2").hide();
         $("#p1").show();
         $("#r1").show();
-    }else {        
+    } else {
         $("#m1").show();
         $("#m2").hide();
         $("#p1").show();
@@ -311,3 +309,45 @@ function CambioOnChange(sel) {
 }
 
 
+
+
+
+var marcadores_nuevos = [];
+function quitar_marcadores(lista) {
+    for (i in lista) {
+        lista[i].setMap(null);
+    }
+};
+$(document).on("ready", function () {
+    var formulario = $("#formulario");
+    var punto = new google.maps.LatLng(-8.1407423, -79.0226483);
+    var config = {
+        zoom: 11,
+        center: punto,
+        mapTypeId: google.maps.MapTypeId.ROADMAP
+    };
+    var mapa = new google.maps.Map($("#Mapa")[0], config);
+    google.maps.event.addListener(mapa, "click", function (event) {
+        var coordenadas = event.latLng.toString();
+        coordenadas = coordenadas.replace("(", "");
+        coordenadas = coordenadas.replace(")", "");
+        //Obtiene latitud y longitud por separado
+        var lista = coordenadas.split(",");
+        var direccion = new google.maps.LatLng(lista[0], lista[1]);
+        var marcador = new google.maps.Marker({
+            position: direccion,
+            map: mapa,
+            animation: google.maps.Animation.DROP,
+            draggable: false
+        });
+        formulario.find("input[name='txtCordenadaX']").val(lista[0]);
+        formulario.find("input[name='txtCoordenadaY']").val(lista[1]);
+        marcadores_nuevos.push(marcador);
+        google.maps.event.addListener(marcador, "click", function () {
+
+        });
+        quitar_marcadores(marcadores_nuevos);
+        marcador.setMap(mapa);
+
+    });
+});
