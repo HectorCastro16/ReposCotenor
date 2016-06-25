@@ -28,7 +28,44 @@ namespace CapaPresentacion.Controllers.Intranet
         {
             return View();
         }
-        
+
+        public ActionResult HistorialLamdas(String mensjae,int? identificador) {
+            try
+            {
+                ViewBag.mensaje = mensjae;
+                ViewBag.idnt = identificador;
+                List<entPedido> p =null;
+                if (Session["lista"] != null)  p = (List<entPedido>)Session["lista"];
+                
+                return View(p);
+            }
+            catch (Exception e)
+            {
+                ViewBag.mensaje = e.Message;
+                return View();
+            }
+        }
+
+        [HttpPost]
+        public ActionResult HistorialLamdas(String numtelef) {
+            try
+            {
+                List<entPedido> Lista = null;
+                Lista = negCliente.Instancia.BuscaRegLlamadas(numtelef);
+                if (Session["lista"] != null) Session.Remove("lista");
+                Session["lista"] = Lista;
+                return RedirectToAction("HistorialLamdas", new { mensjae = Lista.Count() + " Registro(s) Encontrados" });
+            }
+            catch (ApplicationException ae) {
+                return RedirectToAction("HistorialLamdas", new { mensjae = ae.Message });
+            }
+            catch (Exception e)
+            {
+                return RedirectToAction("HistorialLamdas", new { mensjae = e.Message });
+            }
+        }
+
+
         public ActionResult BuscaCliente(String sms,int? identificador,String checkStatus,String num_Tel)
         {
             try

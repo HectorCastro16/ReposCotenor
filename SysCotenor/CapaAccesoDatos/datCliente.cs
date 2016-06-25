@@ -21,6 +21,63 @@ namespace CapaAccesoDatos
 
         #region metodos
 
+        public List<entPedido> ListaHistllamadas(String telefono){
+            SqlCommand cmd = null;
+            SqlDataReader dr = null;
+            List<entPedido> Lista = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spHisLlamadasPedido", cn);
+                cmd.Parameters.AddWithValue("@NUM_TELEF", telefono);
+                cmd.CommandType = CommandType.StoredProcedure;
+                cn.Open();
+                dr = cmd.ExecuteReader();
+                Lista = new List<entPedido>();
+                while (dr.Read())
+                {
+                    entPedido p = new entPedido();
+                    p.Respuesta = dr["Respuesta"].ToString();
+                    p.Ped_FechaRegistro = Convert.ToDateTime(dr["Ped_FechaRegistro"]);
+                    p.Ped_Obser_Estados = dr["Ped_Obser_Estados"].ToString();
+                    p.Ped_Observaciones = dr["Ped_Observaciones"].ToString();
+                    entEstado e = new entEstado();
+                    e.Est_Nombre = dr["Est_Nombre"].ToString();
+                    p.Estado = e;
+                    entCliente_Telefono ct = new entCliente_Telefono();
+                    entCliente c = new entCliente();
+                    c.Cli_Nombre = dr["Cli_Nombre"].ToString();
+                    c.Cli_Numero_Documento = dr["Cli_Numero_Documento"].ToString();
+                    entTelefono t = new entTelefono();
+                    t.Tel_Numero = dr["Tel_Numero"].ToString();
+                    ct.Cliente = c;
+                    ct.Telefono = t;
+                    p.ClienteTelefono = ct;
+                    entUsuario u = new entUsuario();
+                    entPersona pe = new entPersona();
+                    pe.Per_Nombres = dr["Per_Nombres"].ToString();
+                    pe.Per_Apellidos = dr["Per_Apellidos"].ToString();
+                    u.Persona = pe;
+                    p.Usuario = u;
+                    entAccionComercial ac = new entAccionComercial();
+                    ac.Acc_Nombre = dr["Acc_Nombre"].ToString();
+                    entProducto pro = new entProducto();
+                    pro.Pro_Nombre = dr["Pro_Nombre"].ToString();
+                    p.Producto = pro;
+                    p.AccionComercial = ac;
+                    Lista.Add(p);
+                }
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+            finally { cmd.Connection.Close(); }
+            return Lista;
+        }
+
+
         public List<entTipDoc> ListaTipDoc()
         {
             SqlCommand cmd = null;

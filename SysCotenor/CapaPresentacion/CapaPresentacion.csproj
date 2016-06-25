@@ -2042,6 +2042,7 @@
     <Content Include="Views\AsesorVentasCampo\RegistroVenta.cshtml" />
     <Content Include="Views\SupervisorInstalaciones\ListaPedidosAsesoresCampo.cshtml" />
     <Content Include="Views\SupervisorInstalaciones\PedidosAsesoresCampo.cshtml" />
+    <Content Include="Views\Comun\HistorialLamdas.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -283,7 +283,7 @@ namespace CapaPresentacion.Controllers.Intranet
             try
             {
                 ViewBag.tel = telef;
-                String dni = "55555555";
+
                 //   entCliente c = negCliente.Instancia.BuscaCliente(telef, dni);
                 var cliente = new entCliente();
                 ViewBag.cliente = cliente;

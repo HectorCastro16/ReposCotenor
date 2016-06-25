@@ -128,7 +128,7 @@ namespace CapaAccesoDatos
 
         public int updateEstadoPedido(int idpedido,int idestado,String desc){
             SqlCommand cmd = null;
-            SqlDataReader dr = null;
+            
             int result = 0;
             try
             {

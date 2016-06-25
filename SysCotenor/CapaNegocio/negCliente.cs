@@ -20,6 +20,25 @@ namespace CapaNegocio
         #endregion singleton
 
         #region metodos 
+
+        public List<entPedido> BuscaRegLlamadas(String telefono) {
+            try
+            {
+                List<entPedido> Lista = new List<entPedido>();
+                Lista = datCliente.Instancia.ListaHistllamadas(telefono);
+                if (Lista.Count <= 0){
+                    throw new ApplicationException("No se encontraron registros");
+                }
+                return Lista;
+
+            }
+            catch (Exception)
+            {
+
+                throw;
+            }
+        }
+
         public List<entTipDoc> ListaDoc()
         {
             try

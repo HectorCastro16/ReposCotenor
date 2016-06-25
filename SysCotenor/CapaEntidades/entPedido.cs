@@ -31,5 +31,6 @@ namespace CapaEntidades
         public String Ped_Obser_Estados { get; set; }
         public String PedidoX { get; set; }
         public String PedidoY { get; set; }
+        public String Respuesta { get; set; }
     }
 }

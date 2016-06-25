@@ -1,0 +1,123 @@
+﻿@model IEnumerable<CapaEntidades.entPedido>
+
+@{
+    ViewBag.Title = "HistorialLamdas";
+    Layout = "~/Views/MasterPage.cshtml";
+}
+<section>
+    <div class="section-body">
+        <h2>Asesores</h2>
+        @if (ViewBag.mensaje != null)
+        {
+            <div class="alert alert-warning">
+                @ViewBag.mensaje
+            </div>
+        }
+    </div>
+    <div class="section-body">
+        <form class="form form-validate basic-label" method="post" action="HistorialLamdas" role="form" novalidate="novalidate">
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="card">
+                        <div class="card-head"><header>Busca Historial llamadas</header></div>
+                        <div class="card-body">
+                            <div class="col-lg-4">
+                                <div class="card card-outlined style-primary">
+                                    <div class="card-head"></div>
+                                    <div class="col-lg-6">
+                                        <div class="form-group">
+                                            <input type="text" name="numtelef" class="form-control" maxlength="9">
+                                            <label for="select1">Teléfono</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-3">
+                                        <div style="text-align:right">
+                                            <input type="submit" value="Buscar" name="btnBuscar" class="btn btn-raised btn-success">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-lg-12">
+                                <div class="table-responsive no-margin">
+                                    <table id="datatable1" class="table table-striped table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>#</th>
+                                                <th>ASESOR</th>
+                                                <th>ACCIÓN</th>
+                                                <th>PRODUCTO</th>
+                                                <th>NUM.TELEFONO</th>
+                                                <th>CLIENTE</th>
+                                                <th>NUM.DOC</th>
+                                                <th>F.REGISTRO</th>
+                                                <th>RESPUESTA</th>
+                                                <th>ESTADO</th>
+                                                <th>Obs.Sup.Ventas</th>
+                                                <th>Obs.Asesor</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{ int i = 0;
+                                                if (Model != null)
+                                                {
+                                                    foreach (var item in Model)
+                                                    {
+                                                        i++;
+
+                                                        <tr>
+                                                            <td>@i</td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Usuario.Persona.Per_Nombres) @Html.DisplayFor(modelItem => item.Usuario.Persona.Per_Apellidos)
+
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.AccionComercial.Acc_Nombre)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Producto.Pro_Nombre)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ClienteTelefono.Telefono.Tel_Numero)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ClienteTelefono.Cliente.Cli_Nombre)
+                                                            </td>
+
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.ClienteTelefono.Cliente.Cli_Numero_Documento)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Ped_FechaRegistro)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Respuesta)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Estado.Est_Nombre)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Ped_Obser_Estados)
+                                                            </td>
+                                                            <td>
+                                                                @Html.DisplayFor(modelItem => item.Ped_Observaciones)
+                                                            </td>
+                                                        </tr>
+                                                    }
+                                                }
+                                            }
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</section>
+
+
