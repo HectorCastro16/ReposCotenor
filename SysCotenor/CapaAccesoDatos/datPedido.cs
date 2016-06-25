@@ -263,6 +263,40 @@ namespace CapaAccesoDatos
 
         }
 
+        public int InsUpdDelBloActPedidoCampo(String cadXML)
+        {
+            SqlCommand cmd = null;
+            try
+            {
+                SqlConnection cn = Conexion.Instancia.Conectar();
+                cmd = new SqlCommand("spInsUpdDelBloActPedidoCampo", cn);
+                cmd.Parameters.AddWithValue("@prmstrCadXML", cadXML);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                //creamos el parametro de retorno
+                SqlParameter m = new SqlParameter("@retorno", DbType.Int32);
+                m.Direction = ParameterDirection.ReturnValue;
+                cmd.Parameters.Add(m);
+                //fin parametro
+                cn.Open();
+                cmd.ExecuteNonQuery();
+
+                int i = Convert.ToInt32(cmd.Parameters["@retorno"].Value);
+
+                return i;
+
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                cmd.Connection.Close();
+            }
+
+        }
+
 
         #endregion metodos
 

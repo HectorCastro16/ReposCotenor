@@ -351,3 +351,13 @@ $(document).on("ready", function () {
 
     });
 });
+
+
+$("#BuscaPedAC").click(function () {
+    $("#muestraPed").load('ListaPedidosAsesoresCampo', {
+        IdAC: $('#selectus').val(),
+        IdEs: $('#selectes').val(),
+        fdesde: $('#txtdesde').val(),
+        fhasta: $('#txthasta').val()
+    })
+})
