@@ -4,30 +4,25 @@
     Layout = "~/Views/MasterPage.cshtml";
 }
 <section>
-    <br />
-    <div class="card">
-        <section>
-            <h2>Registro Nueva Venta</h2>
-        </section>
-    </div>
+    <h2>Nuevo registro de venta</h2>
     @if (@ViewBag.mensaje != null)
     {
         if (@ViewBag.identificador == 1)
         {
             <div class="alert alert-callout alert-warning" role="alert">
-                <strong>Atención!</strong> @ViewBag.mensaje
+                <strong>¡Atención!</strong> @ViewBag.mensaje
             </div>
         }
         else if (@ViewBag.identificador == 2)
         {
             <div class="alert alert-callout alert-danger" role="alert">
-                <strong>Ooops!</strong> @ViewBag.mensaje
+                <strong>¡Ooops!</strong> @ViewBag.mensaje
             </div>
         }
         else if (@ViewBag.identificador == 3)
         {
             <div class="alert alert-callout alert-success" role="alert">
-                <strong>Atención!</strong> @ViewBag.mensaje
+                <strong>¡Atención!</strong> @ViewBag.mensaje
             </div>
         }
     }
@@ -35,10 +30,12 @@
 
         <div class="row">
             <div class="card">
-                <div class="form-group">    
-                    <div style="text-align:right">
-                        <code>Porfavor marque en el mapa una ubicación lo mas cercana a el lugar de instalación del servicio.</code>
-                    </div>                
+                <div class="form-group"> 
+                    <div class="col-lg-12">
+                        <div class="alert alert-callout alert-info" role="alert">
+                            <strong>Información:</strong> Por favor marque en el mapa la ubicación el lugar de la instalación del servicio.
+                        </div>
+                    </div>             
                     <div id="Mapa" class="contenedor-Registro" style="height:400px">
                     </div>                    
                     <input type="hidden" name="txtCordenadaX" />

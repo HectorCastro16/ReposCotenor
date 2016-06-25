@@ -5,17 +5,9 @@
     Layout = "~/Views/MasterPage.cshtml";
 }
 
-<div class="row">
-    <div class="col-lg-12">
-        <div class="card">
-            <center>
-                <h2>NUEVO USUARIO</h2>
-            </center>
-        </div>
-    </div>
-</div>
-<section>
 
+<section>
+    <h1>Usuario nuevo</h1> 
     <div class="row">
         <div class="col-lg-12">
             <div class="card">
@@ -153,9 +145,12 @@
                         </div><br />
                         <div class="row">
                             <div class="col-lg-8">
-                                <div class="form-group">
-                                    <input type="file" class="form-control" name="archivo" />
-                                    <label for="firstname" class="control-label">Fotografia</label>
+                                <div class="form-group">   
+
+                                    <label class="btn btn-info btn-file">
+                                        <input type="file" class="form-control" name="archivo" />
+                                        Buscar fotografía
+                                    </label>   
                                 </div>
                             </div>
                             <div class="col-lg-4">
