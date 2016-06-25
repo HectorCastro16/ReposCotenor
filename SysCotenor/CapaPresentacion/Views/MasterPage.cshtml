@@ -127,34 +127,22 @@
                             </span>
                         </a>
                         <ul class="dropdown-menu animation-dock">
-                            @*
-                                <li class="dropdown-header">Config</li>*@
                             <li><a href="@Url.Action("perfil","Comun")">Perfil</a></li>
                             <li><a href="@Url.Action("Ajustes", "Comun" )">Ajustes</a></li>
-                            <li class="divider"></li>
-                            @*
-                                <li><a href="~/html/pages/locked.html"><i class="fa fa-fw fa-lock"></i> Lock</a></li>*@
+                            <li class="divider"></li>                           
                             <li><a href="@Url.Action("CerrarSession", "Inicio" )"><i class="fa fa-fw fa-power-off text-danger"></i> Logout</a></li>
-                        </ul><!--end .dropdown-menu -->
-                    </li><!--end .dropdown -->
-                </ul><!--end .header-nav-profile -->
-            </div><!--end #header-navbar-collapse -->
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </header>
-    <!-- END HEADER-->
-    <!-- BEGIN BASE-->
     <div id="base">
-
-        <!-- BEGIN OFFCANVAS LEFT -->
         <div class="offcanvas">
-        </div><!--end .offcanvas-->
-        <!-- END OFFCANVAS LEFT -->
-        <!-- BEGIN CONTENT-->
+        </div>
         <div id="content">
             @RenderBody()
-        </div><!--end #content-->
-        <!-- END CONTENT -->
-        <!-- BEGIN MENUBAR-->
+        </div>
         <div id="menubar" class="menubar-inverse ">
             <div class="menubar-fixed-panel">
                 <div>
@@ -169,8 +157,6 @@
                 </div>
             </div>
             <div class="menubar-scroll-panel">
-
-                <!-- BEGIN MAIN MENU -->
                 <ul id="main-menu" class="gui-controls">
 
                     @{if (TipoUser == "Administrador Sistema")
@@ -180,98 +166,62 @@
                         }
                         else if (TipoUser == "Gerente")
                         {
-
-                    <!-- BEGIN FORMS -->
                             <li class="gui-folder">
                                 <a>
                                     <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
                                     <span class="title">Registro</span>
                                 </a>
-                                <!--start submenu -->
                                 <ul>
                                     <li><a href="@Url.Action("ListaSupervisores", "Gerente" )"><span class="title">Mantenedor Supervisor</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
-                    <!-- END FORMS -->
-                    <!-- BEGIN CHARTS -->
-                            <li class="gui-folder">
-                                <a>
-                                    <div class="gui-icon"><i class="md md-assessment"></i></div>
-                                    <span class="title">Reportes</span>
-                                </a>
-                                <!--start submenu -->
-                                <ul>
-                                    <li><a href="~/html/forms/basic.html"><span class="title">Reporte Ventas Supervisor</span></a></li>
-                                    <li><a href="~/html/forms/basic.html"><span class="title">Peporte Ventas Asesor</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
-
+                                </ul>
+                            </li>
                             <li class="gui-folder">
                                 <a>
                                     <div class="gui-icon"><i class="md md-people-outline"></i></div>
                                     <span class="title">Novedades</span>
                                 </a>
-                                <!--start submenu -->
                                 <ul>
-                                    <li><a href="@Url.Action(" NoticiasEtc","Comun")"><span class="title">Actuales</span></a></li>
-
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
-                    <!-- END CHARTS -->
-                            //
+                                    <li><a href="@Url.Action("NoticiasEtc","Comun")"><span class="title">Actuales</span></a></li>
+                                </ul>
+                            </li>
                         }
                         else if (TipoUser == "Supervisor Call")
                         {
-
-                    <!-- BEGIN FORMS -->
                             <li class="gui-folder">
                                 <a>
                                     <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
                                     <span class="title">Registro</span>
                                 </a>
-                                <!--start submenu -->
                                 <ul>
                                     <li><a href="@Url.Action("ListaUsuarios", "Comun" )"><span class="title">Mantenedor Asesores</span></a></li>
-
                                     <li class="gui-folder">
                                         <a href="javascript:void(0);"><span class="title">Clientes</span></a>
                                         <ul>
-                                            <li><a href="@Url.Action("BuscaCliente","Comun")"><span class="title">Buscar</span></a></li>
-                                            <li><a href="#"><span class="title">Historial</span></a></li>
+                                            <li><a href="@Url.Action("BuscaCliente","Comun")"><span class="title">Buscar</span></a></li>                                           
                                         </ul>
                                     </li>
-
-
                                     <li><a href="@Url.Action("ProductosList", "Comun" )"><span class="title">Productos</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
-                    <!-- END FORMS -->
-                    <!-- BEGIN CHARTS -->
+                                </ul>
+                            </li>
                             <li class="gui-folder">
                                 <a>
                                     <div class="gui-icon"><i class="glyphicon glyphicon-th-list"></i></div>
                                     <span class="title">Ventas</span>
                                 </a>
-                                <!--start submenu -->
                                 <ul>
                                     <li><a href="@Url.Action("lstUsuariosEstadoAsignacionLlamadas","SupervisorCall")"><span class="title">Estado Asesor</span></a></li>
                                     <li><a href=""><span class="title">Seguimiento Ventas</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
-
+                                </ul>
+                            </li>
                             <li class="gui-folder">
                                 <a>
                                     <div class="gui-icon"><i class="md md-people-outline"></i></div>
                                     <span class="title">Novedades</span>
                                 </a>
-                                <!--start submenu -->
                                 <ul>
                                     <li><a href="@Url.Action("NoticiasEtc","Comun")"><span class="title">Actuales</span></a></li>
-
-
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
-                    <!-- END CHARTS -->
+                                </ul>
+                            </li>
                         }
                         else if (TipoUser == "Supervisor Ventas")
                         {
@@ -283,37 +233,33 @@
                                 <ul>
                                     <li><a href="@Url.Action("ActualizarEstadosVentas","SupervisorVentas")"><span class="title">Actuales</span></a></li>
 
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
+                                </ul>
+                            </li>
 
                             <li class="gui-folder">
                                 <a>
                                     <div class="gui-icon"><span class="glyphicon glyphicon-list-alt"></span></div>
                                     <span class="title">Registro</span>
                                 </a>
-                                <!--start submenu -->
                                 <ul>
                                     <li class="gui-folder">
                                         <a href="javascript:void(0);"><span class="title">Clientes</span></a>
                                         <ul>
                                             <li><a href="@Url.Action("BuscaCliente","Comun")"><span class="title">Buscar</span></a></li>
-                                            <li><a href="#"><span class="title">Historial</span></a></li>
                                         </ul>
                                     </li>
                                     <li><a href="@Url.Action("ProductosList", "Comun" )"><span class="title">Productos</span></a></li>
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
+                                </ul>
+                            </li>
                             <li class="gui-folder">
                                 <a>
                                     <div class="gui-icon"><i class="md md-people-outline"></i></div>
                                     <span class="title">Novedades</span>
                                 </a>
-                                <!--start submenu -->
                                 <ul>
                                     <li><a href="@Url.Action("NoticiasEtc","Comun")"><span class="title">Actuales</span></a></li>
-
-                                </ul><!--end /submenu -->
-                            </li><!--end /menu-li -->
+                                </ul>
+                            </li>
                         }
                         else if (TipoUser == "Supervisor Instalaciones")
                         {
